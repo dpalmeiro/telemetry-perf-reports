@@ -1,0 +1,118 @@
+{% autoescape off %}
+<div class="chart"><canvas id="{{segment}}_{{metric}}_pdf"></canvas>
+<button onclick="{{segment}}_{{metric}}_uplift_pdf_chart.resetZoom()">Reset Zoom</button>
+</div>
+<script>
+  ctx = document.getElementById('{{segment}}_{{metric}}_pdf');
+
+  data = {
+      labels: {{values}},
+      datasets: [
+{% for dataset in datasets %}
+      {
+          label: "{{dataset.branch}}",
+          data: {{dataset.density}},
+          borderWidth: 1
+      },
+{% endfor %}
+      ]
+  };
+
+  var {{segment}}_{{metric}}_uplift_pdf_chart = new Chart(ctx, {
+    type: 'line',
+    data,
+    options: {
+      responsive: true,
+      plugins: {
+          zoom: zoomOptions,
+          legend: {
+              display: true,
+              position: 'top',
+            },
+          title: {
+              display: true,
+              text: ["{{metric}} pdf", "segment: {{segment}}"]
+            }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            text: "Density",
+            display: true
+          }
+        },
+        x: {
+          ticks: {
+            maxTicksLimit: 10
+          }
+        }
+      },
+      elements: {
+        point:{
+          radius: 0
+        }
+      }
+    }
+  });
+</script>
+
+<div class="chart"><canvas id="{{segment}}_{{metric}}_cdf"></canvas>
+<button onclick="{{segment}}_{{metric}}_cdf_chart.resetZoom()">Reset Zoom</button>
+</div>
+<script>
+  ctx = document.getElementById('{{segment}}_{{metric}}_cdf');
+
+  data = {
+      labels: {{values}},
+      datasets: [
+{% for dataset in datasets %}
+      {
+          label: "{{dataset.branch}}",
+          data: {{dataset.cdf}},
+          borderWidth: 1
+      },
+{% endfor %}
+      ]
+  };
+
+  var {{segment}}_{{metric}}_cdf_chart = new Chart(ctx, {
+    type: 'line',
+    data,
+    options: {
+      responsive: true,
+      plugins: {
+          zoom: zoomOptions,
+          legend: {
+              display: true,
+              position: 'top',
+            },
+          title: {
+              display: true,
+              text: ["{{metric}} cdf", "segment: {{segment}}"]
+            }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 1.0,
+          title: {
+            text: "CDF",
+            display: true
+          }
+        },
+        x: {
+          ticks: {
+            maxTicksLimit: 10
+          }
+        }
+      },
+      elements: {
+        point:{
+          radius: 0
+        }
+      }
+    }
+  });
+</script>
+{% endautoescape %}
