@@ -1,0 +1,76 @@
+{% autoescape off %}
+<div class="chart"><canvas id="{{segment}}-{{metric}}-mean"></canvas></div>
+<script>
+  ctx = document.getElementById('{{segment}}-{{metric}}-mean');
+
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: {{branches}},
+      datasets: [
+        {
+          data: [
+{% for dataset in datasets %}
+            {
+              x: "{{dataset.branch}}",
+              y: {{dataset.mean}},
+              yMin: {{dataset.yMin}},
+              yMax: {{dataset.yMax}}
+            },
+{% endfor %}
+          ],
+        },
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+          legend: {
+              display: false,
+              position: 'top',
+            },
+          title: {
+              display: true,
+              text: ["{{metric}} mean", "segment: {{segment}}"]
+            }
+      },
+      scales: {
+        y: {
+          title: {
+            text: "Mean",
+            display: true
+          }
+        },
+        x: {
+          type: "category",
+        }
+      },
+    }
+  });
+</script>
+<div class="table">
+  <div class="table-header">
+    <div class="header__item">branch</div>
+    <div class="header__item">mean</div>
+    <div class="header__item">uplift(%)</div>
+    <div class="header__item">stderr</div>
+    <div class="header__item">stddev</div>
+    <div class="header__item">t-value</div>
+    <div class="header__item">p-value</div>
+  </div>
+  <div class="table-content">
+{% for dataset in datasets %}
+    <div class="table-row">
+      <div class="table-data">{{dataset.branch}}</div>
+      <div class="table-data">{{dataset.mean}}</div>
+      <div class="table-data">{{dataset.uplift}}</div>
+      <div class="table-data">{{dataset.se}}</div>
+      <div class="table-data">{{dataset.std}}</div>
+      <div class="table-data">{{dataset.tval}}</div>
+      <div class="table-data">{{dataset.pval}}</div>
+    </div>
+{% endfor %}
+  </div>
+</div>
+{% endautoescape %}

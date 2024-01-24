@@ -1,0 +1,116 @@
+{% autoescape off %}
+<div class="chart">
+<canvas id="{{segment}}_{{metric}}_diff"></canvas>
+<button onclick="{{segment}}_{{metric}}_diff_chart.resetZoom()">Reset Zoom</button>
+</div>
+<script>
+  ctx = document.getElementById('{{segment}}_{{metric}}_diff');
+
+  data = {
+      labels: {{quantiles}},
+      datasets: [
+{% for dataset in datasets %}
+      {
+          label: "{{dataset.branch}}",
+          data: {{dataset.diff}},
+          borderWidth: 1
+      },
+{% endfor %}
+      ]
+  };
+
+  var {{segment}}_{{metric}}_diff_chart = new Chart(ctx, {
+    type: 'line',
+    data,
+    options: {
+      responsive: true,
+      plugins: {
+          zoom: zoomOptions,
+          legend: {
+              display: true,
+              position: 'top',
+            },
+          title: {
+              display: true,
+              text: ["{{metric}} difference", "segment: {{segment}}"]
+            }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            text: "Difference",
+            display: true
+          }
+        },
+        x: {
+          title: {
+            text: "Quantile",
+            display: true
+          },
+          ticks: {
+            maxTicksLimit: 10
+          }
+        }
+      }
+    }
+  });
+</script>
+
+<div class="chart"><canvas id="{{segment}}_{{metric}}_uplift"></canvas>
+<button onclick="{{segment}}_{{metric}}_uplift_chart.resetZoom()">Reset Zoom</button>
+</div>
+<script>
+  ctx = document.getElementById('{{segment}}_{{metric}}_uplift');
+
+  data = {
+      labels: {{quantiles}},
+      datasets: [
+{% for dataset in datasets %}
+      {
+          label: "{{dataset.branch}}",
+          data: {{dataset.uplift}},
+          borderWidth: 1
+      },
+{% endfor %}
+      ]
+  };
+
+  var {{segment}}_{{metric}}_uplift_chart = new Chart(ctx, {
+    type: 'line',
+    data,
+    options: {
+      responsive: true,
+      plugins: {
+          zoom: zoomOptions,
+          legend: {
+              display: true,
+              position: 'top',
+            },
+          title: {
+              display: true,
+              text: ["{{metric}} uplift", "segment: {{segment}}"]
+            }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            text: "Uplift (%)",
+            display: true
+          }
+        },
+        x: {
+          title: {
+            text: "Quantile",
+            display: true
+          },
+          ticks: {
+            maxTicksLimit: 10
+          }
+        }
+      }
+    }
+  });
+</script>
+{% endautoescape %}

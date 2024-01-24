@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<head>
+<title>{{title}}</title>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700');
+@import url('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css');
+body {
+  color: #000000;
+  background: #ffffff;
+  font-family: 'Open Sans',sans-serif;
+  padding: 0;
+  margin: 0;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+div.code {
+    background: #eee;
+    border-radius: 0px;
+}
+.sidebar-toggle {
+  margin-left: -20%;
+}
+div.title{
+  margin-left: -20%;
+  width: 140%;
+  margin-bottom: 10px;
+  font-size: 20px;
+  border-bottom: groove;
+}
+div.cell {
+    margin-left: 35%;
+    margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 40%;
+    position: relative;
+}
+div.chart {
+  margin-bottom: 30px;
+  color: #000000;
+}
+div.table {
+  margin-bottom: 10px;
+  border: double;
+  border-color: black;
+  color: #000000;
+}
+.sidebar {
+  width: 20%;
+  height: 100%;
+  background: #ffffff;
+  position: fixed;
+  -webkit-transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+  -o-transition: all .3s ease-in-out;
+  -ms-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+  z-index: 100;
+  #leftside-navigation {
+    ul, ul ul {
+      margin: -2px 0 0;
+      padding: 0;
+    }
+    ul {
+      li {
+        list-style-type: none;
+        border-bottom: 1px solid rgba(255,255,255,.05);
+        &.active {
+          & > a {
+            color: #ececec;
+          }
+          ul {
+            display: block;
+          }
+        }
+        a {
+          color: #000000;
+          text-decoration: none;
+          display: block;
+          padding: 18px 0 18px 25px;
+          font-size: 16px;
+          outline: 0;
+          -webkit-transition: all 200ms ease-in;
+          -moz-transition: all 200ms ease-in;
+          -o-transition: all 200ms ease-in;
+          -ms-transition: all 200ms ease-in;
+          transition: all 200ms ease-in;
+          &:hover {
+            color: #1abc9c;
+          }
+          span {
+            display: inline-block;
+          }
+          i {
+            width: 20px;
+            .fa-angle-left, .fa-angle-right {
+              padding-top: 3px;
+            }
+          }
+        }
+      }
+    }
+    ul ul {
+      display: none;
+      li {
+        background: #ececec;
+        margin-bottom: 0;
+        margin-left: 0;
+        margin-right: 0;
+        border-bottom: none;
+        a {
+          font-size: 14px;
+          padding-top: 13px;
+          padding-bottom: 13px;
+          color: #000000;
+        }
+      }
+    }
+  }
+}
+.table {
+	width:100%;
+	border:1px solid $color-form-highlight;
+        font-size: 14px;
+}
+.table-header {
+	display:flex;
+	width:100%;
+	background:#000;
+	padding:($half-spacing-unit * 1.5) 0;
+}
+.table-row {
+	display:flex;
+	width:100%;
+	padding:($half-spacing-unit * 1.5) 0;
+
+	&:nth-of-type(odd) {
+		background:$color-form-highlight;
+	}
+}
+.table-data, .header__item {
+	flex: 1 1 20%;
+	text-align:center;
+}
+.header__item {
+        color:white;
+        text-align:center;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-error-bars@4.3.4/build/index.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
+<script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script>
+  Chart.defaults.font.size = 14;
+  Chart.defaults.color = '#000000';
+  zoomOptions = {
+      pan: {
+          enabled: true,
+          mode: 'xy',
+          modifierKey: 'ctrl',
+      },
+      zoom: {
+          mode: 'xy',
+          drag: {
+              enabled: true,
+              borderColor: 'rgb(54, 162, 235)',
+              borderWidth: 1,
+              backgroundColor: 'rgba(54, 162, 235, 0.3)'
+            }
+        }
+    };
+</script>
+
+</head>
+<body>
