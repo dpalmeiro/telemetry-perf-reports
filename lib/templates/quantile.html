@@ -37,6 +37,12 @@
       },
       scales: {
         y: {
+          ticks: {
+            beginAtZero : true
+          },
+          grid: {
+            lineWidth: ({ tick }) => tick.value == 0 ? 5 : 1,
+          },
           beginAtZero: true,
           title: {
             text: "Difference",
@@ -94,6 +100,12 @@
       },
       scales: {
         y: {
+          ticks: {
+            beginAtZero : true
+          },
+          grid: {
+            lineWidth: ({ tick }) => tick.value == 0 ? 5 : 1
+          },
           beginAtZero: true,
           title: {
             text: "Uplift (%)",
