@@ -26,22 +26,35 @@
       responsive: true,
       plugins: {
           zoom: zoomOptions,
+          datalabels: {
+            anchor: 'end',
+            align: 'top',
+            formatter: Math.round,
+          },
+          annotation: {
+              annotations: {
+                  line: {
+                      type: 'line',
+                      yMin: 0,
+                      yMax: 0,
+                      borderWidth: 2,
+                      borderColor: 'gray'
+                    }
+                }
+          },
           legend: {
               display: true,
               position: 'top',
-            },
+          },
           title: {
               display: true,
               text: ["{{metric}} difference", "segment: {{segment}}"]
-            }
+          }
       },
       scales: {
         y: {
           ticks: {
             beginAtZero : true
-          },
-          grid: {
-            lineWidth: ({ tick }) => tick.value == 0 ? 5 : 1,
           },
           beginAtZero: true,
           title: {
@@ -59,7 +72,7 @@
           }
         }
       }
-    }
+    },
   });
 </script>
 
@@ -89,22 +102,35 @@
       responsive: true,
       plugins: {
           zoom: zoomOptions,
+          datalabels: {
+            anchor: 'end',
+            align: 'top',
+            formatter: n => Math.round(n)+"%"
+          },
+          annotation: {
+              annotations: {
+                  line: {
+                      type: 'line',
+                      yMin: 0,
+                      yMax: 0,
+                      borderWidth: 2,
+                      borderColor: 'gray'
+                    }
+                }
+          },
           legend: {
               display: true,
               position: 'top',
-            },
+          },
           title: {
               display: true,
               text: ["{{metric}} uplift", "segment: {{segment}}"]
-            }
+          }
       },
       scales: {
         y: {
           ticks: {
             beginAtZero : true
-          },
-          grid: {
-            lineWidth: ({ tick }) => tick.value == 0 ? 5 : 1
           },
           beginAtZero: true,
           title: {

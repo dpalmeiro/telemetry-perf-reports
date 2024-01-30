@@ -15,8 +15,9 @@
             {
               x: "{{dataset.branch}}",
               y: {{dataset.mean}},
-              yMin: {{dataset.yMin}},
-              yMax: {{dataset.yMax}}
+              {% if dataset.uplift %}
+              uplift: {{dataset.uplift}}
+              {% endif %}
             },
 {% endfor %}
           ],
@@ -26,6 +27,19 @@
     options: {
       responsive: true,
       plugins: {
+          datalabels: {
+            anchor: 'end',
+            align: 'top',
+            formatter: (n) => {
+                return n.hasOwnProperty('uplift') 
+                  ?  n.y.toFixed(2) + "  (" + (n.uplift > 0 ? "+" : "") + n.uplift.toFixed(1) + ")%" 
+                  :  n.y.toFixed(2);
+            },
+            font: {
+              weight: 'bold',
+              size: 15
+            }
+          },
           legend: {
               display: false,
               position: 'top',

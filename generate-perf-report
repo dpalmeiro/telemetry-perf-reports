@@ -31,22 +31,26 @@ def setupDirs(slug, dataDir, reportDir, generate_report):
 
 def getResultsForBranch(client, config, analyzer, branch):
   if config['strategy'] == 'full':
-    df = client.getEventData_Full(config, branch)
-    return analyzer.processPageLoadEventData(df, branch)
+    # Collect histogram data
+    df_hist = client.getHistogramData_Full(config, branch)
+    # Collect pageload events
+    df_events = client.getEventData_Full(config, branch)
+    # Process data
+    return analyzer.processTelemetryData(df_hist, df_events, branch)
+
   elif config['strategy'] == 'incremental':
-    datafiles = client.getEventData_Incremental(config, branch)
     print("Incremental strategy is unsupported for now.")
     sys.exit(1)
+    #datafiles = client.getEventData_Incremental(config, branch)
   else:
     print("Unknown strategy: ", config['strategy'])
     sys.exit(1)
-  return results
 
 def getResultsForExperiment(dataDir, config, skipCache):
   client = TelemetryClient(dataDir, skipCache)
-  analyzer = FullDataAnalyzer(config)
-
   results = {}
+  analyzer = FullDataAnalyzer(config, results)
+
   for branch in config['branches']:
     results[branch] = getResultsForBranch(client, config, analyzer, branch)
   return results
