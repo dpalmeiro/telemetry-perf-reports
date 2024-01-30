@@ -1,4 +1,4 @@
-import urllib.request
+import requests
 import json
 import sys
 
@@ -21,14 +21,14 @@ def retrieveAPI(dataDir, slug, skipCache):
 
   url=f'https://experimenter.services.mozilla.com/api/v6/experiments/{slug}'
   print(f"Loading nimbus API from {url}")
-  try:
-    with urllib.request.urlopen(url) as experimentAPIFile:
-      values = json.load(experimentAPIFile)
-      with open(f"{dataDir}/{slug}-nimbus-API.json", 'w') as f:
+  response = requests.get(url)
+  if response.ok:
+    values = response.json()
+    with open(f"{dataDir}/{slug}-nimbus-API.json", 'w') as f:
         json.dump(values, f, indent=2)
-      return values
-  except urllib.error.URLError as e:
-    print(f"Failed to retrieve {url}: {e.reason}")
+    return values
+  else:
+    print(f"Failed to retrieve {url}: {response.status_code}")
     sys.exit(1)
 
 # We only care about a few values from the API.
