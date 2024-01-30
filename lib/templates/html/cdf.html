@@ -1,6 +1,6 @@
 {% autoescape off %}
 <div class="chart"><canvas id="{{segment}}_{{metric}}_pdf"></canvas>
-<button onclick="{{segment}}_{{metric}}_uplift_pdf_chart.resetZoom()">Reset Zoom</button>
+<button onclick="{{segment}}_{{metric}}_pdf_chart.resetZoom()">Reset Zoom</button>
 </div>
 <script>
   ctx = document.getElementById('{{segment}}_{{metric}}_pdf');
@@ -18,13 +18,14 @@
       ]
   };
 
-  var {{segment}}_{{metric}}_uplift_pdf_chart = new Chart(ctx, {
+  var {{segment}}_{{metric}}_pdf_chart = new Chart(ctx, {
     type: 'line',
     data,
     options: {
       responsive: true,
       plugins: {
           zoom: zoomOptions,
+          datalabels: { display: false },
           legend: {
               display: true,
               position: 'top',
@@ -83,6 +84,65 @@
       responsive: true,
       plugins: {
           zoom: zoomOptions,
+          datalabels: { display: false },
+          annotation: {
+              annotations: {
+                  q25: {
+                      type: 'line',
+                      yMin: 0.25,
+                      yMax: 0.25,
+                      borderWidth: 1,
+                      borderColor: 'orange',
+                      label: {
+                          display: true,
+                          content: '25th',
+                          position: 'end',
+                          color: 'black', 
+                          yAdjust: -5,
+                          backgroundColor: 'transparent',
+                          font: {
+                            size: 12
+                          }
+                      }
+                    },
+                  q50: {
+                      type: 'line',
+                      yMin: 0.5,
+                      yMax: 0.5,
+                      borderWidth: 1,
+                      borderColor: 'magenta',
+                      label: {
+                          display: true,
+                          content: 'median',
+                          position: 'end',
+                          color: 'black', 
+                          yAdjust: -5,
+                          backgroundColor: 'transparent',
+                          font: {
+                            size: 12
+                          }
+                      }
+                    },
+                  q75: {
+                      type: 'line',
+                      yMin: 0.75,
+                      yMax: 0.75,
+                      borderWidth: 1,
+                      borderColor: 'green',
+                      label: {
+                          display: true,
+                          content: '75th',
+                          position: 'end',
+                          color: 'black', 
+                          yAdjust: -5,
+                          backgroundColor: 'transparent',
+                          font: {
+                            size: 12
+                          }
+                      }
+                    },
+                }
+          },
           legend: {
               display: true,
               position: 'top',
@@ -95,7 +155,6 @@
       scales: {
         y: {
           beginAtZero: true,
-          max: 1.0,
           title: {
             text: "CDF",
             display: true

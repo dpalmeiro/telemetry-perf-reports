@@ -1,11 +1,27 @@
 {
   "slug": "parallel-marking-experiment-2",
 
-  "histograms": [
-      "payload.processes.content.histograms.perf_page_load_time_ms"
+  "backup" : [
   ],
 
-  "pageload_event_fields": {
+  "histograms": [
+      "payload.processes.content.histograms.perf_page_load_time_ms",
+      "payload.processes.content.histograms.perf_first_contentful_paint_ms",
+      "payload.processes.content.histograms.js_pageload_execution_ms",
+      "payload.processes.content.histograms.input_event_response_ms",
+      "payload.processes.content.histograms.cycle_collector_max_pause",
+      "payload.processes.content.histograms.gc_ms",
+      "payload.processes.content.histograms.gc_max_pause_ms_2",
+      "payload.processes.content.histograms.gc_mark_ms",
+      "payload.processes.content.histograms.gc_mark_rate_2",
+      "payload.processes.content.histograms.gc_sweep_ms",
+      "payload.processes.content.histograms.gc_slice_count",
+      "payload.processes.content.histograms.gc_budget_overrun",
+      "payload.processes.content.histograms.gc_task_start_delay_us",
+      "payload.histograms.memory_total"
+  ],
+
+  "pageload_event_metrics": {
     "fcp_time" : [0, 10000],
     "response_time": [0, 10000],
     "load_time": [0, 30000],
@@ -16,7 +32,7 @@
     "All",
     "Windows",
     "Linux",
-    "Macintosh"
+    "Mac"
   ],
 
   "strategy": "full"
