@@ -1,125 +1,195 @@
+import os
 import numpy as np
 import pandas as pd
-import os
-from datetime import datetime, timedelta
 from google.cloud import bigquery
+from django.template import Template, Context
+from django.template.loader import get_template
+
+
+def segments_are_all_OS(segments):
+  os_segments = set(["Windows", "All", "Linux", "Mac"])
+  for segment in segments:
+    if segment not in os_segments:
+      return False
+  return True
 
 class TelemetryClient:
-  def __init__(self, dataDir, skipCache):
+  def __init__(self, dataDir, config, skipCache):
     self.client = bigquery.Client()
+    self.config = config
     self.dataDir = dataDir
     self.skipCache = skipCache
 
-  def generateHistogramQuery(self, config, branch, date=None):
-      channel=config['channel']
-      slug=config['slug']
-
-      if date:
-        date_conditions = f"""DATE(submission_timestamp) = DATE('{date}')"""
+  def collectResultsFromQuery_OS_segments(self, results, branch, segment, df_events, histograms):
+    for histogram in self.config['histograms']:
+      df = histograms[histogram]
+      if segment == "All":
+        subset = df[df["branch"] == branch][['bucket', 'counts']].groupby(['bucket']).sum()
+        buckets = list(subset.index)
+        counts = list(subset['counts'])
       else:
-        date_conditions = f"""DATE(submission_timestamp) >= DATE('{config['startDate']}')
-                    AND DATE(submission_timestamp) <= DATE('{config['endDate']}')"""
+        subset = df[(df["segment"] == segment) & (df["branch"] == branch)]
+        buckets = list(subset['bucket'])
+        counts = list(subset['counts'])
 
-      probe_selections = ""
-      for probe in config['histograms']:
-        probe_name=probe.split('.')[-1]
-        probe_selections = probe_selections + \
-            f"{probe} AS {probe_name},\n"
+      assert len(buckets) == len(counts)
+      results[branch][segment]['histograms'][histogram] = {}
+      results[branch][segment]['histograms'][histogram]['bins'] = buckets
+      results[branch][segment]['histograms'][histogram]['counts'] = counts
+      print(f"    len({histogram}) = ", len(buckets))
 
-      query = f"""
-        SELECT
-          {probe_selections}
-          normalized_os as os
-        FROM
-          `moz-fx-data-shared-prod.telemetry.main`
-        WHERE
-          {date_conditions}
-          AND normalized_channel = "{channel}"
-          AND normalized_app_name = "Firefox"
-          AND payload.processes.parent.scalars.browser_engagement_total_uri_count > 0
-          AND mozfun.map.get_key(environment.experiments, "{slug}").branch = "{branch}"
-      """
-      return query
+    for metric in self.config['pageload_event_metrics']:
+      minval = self.config["pageload_event_metrics"][metric][0]
+      maxval = self.config["pageload_event_metrics"][metric][1]
 
-
-  def generateEventsQuery(self, config, branch, date=None):
-      if date:
-        date_conditions = f"""AND DATE(submission_timestamp) = DATE('{date}')"""
+      if segment == "All":
+        subset = df_events[(df_events["branch"] == branch) & 
+          df_events['bucket'].between(minval, maxval)][['bucket', f"{metric}_counts"]].groupby(['bucket']).sum()
+        buckets = list(subset.index)
+        counts = list(subset[f"{metric}_counts"])
       else:
-        date_conditions = f"""AND DATE(submission_timestamp) >= DATE('{config['startDate']}')
-                    AND DATE(submission_timestamp) <= DATE('{config['endDate']}')"""
+        subset = df_events[(df_events["segment"] == segment) & 
+                           (df_events["branch"] == branch) & 
+                            df_events['bucket'].between(minval, maxval)]
+        buckets = list(subset["bucket"])
+        counts = list(subset[f"{metric}_counts"])
+      assert len(buckets) == len(counts)
 
-      field_selections = ""
-      for field in config['pageload_event_metrics']:
-        field_selections = field_selections + \
-              f"""                    SAFE_CAST((SELECT value FROM UNNEST(event.extra) WHERE key = '{field}') AS float64) AS {field},\n"""
-
-      query = f"""WITH eventdata AS (
-                  SELECT
-                    client_info.app_build AS app_build,
-                    client_info.app_display_Version AS app_version,
-                    metadata.geo.country AS country,
-                    metadata.user_agent.os AS os,
-                    metadata.user_agent.version AS os_version,
-                    {field_selections}
-                  FROM
-                    `moz-fx-data-shared-prod.firefox_desktop.pageload`
-                  CROSS JOIN
-                    UNNEST(events) AS event
-                  WHERE 
-                    normalized_channel = "{config['channel']}"
-                    {date_conditions}
-                    AND mozfun.map.get_key(ping_info.experiments, "{config['slug']}").branch = "{branch}"
-                  )
-                  SELECT 
-                    *
-                  FROM 
-                    eventdata
-                  WHERE
-                    load_time > 0
-                    AND response_time > 0
-                    AND fcp_time > 0
-                """
-      
-      #if "queries" not in config:
-      #  config["queries"] = {}
-      #if "pageloadEvent" not in config["queries"]:
-      #  config["queries"]["pageloadEvent"] = {}
-      #config["queries"]["pageloadEvent"]["branch"] = branch
-      #config["queries"]["pageloadEvent"]["date"] = date
-      #config["queries"]["pageloadEvent"]["query"] = query
-      return query
+      results[branch][segment]['pageload_event_metrics'][metric] = {}
+      results[branch][segment]['pageload_event_metrics'][metric]['bins'] = buckets
+      results[branch][segment]['pageload_event_metrics'][metric]['counts'] = counts
+      print(f"    len(pageload event: {metric}) = ", len(buckets))
 
 
-  def getEventData_Incremental(self, config, branch):
-    dataFiles=[]
-    currentDate=datetime.strptime(config['startDate'], "%Y-%m-%d")
-    endDate=datetime.strptime(config['endDate'], "%Y-%m-%d")
-    delta=timedelta(days=1)
+  def getResults(self):
+    # Get data for each pageload event metrics.
+    df_events = self.getPageloadEventData()
+    print(df_events)
 
-    while currentDate <= endDate:
-      currentDateString = currentDate.strftime("%Y-%m-%d")
-      slug = config['slug']
-      query = self.generateEventsQuery(config, "control", currentDateString)
+    #Get data for each histogram in this segment.
+    histograms = {}
+    for histogram in self.config['histograms']:
+      histograms[histogram] = self.getHistogramData(self.config, histogram)
+      print(histograms[histogram])
 
-      print("Running query: " + query)
-      job = self.client.query(query)
+    # Combine histogram and pageload event results.
+    results = {}
+    for branch in self.config['branches']:
+      results[branch] = {}
+      for segment in self.config['segments']:
+        print (f"Aggregating results for segment={segment} and branch={branch}")
+        results[branch][segment] = {"histograms": {}, "pageload_event_metrics": {}}
 
-      print(f"Writing results for {currentDateString} to disk.")
-      filename=os.path.join(self.dataDir, f"{slug}-pageload-events-{branch}-{currentDateString}.pkl")
-      df = job.to_dataframe()
-      df.to_pickle(filename)
+        # Special case when segments is OS only.
+        self.collectResultsFromQuery_OS_segments(results, branch, segment, df_events, histograms)
+    return results
 
-      dataFiles.append(filename)
-      currentDate += delta
-    return dataFiles
+  def generatePageloadEventQuery_OS_segments(self):
+    t = get_template("events_os_segments.sql")
 
-  def checkForExistingData(self, slug, branch, source, date=None):
-    if date is None:
-      filename=os.path.join(self.dataDir, f"{slug}-{source}-{branch}.pkl")
-    else:
-      filename=os.path.join(self.dataDir, f"{slug}-{source}-{branch}-{date}.pkl")
+    maxBucket = 0
+    minBucket = 30000
+    for metric in self.config['pageload_event_metrics']:
+      metricMin = self.config['pageload_event_metrics'][metric][0]
+      metricMax = self.config['pageload_event_metrics'][metric][1]
+      if metricMax > maxBucket:
+        maxBucket = metricMax
+      if metricMin < minBucket:
+        minBucket = metricMin
 
+    context = {
+        "minBucket": minBucket,
+        "maxBucket": maxBucket,
+        "is_experiment": self.config['is_experiment'],
+        "slug": self.config['slug'],
+        "channel": self.config['channel'],
+        "startDate": self.config['startDate'],
+        "endDate": self.config['endDate'],
+        "metrics": self.config['pageload_event_metrics'],
+    }
+    query = t.render(context)
+    # Remove empty lines before returning
+    query = "".join([s for s in query.strip().splitlines(True) if s.strip()])
+    return query
+
+  def generatePageloadEventQuery_Generic(self):
+    t = get_template("events_generic.sql")
+
+    segmentInfo = []
+    for segment in self.config['segments']:
+      segmentInfo.append({
+            "name": segment, 
+            "conditions": self.config['segments'][segment]
+            })
+
+    maxBucket = 0
+    minBucket = 30000
+    for metric in self.config['pageload_event_metrics']:
+      metricMin = self.config['pageload_event_metrics'][metric][0]
+      metricMax = self.config['pageload_event_metrics'][metric][1]
+      if metricMax > maxBucket:
+        maxBucket = metricMax
+      if metricMin < minBucket:
+        minBucket = metricMin
+
+    context = {
+        "minBucket": minBucket,
+        "maxBucket": maxBucket,
+        "is_experiment": self.config['is_experiment'],
+        "slug": self.config['slug'],
+        "channel": self.config['channel'],
+        "startDate": self.config['startDate'],
+        "endDate": self.config['endDate'],
+        "metrics": self.config['pageload_event_metrics'],
+        "segments": segmentInfo
+    }
+    query = t.render(context)
+    # Remove empty lines before returning
+    query = "".join([s for s in query.strip().splitlines(True) if s.strip()])
+    return query
+
+  # Use this query if the segments is OS only which is much faster than generic query.
+  def generateHistogramQuery_OS_segments(self, histogram):
+    t = get_template("histogram_os_segments.sql")
+
+    context = {
+        "is_experiment": self.config['is_experiment'],
+        "slug": self.config['slug'],
+        "channel": self.config['channel'],
+        "startDate": self.config['startDate'],
+        "endDate": self.config['endDate'],
+        "histogram": histogram,
+    }
+    query = t.render(context)
+    # Remove empty lines before returning
+    query = "".join([s for s in query.strip().splitlines(True) if s.strip()])
+    return query
+
+  def generateHistogramQuery_Generic(self, histogram):
+    t = get_template("histogram_generic.sql")
+
+    segmentInfo = []
+    for segment in self.config['segments']:
+      segmentInfo.append({
+            "name": segment, 
+            "conditions": self.config['segments'][segment]
+            })
+
+    context = {
+        "is_experiment": self.config['is_experiment'],
+        "slug": self.config['slug'],
+        "channel": self.config['channel'],
+        "startDate": self.config['startDate'],
+        "endDate": self.config['endDate'],
+        "histogram": histogram,
+        "segments": segmentInfo
+    }
+    query = t.render(context)
+    # Remove empty lines before returning
+    query = "".join([s for s in query.strip().splitlines(True) if s.strip()])
+    return query
+
+  def checkForExistingData(self, filename):
     if self.skipCache:
       df = None
     else:
@@ -130,34 +200,43 @@ class TelemetryClient:
         df = None
     return df
 
-  def getEventData_Full(self, config, branch):
+  def getHistogramData(self, config, histogram):
     slug = config['slug']
-    data = self.checkForExistingData(slug, branch, "events")
-    if data is not None:
-      return data
+    hist_name = histogram.split('.')[-1]
+    filename=os.path.join(self.dataDir, f"{slug}-{hist_name}.pkl")
 
-    query = self.generateEventsQuery(config, branch)
-    print("Running query: " + query)
+    df = self.checkForExistingData(filename)
+    if df is not None:
+      return df
+
+    if segments_are_all_OS(self.config['segments']):
+      query = self.generateHistogramQuery_OS_segments(histogram)
+    else:
+      query = self.generateHistogramQuery_Generic(histogram)
+
+    print("Running query:\n" + query)
     job = self.client.query(query)
-
-    print(f"Writing '{slug}' event results for branch '{branch}' to disk.")
-    filename=os.path.join(self.dataDir, f"{slug}-events-{branch}.pkl")
     df = job.to_dataframe()
+    print(f"Writing '{slug}' histogram results for {histogram} to disk.")
     df.to_pickle(filename)
     return df
 
-  def getHistogramData_Full(self, config, branch):
-    slug = config['slug']
-    data = self.checkForExistingData(slug, branch, "histograms")
-    if data is not None:
-      return data
+  def getPageloadEventData(self):
+    slug = self.config['slug']
+    filename=os.path.join(self.dataDir, f"{slug}-pageload-events.pkl")
 
-    query = self.generateHistogramQuery(config, branch)
-    print("Running query: " + query)
+    df = self.checkForExistingData(filename)
+    if df is not None:
+      return df
+
+    if segments_are_all_OS(self.config['segments']):
+      query = self.generatePageloadEventQuery_OS_segments()
+    else:
+      query = self.generatePageloadEventQuery_Generic()
+
+    print("Running query:\n" + query)
     job = self.client.query(query)
-
-    print(f"Writing '{slug}' histogram results for branch '{branch}' to disk.")
-    filename=os.path.join(self.dataDir, f"{slug}-histograms-{branch}.pkl")
     df = job.to_dataframe()
+    print(f"Writing '{slug}' pageload event results to disk.")
     df.to_pickle(filename)
     return df

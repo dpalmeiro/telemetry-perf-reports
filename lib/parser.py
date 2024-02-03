@@ -35,8 +35,7 @@ def retrieveAPI(dataDir, slug, skipCache):
 # Specifically, the branch slugs, channel and start/end dates.
 def extractValuesFromAPI(api):
   values = {}
-  values["startDate"] = api["startDate"]
-  values["enrollmentEndDate"] = api["enrollmentEndDate"]
+  values["startDate"] = api["enrollmentEndDate"]
   values["endDate"] = api["endDate"]
   values["channel"] = api["channel"]
 
@@ -53,4 +52,10 @@ def parseConfigFile(configFile):
   with open(configFile, "r") as configData:
     config = json.load(configData)
     configData.close()
+
+  if "branches" in config:
+    config["is_experiment"] = False
+  else:
+    config["is_experiment"] = True
+
   return config

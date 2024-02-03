@@ -1,33 +1,26 @@
-import django
 import json
 import os
 import numpy as np
-from django.conf import settings
 from django.template import Template, Context
 from django.template.loader import get_template
 from airium import Airium
 
-class ReportGenerator:
-  def setupDjango(self):
-    TEMPLATES = [
-        {
-          "BACKEND": "django.template.backends.django.DjangoTemplates",
-          'DIRS': [os.path.join(os.path.dirname(__file__),'templates','html')]
-          }
-        ]
-    settings.configure(TEMPLATES=TEMPLATES)
-    django.setup()
+def getIconForSegment(segment):
+  iconMap = {
+      "All": "fa-solid fa-globe",
+      "Windows": "fa-brands fa-windows",
+      "Linux": "fa-brands fa-linux",
+      "Mac": "fa-brands fa-apple"
+  }
+  if segment in iconMap:
+    return iconMap[segment]
+  else:
+    return "fa-solid fa-chart-simple"
 
+class ReportGenerator:
   def __init__(self, data):
-    self.setupDjango()
     self.data = data
     self.doc = Airium()
-    self.iconMap = {
-      "All": "fa-globe",
-      "Windows": "fa-windows",
-      "Linux": "fa-linux",
-      "Mac": "fa-apple"
-    }
 
   def createHeader(self):
     t = get_template("header.html")
@@ -46,7 +39,7 @@ class ReportGenerator:
     segments = []
     for segment in self.data['segments']:
       entry = { "name": segment,
-                "icon": self.iconMap[segment],
+                "icon": getIconForSegment(segment),
                 "pageload_metrics" : [],
                 "histograms" : []
               }
@@ -78,17 +71,26 @@ class ReportGenerator:
       density = self.data[branch][segment][metric_type][metric]["pdf"]["density"]
       cdf = self.data[branch][segment][metric_type][metric]["pdf"]["cdf"]
 
+      # Reduce the arrays to about 100 values so the report doesn't take forever.
+      if len(cdf) > 100:
+        n = int(len(cdf)/100)
+      else:
+        n = 1
+      cdf_reduced = cdf[0::n]
+      values_reduced = values[0::n]
+      density_reduced = density[0::n]
+
       dataset = {
           "branch": branch,
-          "cdf": cdf,
-          "density": density
+          "cdf": cdf_reduced,
+          "density": density_reduced
       }
       datasets.append(dataset)
 
     context = {
         "segment": segment,
         "metric": metric,
-        "values": values,
+        "values": values_reduced,
         "datasets": datasets
     }
     self.doc(t.render(context))
