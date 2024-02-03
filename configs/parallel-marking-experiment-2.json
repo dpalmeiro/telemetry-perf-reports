@@ -1,9 +1,6 @@
 {
   "slug": "parallel-marking-experiment-2",
 
-  "backup" : [
-  ],
-
   "histograms": [
       "payload.processes.content.histograms.perf_page_load_time_ms",
       "payload.processes.content.histograms.perf_first_contentful_paint_ms",
@@ -28,12 +25,10 @@
     "js_exec_time": [0, 10000]
   },
 
-  "segments": [
-    "All",
-    "Windows",
-    "Linux",
-    "Mac"
-  ],
-
-  "strategy": "full"
+  "segments": {
+    "All": [],
+    "Windows": ["AND normalized_os = 'Windows'"],
+    "Linux": ["AND normalized_os = 'Linux'"],
+    "Mac": ["AND normalized_os = 'Mac'"]
+  }
 }

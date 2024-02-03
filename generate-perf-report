@@ -3,10 +3,34 @@ import json
 import os
 import sys
 import argparse
+import numpy as np
+import django
+from django.conf import settings
 from lib.parser import parseConfigFile, parseNimbusAPI
 from lib.telemetry import TelemetryClient
-from lib.analysis import FullDataAnalyzer
+from lib.analysis import DataAnalyzer
 from lib.report import ReportGenerator
+
+class NpEncoder(json.JSONEncoder):
+  def default(self, obj):
+    if isinstance(obj, np.integer):
+      return int(obj)
+    if isinstance(obj, np.floating):
+      return float(obj)
+    if isinstance(obj, np.ndarray):
+      return obj.tolist()
+    return super(NpEncoder, self).default(obj)
+
+def setupDjango():
+  TEMPLATES = [
+      {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        'DIRS': [os.path.join(os.path.dirname(__file__),'lib','templates','sql'),
+                 os.path.join(os.path.dirname(__file__),'lib','templates','html')]
+        }
+      ]
+  settings.configure(TEMPLATES=TEMPLATES)
+  django.setup()
 
 def parseArguments():
   parser = argparse.ArgumentParser(description='Process telemetry performance report.')
@@ -29,31 +53,12 @@ def setupDirs(slug, dataDir, reportDir, generate_report):
     if not os.path.isdir(reportDir):
       os.mkdir(reportDir)
 
-def getResultsForBranch(client, config, analyzer, branch):
-  if config['strategy'] == 'full':
-    # Collect histogram data
-    df_hist = client.getHistogramData_Full(config, branch)
-    # Collect pageload events
-    df_events = client.getEventData_Full(config, branch)
-    # Process data
-    return analyzer.processTelemetryData(df_hist, df_events, branch)
-
-  elif config['strategy'] == 'incremental':
-    print("Incremental strategy is unsupported for now.")
-    sys.exit(1)
-    #datafiles = client.getEventData_Incremental(config, branch)
-  else:
-    print("Unknown strategy: ", config['strategy'])
-    sys.exit(1)
-
 def getResultsForExperiment(dataDir, config, skipCache):
-  client = TelemetryClient(dataDir, skipCache)
-  results = {}
-  analyzer = FullDataAnalyzer(config, results)
+  sqlClient = TelemetryClient(dataDir, config, skipCache)
+  analyzer = DataAnalyzer(config)
 
-  for branch in config['branches']:
-    results[branch] = getResultsForBranch(client, config, analyzer, branch)
-  return results
+  telemetryData = sqlClient.getResults()
+  return analyzer.processTelemetryData(telemetryData)
 
 def checkForLocalResults(resultsFile):
   if os.path.isfile(resultsFile):
@@ -64,8 +69,8 @@ def checkForLocalResults(resultsFile):
 
 ########### Start Program Here ###########
 if __name__ == "__main__":
+  setupDjango()
   args = parseArguments()
-  print(args)
 
   # Parse config file.
   print("Loading config file: ", args.config)
@@ -104,7 +109,7 @@ if __name__ == "__main__":
     print("---------------------------------")
     print(f"Writing results to {resultsFile}")
     with open(resultsFile, 'w') as f:
-      json.dump(results, f, indent=2)
+      json.dump(results, f, indent=2, cls=NpEncoder)
   else:
     print("---------------------------------")
     print(f"Found local results in {resultsFile}")

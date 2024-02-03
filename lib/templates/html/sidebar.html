@@ -3,11 +3,11 @@
   <div id="leftside-navigation" class="nano">
     <ul class="nano-content">
       <li>
-        <a href="#config"><i class="fa fa-cogs"></i><span>Configuration</span></a>
+        <a href="#config"><i class="fa-solid fa-gear"></i><span>Configuration</span></a>
       </li>
 {% for segment in segments %}
       <li class="sub-menu">
-        <a href="javascript:void(0);"><i class="fa {{segment.icon}}"></i><span>{{segment.name}}</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+        <a href="javascript:void(0);"><i class="{{segment.icon}}"></i><span>{{segment.name}}</span><i class="arrow fa-solid fa-angle-right pull-right"></i></a>
         <ul>
 {% for histogram in segment.histograms %}
           <li><a href="#{{segment.name}}-{{histogram}}">{{histogram}}</a></li>

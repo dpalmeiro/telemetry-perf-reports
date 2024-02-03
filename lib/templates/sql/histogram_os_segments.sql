@@ -1,0 +1,43 @@
+{% autoescape off %}
+with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "{{slug}}").branch as branch,
+        JSON_EXTRACT({{histogram}}, '$.values') as hist
+    FROM
+    {% if channel == "nightly" %}
+        `moz-fx-data-shared-prod.telemetry.main_nightly`
+    {% else %}
+        `moz-fx-data-shared-prod.telemetry.main`
+    {% endif %}
+    WHERE
+        DATE(submission_timestamp) >= DATE('{{startDate}}')
+        AND DATE(submission_timestamp) <= DATE('{{endDate}}')
+        AND normalized_channel = "{{channel}}"
+        AND normalized_app_name = "Firefox"
+        AND {{histogram}} is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count > 0
+        AND mozfun.map.get_key(environment.experiments, "{{slug}}").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+{% endautoescape %}

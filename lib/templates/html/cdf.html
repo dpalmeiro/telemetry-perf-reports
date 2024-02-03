@@ -25,6 +25,16 @@
       responsive: true,
       plugins: {
           zoom: zoomOptions,
+          tooltip: {
+              mode: 'interpolate',
+              intersect: false
+          },
+          crosshair: {
+            line: {
+              color: '#F66',  // crosshair line color
+              width: 1        // crosshair line width
+            }
+          },
           datalabels: { display: false },
           legend: {
               display: true,
@@ -84,6 +94,15 @@
       responsive: true,
       plugins: {
           zoom: zoomOptions,
+          tooltip: {
+              mode: 'interpolate',
+              intersect: false
+          },
+          crosshair: {
+            sync: {
+              enabled: false
+            },
+          },
           datalabels: { display: false },
           annotation: {
               annotations: {
