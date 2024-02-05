@@ -4,12 +4,56 @@ import numpy as np
 import json
 import sys
 
+# Expand the histogram into an array of values
+def expand_histogram(bins, counts):
+  array = []
+  for i in range(len(bins)):
+    for j in range(1, int(counts[i]/2.0)):
+      array.append(bins[i])
+  return array
+
+def calc_cohen_d(x1, x2, s1, s2, n1, n2):
+  effect_size = (x1-x2)/np.sqrt(((n1-1)*s1**2 + (n2-1)*s2**2) / (n1+n2-2))
+  return effect_size
+
+def rank_biserial_correlation(n1, n2, U):
+  return (1-2*U/(n1*n2))
+
+# Calculate two-way t-test with unequal sample size and unequal variances.
+# Return the t-value, p-value, and effect size via cohen's d.
 def calc_t_test(x1, x2, s1, s2, n1, n2): 
-    degrees_of_freedom = (s1**2/n1 + s2**2/n2)**2/( (s1**2/n1)**2/(n1-1) + (s2**2/n2)**2/(n2-1) )
     s_prime = np.sqrt((s1**2/n1) + (s2**2)/n2)
     t_value = (x1-x2)/s_prime
-    p_value = 2 * (1-(stats.t.cdf(abs(t_value), degrees_of_freedom)))
-    return [t_value, p_value]
+
+    df = (s1**2/n1 + s2**2/n2)**2/( (s1**2/n1)**2/(n1-1) + (s2**2/n2)**2/(n2-1) )
+    p_value = 2 * (1-(stats.t.cdf(abs(t_value), df)))
+    effect_size = calc_cohen_d(x1, x2, s1, s2, n1, n2)
+
+    return [t_value, p_value, effect_size]
+
+# Calculate Mann-Whitney U test when input datasets are histograms.
+# TODO:  Actually implement this.
+def calc_mwu_test(bins1, counts1, bins2, counts2):
+  u_value = 0
+  p_value = 0
+  effect_size = 0
+  return [u_value, p_value, effect_size]
+
+# Calculate Chi squared test when input datasets are histograms.
+# TODO:  Actually implement this.
+def calc_chi_sq_test(bins1, counts1, bins2, counts2):
+  chi_value = 0
+  p_value = 0
+  effect_size = 0
+  return [chi_value, p_value, effect_size]
+
+# Calculate Kolmogorov–Smirnov test when input datasets are histograms.
+# TODO:  Actually implement this.
+def calc_ks_test(bins1, counts1, bins2, counts2):
+  ks_value = 0
+  p_value = 0
+  effect_size = 0
+  return [ks_value, p_value, effect_size]
 
 def calc_cdf_from_density(density, vals):
   cdf = []
@@ -27,25 +71,21 @@ def calc_cdf_from_density(density, vals):
   return cdf
 
 # TODO: Interpolate the quantiles.
-def calc_histogram_quantiles(bins, density, quantiles):
+def calc_histogram_quantiles(bins, density):
   vals = []
+  quantiles = []
   q = 0
   j = 0
   for i in range(len(bins)):
     q = q + density[i]
-    if q >= quantiles[j]:
-      vals.append(bins[i])
-      j=j+1
-      if j==len(quantiles)-1:
-        break
+    vals.append(bins[i])
+    quantiles.append(q)
 
-  while len(vals) < len(quantiles):
-    vals.append(bins[-1])
-  return vals
+  return [quantiles, vals]
 
 def calc_histogram_density(counts, n):
   density = []
-  cdf = [0]
+  cdf = []
   cum = 0
   for i in range(len(counts)):
     density.append(float(counts[i]/n))
@@ -62,14 +102,14 @@ def calc_histogram_mean_var(bins, counts):
     count  = float(counts[i])
     n = n + count
     mean = mean + bucket*count
-  mean = float(mean)/float(n)
+  mean = float(mean)/float(n-1)
 
   var = 0
   for i in range(len(bins)):
     bucket = float(bins[i])
     count =  float(counts[i])
     var = var + count*(bucket-mean)**2
-  var = var/n
+  var = var/(n-1)
   std = np.sqrt(var)
 
   return [mean, var, std, n]
@@ -89,11 +129,9 @@ def calculate_histogram_stats(bins, counts, data):
   data["pdf"]["values"] = bins
 
   # Calculate quantiles
-  quantiles = sorted(list(data["quantile"].keys()))
-  vals = calc_histogram_quantiles(bins, density, quantiles)
-  data["quantile"] = {}
-  for i in range(len(quantiles)):
-    data["quantile"][quantiles[i]] = vals[i]
+  [quantiles, vals] = calc_histogram_quantiles(bins, density)
+  data["quantiles"] = quantiles
+  data["quantile_vals"] = vals
 
 def calculate_histogram_tests(bins, counts, data, control):
   mean_control = control['mean']
@@ -105,7 +143,7 @@ def calculate_histogram_tests(bins, counts, data, control):
   n = data['n']
   
   # Calculate t-test
-  [t_value, p_value] = calc_t_test(mean, mean_control, std, std_control, n, n_control)
+  [t_value, p_value, effect] = calc_t_test(mean, mean_control, std, std_control, n, n_control)
   data["t-test"] = {}
   data["t-test"]["score"] = t_value
   data["t-test"]["p-value"] = p_value
@@ -146,21 +184,8 @@ def createEmptyResultsTemplate(config):
                         "density" : [],
                         "cdf": []
                        },
-                 "quantile": 
-                       {
-                        0.1: 0, 
-                        0.2: 0, 
-                        0.3: 0, 
-                        0.4: 0, 
-                        0.5: 0,
-                        0.6: 0,
-                        0.7: 0,
-                        0.8: 0,
-                        0.9: 0,
-                        0.95: 0,
-                        0.99: 0,
-                        1.0: 0
-                       }
+                  "quantiles": [],
+                  "quantile_vals": []
         }
 
         for metric in config["pageload_event_metrics"]:
@@ -180,21 +205,8 @@ def createEmptyResultsTemplate(config):
                           "density" : [],
                           "cdf": []
                          },
-                   "quantile": 
-                         {
-                          0.1: 0, 
-                          0.2: 0, 
-                          0.3: 0, 
-                          0.4: 0, 
-                          0.5: 0,
-                          0.6: 0,
-                          0.7: 0,
-                          0.8: 0,
-                          0.9: 0,
-                          0.95: 0,
-                          0.99: 0,
-                          1.0: 0
-                         }
+                   "quantiles": [],
+                   "quantile_vals": []
           }
   return template
 
@@ -244,11 +256,9 @@ class DataAnalyzer:
         self.results[branch][segment]["histograms"][hist_name]["pdf"]["values"] = bins
 
         # Calculate quantiles
-        quantiles = sorted(list(self.results[branch][segment]["histograms"][hist_name]["quantile"].keys()))
-        vals = calc_histogram_quantiles(bins, density, quantiles)
-        self.results[branch][segment]["histograms"][hist_name]["quantile"] = {}
-        for i in range(len(quantiles)):
-          self.results[branch][segment]["histograms"][hist_name]["quantile"][quantiles[i]] = vals[i]
+        [quantiles, vals] = calc_histogram_quantiles(bins, density)
+        self.results[branch][segment]["histograms"][hist_name]["quantiles"] = quantiles
+        self.results[branch][segment]["histograms"][hist_name]["quantile_vals"] = vals
 
         if branch != self.control:
           # Get mean, var, and n from results
@@ -256,7 +266,7 @@ class DataAnalyzer:
           std_control = self.results[self.control][segment]["histograms"][hist_name]['std']
           n_control = self.results[self.control][segment]["histograms"][hist_name]['n']
           # Calculate t-test
-          [t_value, p_value] = calc_t_test(mean, mean_control, std, std_control, n, n_control)
+          [t_value, p_value, effect] = calc_t_test(mean, mean_control, std, std_control, n, n_control)
           self.results[branch][segment]["histograms"][hist_name]["t-test"] = {}
           self.results[branch][segment]["histograms"][hist_name]["t-test"]["score"] = t_value
           self.results[branch][segment]["histograms"][hist_name]["t-test"]["p-value"] = p_value
@@ -286,11 +296,10 @@ class DataAnalyzer:
         self.results[branch][segment]["pageload_event_metrics"][metric]["pdf"]["values"] = bins
 
         # Calculate quantiles
-        quantiles = sorted(list(self.results[branch][segment]["pageload_event_metrics"][metric]["quantile"].keys()))
-        vals = calc_histogram_quantiles(bins, density, quantiles)
-        self.results[branch][segment]["pageload_event_metrics"][metric]["quantile"] = {}
-        for i in range(len(quantiles)):
-          self.results[branch][segment]["pageload_event_metrics"][metric]["quantile"][quantiles[i]] = vals[i]
+        # Calculate quantiles
+        [quantiles, vals] = calc_histogram_quantiles(bins, density)
+        self.results[branch][segment]["pageload_event_metrics"][metric]["quantiles"] = quantiles
+        self.results[branch][segment]["pageload_event_metrics"][metric]["quantile_vals"] = vals
 
         if branch != self.control:
           # Get mean, var, and n from results
@@ -298,7 +307,7 @@ class DataAnalyzer:
           std_control = self.results[self.control][segment]["pageload_event_metrics"][metric]['std']
           n_control = self.results[self.control][segment]["pageload_event_metrics"][metric]['n']
           # Calculate t-test
-          [t_value, p_value] = calc_t_test(mean, mean_control, std, std_control, n, n_control)
+          [t_value, p_value, effect] = calc_t_test(mean, mean_control, std, std_control, n, n_control)
           self.results[branch][segment]["pageload_event_metrics"][metric]["t-test"] = {}
           self.results[branch][segment]["pageload_event_metrics"][metric]["t-test"]["score"] = t_value
           self.results[branch][segment]["pageload_event_metrics"][metric]["t-test"]["p-value"] = p_value

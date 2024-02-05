@@ -1,0 +1,80 @@
+{% autoescape off %}
+<div class="chart"><canvas id="{{segment}}_{{metric}}_cdf_uplift"></canvas>
+<button onclick="{{segment}}_{{metric}}_cdf_uplift_chart.resetZoom()">Reset Zoom</button>
+</div>
+<script>
+  ctx = document.getElementById('{{segment}}_{{metric}}_cdf_uplift');
+
+  data = {
+      labels: {{quantiles}},
+      datasets: [
+{% for dataset in datasets %}
+      {
+          label: "{{dataset.branch}}",
+          data: {{dataset.uplift}},
+          borderWidth: 1
+      },
+{% endfor %}
+      ]
+  };
+
+  var {{segment}}_{{metric}}_cdf_uplift_chart = new Chart(ctx, {
+    type: 'line',
+    data,
+    options: {
+      responsive: true,
+      plugins: {
+          zoom: zoomOptions,
+          datalabels: { 
+            display: 'auto',
+            anchor: 'end',
+            align: 'top',
+            formatter: n => Math.round(n)+"%"
+          },
+          annotation: {
+              annotations: {
+                  line: {
+                      type: 'line',
+                      yMin: 0,
+                      yMax: 0,
+                      borderWidth: 2,
+                      borderColor: 'gray'
+                    }
+                }
+          },
+          legend: {
+              display: true,
+              position: 'top',
+          },
+          title: {
+              display: true,
+              text: ["{{metric}} cdf uplift", "segment: {{segment}}"]
+          }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            text: "Uplift (%)",
+            display: true
+          }
+        },
+        x: {
+          title: {
+            text: "Quantile",
+            display: true
+          },
+          ticks: {
+            maxTicksLimit: 10
+          }
+        }
+      },
+      elements: {
+        point:{
+          radius: 1
+        }
+      }
+    }
+  });
+</script>
+{% endautoescape %}

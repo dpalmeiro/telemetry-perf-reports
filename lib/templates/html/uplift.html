@@ -27,6 +27,7 @@
       plugins: {
           zoom: zoomOptions,
           datalabels: {
+            display: 'auto',
             anchor: 'end',
             align: 'top',
             formatter: Math.round,
@@ -68,8 +69,16 @@
             display: true
           },
           ticks: {
-            maxTicksLimit: 10
+            callback: function(val, index) {
+              x = this.getLabelForValue(val);
+              return Math.round(x*100) % 10 == 0 ? x : '';
+            }
           }
+        }
+      },
+      elements: {
+        point:{
+          radius: 1
         }
       }
     },
@@ -103,6 +112,7 @@
       plugins: {
           zoom: zoomOptions,
           datalabels: {
+            display: 'auto',
             anchor: 'end',
             align: 'top',
             formatter: n => Math.round(n)+"%"
@@ -144,8 +154,16 @@
             display: true
           },
           ticks: {
-            maxTicksLimit: 10
+            callback: function(val, index) {
+              x = this.getLabelForValue(val);
+              return Math.round(x*100) % 10 == 0 ? x : '';
+            }
           }
+        }
+      },
+      elements: {
+        point:{
+          radius: 1
         }
       }
     }
