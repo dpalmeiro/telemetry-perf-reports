@@ -1,6 +1,7 @@
 import requests
 import json
 import sys
+import datetime
 
 def checkForLocalAPI(dataDir, slug):
   try:
@@ -38,6 +39,10 @@ def extractValuesFromAPI(api):
   values["startDate"] = api["enrollmentEndDate"]
   values["endDate"] = api["endDate"]
   values["channel"] = api["channel"]
+
+  if values["endDate"] == None:
+    now = datetime.datetime.now();
+    values["endDate"] = now.strftime('%Y-%m-%d')
 
   values["branches"] = []
   for branch in api["branches"]:
