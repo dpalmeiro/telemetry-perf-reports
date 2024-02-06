@@ -1,7 +1,7 @@
 import json
 import os
 import numpy as np
-from scipy.interpolate import CubicSpline
+from scipy import interpolate
 from django.template import Template, Context
 from django.template.loader import get_template
 from airium import Airium
@@ -110,18 +110,43 @@ class ReportGenerator:
     self.doc(t.render(context))
     return
 
-  def calculate_uplift(self, quantiles, branch, segment, metric_type, metric):
+  def calculate_uplift_smooth(self, quantiles, branch, segment, metric_type, metric):
     control = self.data["branches"][0]
 
     quantiles_control = self.data[control][segment][metric_type][metric]["quantiles"]
     values_control = self.data[control][segment][metric_type][metric]["quantile_vals"]
     [quantiles_control_n, values_control_n] = cubic_spline_prep(quantiles_control, values_control)
-    cs_control = CubicSpline(quantiles_control_n, values_control_n)
+    tck = interpolate.splrep(quantiles_control_n, values_control_n, k=3)
+    values_control_n = interpolate.splev(quantiles, tck, der=0)
 
     quantiles_branch = self.data[branch][segment][metric_type][metric]["quantiles"]
     values_branch = self.data[branch][segment][metric_type][metric]["quantile_vals"]
     [quantiles_branch_n, values_branch_n] = cubic_spline_prep(quantiles_branch, values_branch)
-    cs_branch = CubicSpline(quantiles_branch_n, values_branch_n)
+    tck = interpolate.splrep(quantiles_branch_n, values_branch_n, k=3)
+    values_branch_n = interpolate.splev(quantiles, tck, der=0)
+
+    uplifts = []
+    diffs = []
+    for i in range(len(quantiles)):
+      diff = values_branch_n[i] - values_control_n[i]
+      uplift = diff/values_control_n[i]*100
+      diffs.append(diff)
+      uplifts.append(uplift)
+
+    return [diffs, uplifts]
+
+  def calculate_uplift_spline(self, quantiles, branch, segment, metric_type, metric):
+    control = self.data["branches"][0]
+
+    quantiles_control = self.data[control][segment][metric_type][metric]["quantiles"]
+    values_control = self.data[control][segment][metric_type][metric]["quantile_vals"]
+    [quantiles_control_n, values_control_n] = cubic_spline_prep(quantiles_control, values_control)
+    cs_control = interpolate.CubicSpline(quantiles_control_n, values_control_n)
+
+    quantiles_branch = self.data[branch][segment][metric_type][metric]["quantiles"]
+    values_branch = self.data[branch][segment][metric_type][metric]["quantile_vals"]
+    [quantiles_branch_n, values_branch_n] = cubic_spline_prep(quantiles_branch, values_branch)
+    cs_branch = interpolate.CubicSpline(quantiles_branch_n, values_branch_n)
 
     uplifts = []
     diffs = []
@@ -134,7 +159,7 @@ class ReportGenerator:
     return [diffs, uplifts]
 
 
-  def calculate_CDF_uplift(self, quantiles, branch, segment, metric_type, metric):
+  def calculate_cdf_uplift_spline(self, quantiles, branch, segment, metric_type, metric):
     control = self.data["branches"][0]
 
     cdf_control = self.data[control][segment][metric_type][metric]["pdf"]["cdf"]
@@ -165,7 +190,7 @@ class ReportGenerator:
       if branch == control:
         continue
 
-      [diff, uplift] = self.calculate_uplift(quantiles, branch, segment, metric_type, metric)
+      [diff, uplift] = self.calculate_uplift_smooth(quantiles, branch, segment, metric_type, metric)
       dataset = {
           "branch": branch,
           "diff": diff,
@@ -173,11 +198,25 @@ class ReportGenerator:
       }
       datasets.append(dataset)
 
+    maxVal = 0
+    for x in diff:
+      if abs(x) > maxVal:
+        maxVal = abs(x)
+
+    maxPerc = 0
+    for x in uplift:
+      if abs(x) > maxPerc:
+        maxPerc = abs(x)
+
     context = {
         "segment": segment,
         "metric": metric,
         "quantiles": quantiles,
-        "datasets": datasets
+        "datasets": datasets,
+        "upliftMax": maxPerc,
+        "upliftMin": -maxPerc,
+        "diffMax": maxVal,
+        "diffMin": -maxVal
     }
     self.doc(t.render(context))
 
