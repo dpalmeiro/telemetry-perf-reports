@@ -1,12 +1,43 @@
 {% autoescape off %}
 <div id="config" class="cell">
-  <div class="title">Configuration Used:</div>
-  <div class="code">
-  <pre>
-  <code>
+  <div class="title">Configuration & Queries Used:</div>
+
+  <section class="accordion">
+  <input type="checkbox" name="collapse" id="config-json">
+  <h1 class="handle">
+    <label for="config-json">Configuration</label>
+  </h1>
+  <div class="content">
+  <code><pre>
   {{config}}
-  </code>
-  </pre>
+  </pre></code>
   </div>
+  </section>
+
+  <section class="accordion">
+  <input type="checkbox" name="collapse" id="events_query">
+  <h1 class="handle">
+    <label for="events_query">Pageload Events Query</label>
+  </h1>
+  <div class="content">
+  <code><pre>
+  {{queries.events}}
+  </pre></code>
+  </div>
+  </section>
+
+{% for histogram in queries.histograms %}
+  <section class="accordion">
+    <input type="checkbox" name="collapse" id="{{histogram.name}}-query">
+  <h1 class="handle">
+    <label for="{{histogram.name}}-query">Histogram: {{histogram.name}}</label>
+  </h1>
+  <div class="content">
+  <code><pre>
+  {{histogram.query}}
+  </pre></code>
+  </div>
+  </section>
+{% endfor %}
 </div>
 {% endautoescape %}

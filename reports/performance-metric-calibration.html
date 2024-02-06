@@ -2,6 +2,8 @@
 <head>
 <title>performance-metric-calibration experimental results</title>
 <style>
+/* Collapsable styling courtesy of https://codepen.io/markcaron/pen/RVvmaz
+   Sidebar styling courtesy of https://codepen.io/maggiben/pen/bGpzPj */
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700');
 @import url('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css');
 @import url('//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
@@ -14,9 +16,59 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
-div.code {
-    background: #eee;
-    border-radius: 0px;
+.accordion > input[type="checkbox"] {
+  position: absolute;
+  left: -100vw;
+}
+.accordion .content {
+  overflow-y: hidden;
+  height: 0;
+  transition: height 0.3s ease;
+}
+.accordion > input[type="checkbox"]:checked ~ .content {
+  height: auto;
+  overflow: visible;
+}
+.accordion label {
+  display: block;
+}
+.accordion {
+  margin-left: -20%;
+  width: 140%;
+  margin-bottom: 1em;
+}
+.accordion > input[type="checkbox"]:checked ~ .content {
+  padding: 15px;
+  border: 1px solid #e8e8e8;
+  border-top: 0;
+}
+.accordion .handle {
+  margin: 0;
+  font-size: 1.125em;
+  line-height: 1.2em;
+}
+.accordion label {
+  color: #333;
+  cursor: pointer;
+  font-weight: normal;
+  padding: 15px;
+  background: #e8e8e8;
+}
+.accordion label:hover,
+.accordion label:focus {
+  background: #d8d8d8;
+}
+.accordion .handle label:before {
+  font-family: 'fontawesome';
+  content: "\f054";
+  display: inline-block;
+  margin-right: 10px;
+  font-size: .58em;
+  line-height: 1.556em;
+  vertical-align: middle;
+}
+.accordion > input[type="checkbox"]:checked ~ .handle label:before {
+  content: "\f078";
 }
 .sidebar-toggle {
   margin-left: -20%;
@@ -27,6 +79,13 @@ div.title{
   margin-bottom: 10px;
   font-size: 20px;
   border-bottom: groove;
+}
+div.subtitle{
+  margin-lift: -50%;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: bold;
 }
 div.cell {
     margin-left: 35%;
@@ -128,7 +187,7 @@ div.table {
 .table-header {
 	display:flex;
 	width:100%;
-	background:#000;
+	background:gray;
 	padding:($half-spacing-unit * 1.5) 0;
 }
 .table-row {
@@ -186,7 +245,7 @@ div.table {
   <div id="leftside-navigation" class="nano">
     <ul class="nano-content">
       <li>
-        <a href="#config"><i class="fa-solid fa-gear"></i><span>Configuration</span></a>
+        <a href="#summary"><i class="fa-solid fa-list"></i><span>Summary</span></a>
       </li>
 
       <li class="sub-menu">
@@ -293,6 +352,9 @@ div.table {
         </ul>
       </li>
 
+      <li>
+        <a href="#config"><i class="fa-solid fa-gear"></i><span>Configuration</span></a>
+      </li>
     </ul>
   </div>
 </aside>
@@ -306,59 +368,426 @@ div.table {
 
 
 
-<div id="config" class="cell">
-  <div class="title">Configuration Used:</div>
-  <div class="code">
-  <pre>
-  <code>
-  {
-    "slug": "performance-metric-calibration",
-    "histograms": [
-        "payload.processes.content.histograms.perf_page_load_time_ms",
-        "payload.processes.content.histograms.perf_page_load_time_from_responsestart_ms",
-        "payload.processes.content.histograms.perf_first_contentful_paint_ms",
-        "payload.processes.content.histograms.perf_first_contentful_paint_from_responsestart_ms",
-        "payload.processes.content.histograms.js_pageload_execution_ms"
-    ],
-    "pageload_event_metrics": {
-        "fcp_time": [
-            0,
-            10000
-        ],
-        "load_time": [
-            0,
-            30000
-        ],
-        "response_time": [
-            0,
-            10000
-        ],
-        "js_exec_time": [
-            0,
-            10000
-        ]
-    },
-    "segments": [
-        "All",
-        "Windows",
-        "Linux",
-        "Mac"
-    ],
-    "is_experiment": true,
-    "startDate": "2023-10-31",
-    "endDate": "2023-11-21",
-    "channel": "release",
-    "branches": [
-        "control",
-        "treatment-a",
-        "treatment-b",
-        "treatment-c"
-    ]
-}
-  </code>
-  </pre>
+<div id="summary" class="cell">
+  <div class="title">Summary:</div>
+
+  
+  <div class="subtitle">perf_page_load_time_ms</div>
+  <div class="table">
+    <div class="table-header">
+      <div class="header__item">branch</div>
+      <div class="header__item">mean</div>
+      <div class="header__item">uplift(%)</div>
+      <div class="header__item">stddev</div>
+      <div class="header__item">t-test (effect)</div>
+    </div>
+    <div class="table-content">
+  
+      <div class="table-row">
+        <div class="table-data">control</div>
+        <div class="table-data">2029.2</div>
+        <div class="table-data"></div>
+        <div class="table-data">3850.7</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-a</div>
+        <div class="table-data">2024.4</div>
+        <div class="table-data">-0.2</div>
+        <div class="table-data">3855.4</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-b</div>
+        <div class="table-data">2010.0</div>
+        <div class="table-data">-0.9</div>
+        <div class="table-data">3834.3</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-c</div>
+        <div class="table-data">2041.7</div>
+        <div class="table-data">0.6</div>
+        <div class="table-data">3884.8</div>
+        <div class="table-data"></div>
+      </div>
+  
+    </div>
   </div>
-</div>
+  
+  <div class="subtitle">perf_page_load_time_from_responsestart_ms</div>
+  <div class="table">
+    <div class="table-header">
+      <div class="header__item">branch</div>
+      <div class="header__item">mean</div>
+      <div class="header__item">uplift(%)</div>
+      <div class="header__item">stddev</div>
+      <div class="header__item">t-test (effect)</div>
+    </div>
+    <div class="table-content">
+  
+      <div class="table-row">
+        <div class="table-data">control</div>
+        <div class="table-data">1364.8</div>
+        <div class="table-data"></div>
+        <div class="table-data">3205.5</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-a</div>
+        <div class="table-data">1358.4</div>
+        <div class="table-data">-0.5</div>
+        <div class="table-data">3200.0</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-b</div>
+        <div class="table-data">1346.1</div>
+        <div class="table-data">-1.4</div>
+        <div class="table-data">3195.2</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-c</div>
+        <div class="table-data">1375.5</div>
+        <div class="table-data">0.8</div>
+        <div class="table-data">3244.8</div>
+        <div class="table-data"></div>
+      </div>
+  
+    </div>
+  </div>
+  
+  <div class="subtitle">perf_first_contentful_paint_ms</div>
+  <div class="table">
+    <div class="table-header">
+      <div class="header__item">branch</div>
+      <div class="header__item">mean</div>
+      <div class="header__item">uplift(%)</div>
+      <div class="header__item">stddev</div>
+      <div class="header__item">t-test (effect)</div>
+    </div>
+    <div class="table-content">
+  
+      <div class="table-row">
+        <div class="table-data">control</div>
+        <div class="table-data">1132.5</div>
+        <div class="table-data"></div>
+        <div class="table-data">2221.8</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-a</div>
+        <div class="table-data">1140.6</div>
+        <div class="table-data">0.7</div>
+        <div class="table-data">2244.2</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-b</div>
+        <div class="table-data">1139.8</div>
+        <div class="table-data">0.6</div>
+        <div class="table-data">2238.8</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-c</div>
+        <div class="table-data">1139.3</div>
+        <div class="table-data">0.6</div>
+        <div class="table-data">2242.8</div>
+        <div class="table-data"></div>
+      </div>
+  
+    </div>
+  </div>
+  
+  <div class="subtitle">perf_first_contentful_paint_from_responsestart_ms</div>
+  <div class="table">
+    <div class="table-header">
+      <div class="header__item">branch</div>
+      <div class="header__item">mean</div>
+      <div class="header__item">uplift(%)</div>
+      <div class="header__item">stddev</div>
+      <div class="header__item">t-test (effect)</div>
+    </div>
+    <div class="table-content">
+  
+      <div class="table-row">
+        <div class="table-data">control</div>
+        <div class="table-data">472.4</div>
+        <div class="table-data"></div>
+        <div class="table-data">1319.3</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-a</div>
+        <div class="table-data">474.1</div>
+        <div class="table-data">0.4</div>
+        <div class="table-data">1324.4</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-b</div>
+        <div class="table-data">474.8</div>
+        <div class="table-data">0.5</div>
+        <div class="table-data">1331.1</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-c</div>
+        <div class="table-data">475.2</div>
+        <div class="table-data">0.6</div>
+        <div class="table-data">1334.0</div>
+        <div class="table-data"></div>
+      </div>
+  
+    </div>
+  </div>
+  
+  <div class="subtitle">js_pageload_execution_ms</div>
+  <div class="table">
+    <div class="table-header">
+      <div class="header__item">branch</div>
+      <div class="header__item">mean</div>
+      <div class="header__item">uplift(%)</div>
+      <div class="header__item">stddev</div>
+      <div class="header__item">t-test (effect)</div>
+    </div>
+    <div class="table-content">
+  
+      <div class="table-row">
+        <div class="table-data">control</div>
+        <div class="table-data">389.3</div>
+        <div class="table-data"></div>
+        <div class="table-data">1733.7</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-a</div>
+        <div class="table-data">387.0</div>
+        <div class="table-data">-0.6</div>
+        <div class="table-data">1731.5</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-b</div>
+        <div class="table-data">379.7</div>
+        <div class="table-data">-2.5</div>
+        <div class="table-data">1712.3</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-c</div>
+        <div class="table-data">390.9</div>
+        <div class="table-data">0.4</div>
+        <div class="table-data">1737.8</div>
+        <div class="table-data"></div>
+      </div>
+  
+    </div>
+  </div>
+  
+  <div class="subtitle">pageload event: fcp_time</div>
+  <div class="table">
+    <div class="table-header">
+      <div class="header__item">branch</div>
+      <div class="header__item">mean</div>
+      <div class="header__item">uplift(%)</div>
+      <div class="header__item">stddev</div>
+      <div class="header__item">t-test (effect)</div>
+    </div>
+    <div class="table-content">
+  
+      <div class="table-row">
+        <div class="table-data">control</div>
+        <div class="table-data">952.2</div>
+        <div class="table-data"></div>
+        <div class="table-data">1055.6</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-a</div>
+        <div class="table-data">959.6</div>
+        <div class="table-data">0.8</div>
+        <div class="table-data">1065.5</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-b</div>
+        <div class="table-data">958.9</div>
+        <div class="table-data">0.7</div>
+        <div class="table-data">1065.1</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-c</div>
+        <div class="table-data">957.1</div>
+        <div class="table-data">0.5</div>
+        <div class="table-data">1065.0</div>
+        <div class="table-data"></div>
+      </div>
+  
+    </div>
+  </div>
+  
+  <div class="subtitle">pageload event: load_time</div>
+  <div class="table">
+    <div class="table-header">
+      <div class="header__item">branch</div>
+      <div class="header__item">mean</div>
+      <div class="header__item">uplift(%)</div>
+      <div class="header__item">stddev</div>
+      <div class="header__item">t-test (effect)</div>
+    </div>
+    <div class="table-content">
+  
+      <div class="table-row">
+        <div class="table-data">control</div>
+        <div class="table-data">1703.9</div>
+        <div class="table-data"></div>
+        <div class="table-data">2363.0</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-a</div>
+        <div class="table-data">1701.6</div>
+        <div class="table-data">-0.1</div>
+        <div class="table-data">2369.4</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-b</div>
+        <div class="table-data">1691.3</div>
+        <div class="table-data">-0.7</div>
+        <div class="table-data">2352.1</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-c</div>
+        <div class="table-data">1717.7</div>
+        <div class="table-data">0.8</div>
+        <div class="table-data">2383.1</div>
+        <div class="table-data"></div>
+      </div>
+  
+    </div>
+  </div>
+  
+  <div class="subtitle">pageload event: response_time</div>
+  <div class="table">
+    <div class="table-header">
+      <div class="header__item">branch</div>
+      <div class="header__item">mean</div>
+      <div class="header__item">uplift(%)</div>
+      <div class="header__item">stddev</div>
+      <div class="header__item">t-test (effect)</div>
+    </div>
+    <div class="table-content">
+  
+      <div class="table-row">
+        <div class="table-data">control</div>
+        <div class="table-data">565.3</div>
+        <div class="table-data"></div>
+        <div class="table-data">861.1</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-a</div>
+        <div class="table-data">566.1</div>
+        <div class="table-data">0.1</div>
+        <div class="table-data">866.3</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-b</div>
+        <div class="table-data">570.5</div>
+        <div class="table-data">0.9</div>
+        <div class="table-data">853.0</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-c</div>
+        <div class="table-data">567.1</div>
+        <div class="table-data">0.3</div>
+        <div class="table-data">864.4</div>
+        <div class="table-data"></div>
+      </div>
+  
+    </div>
+  </div>
+  
+  <div class="subtitle">pageload event: js_exec_time</div>
+  <div class="table">
+    <div class="table-header">
+      <div class="header__item">branch</div>
+      <div class="header__item">mean</div>
+      <div class="header__item">uplift(%)</div>
+      <div class="header__item">stddev</div>
+      <div class="header__item">t-test (effect)</div>
+    </div>
+    <div class="table-content">
+  
+      <div class="table-row">
+        <div class="table-data">control</div>
+        <div class="table-data">229.1</div>
+        <div class="table-data"></div>
+        <div class="table-data">492.1</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-a</div>
+        <div class="table-data">228.9</div>
+        <div class="table-data">-0.1</div>
+        <div class="table-data">490.7</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-b</div>
+        <div class="table-data">225.4</div>
+        <div class="table-data">-1.6</div>
+        <div class="table-data">491.8</div>
+        <div class="table-data"></div>
+      </div>
+  
+      <div class="table-row">
+        <div class="table-data">treatment-c</div>
+        <div class="table-data">233.0</div>
+        <div class="table-data">1.7</div>
+        <div class="table-data">501.2</div>
+        <div class="table-data"></div>
+      </div>
+  
+    </div>
+  </div>
+  
+
+</div> 
 
 
 <div id="All-perf_page_load_time_ms" class="cell">
@@ -459,9 +888,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -470,7 +898,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">2029.2</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3850.7</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -480,9 +907,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">2024.4</div>
       <div class="table-data">-0.2</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3855.4</div>
-      <div class="table-data">-16.5</div>
+      <div class="table-data">-0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -490,9 +916,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">2010.0</div>
       <div class="table-data">-0.9</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3834.3</div>
-      <div class="table-data">-66.3</div>
+      <div class="table-data">-0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -500,9 +925,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">2041.7</div>
       <div class="table-data">0.6</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3884.8</div>
-      <div class="table-data">42.6</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -1067,9 +1491,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -1078,7 +1501,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">1364.8</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3205.5</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -1088,9 +1510,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">1358.4</div>
       <div class="table-data">-0.5</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3200.0</div>
-      <div class="table-data">-26.3</div>
+      <div class="table-data">-0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -1098,9 +1519,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">1346.1</div>
       <div class="table-data">-1.4</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3195.2</div>
-      <div class="table-data">-77.6</div>
+      <div class="table-data">-0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -1108,9 +1528,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">1375.5</div>
       <div class="table-data">0.8</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3244.8</div>
-      <div class="table-data">43.6</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -1675,9 +2094,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -1686,7 +2104,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">1132.5</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2221.8</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -1696,9 +2113,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">1140.6</div>
       <div class="table-data">0.7</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2244.2</div>
-      <div class="table-data">43.9</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -1706,9 +2122,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">1139.8</div>
       <div class="table-data">0.6</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2238.8</div>
-      <div class="table-data">39.6</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -1716,9 +2131,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">1139.3</div>
       <div class="table-data">0.6</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2242.8</div>
-      <div class="table-data">37.0</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -2283,9 +2697,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -2294,7 +2707,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">472.4</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1319.3</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -2304,9 +2716,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">474.1</div>
       <div class="table-data">0.4</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1324.4</div>
-      <div class="table-data">15.1</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -2314,9 +2725,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">474.8</div>
       <div class="table-data">0.5</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1331.1</div>
-      <div class="table-data">21.3</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -2324,9 +2734,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">475.2</div>
       <div class="table-data">0.6</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1334.0</div>
-      <div class="table-data">25.5</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -2891,9 +3300,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -2902,7 +3310,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">389.3</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1733.7</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -2912,9 +3319,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">387.0</div>
       <div class="table-data">-0.6</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1731.5</div>
-      <div class="table-data">-20.3</div>
+      <div class="table-data">-0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -2922,9 +3328,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">379.7</div>
       <div class="table-data">-2.5</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1712.3</div>
-      <div class="table-data">-86.2</div>
+      <div class="table-data">-0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -2932,9 +3337,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">390.9</div>
       <div class="table-data">0.4</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1737.8</div>
-      <div class="table-data">14.3</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -3499,9 +3903,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -3510,7 +3913,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">952.2</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1055.6</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -3520,9 +3922,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">959.6</div>
       <div class="table-data">0.8</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1065.5</div>
-      <div class="table-data">68.4</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -3530,9 +3931,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">958.9</div>
       <div class="table-data">0.7</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1065.1</div>
-      <div class="table-data">61.4</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -3540,9 +3940,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">957.1</div>
       <div class="table-data">0.5</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1065.0</div>
-      <div class="table-data">45.6</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -4107,9 +4506,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -4118,7 +4516,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">1703.9</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2363.0</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -4128,9 +4525,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">1701.6</div>
       <div class="table-data">-0.1</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2369.4</div>
-      <div class="table-data">-10.5</div>
+      <div class="table-data">-0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -4138,9 +4534,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">1691.3</div>
       <div class="table-data">-0.7</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2352.1</div>
-      <div class="table-data">-59.1</div>
+      <div class="table-data">-0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -4148,9 +4543,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">1717.7</div>
       <div class="table-data">0.8</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2383.1</div>
-      <div class="table-data">64.1</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -4715,9 +5109,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -4726,7 +5119,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">565.3</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">861.1</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -4736,9 +5128,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">566.1</div>
       <div class="table-data">0.1</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">866.3</div>
-      <div class="table-data">10.2</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -4746,9 +5137,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">570.5</div>
       <div class="table-data">0.9</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">853.0</div>
-      <div class="table-data">67.5</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -4756,9 +5146,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">567.1</div>
       <div class="table-data">0.3</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">864.4</div>
-      <div class="table-data">23.6</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -5323,9 +5712,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -5334,7 +5722,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">229.1</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">492.1</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -5344,19 +5731,17 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">228.9</div>
       <div class="table-data">-0.1</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">490.7</div>
-      <div class="table-data">-3.7</div>
-      <div class="table-data">0.0003</div>
+      <div class="table-data">-0.00</div>
+      <div class="table-data">0.00026</div>
     </div>
 
     <div class="table-row">
       <div class="table-data">treatment-b</div>
       <div class="table-data">225.4</div>
       <div class="table-data">-1.6</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">491.8</div>
-      <div class="table-data">-81.1</div>
+      <div class="table-data">-0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -5364,9 +5749,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">233.0</div>
       <div class="table-data">1.7</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">501.2</div>
-      <div class="table-data">84.7</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -5931,9 +6315,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -5942,7 +6325,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">2045.4</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3889.7</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -5952,9 +6334,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">2038.8</div>
       <div class="table-data">-0.3</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3894.8</div>
-      <div class="table-data">-21.4</div>
+      <div class="table-data">-0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -5962,9 +6343,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">2022.0</div>
       <div class="table-data">-1.1</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3869.3</div>
-      <div class="table-data">-76.5</div>
+      <div class="table-data">-0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -5972,9 +6352,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">2056.5</div>
       <div class="table-data">0.5</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3920.1</div>
-      <div class="table-data">36.0</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -6539,9 +6918,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -6550,7 +6928,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">1378.0</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3242.8</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -6560,9 +6937,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">1371.3</div>
       <div class="table-data">-0.5</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3240.7</div>
-      <div class="table-data">-25.9</div>
+      <div class="table-data">-0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -6570,9 +6946,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">1355.8</div>
       <div class="table-data">-1.6</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3230.5</div>
-      <div class="table-data">-86.7</div>
+      <div class="table-data">-0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -6580,9 +6955,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">1387.3</div>
       <div class="table-data">0.7</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3277.7</div>
-      <div class="table-data">36.1</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -7147,9 +7521,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -7158,7 +7531,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">1142.4</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2248.3</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -7168,9 +7540,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">1150.4</div>
       <div class="table-data">0.7</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2266.4</div>
-      <div class="table-data">40.7</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -7178,9 +7549,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">1149.8</div>
       <div class="table-data">0.6</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2263.3</div>
-      <div class="table-data">37.6</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -7188,9 +7558,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">1149.4</div>
       <div class="table-data">0.6</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2264.2</div>
-      <div class="table-data">35.8</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -7755,9 +8124,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -7766,7 +8134,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">479.0</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1341.8</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -7776,9 +8143,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">481.2</div>
       <div class="table-data">0.5</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1348.0</div>
-      <div class="table-data">19.0</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -7786,9 +8152,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">481.2</div>
       <div class="table-data">0.5</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1351.3</div>
-      <div class="table-data">18.6</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -7796,9 +8161,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">481.5</div>
       <div class="table-data">0.5</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1348.8</div>
-      <div class="table-data">21.5</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -8363,9 +8727,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -8374,7 +8737,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">398.0</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1782.3</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -8384,9 +8746,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">395.3</div>
       <div class="table-data">-0.7</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1778.8</div>
-      <div class="table-data">-22.5</div>
+      <div class="table-data">-0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -8394,9 +8755,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">386.5</div>
       <div class="table-data">-2.9</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1755.8</div>
-      <div class="table-data">-96.0</div>
+      <div class="table-data">-0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -8404,10 +8764,9 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">398.9</div>
       <div class="table-data">0.2</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1781.3</div>
-      <div class="table-data">7.4</div>
-      <div class="table-data">1e-13</div>
+      <div class="table-data">0.00</div>
+      <div class="table-data">1.1e-13</div>
     </div>
 
   </div>
@@ -8971,9 +9330,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -8982,7 +9340,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">955.5</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1060.8</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -8992,9 +9349,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">963.6</div>
       <div class="table-data">0.8</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1071.8</div>
-      <div class="table-data">69.8</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -9002,9 +9358,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">962.5</div>
       <div class="table-data">0.7</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1070.7</div>
-      <div class="table-data">60.4</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -9012,9 +9367,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">960.7</div>
       <div class="table-data">0.5</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1070.8</div>
-      <div class="table-data">44.7</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -9579,9 +9933,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -9590,7 +9943,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">1706.4</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2380.4</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -9600,9 +9952,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">1701.7</div>
       <div class="table-data">-0.3</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2386.9</div>
-      <div class="table-data">-20.5</div>
+      <div class="table-data">-0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -9610,9 +9961,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">1689.3</div>
       <div class="table-data">-1.0</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2367.2</div>
-      <div class="table-data">-75.1</div>
+      <div class="table-data">-0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -9620,9 +9970,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">1718.4</div>
       <div class="table-data">0.7</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2402.4</div>
-      <div class="table-data">52.0</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -10187,9 +10536,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -10198,7 +10546,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">565.8</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">865.1</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -10208,19 +10555,17 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">565.5</div>
       <div class="table-data">-0.0</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">869.7</div>
-      <div class="table-data">-3.3</div>
-      <div class="table-data">0.001</div>
+      <div class="table-data">-0.00</div>
+      <div class="table-data">0.00097</div>
     </div>
 
     <div class="table-row">
       <div class="table-data">treatment-b</div>
       <div class="table-data">570.9</div>
       <div class="table-data">0.9</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">855.0</div>
-      <div class="table-data">62.1</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -10228,9 +10573,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">567.2</div>
       <div class="table-data">0.3</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">868.3</div>
-      <div class="table-data">17.4</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -10795,9 +11139,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -10806,7 +11149,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">231.3</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">498.4</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -10816,9 +11158,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">230.5</div>
       <div class="table-data">-0.3</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">496.3</div>
-      <div class="table-data">-16.6</div>
+      <div class="table-data">-0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -10826,9 +11167,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">226.3</div>
       <div class="table-data">-2.1</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">496.8</div>
-      <div class="table-data">-102.8</div>
+      <div class="table-data">-0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -10836,9 +11176,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">234.7</div>
       <div class="table-data">1.5</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">507.4</div>
-      <div class="table-data">70.8</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -11403,9 +11742,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -11414,7 +11752,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">1978.8</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3932.9</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -11424,19 +11761,17 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">1969.4</div>
       <div class="table-data">-0.5</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3891.7</div>
-      <div class="table-data">-4.9</div>
-      <div class="table-data">8e-07</div>
+      <div class="table-data">-0.00</div>
+      <div class="table-data">8.5e-07</div>
     </div>
 
     <div class="table-row">
       <div class="table-data">treatment-b</div>
       <div class="table-data">1956.5</div>
       <div class="table-data">-1.1</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3870.9</div>
-      <div class="table-data">-11.7</div>
+      <div class="table-data">-0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -11444,9 +11779,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">2049.8</div>
       <div class="table-data">3.6</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">4171.0</div>
-      <div class="table-data">35.7</div>
+      <div class="table-data">0.02</div>
       <div class="table-data">0</div>
     </div>
 
@@ -12011,9 +12345,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -12022,7 +12355,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">1330.1</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3199.7</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -12032,9 +12364,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">1276.3</div>
       <div class="table-data">-4.0</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3027.2</div>
-      <div class="table-data">-35.6</div>
+      <div class="table-data">-0.02</div>
       <div class="table-data">0</div>
     </div>
 
@@ -12042,9 +12373,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">1295.3</div>
       <div class="table-data">-2.6</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3064.5</div>
-      <div class="table-data">-22.8</div>
+      <div class="table-data">-0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -12052,9 +12382,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">1394.0</div>
       <div class="table-data">4.8</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3497.6</div>
-      <div class="table-data">38.8</div>
+      <div class="table-data">0.02</div>
       <div class="table-data">0</div>
     </div>
 
@@ -12619,9 +12948,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -12630,7 +12958,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">1142.8</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2247.9</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -12640,9 +12967,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">1158.5</div>
       <div class="table-data">1.4</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2422.7</div>
-      <div class="table-data">12.5</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -12650,19 +12976,17 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">1140.4</div>
       <div class="table-data">-0.2</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2295.7</div>
-      <div class="table-data">-1.9</div>
-      <div class="table-data">0.06</div>
+      <div class="table-data">-0.00</div>
+      <div class="table-data">0.058</div>
     </div>
 
     <div class="table-row">
       <div class="table-data">treatment-c</div>
       <div class="table-data">1175.1</div>
       <div class="table-data">2.8</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2523.5</div>
-      <div class="table-data">24.7</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -13227,9 +13551,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -13238,7 +13561,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">496.4</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1255.7</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -13248,9 +13570,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">470.4</div>
       <div class="table-data">-5.3</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1220.9</div>
-      <div class="table-data">-39.0</div>
+      <div class="table-data">-0.02</div>
       <div class="table-data">0</div>
     </div>
 
@@ -13258,9 +13579,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">488.9</div>
       <div class="table-data">-1.5</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1295.6</div>
-      <div class="table-data">-10.9</div>
+      <div class="table-data">-0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -13268,9 +13588,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">520.0</div>
       <div class="table-data">4.7</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1605.1</div>
-      <div class="table-data">29.8</div>
+      <div class="table-data">0.02</div>
       <div class="table-data">0</div>
     </div>
 
@@ -13835,9 +14154,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -13846,7 +14164,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">361.7</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1356.7</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -13856,9 +14173,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">350.8</div>
       <div class="table-data">-3.0</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1342.6</div>
-      <div class="table-data">-19.7</div>
+      <div class="table-data">-0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -13866,19 +14182,17 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">360.6</div>
       <div class="table-data">-0.3</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1370.1</div>
-      <div class="table-data">-2.0</div>
-      <div class="table-data">0.04</div>
+      <div class="table-data">-0.00</div>
+      <div class="table-data">0.044</div>
     </div>
 
     <div class="table-row">
       <div class="table-data">treatment-c</div>
       <div class="table-data">387.5</div>
       <div class="table-data">7.1</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1569.7</div>
-      <div class="table-data">42.2</div>
+      <div class="table-data">0.02</div>
       <div class="table-data">0</div>
     </div>
 
@@ -14443,9 +14757,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -14454,7 +14767,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">970.1</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1058.8</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -14464,9 +14776,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">952.9</div>
       <div class="table-data">-1.8</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1027.1</div>
-      <div class="table-data">-26.1</div>
+      <div class="table-data">-0.02</div>
       <div class="table-data">0</div>
     </div>
 
@@ -14474,9 +14785,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">959.0</div>
       <div class="table-data">-1.1</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1052.7</div>
-      <div class="table-data">-16.5</div>
+      <div class="table-data">-0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -14484,9 +14794,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">982.4</div>
       <div class="table-data">1.3</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1064.3</div>
-      <div class="table-data">18.0</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -15051,9 +15360,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -15062,7 +15370,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">1626.9</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2343.1</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -15072,29 +15379,26 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">1624.3</div>
       <div class="table-data">-0.2</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2304.2</div>
-      <div class="table-data">-2.0</div>
-      <div class="table-data">0.05</div>
+      <div class="table-data">-0.00</div>
+      <div class="table-data">0.049</div>
     </div>
 
     <div class="table-row">
       <div class="table-data">treatment-b</div>
       <div class="table-data">1630.1</div>
       <div class="table-data">0.2</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2287.8</div>
-      <div class="table-data">2.5</div>
-      <div class="table-data">0.01</div>
+      <div class="table-data">0.00</div>
+      <div class="table-data">0.012</div>
     </div>
 
     <div class="table-row">
       <div class="table-data">treatment-c</div>
       <div class="table-data">1693.6</div>
       <div class="table-data">4.1</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2324.8</div>
-      <div class="table-data">50.6</div>
+      <div class="table-data">0.03</div>
       <div class="table-data">0</div>
     </div>
 
@@ -15659,9 +15963,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -15670,7 +15973,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">531.2</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">827.3</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -15680,9 +15982,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">551.0</div>
       <div class="table-data">3.7</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">839.7</div>
-      <div class="table-data">42.7</div>
+      <div class="table-data">0.02</div>
       <div class="table-data">0</div>
     </div>
 
@@ -15690,9 +15991,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">538.6</div>
       <div class="table-data">1.4</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">846.8</div>
-      <div class="table-data">15.9</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -15700,9 +16000,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">545.8</div>
       <div class="table-data">2.7</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">853.0</div>
-      <div class="table-data">30.6</div>
+      <div class="table-data">0.02</div>
       <div class="table-data">0</div>
     </div>
 
@@ -16267,9 +16566,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -16278,7 +16576,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">214.5</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">470.8</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -16288,29 +16585,26 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">215.9</div>
       <div class="table-data">0.7</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">467.7</div>
-      <div class="table-data">5.5</div>
-      <div class="table-data">3e-08</div>
+      <div class="table-data">0.00</div>
+      <div class="table-data">2.9e-08</div>
     </div>
 
     <div class="table-row">
       <div class="table-data">treatment-b</div>
       <div class="table-data">214.2</div>
       <div class="table-data">-0.1</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">462.4</div>
-      <div class="table-data">-1.1</div>
-      <div class="table-data">0.3</div>
+      <div class="table-data">-0.00</div>
+      <div class="table-data">0.29</div>
     </div>
 
     <div class="table-row">
       <div class="table-data">treatment-c</div>
       <div class="table-data">233.9</div>
       <div class="table-data">9.0</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">495.1</div>
-      <div class="table-data">69.5</div>
+      <div class="table-data">0.04</div>
       <div class="table-data">0</div>
     </div>
 
@@ -16875,9 +17169,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -16886,7 +17179,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">1814.5</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3186.3</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -16896,9 +17188,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">1830.2</div>
       <div class="table-data">0.9</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3183.2</div>
-      <div class="table-data">16.2</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -16906,9 +17197,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">1849.1</div>
       <div class="table-data">1.9</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3235.2</div>
-      <div class="table-data">35.5</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -16916,9 +17206,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">1822.8</div>
       <div class="table-data">0.5</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">3189.9</div>
-      <div class="table-data">8.6</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -17483,9 +17772,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -17494,7 +17782,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">1188.1</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2601.0</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -17504,9 +17791,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">1198.1</div>
       <div class="table-data">0.8</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2590.1</div>
-      <div class="table-data">12.7</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -17514,9 +17800,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">1218.1</div>
       <div class="table-data">2.5</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2655.9</div>
-      <div class="table-data">37.6</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -17524,9 +17809,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">1197.0</div>
       <div class="table-data">0.7</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2597.6</div>
-      <div class="table-data">11.3</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -18091,9 +18375,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -18102,7 +18385,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">986.1</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1778.9</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -18112,19 +18394,17 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">990.9</div>
       <div class="table-data">0.5</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1795.0</div>
-      <div class="table-data">8.2</div>
-      <div class="table-data">2e-16</div>
+      <div class="table-data">0.00</div>
+      <div class="table-data">2.2e-16</div>
     </div>
 
     <div class="table-row">
       <div class="table-data">treatment-b</div>
       <div class="table-data">994.5</div>
       <div class="table-data">0.9</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1812.1</div>
-      <div class="table-data">14.2</div>
+      <div class="table-data">0.00</div>
       <div class="table-data">0</div>
     </div>
 
@@ -18132,9 +18412,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">982.7</div>
       <div class="table-data">-0.3</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1777.0</div>
-      <div class="table-data">-5.8</div>
+      <div class="table-data">-0.00</div>
       <div class="table-data">6e-09</div>
     </div>
 
@@ -18699,9 +18978,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -18710,7 +18988,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">368.8</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">962.0</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -18720,19 +18997,17 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">370.7</div>
       <div class="table-data">0.5</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">957.7</div>
-      <div class="table-data">6.0</div>
-      <div class="table-data">2e-09</div>
+      <div class="table-data">0.00</div>
+      <div class="table-data">1.8e-09</div>
     </div>
 
     <div class="table-row">
       <div class="table-data">treatment-b</div>
       <div class="table-data">376.0</div>
       <div class="table-data">2.0</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1002.8</div>
-      <div class="table-data">22.2</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -18740,10 +19015,9 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">369.6</div>
       <div class="table-data">0.2</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">958.0</div>
-      <div class="table-data">2.6</div>
-      <div class="table-data">0.009</div>
+      <div class="table-data">0.00</div>
+      <div class="table-data">0.0093</div>
     </div>
 
   </div>
@@ -19307,9 +19581,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -19318,7 +19591,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">269.9</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">947.4</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -19328,9 +19600,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">275.0</div>
       <div class="table-data">1.9</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">963.5</div>
-      <div class="table-data">20.4</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -19338,9 +19609,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">279.7</div>
       <div class="table-data">3.6</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">990.6</div>
-      <div class="table-data">38.3</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -19348,10 +19618,9 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">271.4</div>
       <div class="table-data">0.6</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">952.4</div>
-      <div class="table-data">6.0</div>
-      <div class="table-data">2e-09</div>
+      <div class="table-data">0.00</div>
+      <div class="table-data">1.8e-09</div>
     </div>
 
   </div>
@@ -19915,9 +20184,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -19926,7 +20194,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">910.3</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">995.9</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -19936,9 +20203,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">918.1</div>
       <div class="table-data">0.9</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1005.7</div>
-      <div class="table-data">21.7</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -19946,9 +20212,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">918.9</div>
       <div class="table-data">0.9</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">1004.2</div>
-      <div class="table-data">24.0</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -19956,10 +20221,9 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">911.6</div>
       <div class="table-data">0.1</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">999.2</div>
-      <div class="table-data">3.4</div>
-      <div class="table-data">0.0006</div>
+      <div class="table-data">0.00</div>
+      <div class="table-data">0.00056</div>
     </div>
 
   </div>
@@ -20523,9 +20787,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -20534,7 +20797,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">1701.5</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2165.0</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -20544,9 +20806,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">1727.8</div>
       <div class="table-data">1.5</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2180.0</div>
-      <div class="table-data">37.2</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -20554,9 +20815,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">1735.2</div>
       <div class="table-data">2.0</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2188.3</div>
-      <div class="table-data">47.6</div>
+      <div class="table-data">0.02</div>
       <div class="table-data">0</div>
     </div>
 
@@ -20564,9 +20824,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">1718.3</div>
       <div class="table-data">1.0</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">2175.3</div>
-      <div class="table-data">24.0</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -21131,9 +21390,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -21142,7 +21400,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">571.0</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">825.7</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -21152,9 +21409,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">578.0</div>
       <div class="table-data">1.2</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">835.2</div>
-      <div class="table-data">25.7</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -21162,9 +21418,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">577.1</div>
       <div class="table-data">1.1</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">831.2</div>
-      <div class="table-data">22.6</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -21172,10 +21427,9 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">572.6</div>
       <div class="table-data">0.3</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">823.0</div>
-      <div class="table-data">6.0</div>
-      <div class="table-data">1e-09</div>
+      <div class="table-data">0.00</div>
+      <div class="table-data">1.4e-09</div>
     </div>
 
   </div>
@@ -21739,9 +21993,8 @@ div.table {
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -21750,7 +22003,6 @@ div.table {
       <div class="table-data">control</div>
       <div class="table-data">209.8</div>
       <div class="table-data"></div>
-      <div class="table-data">0.0</div>
       <div class="table-data">422.5</div>
       <div class="table-data"></div>
       <div class="table-data"></div>
@@ -21760,9 +22012,8 @@ div.table {
       <div class="table-data">treatment-a</div>
       <div class="table-data">215.9</div>
       <div class="table-data">2.9</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">429.3</div>
-      <div class="table-data">44.0</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -21770,9 +22021,8 @@ div.table {
       <div class="table-data">treatment-b</div>
       <div class="table-data">219.0</div>
       <div class="table-data">4.4</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">439.5</div>
-      <div class="table-data">65.6</div>
+      <div class="table-data">0.02</div>
       <div class="table-data">0</div>
     </div>
 
@@ -21780,9 +22030,8 @@ div.table {
       <div class="table-data">treatment-c</div>
       <div class="table-data">213.2</div>
       <div class="table-data">1.6</div>
-      <div class="table-data">0.0</div>
       <div class="table-data">428.5</div>
-      <div class="table-data">24.6</div>
+      <div class="table-data">0.01</div>
       <div class="table-data">0</div>
     </div>
 
@@ -22249,4 +22498,79 @@ div.table {
 
 
 </div>
+
+<div id="config" class="cell">
+  <div class="title">Configuration & Queries Used:</div>
+
+  <section class="accordion">
+  <input type="checkbox" name="collapse" id="config-json">
+  <h1 class="handle">
+    <label for="config-json">Configuration</label>
+  </h1>
+  <div class="content">
+  <code><pre>
+  {
+    "slug": "performance-metric-calibration",
+    "histograms": [
+        "payload.processes.content.histograms.perf_page_load_time_ms",
+        "payload.processes.content.histograms.perf_page_load_time_from_responsestart_ms",
+        "payload.processes.content.histograms.perf_first_contentful_paint_ms",
+        "payload.processes.content.histograms.perf_first_contentful_paint_from_responsestart_ms",
+        "payload.processes.content.histograms.js_pageload_execution_ms"
+    ],
+    "pageload_event_metrics": {
+        "fcp_time": [
+            0,
+            10000
+        ],
+        "load_time": [
+            0,
+            30000
+        ],
+        "response_time": [
+            0,
+            10000
+        ],
+        "js_exec_time": [
+            0,
+            10000
+        ]
+    },
+    "segments": [
+        "All",
+        "Windows",
+        "Linux",
+        "Mac"
+    ],
+    "is_experiment": true,
+    "startDate": "2023-10-31",
+    "endDate": "2023-11-21",
+    "channel": "release",
+    "branches": [
+        "control",
+        "treatment-a",
+        "treatment-b",
+        "treatment-c"
+    ]
+}
+  </pre></code>
+  </div>
+  </section>
+
+  <section class="accordion">
+  <input type="checkbox" name="collapse" id="events_query">
+  <h1 class="handle">
+    <label for="events_query">Pageload Events Query</label>
+  </h1>
+  <div class="content">
+  <code><pre>
+  
+  </pre></code>
+  </div>
+  </section>
+
+
+</div>
+
+
 </body>

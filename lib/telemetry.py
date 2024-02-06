@@ -19,6 +19,7 @@ class TelemetryClient:
     self.config = config
     self.dataDir = dataDir
     self.skipCache = skipCache
+    self.queries = {'events': "", 'histograms': []}
 
   def collectResultsFromQuery_OS_segments(self, results, branch, segment, df_events, histograms):
     for histogram in self.config['histograms']:
@@ -82,6 +83,8 @@ class TelemetryClient:
 
         # Special case when segments is OS only.
         self.collectResultsFromQuery_OS_segments(results, branch, segment, df_events, histograms)
+
+    results['queries'] = self.queries
     return results
 
   def generatePageloadEventQuery_OS_segments(self):
@@ -110,6 +113,7 @@ class TelemetryClient:
     query = t.render(context)
     # Remove empty lines before returning
     query = "".join([s for s in query.strip().splitlines(True) if s.strip()])
+    self.queries['events'] = query
     return query
 
   def generatePageloadEventQuery_Generic(self):
@@ -146,6 +150,7 @@ class TelemetryClient:
     query = t.render(context)
     # Remove empty lines before returning
     query = "".join([s for s in query.strip().splitlines(True) if s.strip()])
+    self.queries['events'] = query
     return query
 
   # Use this query if the segments is OS only which is much faster than generic query.
@@ -163,6 +168,10 @@ class TelemetryClient:
     query = t.render(context)
     # Remove empty lines before returning
     query = "".join([s for s in query.strip().splitlines(True) if s.strip()])
+    self.queries['histograms'].append({
+      "name": histogram,
+      "query": query
+    })
     return query
 
   def generateHistogramQuery_Generic(self, histogram):
@@ -187,6 +196,10 @@ class TelemetryClient:
     query = t.render(context)
     # Remove empty lines before returning
     query = "".join([s for s in query.strip().splitlines(True) if s.strip()])
+    self.queries['histograms'].append({
+      "name": histogram,
+      "query": query
+    })
     return query
 
   def checkForExistingData(self, filename):
