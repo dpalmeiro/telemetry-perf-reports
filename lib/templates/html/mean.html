@@ -70,9 +70,8 @@
     <div class="header__item">branch</div>
     <div class="header__item">mean</div>
     <div class="header__item">uplift(%)</div>
-    <div class="header__item">stderr</div>
     <div class="header__item">stddev</div>
-    <div class="header__item">t-value</div>
+    <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
   <div class="table-content">
@@ -81,9 +80,8 @@
       <div class="table-data">{{dataset.branch}}</div>
       <div class="table-data">{{dataset.mean}}</div>
       <div class="table-data">{{dataset.uplift}}</div>
-      <div class="table-data">{{dataset.se}}</div>
       <div class="table-data">{{dataset.std}}</div>
-      <div class="table-data">{{dataset.tval}}</div>
+      <div class="table-data">{{dataset.effect}}</div>
       <div class="table-data">{{dataset.pval}}</div>
     </div>
 {% endfor %}

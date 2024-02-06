@@ -147,6 +147,7 @@ def calculate_histogram_tests(bins, counts, data, control):
   data["t-test"] = {}
   data["t-test"]["score"] = t_value
   data["t-test"]["p-value"] = p_value
+  data["t-test"]["effect"] = effect
 
 def calc_confidence_interval(data, confidence=0.95):
     a = 1.0 * np.array(data)
@@ -270,6 +271,7 @@ class DataAnalyzer:
           self.results[branch][segment]["histograms"][hist_name]["t-test"] = {}
           self.results[branch][segment]["histograms"][hist_name]["t-test"]["score"] = t_value
           self.results[branch][segment]["histograms"][hist_name]["t-test"]["p-value"] = p_value
+          self.results[branch][segment]["histograms"][hist_name]["t-test"]["effect"] = effect
 
   def processPageLoadEventData(self, data, branch):
     print(f"Calculating pageload event statistics for branch: {branch}")
@@ -311,3 +313,4 @@ class DataAnalyzer:
           self.results[branch][segment]["pageload_event_metrics"][metric]["t-test"] = {}
           self.results[branch][segment]["pageload_event_metrics"][metric]["t-test"]["score"] = t_value
           self.results[branch][segment]["pageload_event_metrics"][metric]["t-test"]["p-value"] = p_value
+          self.results[branch][segment]["pageload_event_metrics"][metric]["t-test"]["effect"] = effect

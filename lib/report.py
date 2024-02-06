@@ -6,6 +6,19 @@ from django.template import Template, Context
 from django.template.loader import get_template
 from airium import Airium
 
+# These values are mostly hand-wavy that seem to 
+# fit the telemetry result impacts.
+def get_cohen_effect_meaning(d):
+  d_abs = abs(d)
+  if d_abs <= 0.05:
+    return "Small"
+  if d_abs <= 0.1:
+    return "Medium"
+  if d_abs <= 0.2:
+    return "Large"
+  if d_abs >  0.2:
+    return "Very Large"
+
 # CubicSpline requires a monotonically increasing x.
 # Remove duplicates.
 def cubic_spline_prep(x, y):
@@ -69,9 +82,66 @@ class ReportGenerator:
     }
     self.doc(t.render(ctx))
 
-  def createConfig(self):
+  def createSummarySection(self):
+    t = get_template("summary.html")
+
+
+    control=self.data["branches"][0]
+    segment = "All"
+
+    metrics = []
+    for metric_type in ["histograms", "pageload_event_metrics"]:
+      for metric in self.data[metric_type]:
+        datasets = []
+        if metric_type == "pageload_event_metrics":
+          name = f"pageload event: {metric}"
+        else:
+          metric = metric.split(".")[-1]
+          name = metric
+
+        for branch in self.data["branches"]:
+          mean = "{0:.1f}".format(self.data[branch][segment][metric_type][metric]["mean"])
+          std  = "{0:.1f}".format(self.data[branch][segment][metric_type][metric]["std"])
+
+          if branch != control:
+            branch_mean = self.data[branch][segment][metric_type][metric]["mean"]
+            control_mean = self.data[control][segment][metric_type][metric]["mean"]
+            uplift = (branch_mean-control_mean)/control_mean*100.0
+            uplift = "{0:.1f}".format(uplift)
+          else:
+            uplift = ""
+
+          if "t-test" in self.data[branch][segment][metric_type][metric]:
+            effect_size = self.data[branch][segment][metric_type][metric]["t-test"]["effect"]
+            effect_meaning = get_cohen_effect_meaning(effect_size)
+            effect_size = "{0:.2f}".format(effect_size)
+            effect = f"{effect_meaning} (d={effect_size})"
+          else:
+            effect = ""
+
+          dataset = {
+              "branch": branch,
+              "mean": mean,
+              "uplift": uplift,
+              "std": std,
+              "effect": effect,
+          }
+          datasets.append(dataset);
+
+        metrics.append({ 
+          "name": name,
+          "datasets": datasets
+        })
+
+    context = { "metrics": metrics }
+    self.doc(t.render(context))
+
+  def createConfigSection(self):
     t = get_template("config.html")
-    context = { "config": json.dumps(self.data["input"], indent=4) }
+    context = { 
+                "config": json.dumps(self.data["input"], indent=4),
+                "queries": self.data['queries']
+              }
     self.doc(t.render(context))
 
   def createCDFComparison(self, segment, metric, metric_type):
@@ -241,10 +311,10 @@ class ReportGenerator:
       std  = "{0:.1f}".format(self.data[branch][segment][metric_type][metric]["std"])
 
       if "t-test" in self.data[branch][segment][metric_type][metric]:
-        tval = "{0:.1f}".format(self.data[branch][segment][metric_type][metric]["t-test"]["score"])
-        pval = "{0:.1g}".format(self.data[branch][segment][metric_type][metric]["t-test"]["p-value"])
+        effect = "{0:.2f}".format(self.data[branch][segment][metric_type][metric]["t-test"]["effect"])
+        pval = "{0:.2g}".format(self.data[branch][segment][metric_type][metric]["t-test"]["p-value"])
       else:
-        tval = ""
+        effect = ""
         pval = ""
 
       dataset = {
@@ -253,7 +323,7 @@ class ReportGenerator:
           "uplift": uplift,
           "se": se,
           "std": std,
-          "tval": tval,
+          "effect": effect,
           "pval": pval,
       }
       datasets.append(dataset)
@@ -295,14 +365,17 @@ class ReportGenerator:
   def createHTMLReport(self):
     self.createHeader()
     self.createSidebar()
-    
-    # Dump the config used for the experiment
-    self.createConfig()
+
+    # Create a summary of results
+    self.createSummarySection()
 
     # Generate charts and tables for each segment and metric
     for segment in self.data['segments']:
       self.createHistogramMetrics(segment)
       self.createPageloadEventMetrics(segment)
+
+    # Dump the config and queries used for the report
+    self.createConfigSection()
 
     self.endDocument()
     return str(self.doc)

@@ -58,7 +58,11 @@ def getResultsForExperiment(dataDir, config, skipCache):
   analyzer = DataAnalyzer(config)
 
   telemetryData = sqlClient.getResults()
-  return analyzer.processTelemetryData(telemetryData)
+  results = analyzer.processTelemetryData(telemetryData)
+
+  # save the queries into the results
+  results['queries'] = telemetryData['queries']
+  return results
 
 def checkForLocalResults(resultsFile):
   if os.path.isfile(resultsFile):
