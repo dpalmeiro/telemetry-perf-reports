@@ -19,16 +19,14 @@
         <td rowspan={{segment.rowspan}} style="border-bottom-style: solid;">{{segment.name}}</td>
     {% for data in segment.datasets %}
       {% if data.last == True %}
-        <td style="font-weight:{{data.weight}}; border-bottom-style: solid;">{{data.branch}}</td>
-        <td style="font-weight:{{data.weight}}; border-bottom-style: solid;">{{data.uplift}}%</td>
-        <td style="font-weight:{{data.weight}}; border-bottom-style: solid;">{{data.effect}}</td>
+        <td style="{{data.weight}}; border-bottom-style: solid;">{{data.branch}}</td>
+        <td style="{{data.weight}}; border-bottom-style: solid;">{{data.uplift}}%</td>
+        <td style="{{data.weight}}; border-bottom-style: solid;">{{data.effect}}</td>
         </tr>
       {% else %}
-        <td>{{data.branch}}</td>
-        <td>{{data.mean}}</td>
-        <td>{{data.uplift}}%</td>
-        <td>{{data.std}}</td>
-        <td>{{data.effect}}</td>
+        <td style="{{data.weight}}">{{data.branch}}</td>
+        <td style="{{data.weight}}">{{data.uplift}}%</td>
+        <td style="{{data.weight}}">{{data.effect}}</td>
         </tr>
         <tr>
       {% endif %}

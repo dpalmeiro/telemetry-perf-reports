@@ -124,9 +124,9 @@ class ReportGenerator:
               effect_meaning = "None"
 
             if effect_meaning == "None" or effect_meaning == "Small":
-              weight="normal"
+              weight="font-weight: normal"
             else:
-              weight="bold"
+              weight="font-weight: bold"
 
             dataset = {
                 "branch": branch,
