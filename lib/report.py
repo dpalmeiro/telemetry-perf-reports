@@ -87,51 +87,64 @@ class ReportGenerator:
 
 
     control=self.data["branches"][0]
-    segment = "All"
 
     metrics = []
     for metric_type in ["histograms", "pageload_event_metrics"]:
       for metric in self.data[metric_type]:
-        datasets = []
         if metric_type == "pageload_event_metrics":
-          name = f"pageload event: {metric}"
+          metric_name = f"pageload event: {metric}"
         else:
           metric = metric.split(".")[-1]
-          name = metric
+          metric_name = metric
 
-        for branch in self.data["branches"]:
-          mean = "{0:.1f}".format(self.data[branch][segment][metric_type][metric]["mean"])
-          std  = "{0:.1f}".format(self.data[branch][segment][metric_type][metric]["std"])
+        segments=[]
+        for segment in self.data["segments"]:
+          datasets = []
+          for branch in self.data["branches"]:
+            if branch == control:
+              continue
 
-          if branch != control:
+            mean = "{0:.1f}".format(self.data[branch][segment][metric_type][metric]["mean"])
+            std  = "{0:.1f}".format(self.data[branch][segment][metric_type][metric]["std"])
+
             branch_mean = self.data[branch][segment][metric_type][metric]["mean"]
             control_mean = self.data[control][segment][metric_type][metric]["mean"]
             uplift = (branch_mean-control_mean)/control_mean*100.0
             uplift = "{0:.1f}".format(uplift)
-          else:
-            uplift = ""
 
-          if "t-test" in self.data[branch][segment][metric_type][metric]:
+            pval = self.data[branch][segment][metric_type][metric]["t-test"]["p-value"]
             effect_size = self.data[branch][segment][metric_type][metric]["t-test"]["effect"]
             effect_meaning = get_cohen_effect_meaning(effect_size)
             effect_size = "{0:.2f}".format(effect_size)
             effect = f"{effect_meaning} (d={effect_size})"
-          else:
-            effect = ""
+        
+            if pval >= 0.05:
+              pval = "{0:.2f}".format(pval)
+              effect = f"None (p={pval})"
+              effect_meaning = "None"
 
-          dataset = {
-              "branch": branch,
-              "mean": mean,
-              "uplift": uplift,
-              "std": std,
-              "effect": effect,
-          }
-          datasets.append(dataset);
+            if effect_meaning == "None" or effect_meaning == "Small":
+              weight="normal"
+            else:
+              weight="bold"
 
-        metrics.append({ 
-          "name": name,
-          "datasets": datasets
-        })
+            dataset = {
+                "branch": branch,
+                "mean": mean,
+                "uplift": uplift,
+                "std": std,
+                "effect": effect,
+                "weight": weight,
+                "last": False
+            }
+            datasets.append(dataset);
+
+          datasets[-1]["last"] = True
+          segments.append({"name": segment, 
+                           "datasets": datasets, 
+                           "rowspan": len(datasets)})
+
+        metrics.append({"name": metric_name, "segments": segments}) 
 
     context = { "metrics": metrics }
     self.doc(t.render(context))
