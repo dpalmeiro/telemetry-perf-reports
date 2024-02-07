@@ -5,6 +5,7 @@ from scipy import interpolate
 from django.template import Template, Context
 from django.template.loader import get_template
 from airium import Airium
+from bs4 import BeautifulSoup as bs
 
 # These values are mostly hand-wavy that seem to 
 # fit the telemetry result impacts.
@@ -14,10 +15,8 @@ def get_cohen_effect_meaning(d):
     return "Small"
   if d_abs <= 0.1:
     return "Medium"
-  if d_abs <= 0.2:
+  else:
     return "Large"
-  if d_abs >  0.2:
-    return "Very Large"
 
 # CubicSpline requires a monotonically increasing x.
 # Remove duplicates.
@@ -84,21 +83,19 @@ class ReportGenerator:
 
   def createSummarySection(self):
     t = get_template("summary.html")
-
-
     control=self.data["branches"][0]
 
-    metrics = []
-    for metric_type in ["histograms", "pageload_event_metrics"]:
-      for metric in self.data[metric_type]:
-        if metric_type == "pageload_event_metrics":
-          metric_name = f"pageload event: {metric}"
-        else:
-          metric = metric.split(".")[-1]
-          metric_name = metric
+    segments = []
+    for segment in self.data["segments"]:
+      metrics = []
+      for metric_type in ["histograms", "pageload_event_metrics"]:
+        for metric in self.data[metric_type]:
+          if metric_type == "pageload_event_metrics":
+            metric_name = f"pageload event: {metric}"
+          else:
+            metric = metric.split(".")[-1]
+            metric_name = metric
 
-        segments=[]
-        for segment in self.data["segments"]:
           datasets = []
           for branch in self.data["branches"]:
             if branch == control:
@@ -110,7 +107,7 @@ class ReportGenerator:
             branch_mean = self.data[branch][segment][metric_type][metric]["mean"]
             control_mean = self.data[control][segment][metric_type][metric]["mean"]
             uplift = (branch_mean-control_mean)/control_mean*100.0
-            uplift = "{0:.1f}".format(uplift)
+            uplift_str = "{0:.1f}".format(uplift)
 
             pval = self.data[branch][segment][metric_type][metric]["t-test"]["p-value"]
             effect_size = self.data[branch][segment][metric_type][metric]["t-test"]["effect"]
@@ -124,29 +121,34 @@ class ReportGenerator:
               effect_meaning = "None"
 
             if effect_meaning == "None" or effect_meaning == "Small":
-              weight="font-weight: normal"
+              style="font-weight: normal"
             else:
-              weight="font-weight: bold"
+              if uplift >= 1.5:
+                style="font-weight: bold; color: red"
+              elif uplift <= -1.5:
+                style="font-weight: bold; color: green"
+              else:
+                style="font-weight: normal"
+
 
             dataset = {
                 "branch": branch,
                 "mean": mean,
-                "uplift": uplift,
+                "uplift": uplift_str,
                 "std": std,
                 "effect": effect,
-                "weight": weight,
+                "style": style,
                 "last": False
             }
             datasets.append(dataset);
 
           datasets[-1]["last"] = True
-          segments.append({"name": segment, 
+          metrics.append({"name": metric_name, 
                            "datasets": datasets, 
                            "rowspan": len(datasets)})
+      segments.append({"name": segment, "metrics": metrics}) 
 
-        metrics.append({"name": metric_name, "segments": segments}) 
-
-    context = { "metrics": metrics }
+    context = { "segments": segments }
     self.doc(t.render(context))
 
   def createConfigSection(self):
@@ -391,4 +393,7 @@ class ReportGenerator:
     self.createConfigSection()
 
     self.endDocument()
-    return str(self.doc)
+    
+    # Prettify the output
+    soup = bs(str(self.doc), 'html.parser')
+    return soup.prettify()
