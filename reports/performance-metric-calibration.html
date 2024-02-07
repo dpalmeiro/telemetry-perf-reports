@@ -81,7 +81,8 @@ div.title{
   border-bottom: groove;
 }
 div.subtitle{
-  margin-lift: -50%;
+  margin-left: -20%;
+  width: 140%;
   margin-bottom: 10px;
   margin-top: 20px;
   font-size: 16px;
@@ -179,6 +180,42 @@ div.table {
     }
   }
 }
+.summary-table {
+    margin-left: -10%;
+    width:120%;
+    border: double;
+    border-color: black;
+    text-align:center;
+    padding:($half-spacing-unit * 1.5) 0;
+    font-size: 14px;
+}
+.summary-table thead tr {
+    background-color: gray;
+    width:100%;
+    height:14px;
+    color: #ffffff;
+    text-align:center;
+    font-size: 14px;
+}
+.summary-table th,
+.summary-table td {
+    padding: 0;
+    border-left-style: hidden;
+    border-right-style: hidden;
+    border-bottom-style: hidden;
+    border-top-style: hidden;
+}
+.summary-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+    border-left-style: hidden;
+    border-right-style: hidden;
+    border-bottom-style: hidden;
+    border-top-style: hidden;
+}
+.summary-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
 .table {
 	width:100%;
 	border:1px solid $color-form-highlight;
@@ -199,7 +236,16 @@ div.table {
 		background:$color-form-highlight;
 	}
 }
-.table-data, .header__item {
+.table-data-normal, .header__item {
+	flex: 1 1 20%;
+	text-align:center;
+}
+.table-data-med {
+	flex: 1 1 20%;
+	text-align:center;
+        font-weight: bold;
+}
+.table-data-high {
 	flex: 1 1 20%;
 	text-align:center;
 }
@@ -373,419 +419,1345 @@ div.table {
 
   
   <div class="subtitle">perf_page_load_time_ms</div>
-  <div class="table">
-    <div class="table-header">
-      <div class="header__item">branch</div>
-      <div class="header__item">mean</div>
-      <div class="header__item">uplift(%)</div>
-      <div class="header__item">stddev</div>
-      <div class="header__item">t-test (effect)</div>
-    </div>
-    <div class="table-content">
-  
-      <div class="table-row">
-        <div class="table-data">control</div>
-        <div class="table-data">2029.2</div>
-        <div class="table-data"></div>
-        <div class="table-data">3850.7</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-a</div>
-        <div class="table-data">2024.4</div>
-        <div class="table-data">-0.2</div>
-        <div class="table-data">3855.4</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-b</div>
-        <div class="table-data">2010.0</div>
-        <div class="table-data">-0.9</div>
-        <div class="table-data">3834.3</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-c</div>
-        <div class="table-data">2041.7</div>
-        <div class="table-data">0.6</div>
-        <div class="table-data">3884.8</div>
-        <div class="table-data"></div>
-      </div>
-  
-    </div>
-  </div>
-  
+  <table border="1" cellspacing="0" cellpadding="0" class="summary-table">
+    <thead>
+      <tr>
+        <th>segment</th>
+        <th>branch</th>
+        <th>mean</th>
+        <th>uplift(%)</th>
+        <th>stddev</th>
+        <th>effect size</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">All</td>
+    
+      
+        <td>treatment-a</td>
+        <td>2024.4</td>
+        <td>-0.2%</td>
+        <td>3855.4</td>
+        <td>Small (d=-0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>2010.0</td>
+        <td>-0.9%</td>
+        <td>3834.3</td>
+        <td>Small (d=-0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">2041.7</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">0.6%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">3884.8</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.00)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Windows</td>
+    
+      
+        <td>treatment-a</td>
+        <td>2038.8</td>
+        <td>-0.3%</td>
+        <td>3894.8</td>
+        <td>Small (d=-0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>2022.0</td>
+        <td>-1.1%</td>
+        <td>3869.3</td>
+        <td>Small (d=-0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">2056.5</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">0.5%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">3920.1</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.00)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Linux</td>
+    
+      
+        <td>treatment-a</td>
+        <td>1969.4</td>
+        <td>-0.5%</td>
+        <td>3891.7</td>
+        <td>Small (d=-0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>1956.5</td>
+        <td>-1.1%</td>
+        <td>3870.9</td>
+        <td>Small (d=-0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">2049.8</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">3.6%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">4171.0</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.02)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Mac</td>
+    
+      
+        <td>treatment-a</td>
+        <td>1830.2</td>
+        <td>0.9%</td>
+        <td>3183.2</td>
+        <td>Small (d=0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>1849.1</td>
+        <td>1.9%</td>
+        <td>3235.2</td>
+        <td>Small (d=0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1822.8</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">0.5%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">3189.9</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.00)</td>
+        </tr>
+      
+    
+    
+    </tbody>
+  </table>
+
   <div class="subtitle">perf_page_load_time_from_responsestart_ms</div>
-  <div class="table">
-    <div class="table-header">
-      <div class="header__item">branch</div>
-      <div class="header__item">mean</div>
-      <div class="header__item">uplift(%)</div>
-      <div class="header__item">stddev</div>
-      <div class="header__item">t-test (effect)</div>
-    </div>
-    <div class="table-content">
-  
-      <div class="table-row">
-        <div class="table-data">control</div>
-        <div class="table-data">1364.8</div>
-        <div class="table-data"></div>
-        <div class="table-data">3205.5</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-a</div>
-        <div class="table-data">1358.4</div>
-        <div class="table-data">-0.5</div>
-        <div class="table-data">3200.0</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-b</div>
-        <div class="table-data">1346.1</div>
-        <div class="table-data">-1.4</div>
-        <div class="table-data">3195.2</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-c</div>
-        <div class="table-data">1375.5</div>
-        <div class="table-data">0.8</div>
-        <div class="table-data">3244.8</div>
-        <div class="table-data"></div>
-      </div>
-  
-    </div>
-  </div>
-  
+  <table border="1" cellspacing="0" cellpadding="0" class="summary-table">
+    <thead>
+      <tr>
+        <th>segment</th>
+        <th>branch</th>
+        <th>mean</th>
+        <th>uplift(%)</th>
+        <th>stddev</th>
+        <th>effect size</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">All</td>
+    
+      
+        <td>treatment-a</td>
+        <td>1358.4</td>
+        <td>-0.5%</td>
+        <td>3200.0</td>
+        <td>Small (d=-0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>1346.1</td>
+        <td>-1.4%</td>
+        <td>3195.2</td>
+        <td>Small (d=-0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1375.5</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">0.8%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">3244.8</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.00)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Windows</td>
+    
+      
+        <td>treatment-a</td>
+        <td>1371.3</td>
+        <td>-0.5%</td>
+        <td>3240.7</td>
+        <td>Small (d=-0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>1355.8</td>
+        <td>-1.6%</td>
+        <td>3230.5</td>
+        <td>Small (d=-0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1387.3</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">0.7%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">3277.7</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.00)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Linux</td>
+    
+      
+        <td>treatment-a</td>
+        <td>1276.3</td>
+        <td>-4.0%</td>
+        <td>3027.2</td>
+        <td>Small (d=-0.02)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>1295.3</td>
+        <td>-2.6%</td>
+        <td>3064.5</td>
+        <td>Small (d=-0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1394.0</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">4.8%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">3497.6</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.02)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Mac</td>
+    
+      
+        <td>treatment-a</td>
+        <td>1198.1</td>
+        <td>0.8%</td>
+        <td>2590.1</td>
+        <td>Small (d=0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>1218.1</td>
+        <td>2.5%</td>
+        <td>2655.9</td>
+        <td>Small (d=0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1197.0</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">0.7%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">2597.6</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.00)</td>
+        </tr>
+      
+    
+    
+    </tbody>
+  </table>
+
   <div class="subtitle">perf_first_contentful_paint_ms</div>
-  <div class="table">
-    <div class="table-header">
-      <div class="header__item">branch</div>
-      <div class="header__item">mean</div>
-      <div class="header__item">uplift(%)</div>
-      <div class="header__item">stddev</div>
-      <div class="header__item">t-test (effect)</div>
-    </div>
-    <div class="table-content">
-  
-      <div class="table-row">
-        <div class="table-data">control</div>
-        <div class="table-data">1132.5</div>
-        <div class="table-data"></div>
-        <div class="table-data">2221.8</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-a</div>
-        <div class="table-data">1140.6</div>
-        <div class="table-data">0.7</div>
-        <div class="table-data">2244.2</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-b</div>
-        <div class="table-data">1139.8</div>
-        <div class="table-data">0.6</div>
-        <div class="table-data">2238.8</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-c</div>
-        <div class="table-data">1139.3</div>
-        <div class="table-data">0.6</div>
-        <div class="table-data">2242.8</div>
-        <div class="table-data"></div>
-      </div>
-  
-    </div>
-  </div>
-  
+  <table border="1" cellspacing="0" cellpadding="0" class="summary-table">
+    <thead>
+      <tr>
+        <th>segment</th>
+        <th>branch</th>
+        <th>mean</th>
+        <th>uplift(%)</th>
+        <th>stddev</th>
+        <th>effect size</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">All</td>
+    
+      
+        <td>treatment-a</td>
+        <td>1140.6</td>
+        <td>0.7%</td>
+        <td>2244.2</td>
+        <td>Small (d=0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>1139.8</td>
+        <td>0.6%</td>
+        <td>2238.8</td>
+        <td>Small (d=0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1139.3</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">0.6%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">2242.8</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.00)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Windows</td>
+    
+      
+        <td>treatment-a</td>
+        <td>1150.4</td>
+        <td>0.7%</td>
+        <td>2266.4</td>
+        <td>Small (d=0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>1149.8</td>
+        <td>0.6%</td>
+        <td>2263.3</td>
+        <td>Small (d=0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1149.4</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">0.6%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">2264.2</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.00)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Linux</td>
+    
+      
+        <td>treatment-a</td>
+        <td>1158.5</td>
+        <td>1.4%</td>
+        <td>2422.7</td>
+        <td>Small (d=0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>1140.4</td>
+        <td>-0.2%</td>
+        <td>2295.7</td>
+        <td>None (p=0.06)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1175.1</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">2.8%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">2523.5</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.01)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Mac</td>
+    
+      
+        <td>treatment-a</td>
+        <td>990.9</td>
+        <td>0.5%</td>
+        <td>1795.0</td>
+        <td>Small (d=0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>994.5</td>
+        <td>0.9%</td>
+        <td>1812.1</td>
+        <td>Small (d=0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">982.7</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">-0.3%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1777.0</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=-0.00)</td>
+        </tr>
+      
+    
+    
+    </tbody>
+  </table>
+
   <div class="subtitle">perf_first_contentful_paint_from_responsestart_ms</div>
-  <div class="table">
-    <div class="table-header">
-      <div class="header__item">branch</div>
-      <div class="header__item">mean</div>
-      <div class="header__item">uplift(%)</div>
-      <div class="header__item">stddev</div>
-      <div class="header__item">t-test (effect)</div>
-    </div>
-    <div class="table-content">
-  
-      <div class="table-row">
-        <div class="table-data">control</div>
-        <div class="table-data">472.4</div>
-        <div class="table-data"></div>
-        <div class="table-data">1319.3</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-a</div>
-        <div class="table-data">474.1</div>
-        <div class="table-data">0.4</div>
-        <div class="table-data">1324.4</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-b</div>
-        <div class="table-data">474.8</div>
-        <div class="table-data">0.5</div>
-        <div class="table-data">1331.1</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-c</div>
-        <div class="table-data">475.2</div>
-        <div class="table-data">0.6</div>
-        <div class="table-data">1334.0</div>
-        <div class="table-data"></div>
-      </div>
-  
-    </div>
-  </div>
-  
+  <table border="1" cellspacing="0" cellpadding="0" class="summary-table">
+    <thead>
+      <tr>
+        <th>segment</th>
+        <th>branch</th>
+        <th>mean</th>
+        <th>uplift(%)</th>
+        <th>stddev</th>
+        <th>effect size</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">All</td>
+    
+      
+        <td>treatment-a</td>
+        <td>474.1</td>
+        <td>0.4%</td>
+        <td>1324.4</td>
+        <td>Small (d=0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>474.8</td>
+        <td>0.5%</td>
+        <td>1331.1</td>
+        <td>Small (d=0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">475.2</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">0.6%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1334.0</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.00)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Windows</td>
+    
+      
+        <td>treatment-a</td>
+        <td>481.2</td>
+        <td>0.5%</td>
+        <td>1348.0</td>
+        <td>Small (d=0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>481.2</td>
+        <td>0.5%</td>
+        <td>1351.3</td>
+        <td>Small (d=0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">481.5</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">0.5%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1348.8</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.00)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Linux</td>
+    
+      
+        <td>treatment-a</td>
+        <td>470.4</td>
+        <td>-5.3%</td>
+        <td>1220.9</td>
+        <td>Small (d=-0.02)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>488.9</td>
+        <td>-1.5%</td>
+        <td>1295.6</td>
+        <td>Small (d=-0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">520.0</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">4.7%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1605.1</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.02)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Mac</td>
+    
+      
+        <td>treatment-a</td>
+        <td>370.7</td>
+        <td>0.5%</td>
+        <td>957.7</td>
+        <td>Small (d=0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>376.0</td>
+        <td>2.0%</td>
+        <td>1002.8</td>
+        <td>Small (d=0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">369.6</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">0.2%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">958.0</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.00)</td>
+        </tr>
+      
+    
+    
+    </tbody>
+  </table>
+
   <div class="subtitle">js_pageload_execution_ms</div>
-  <div class="table">
-    <div class="table-header">
-      <div class="header__item">branch</div>
-      <div class="header__item">mean</div>
-      <div class="header__item">uplift(%)</div>
-      <div class="header__item">stddev</div>
-      <div class="header__item">t-test (effect)</div>
-    </div>
-    <div class="table-content">
-  
-      <div class="table-row">
-        <div class="table-data">control</div>
-        <div class="table-data">389.3</div>
-        <div class="table-data"></div>
-        <div class="table-data">1733.7</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-a</div>
-        <div class="table-data">387.0</div>
-        <div class="table-data">-0.6</div>
-        <div class="table-data">1731.5</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-b</div>
-        <div class="table-data">379.7</div>
-        <div class="table-data">-2.5</div>
-        <div class="table-data">1712.3</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-c</div>
-        <div class="table-data">390.9</div>
-        <div class="table-data">0.4</div>
-        <div class="table-data">1737.8</div>
-        <div class="table-data"></div>
-      </div>
-  
-    </div>
-  </div>
-  
+  <table border="1" cellspacing="0" cellpadding="0" class="summary-table">
+    <thead>
+      <tr>
+        <th>segment</th>
+        <th>branch</th>
+        <th>mean</th>
+        <th>uplift(%)</th>
+        <th>stddev</th>
+        <th>effect size</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">All</td>
+    
+      
+        <td>treatment-a</td>
+        <td>387.0</td>
+        <td>-0.6%</td>
+        <td>1731.5</td>
+        <td>Small (d=-0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>379.7</td>
+        <td>-2.5%</td>
+        <td>1712.3</td>
+        <td>Small (d=-0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">390.9</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">0.4%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1737.8</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.00)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Windows</td>
+    
+      
+        <td>treatment-a</td>
+        <td>395.3</td>
+        <td>-0.7%</td>
+        <td>1778.8</td>
+        <td>Small (d=-0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>386.5</td>
+        <td>-2.9%</td>
+        <td>1755.8</td>
+        <td>Small (d=-0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">398.9</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">0.2%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1781.3</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.00)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Linux</td>
+    
+      
+        <td>treatment-a</td>
+        <td>350.8</td>
+        <td>-3.0%</td>
+        <td>1342.6</td>
+        <td>Small (d=-0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>360.6</td>
+        <td>-0.3%</td>
+        <td>1370.1</td>
+        <td>Small (d=-0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">387.5</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">7.1%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1569.7</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.02)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Mac</td>
+    
+      
+        <td>treatment-a</td>
+        <td>275.0</td>
+        <td>1.9%</td>
+        <td>963.5</td>
+        <td>Small (d=0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>279.7</td>
+        <td>3.6%</td>
+        <td>990.6</td>
+        <td>Small (d=0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">271.4</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">0.6%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">952.4</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.00)</td>
+        </tr>
+      
+    
+    
+    </tbody>
+  </table>
+
   <div class="subtitle">pageload event: fcp_time</div>
-  <div class="table">
-    <div class="table-header">
-      <div class="header__item">branch</div>
-      <div class="header__item">mean</div>
-      <div class="header__item">uplift(%)</div>
-      <div class="header__item">stddev</div>
-      <div class="header__item">t-test (effect)</div>
-    </div>
-    <div class="table-content">
-  
-      <div class="table-row">
-        <div class="table-data">control</div>
-        <div class="table-data">952.2</div>
-        <div class="table-data"></div>
-        <div class="table-data">1055.6</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-a</div>
-        <div class="table-data">959.6</div>
-        <div class="table-data">0.8</div>
-        <div class="table-data">1065.5</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-b</div>
-        <div class="table-data">958.9</div>
-        <div class="table-data">0.7</div>
-        <div class="table-data">1065.1</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-c</div>
-        <div class="table-data">957.1</div>
-        <div class="table-data">0.5</div>
-        <div class="table-data">1065.0</div>
-        <div class="table-data"></div>
-      </div>
-  
-    </div>
-  </div>
-  
+  <table border="1" cellspacing="0" cellpadding="0" class="summary-table">
+    <thead>
+      <tr>
+        <th>segment</th>
+        <th>branch</th>
+        <th>mean</th>
+        <th>uplift(%)</th>
+        <th>stddev</th>
+        <th>effect size</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">All</td>
+    
+      
+        <td>treatment-a</td>
+        <td>959.6</td>
+        <td>0.8%</td>
+        <td>1065.5</td>
+        <td>Small (d=0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>958.9</td>
+        <td>0.7%</td>
+        <td>1065.1</td>
+        <td>Small (d=0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">957.1</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">0.5%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1065.0</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.00)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Windows</td>
+    
+      
+        <td>treatment-a</td>
+        <td>963.6</td>
+        <td>0.8%</td>
+        <td>1071.8</td>
+        <td>Small (d=0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>962.5</td>
+        <td>0.7%</td>
+        <td>1070.7</td>
+        <td>Small (d=0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">960.7</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">0.5%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1070.8</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.00)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Linux</td>
+    
+      
+        <td>treatment-a</td>
+        <td>952.9</td>
+        <td>-1.8%</td>
+        <td>1027.1</td>
+        <td>Small (d=-0.02)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>959.0</td>
+        <td>-1.1%</td>
+        <td>1052.7</td>
+        <td>Small (d=-0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">982.4</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1.3%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1064.3</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.01)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Mac</td>
+    
+      
+        <td>treatment-a</td>
+        <td>918.1</td>
+        <td>0.9%</td>
+        <td>1005.7</td>
+        <td>Small (d=0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>918.9</td>
+        <td>0.9%</td>
+        <td>1004.2</td>
+        <td>Small (d=0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">911.6</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">0.1%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">999.2</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.00)</td>
+        </tr>
+      
+    
+    
+    </tbody>
+  </table>
+
   <div class="subtitle">pageload event: load_time</div>
-  <div class="table">
-    <div class="table-header">
-      <div class="header__item">branch</div>
-      <div class="header__item">mean</div>
-      <div class="header__item">uplift(%)</div>
-      <div class="header__item">stddev</div>
-      <div class="header__item">t-test (effect)</div>
-    </div>
-    <div class="table-content">
-  
-      <div class="table-row">
-        <div class="table-data">control</div>
-        <div class="table-data">1703.9</div>
-        <div class="table-data"></div>
-        <div class="table-data">2363.0</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-a</div>
-        <div class="table-data">1701.6</div>
-        <div class="table-data">-0.1</div>
-        <div class="table-data">2369.4</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-b</div>
-        <div class="table-data">1691.3</div>
-        <div class="table-data">-0.7</div>
-        <div class="table-data">2352.1</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-c</div>
-        <div class="table-data">1717.7</div>
-        <div class="table-data">0.8</div>
-        <div class="table-data">2383.1</div>
-        <div class="table-data"></div>
-      </div>
-  
-    </div>
-  </div>
-  
+  <table border="1" cellspacing="0" cellpadding="0" class="summary-table">
+    <thead>
+      <tr>
+        <th>segment</th>
+        <th>branch</th>
+        <th>mean</th>
+        <th>uplift(%)</th>
+        <th>stddev</th>
+        <th>effect size</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">All</td>
+    
+      
+        <td>treatment-a</td>
+        <td>1701.6</td>
+        <td>-0.1%</td>
+        <td>2369.4</td>
+        <td>Small (d=-0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>1691.3</td>
+        <td>-0.7%</td>
+        <td>2352.1</td>
+        <td>Small (d=-0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1717.7</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">0.8%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">2383.1</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.01)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Windows</td>
+    
+      
+        <td>treatment-a</td>
+        <td>1701.7</td>
+        <td>-0.3%</td>
+        <td>2386.9</td>
+        <td>Small (d=-0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>1689.3</td>
+        <td>-1.0%</td>
+        <td>2367.2</td>
+        <td>Small (d=-0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1718.4</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">0.7%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">2402.4</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.01)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Linux</td>
+    
+      
+        <td>treatment-a</td>
+        <td>1624.3</td>
+        <td>-0.2%</td>
+        <td>2304.2</td>
+        <td>Small (d=-0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>1630.1</td>
+        <td>0.2%</td>
+        <td>2287.8</td>
+        <td>Small (d=0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1693.6</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">4.1%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">2324.8</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.03)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Mac</td>
+    
+      
+        <td>treatment-a</td>
+        <td>1727.8</td>
+        <td>1.5%</td>
+        <td>2180.0</td>
+        <td>Small (d=0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>1735.2</td>
+        <td>2.0%</td>
+        <td>2188.3</td>
+        <td>Small (d=0.02)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1718.3</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1.0%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">2175.3</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.01)</td>
+        </tr>
+      
+    
+    
+    </tbody>
+  </table>
+
   <div class="subtitle">pageload event: response_time</div>
-  <div class="table">
-    <div class="table-header">
-      <div class="header__item">branch</div>
-      <div class="header__item">mean</div>
-      <div class="header__item">uplift(%)</div>
-      <div class="header__item">stddev</div>
-      <div class="header__item">t-test (effect)</div>
-    </div>
-    <div class="table-content">
-  
-      <div class="table-row">
-        <div class="table-data">control</div>
-        <div class="table-data">565.3</div>
-        <div class="table-data"></div>
-        <div class="table-data">861.1</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-a</div>
-        <div class="table-data">566.1</div>
-        <div class="table-data">0.1</div>
-        <div class="table-data">866.3</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-b</div>
-        <div class="table-data">570.5</div>
-        <div class="table-data">0.9</div>
-        <div class="table-data">853.0</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-c</div>
-        <div class="table-data">567.1</div>
-        <div class="table-data">0.3</div>
-        <div class="table-data">864.4</div>
-        <div class="table-data"></div>
-      </div>
-  
-    </div>
-  </div>
-  
+  <table border="1" cellspacing="0" cellpadding="0" class="summary-table">
+    <thead>
+      <tr>
+        <th>segment</th>
+        <th>branch</th>
+        <th>mean</th>
+        <th>uplift(%)</th>
+        <th>stddev</th>
+        <th>effect size</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">All</td>
+    
+      
+        <td>treatment-a</td>
+        <td>566.1</td>
+        <td>0.1%</td>
+        <td>866.3</td>
+        <td>Small (d=0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>570.5</td>
+        <td>0.9%</td>
+        <td>853.0</td>
+        <td>Small (d=0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">567.1</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">0.3%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">864.4</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.00)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Windows</td>
+    
+      
+        <td>treatment-a</td>
+        <td>565.5</td>
+        <td>-0.0%</td>
+        <td>869.7</td>
+        <td>Small (d=-0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>570.9</td>
+        <td>0.9%</td>
+        <td>855.0</td>
+        <td>Small (d=0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">567.2</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">0.3%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">868.3</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.00)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Linux</td>
+    
+      
+        <td>treatment-a</td>
+        <td>551.0</td>
+        <td>3.7%</td>
+        <td>839.7</td>
+        <td>Small (d=0.02)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>538.6</td>
+        <td>1.4%</td>
+        <td>846.8</td>
+        <td>Small (d=0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">545.8</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">2.7%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">853.0</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.02)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Mac</td>
+    
+      
+        <td>treatment-a</td>
+        <td>578.0</td>
+        <td>1.2%</td>
+        <td>835.2</td>
+        <td>Small (d=0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>577.1</td>
+        <td>1.1%</td>
+        <td>831.2</td>
+        <td>Small (d=0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">572.6</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">0.3%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">823.0</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.00)</td>
+        </tr>
+      
+    
+    
+    </tbody>
+  </table>
+
   <div class="subtitle">pageload event: js_exec_time</div>
-  <div class="table">
-    <div class="table-header">
-      <div class="header__item">branch</div>
-      <div class="header__item">mean</div>
-      <div class="header__item">uplift(%)</div>
-      <div class="header__item">stddev</div>
-      <div class="header__item">t-test (effect)</div>
-    </div>
-    <div class="table-content">
-  
-      <div class="table-row">
-        <div class="table-data">control</div>
-        <div class="table-data">229.1</div>
-        <div class="table-data"></div>
-        <div class="table-data">492.1</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-a</div>
-        <div class="table-data">228.9</div>
-        <div class="table-data">-0.1</div>
-        <div class="table-data">490.7</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-b</div>
-        <div class="table-data">225.4</div>
-        <div class="table-data">-1.6</div>
-        <div class="table-data">491.8</div>
-        <div class="table-data"></div>
-      </div>
-  
-      <div class="table-row">
-        <div class="table-data">treatment-c</div>
-        <div class="table-data">233.0</div>
-        <div class="table-data">1.7</div>
-        <div class="table-data">501.2</div>
-        <div class="table-data"></div>
-      </div>
-  
-    </div>
-  </div>
-  
+  <table border="1" cellspacing="0" cellpadding="0" class="summary-table">
+    <thead>
+      <tr>
+        <th>segment</th>
+        <th>branch</th>
+        <th>mean</th>
+        <th>uplift(%)</th>
+        <th>stddev</th>
+        <th>effect size</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">All</td>
+    
+      
+        <td>treatment-a</td>
+        <td>228.9</td>
+        <td>-0.1%</td>
+        <td>490.7</td>
+        <td>Small (d=-0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>225.4</td>
+        <td>-1.6%</td>
+        <td>491.8</td>
+        <td>Small (d=-0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">233.0</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1.7%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">501.2</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.01)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Windows</td>
+    
+      
+        <td>treatment-a</td>
+        <td>230.5</td>
+        <td>-0.3%</td>
+        <td>496.3</td>
+        <td>Small (d=-0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>226.3</td>
+        <td>-2.1%</td>
+        <td>496.8</td>
+        <td>Small (d=-0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">234.7</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1.5%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">507.4</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.01)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Linux</td>
+    
+      
+        <td>treatment-a</td>
+        <td>215.9</td>
+        <td>0.7%</td>
+        <td>467.7</td>
+        <td>Small (d=0.00)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>214.2</td>
+        <td>-0.1%</td>
+        <td>462.4</td>
+        <td>None (p=0.29)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">233.9</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">9.0%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">495.1</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.04)</td>
+        </tr>
+      
+    
+    
+      <tr>
+        <td rowspan=3 style="border-bottom-style: solid;">Mac</td>
+    
+      
+        <td>treatment-a</td>
+        <td>215.9</td>
+        <td>2.9%</td>
+        <td>429.3</td>
+        <td>Small (d=0.01)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td>treatment-b</td>
+        <td>219.0</td>
+        <td>4.4%</td>
+        <td>439.5</td>
+        <td>Small (d=0.02)</td>
+        </tr>
+        <tr>
+      
+    
+      
+        <td style="font-weight:normal; border-bottom-style: solid;">treatment-c</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">213.2</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">1.6%</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">428.5</td>
+        <td style="font-weight:normal; border-bottom-style: solid;">Small (d=0.01)</td>
+        </tr>
+      
+    
+    
+    </tbody>
+  </table>
 
 </div> 
 
@@ -895,39 +1867,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">2029.2</div>
-      <div class="table-data"></div>
-      <div class="table-data">3850.7</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">2029.2</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">3850.7</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">2024.4</div>
-      <div class="table-data">-0.2</div>
-      <div class="table-data">3855.4</div>
-      <div class="table-data">-0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">2024.4</div>
+      <div class="table-data-normal">-0.2</div>
+      <div class="table-data-normal">3855.4</div>
+      <div class="table-data-normal">-0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">2010.0</div>
-      <div class="table-data">-0.9</div>
-      <div class="table-data">3834.3</div>
-      <div class="table-data">-0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">2010.0</div>
+      <div class="table-data-normal">-0.9</div>
+      <div class="table-data-normal">3834.3</div>
+      <div class="table-data-normal">-0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">2041.7</div>
-      <div class="table-data">0.6</div>
-      <div class="table-data">3884.8</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">2041.7</div>
+      <div class="table-data-normal">0.6</div>
+      <div class="table-data-normal">3884.8</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -1498,39 +2470,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">1364.8</div>
-      <div class="table-data"></div>
-      <div class="table-data">3205.5</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">1364.8</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">3205.5</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">1358.4</div>
-      <div class="table-data">-0.5</div>
-      <div class="table-data">3200.0</div>
-      <div class="table-data">-0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">1358.4</div>
+      <div class="table-data-normal">-0.5</div>
+      <div class="table-data-normal">3200.0</div>
+      <div class="table-data-normal">-0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">1346.1</div>
-      <div class="table-data">-1.4</div>
-      <div class="table-data">3195.2</div>
-      <div class="table-data">-0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">1346.1</div>
+      <div class="table-data-normal">-1.4</div>
+      <div class="table-data-normal">3195.2</div>
+      <div class="table-data-normal">-0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">1375.5</div>
-      <div class="table-data">0.8</div>
-      <div class="table-data">3244.8</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">1375.5</div>
+      <div class="table-data-normal">0.8</div>
+      <div class="table-data-normal">3244.8</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -2101,39 +3073,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">1132.5</div>
-      <div class="table-data"></div>
-      <div class="table-data">2221.8</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">1132.5</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">2221.8</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">1140.6</div>
-      <div class="table-data">0.7</div>
-      <div class="table-data">2244.2</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">1140.6</div>
+      <div class="table-data-normal">0.7</div>
+      <div class="table-data-normal">2244.2</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">1139.8</div>
-      <div class="table-data">0.6</div>
-      <div class="table-data">2238.8</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">1139.8</div>
+      <div class="table-data-normal">0.6</div>
+      <div class="table-data-normal">2238.8</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">1139.3</div>
-      <div class="table-data">0.6</div>
-      <div class="table-data">2242.8</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">1139.3</div>
+      <div class="table-data-normal">0.6</div>
+      <div class="table-data-normal">2242.8</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -2704,39 +3676,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">472.4</div>
-      <div class="table-data"></div>
-      <div class="table-data">1319.3</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">472.4</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">1319.3</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">474.1</div>
-      <div class="table-data">0.4</div>
-      <div class="table-data">1324.4</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">474.1</div>
+      <div class="table-data-normal">0.4</div>
+      <div class="table-data-normal">1324.4</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">474.8</div>
-      <div class="table-data">0.5</div>
-      <div class="table-data">1331.1</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">474.8</div>
+      <div class="table-data-normal">0.5</div>
+      <div class="table-data-normal">1331.1</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">475.2</div>
-      <div class="table-data">0.6</div>
-      <div class="table-data">1334.0</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">475.2</div>
+      <div class="table-data-normal">0.6</div>
+      <div class="table-data-normal">1334.0</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -3307,39 +4279,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">389.3</div>
-      <div class="table-data"></div>
-      <div class="table-data">1733.7</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">389.3</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">1733.7</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">387.0</div>
-      <div class="table-data">-0.6</div>
-      <div class="table-data">1731.5</div>
-      <div class="table-data">-0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">387.0</div>
+      <div class="table-data-normal">-0.6</div>
+      <div class="table-data-normal">1731.5</div>
+      <div class="table-data-normal">-0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">379.7</div>
-      <div class="table-data">-2.5</div>
-      <div class="table-data">1712.3</div>
-      <div class="table-data">-0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">379.7</div>
+      <div class="table-data-normal">-2.5</div>
+      <div class="table-data-normal">1712.3</div>
+      <div class="table-data-normal">-0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">390.9</div>
-      <div class="table-data">0.4</div>
-      <div class="table-data">1737.8</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">390.9</div>
+      <div class="table-data-normal">0.4</div>
+      <div class="table-data-normal">1737.8</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -3910,39 +4882,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">952.2</div>
-      <div class="table-data"></div>
-      <div class="table-data">1055.6</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">952.2</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">1055.6</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">959.6</div>
-      <div class="table-data">0.8</div>
-      <div class="table-data">1065.5</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">959.6</div>
+      <div class="table-data-normal">0.8</div>
+      <div class="table-data-normal">1065.5</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">958.9</div>
-      <div class="table-data">0.7</div>
-      <div class="table-data">1065.1</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">958.9</div>
+      <div class="table-data-normal">0.7</div>
+      <div class="table-data-normal">1065.1</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">957.1</div>
-      <div class="table-data">0.5</div>
-      <div class="table-data">1065.0</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">957.1</div>
+      <div class="table-data-normal">0.5</div>
+      <div class="table-data-normal">1065.0</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -4513,39 +5485,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">1703.9</div>
-      <div class="table-data"></div>
-      <div class="table-data">2363.0</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">1703.9</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">2363.0</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">1701.6</div>
-      <div class="table-data">-0.1</div>
-      <div class="table-data">2369.4</div>
-      <div class="table-data">-0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">1701.6</div>
+      <div class="table-data-normal">-0.1</div>
+      <div class="table-data-normal">2369.4</div>
+      <div class="table-data-normal">-0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">1691.3</div>
-      <div class="table-data">-0.7</div>
-      <div class="table-data">2352.1</div>
-      <div class="table-data">-0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">1691.3</div>
+      <div class="table-data-normal">-0.7</div>
+      <div class="table-data-normal">2352.1</div>
+      <div class="table-data-normal">-0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">1717.7</div>
-      <div class="table-data">0.8</div>
-      <div class="table-data">2383.1</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">1717.7</div>
+      <div class="table-data-normal">0.8</div>
+      <div class="table-data-normal">2383.1</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -5116,39 +6088,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">565.3</div>
-      <div class="table-data"></div>
-      <div class="table-data">861.1</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">565.3</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">861.1</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">566.1</div>
-      <div class="table-data">0.1</div>
-      <div class="table-data">866.3</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">566.1</div>
+      <div class="table-data-normal">0.1</div>
+      <div class="table-data-normal">866.3</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">570.5</div>
-      <div class="table-data">0.9</div>
-      <div class="table-data">853.0</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">570.5</div>
+      <div class="table-data-normal">0.9</div>
+      <div class="table-data-normal">853.0</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">567.1</div>
-      <div class="table-data">0.3</div>
-      <div class="table-data">864.4</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">567.1</div>
+      <div class="table-data-normal">0.3</div>
+      <div class="table-data-normal">864.4</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -5719,39 +6691,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">229.1</div>
-      <div class="table-data"></div>
-      <div class="table-data">492.1</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">229.1</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">492.1</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">228.9</div>
-      <div class="table-data">-0.1</div>
-      <div class="table-data">490.7</div>
-      <div class="table-data">-0.00</div>
-      <div class="table-data">0.00026</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">228.9</div>
+      <div class="table-data-normal">-0.1</div>
+      <div class="table-data-normal">490.7</div>
+      <div class="table-data-normal">-0.00</div>
+      <div class="table-data-normal">0.00026</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">225.4</div>
-      <div class="table-data">-1.6</div>
-      <div class="table-data">491.8</div>
-      <div class="table-data">-0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">225.4</div>
+      <div class="table-data-normal">-1.6</div>
+      <div class="table-data-normal">491.8</div>
+      <div class="table-data-normal">-0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">233.0</div>
-      <div class="table-data">1.7</div>
-      <div class="table-data">501.2</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">233.0</div>
+      <div class="table-data-normal">1.7</div>
+      <div class="table-data-normal">501.2</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -6322,39 +7294,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">2045.4</div>
-      <div class="table-data"></div>
-      <div class="table-data">3889.7</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">2045.4</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">3889.7</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">2038.8</div>
-      <div class="table-data">-0.3</div>
-      <div class="table-data">3894.8</div>
-      <div class="table-data">-0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">2038.8</div>
+      <div class="table-data-normal">-0.3</div>
+      <div class="table-data-normal">3894.8</div>
+      <div class="table-data-normal">-0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">2022.0</div>
-      <div class="table-data">-1.1</div>
-      <div class="table-data">3869.3</div>
-      <div class="table-data">-0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">2022.0</div>
+      <div class="table-data-normal">-1.1</div>
+      <div class="table-data-normal">3869.3</div>
+      <div class="table-data-normal">-0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">2056.5</div>
-      <div class="table-data">0.5</div>
-      <div class="table-data">3920.1</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">2056.5</div>
+      <div class="table-data-normal">0.5</div>
+      <div class="table-data-normal">3920.1</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -6925,39 +7897,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">1378.0</div>
-      <div class="table-data"></div>
-      <div class="table-data">3242.8</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">1378.0</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">3242.8</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">1371.3</div>
-      <div class="table-data">-0.5</div>
-      <div class="table-data">3240.7</div>
-      <div class="table-data">-0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">1371.3</div>
+      <div class="table-data-normal">-0.5</div>
+      <div class="table-data-normal">3240.7</div>
+      <div class="table-data-normal">-0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">1355.8</div>
-      <div class="table-data">-1.6</div>
-      <div class="table-data">3230.5</div>
-      <div class="table-data">-0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">1355.8</div>
+      <div class="table-data-normal">-1.6</div>
+      <div class="table-data-normal">3230.5</div>
+      <div class="table-data-normal">-0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">1387.3</div>
-      <div class="table-data">0.7</div>
-      <div class="table-data">3277.7</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">1387.3</div>
+      <div class="table-data-normal">0.7</div>
+      <div class="table-data-normal">3277.7</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -7528,39 +8500,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">1142.4</div>
-      <div class="table-data"></div>
-      <div class="table-data">2248.3</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">1142.4</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">2248.3</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">1150.4</div>
-      <div class="table-data">0.7</div>
-      <div class="table-data">2266.4</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">1150.4</div>
+      <div class="table-data-normal">0.7</div>
+      <div class="table-data-normal">2266.4</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">1149.8</div>
-      <div class="table-data">0.6</div>
-      <div class="table-data">2263.3</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">1149.8</div>
+      <div class="table-data-normal">0.6</div>
+      <div class="table-data-normal">2263.3</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">1149.4</div>
-      <div class="table-data">0.6</div>
-      <div class="table-data">2264.2</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">1149.4</div>
+      <div class="table-data-normal">0.6</div>
+      <div class="table-data-normal">2264.2</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -8131,39 +9103,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">479.0</div>
-      <div class="table-data"></div>
-      <div class="table-data">1341.8</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">479.0</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">1341.8</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">481.2</div>
-      <div class="table-data">0.5</div>
-      <div class="table-data">1348.0</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">481.2</div>
+      <div class="table-data-normal">0.5</div>
+      <div class="table-data-normal">1348.0</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">481.2</div>
-      <div class="table-data">0.5</div>
-      <div class="table-data">1351.3</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">481.2</div>
+      <div class="table-data-normal">0.5</div>
+      <div class="table-data-normal">1351.3</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">481.5</div>
-      <div class="table-data">0.5</div>
-      <div class="table-data">1348.8</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">481.5</div>
+      <div class="table-data-normal">0.5</div>
+      <div class="table-data-normal">1348.8</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -8734,39 +9706,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">398.0</div>
-      <div class="table-data"></div>
-      <div class="table-data">1782.3</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">398.0</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">1782.3</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">395.3</div>
-      <div class="table-data">-0.7</div>
-      <div class="table-data">1778.8</div>
-      <div class="table-data">-0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">395.3</div>
+      <div class="table-data-normal">-0.7</div>
+      <div class="table-data-normal">1778.8</div>
+      <div class="table-data-normal">-0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">386.5</div>
-      <div class="table-data">-2.9</div>
-      <div class="table-data">1755.8</div>
-      <div class="table-data">-0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">386.5</div>
+      <div class="table-data-normal">-2.9</div>
+      <div class="table-data-normal">1755.8</div>
+      <div class="table-data-normal">-0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">398.9</div>
-      <div class="table-data">0.2</div>
-      <div class="table-data">1781.3</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">1.1e-13</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">398.9</div>
+      <div class="table-data-normal">0.2</div>
+      <div class="table-data-normal">1781.3</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">1.1e-13</div>
     </div>
 
   </div>
@@ -9337,39 +10309,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">955.5</div>
-      <div class="table-data"></div>
-      <div class="table-data">1060.8</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">955.5</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">1060.8</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">963.6</div>
-      <div class="table-data">0.8</div>
-      <div class="table-data">1071.8</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">963.6</div>
+      <div class="table-data-normal">0.8</div>
+      <div class="table-data-normal">1071.8</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">962.5</div>
-      <div class="table-data">0.7</div>
-      <div class="table-data">1070.7</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">962.5</div>
+      <div class="table-data-normal">0.7</div>
+      <div class="table-data-normal">1070.7</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">960.7</div>
-      <div class="table-data">0.5</div>
-      <div class="table-data">1070.8</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">960.7</div>
+      <div class="table-data-normal">0.5</div>
+      <div class="table-data-normal">1070.8</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -9940,39 +10912,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">1706.4</div>
-      <div class="table-data"></div>
-      <div class="table-data">2380.4</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">1706.4</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">2380.4</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">1701.7</div>
-      <div class="table-data">-0.3</div>
-      <div class="table-data">2386.9</div>
-      <div class="table-data">-0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">1701.7</div>
+      <div class="table-data-normal">-0.3</div>
+      <div class="table-data-normal">2386.9</div>
+      <div class="table-data-normal">-0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">1689.3</div>
-      <div class="table-data">-1.0</div>
-      <div class="table-data">2367.2</div>
-      <div class="table-data">-0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">1689.3</div>
+      <div class="table-data-normal">-1.0</div>
+      <div class="table-data-normal">2367.2</div>
+      <div class="table-data-normal">-0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">1718.4</div>
-      <div class="table-data">0.7</div>
-      <div class="table-data">2402.4</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">1718.4</div>
+      <div class="table-data-normal">0.7</div>
+      <div class="table-data-normal">2402.4</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -10543,39 +11515,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">565.8</div>
-      <div class="table-data"></div>
-      <div class="table-data">865.1</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">565.8</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">865.1</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">565.5</div>
-      <div class="table-data">-0.0</div>
-      <div class="table-data">869.7</div>
-      <div class="table-data">-0.00</div>
-      <div class="table-data">0.00097</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">565.5</div>
+      <div class="table-data-normal">-0.0</div>
+      <div class="table-data-normal">869.7</div>
+      <div class="table-data-normal">-0.00</div>
+      <div class="table-data-normal">0.00097</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">570.9</div>
-      <div class="table-data">0.9</div>
-      <div class="table-data">855.0</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">570.9</div>
+      <div class="table-data-normal">0.9</div>
+      <div class="table-data-normal">855.0</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">567.2</div>
-      <div class="table-data">0.3</div>
-      <div class="table-data">868.3</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">567.2</div>
+      <div class="table-data-normal">0.3</div>
+      <div class="table-data-normal">868.3</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -11146,39 +12118,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">231.3</div>
-      <div class="table-data"></div>
-      <div class="table-data">498.4</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">231.3</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">498.4</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">230.5</div>
-      <div class="table-data">-0.3</div>
-      <div class="table-data">496.3</div>
-      <div class="table-data">-0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">230.5</div>
+      <div class="table-data-normal">-0.3</div>
+      <div class="table-data-normal">496.3</div>
+      <div class="table-data-normal">-0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">226.3</div>
-      <div class="table-data">-2.1</div>
-      <div class="table-data">496.8</div>
-      <div class="table-data">-0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">226.3</div>
+      <div class="table-data-normal">-2.1</div>
+      <div class="table-data-normal">496.8</div>
+      <div class="table-data-normal">-0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">234.7</div>
-      <div class="table-data">1.5</div>
-      <div class="table-data">507.4</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">234.7</div>
+      <div class="table-data-normal">1.5</div>
+      <div class="table-data-normal">507.4</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -11749,39 +12721,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">1978.8</div>
-      <div class="table-data"></div>
-      <div class="table-data">3932.9</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">1978.8</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">3932.9</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">1969.4</div>
-      <div class="table-data">-0.5</div>
-      <div class="table-data">3891.7</div>
-      <div class="table-data">-0.00</div>
-      <div class="table-data">8.5e-07</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">1969.4</div>
+      <div class="table-data-normal">-0.5</div>
+      <div class="table-data-normal">3891.7</div>
+      <div class="table-data-normal">-0.00</div>
+      <div class="table-data-normal">8.5e-07</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">1956.5</div>
-      <div class="table-data">-1.1</div>
-      <div class="table-data">3870.9</div>
-      <div class="table-data">-0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">1956.5</div>
+      <div class="table-data-normal">-1.1</div>
+      <div class="table-data-normal">3870.9</div>
+      <div class="table-data-normal">-0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">2049.8</div>
-      <div class="table-data">3.6</div>
-      <div class="table-data">4171.0</div>
-      <div class="table-data">0.02</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">2049.8</div>
+      <div class="table-data-normal">3.6</div>
+      <div class="table-data-normal">4171.0</div>
+      <div class="table-data-normal">0.02</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -12352,39 +13324,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">1330.1</div>
-      <div class="table-data"></div>
-      <div class="table-data">3199.7</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">1330.1</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">3199.7</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">1276.3</div>
-      <div class="table-data">-4.0</div>
-      <div class="table-data">3027.2</div>
-      <div class="table-data">-0.02</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">1276.3</div>
+      <div class="table-data-normal">-4.0</div>
+      <div class="table-data-normal">3027.2</div>
+      <div class="table-data-normal">-0.02</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">1295.3</div>
-      <div class="table-data">-2.6</div>
-      <div class="table-data">3064.5</div>
-      <div class="table-data">-0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">1295.3</div>
+      <div class="table-data-normal">-2.6</div>
+      <div class="table-data-normal">3064.5</div>
+      <div class="table-data-normal">-0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">1394.0</div>
-      <div class="table-data">4.8</div>
-      <div class="table-data">3497.6</div>
-      <div class="table-data">0.02</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">1394.0</div>
+      <div class="table-data-normal">4.8</div>
+      <div class="table-data-normal">3497.6</div>
+      <div class="table-data-normal">0.02</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -12955,39 +13927,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">1142.8</div>
-      <div class="table-data"></div>
-      <div class="table-data">2247.9</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">1142.8</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">2247.9</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">1158.5</div>
-      <div class="table-data">1.4</div>
-      <div class="table-data">2422.7</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">1158.5</div>
+      <div class="table-data-normal">1.4</div>
+      <div class="table-data-normal">2422.7</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">1140.4</div>
-      <div class="table-data">-0.2</div>
-      <div class="table-data">2295.7</div>
-      <div class="table-data">-0.00</div>
-      <div class="table-data">0.058</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">1140.4</div>
+      <div class="table-data-normal">-0.2</div>
+      <div class="table-data-normal">2295.7</div>
+      <div class="table-data-normal">-0.00</div>
+      <div class="table-data-normal">0.058</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">1175.1</div>
-      <div class="table-data">2.8</div>
-      <div class="table-data">2523.5</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">1175.1</div>
+      <div class="table-data-normal">2.8</div>
+      <div class="table-data-normal">2523.5</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -13558,39 +14530,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">496.4</div>
-      <div class="table-data"></div>
-      <div class="table-data">1255.7</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">496.4</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">1255.7</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">470.4</div>
-      <div class="table-data">-5.3</div>
-      <div class="table-data">1220.9</div>
-      <div class="table-data">-0.02</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">470.4</div>
+      <div class="table-data-normal">-5.3</div>
+      <div class="table-data-normal">1220.9</div>
+      <div class="table-data-normal">-0.02</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">488.9</div>
-      <div class="table-data">-1.5</div>
-      <div class="table-data">1295.6</div>
-      <div class="table-data">-0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">488.9</div>
+      <div class="table-data-normal">-1.5</div>
+      <div class="table-data-normal">1295.6</div>
+      <div class="table-data-normal">-0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">520.0</div>
-      <div class="table-data">4.7</div>
-      <div class="table-data">1605.1</div>
-      <div class="table-data">0.02</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">520.0</div>
+      <div class="table-data-normal">4.7</div>
+      <div class="table-data-normal">1605.1</div>
+      <div class="table-data-normal">0.02</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -14161,39 +15133,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">361.7</div>
-      <div class="table-data"></div>
-      <div class="table-data">1356.7</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">361.7</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">1356.7</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">350.8</div>
-      <div class="table-data">-3.0</div>
-      <div class="table-data">1342.6</div>
-      <div class="table-data">-0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">350.8</div>
+      <div class="table-data-normal">-3.0</div>
+      <div class="table-data-normal">1342.6</div>
+      <div class="table-data-normal">-0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">360.6</div>
-      <div class="table-data">-0.3</div>
-      <div class="table-data">1370.1</div>
-      <div class="table-data">-0.00</div>
-      <div class="table-data">0.044</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">360.6</div>
+      <div class="table-data-normal">-0.3</div>
+      <div class="table-data-normal">1370.1</div>
+      <div class="table-data-normal">-0.00</div>
+      <div class="table-data-normal">0.044</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">387.5</div>
-      <div class="table-data">7.1</div>
-      <div class="table-data">1569.7</div>
-      <div class="table-data">0.02</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">387.5</div>
+      <div class="table-data-normal">7.1</div>
+      <div class="table-data-normal">1569.7</div>
+      <div class="table-data-normal">0.02</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -14764,39 +15736,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">970.1</div>
-      <div class="table-data"></div>
-      <div class="table-data">1058.8</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">970.1</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">1058.8</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">952.9</div>
-      <div class="table-data">-1.8</div>
-      <div class="table-data">1027.1</div>
-      <div class="table-data">-0.02</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">952.9</div>
+      <div class="table-data-normal">-1.8</div>
+      <div class="table-data-normal">1027.1</div>
+      <div class="table-data-normal">-0.02</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">959.0</div>
-      <div class="table-data">-1.1</div>
-      <div class="table-data">1052.7</div>
-      <div class="table-data">-0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">959.0</div>
+      <div class="table-data-normal">-1.1</div>
+      <div class="table-data-normal">1052.7</div>
+      <div class="table-data-normal">-0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">982.4</div>
-      <div class="table-data">1.3</div>
-      <div class="table-data">1064.3</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">982.4</div>
+      <div class="table-data-normal">1.3</div>
+      <div class="table-data-normal">1064.3</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -15367,39 +16339,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">1626.9</div>
-      <div class="table-data"></div>
-      <div class="table-data">2343.1</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">1626.9</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">2343.1</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">1624.3</div>
-      <div class="table-data">-0.2</div>
-      <div class="table-data">2304.2</div>
-      <div class="table-data">-0.00</div>
-      <div class="table-data">0.049</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">1624.3</div>
+      <div class="table-data-normal">-0.2</div>
+      <div class="table-data-normal">2304.2</div>
+      <div class="table-data-normal">-0.00</div>
+      <div class="table-data-normal">0.049</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">1630.1</div>
-      <div class="table-data">0.2</div>
-      <div class="table-data">2287.8</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0.012</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">1630.1</div>
+      <div class="table-data-normal">0.2</div>
+      <div class="table-data-normal">2287.8</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0.012</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">1693.6</div>
-      <div class="table-data">4.1</div>
-      <div class="table-data">2324.8</div>
-      <div class="table-data">0.03</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">1693.6</div>
+      <div class="table-data-normal">4.1</div>
+      <div class="table-data-normal">2324.8</div>
+      <div class="table-data-normal">0.03</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -15970,39 +16942,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">531.2</div>
-      <div class="table-data"></div>
-      <div class="table-data">827.3</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">531.2</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">827.3</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">551.0</div>
-      <div class="table-data">3.7</div>
-      <div class="table-data">839.7</div>
-      <div class="table-data">0.02</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">551.0</div>
+      <div class="table-data-normal">3.7</div>
+      <div class="table-data-normal">839.7</div>
+      <div class="table-data-normal">0.02</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">538.6</div>
-      <div class="table-data">1.4</div>
-      <div class="table-data">846.8</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">538.6</div>
+      <div class="table-data-normal">1.4</div>
+      <div class="table-data-normal">846.8</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">545.8</div>
-      <div class="table-data">2.7</div>
-      <div class="table-data">853.0</div>
-      <div class="table-data">0.02</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">545.8</div>
+      <div class="table-data-normal">2.7</div>
+      <div class="table-data-normal">853.0</div>
+      <div class="table-data-normal">0.02</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -16573,39 +17545,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">214.5</div>
-      <div class="table-data"></div>
-      <div class="table-data">470.8</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">214.5</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">470.8</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">215.9</div>
-      <div class="table-data">0.7</div>
-      <div class="table-data">467.7</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">2.9e-08</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">215.9</div>
+      <div class="table-data-normal">0.7</div>
+      <div class="table-data-normal">467.7</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">2.9e-08</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">214.2</div>
-      <div class="table-data">-0.1</div>
-      <div class="table-data">462.4</div>
-      <div class="table-data">-0.00</div>
-      <div class="table-data">0.29</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">214.2</div>
+      <div class="table-data-normal">-0.1</div>
+      <div class="table-data-normal">462.4</div>
+      <div class="table-data-normal">-0.00</div>
+      <div class="table-data-normal">0.29</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">233.9</div>
-      <div class="table-data">9.0</div>
-      <div class="table-data">495.1</div>
-      <div class="table-data">0.04</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">233.9</div>
+      <div class="table-data-normal">9.0</div>
+      <div class="table-data-normal">495.1</div>
+      <div class="table-data-normal">0.04</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -17176,39 +18148,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">1814.5</div>
-      <div class="table-data"></div>
-      <div class="table-data">3186.3</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">1814.5</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">3186.3</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">1830.2</div>
-      <div class="table-data">0.9</div>
-      <div class="table-data">3183.2</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">1830.2</div>
+      <div class="table-data-normal">0.9</div>
+      <div class="table-data-normal">3183.2</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">1849.1</div>
-      <div class="table-data">1.9</div>
-      <div class="table-data">3235.2</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">1849.1</div>
+      <div class="table-data-normal">1.9</div>
+      <div class="table-data-normal">3235.2</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">1822.8</div>
-      <div class="table-data">0.5</div>
-      <div class="table-data">3189.9</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">1822.8</div>
+      <div class="table-data-normal">0.5</div>
+      <div class="table-data-normal">3189.9</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -17779,39 +18751,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">1188.1</div>
-      <div class="table-data"></div>
-      <div class="table-data">2601.0</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">1188.1</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">2601.0</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">1198.1</div>
-      <div class="table-data">0.8</div>
-      <div class="table-data">2590.1</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">1198.1</div>
+      <div class="table-data-normal">0.8</div>
+      <div class="table-data-normal">2590.1</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">1218.1</div>
-      <div class="table-data">2.5</div>
-      <div class="table-data">2655.9</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">1218.1</div>
+      <div class="table-data-normal">2.5</div>
+      <div class="table-data-normal">2655.9</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">1197.0</div>
-      <div class="table-data">0.7</div>
-      <div class="table-data">2597.6</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">1197.0</div>
+      <div class="table-data-normal">0.7</div>
+      <div class="table-data-normal">2597.6</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -18382,39 +19354,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">986.1</div>
-      <div class="table-data"></div>
-      <div class="table-data">1778.9</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">986.1</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">1778.9</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">990.9</div>
-      <div class="table-data">0.5</div>
-      <div class="table-data">1795.0</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">2.2e-16</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">990.9</div>
+      <div class="table-data-normal">0.5</div>
+      <div class="table-data-normal">1795.0</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">2.2e-16</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">994.5</div>
-      <div class="table-data">0.9</div>
-      <div class="table-data">1812.1</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">994.5</div>
+      <div class="table-data-normal">0.9</div>
+      <div class="table-data-normal">1812.1</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">982.7</div>
-      <div class="table-data">-0.3</div>
-      <div class="table-data">1777.0</div>
-      <div class="table-data">-0.00</div>
-      <div class="table-data">6e-09</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">982.7</div>
+      <div class="table-data-normal">-0.3</div>
+      <div class="table-data-normal">1777.0</div>
+      <div class="table-data-normal">-0.00</div>
+      <div class="table-data-normal">6e-09</div>
     </div>
 
   </div>
@@ -18985,39 +19957,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">368.8</div>
-      <div class="table-data"></div>
-      <div class="table-data">962.0</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">368.8</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">962.0</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">370.7</div>
-      <div class="table-data">0.5</div>
-      <div class="table-data">957.7</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">1.8e-09</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">370.7</div>
+      <div class="table-data-normal">0.5</div>
+      <div class="table-data-normal">957.7</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">1.8e-09</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">376.0</div>
-      <div class="table-data">2.0</div>
-      <div class="table-data">1002.8</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">376.0</div>
+      <div class="table-data-normal">2.0</div>
+      <div class="table-data-normal">1002.8</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">369.6</div>
-      <div class="table-data">0.2</div>
-      <div class="table-data">958.0</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0.0093</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">369.6</div>
+      <div class="table-data-normal">0.2</div>
+      <div class="table-data-normal">958.0</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0.0093</div>
     </div>
 
   </div>
@@ -19588,39 +20560,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">269.9</div>
-      <div class="table-data"></div>
-      <div class="table-data">947.4</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">269.9</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">947.4</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">275.0</div>
-      <div class="table-data">1.9</div>
-      <div class="table-data">963.5</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">275.0</div>
+      <div class="table-data-normal">1.9</div>
+      <div class="table-data-normal">963.5</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">279.7</div>
-      <div class="table-data">3.6</div>
-      <div class="table-data">990.6</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">279.7</div>
+      <div class="table-data-normal">3.6</div>
+      <div class="table-data-normal">990.6</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">271.4</div>
-      <div class="table-data">0.6</div>
-      <div class="table-data">952.4</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">1.8e-09</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">271.4</div>
+      <div class="table-data-normal">0.6</div>
+      <div class="table-data-normal">952.4</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">1.8e-09</div>
     </div>
 
   </div>
@@ -20191,39 +21163,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">910.3</div>
-      <div class="table-data"></div>
-      <div class="table-data">995.9</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">910.3</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">995.9</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">918.1</div>
-      <div class="table-data">0.9</div>
-      <div class="table-data">1005.7</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">918.1</div>
+      <div class="table-data-normal">0.9</div>
+      <div class="table-data-normal">1005.7</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">918.9</div>
-      <div class="table-data">0.9</div>
-      <div class="table-data">1004.2</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">918.9</div>
+      <div class="table-data-normal">0.9</div>
+      <div class="table-data-normal">1004.2</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">911.6</div>
-      <div class="table-data">0.1</div>
-      <div class="table-data">999.2</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">0.00056</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">911.6</div>
+      <div class="table-data-normal">0.1</div>
+      <div class="table-data-normal">999.2</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">0.00056</div>
     </div>
 
   </div>
@@ -20794,39 +21766,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">1701.5</div>
-      <div class="table-data"></div>
-      <div class="table-data">2165.0</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">1701.5</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">2165.0</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">1727.8</div>
-      <div class="table-data">1.5</div>
-      <div class="table-data">2180.0</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">1727.8</div>
+      <div class="table-data-normal">1.5</div>
+      <div class="table-data-normal">2180.0</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">1735.2</div>
-      <div class="table-data">2.0</div>
-      <div class="table-data">2188.3</div>
-      <div class="table-data">0.02</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">1735.2</div>
+      <div class="table-data-normal">2.0</div>
+      <div class="table-data-normal">2188.3</div>
+      <div class="table-data-normal">0.02</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">1718.3</div>
-      <div class="table-data">1.0</div>
-      <div class="table-data">2175.3</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">1718.3</div>
+      <div class="table-data-normal">1.0</div>
+      <div class="table-data-normal">2175.3</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -21397,39 +22369,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">571.0</div>
-      <div class="table-data"></div>
-      <div class="table-data">825.7</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">571.0</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">825.7</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">578.0</div>
-      <div class="table-data">1.2</div>
-      <div class="table-data">835.2</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">578.0</div>
+      <div class="table-data-normal">1.2</div>
+      <div class="table-data-normal">835.2</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">577.1</div>
-      <div class="table-data">1.1</div>
-      <div class="table-data">831.2</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">577.1</div>
+      <div class="table-data-normal">1.1</div>
+      <div class="table-data-normal">831.2</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">572.6</div>
-      <div class="table-data">0.3</div>
-      <div class="table-data">823.0</div>
-      <div class="table-data">0.00</div>
-      <div class="table-data">1.4e-09</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">572.6</div>
+      <div class="table-data-normal">0.3</div>
+      <div class="table-data-normal">823.0</div>
+      <div class="table-data-normal">0.00</div>
+      <div class="table-data-normal">1.4e-09</div>
     </div>
 
   </div>
@@ -22000,39 +22972,39 @@ div.table {
   <div class="table-content">
 
     <div class="table-row">
-      <div class="table-data">control</div>
-      <div class="table-data">209.8</div>
-      <div class="table-data"></div>
-      <div class="table-data">422.5</div>
-      <div class="table-data"></div>
-      <div class="table-data"></div>
+      <div class="table-data-normal">control</div>
+      <div class="table-data-normal">209.8</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal">422.5</div>
+      <div class="table-data-normal"></div>
+      <div class="table-data-normal"></div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-a</div>
-      <div class="table-data">215.9</div>
-      <div class="table-data">2.9</div>
-      <div class="table-data">429.3</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-a</div>
+      <div class="table-data-normal">215.9</div>
+      <div class="table-data-normal">2.9</div>
+      <div class="table-data-normal">429.3</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-b</div>
-      <div class="table-data">219.0</div>
-      <div class="table-data">4.4</div>
-      <div class="table-data">439.5</div>
-      <div class="table-data">0.02</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-b</div>
+      <div class="table-data-normal">219.0</div>
+      <div class="table-data-normal">4.4</div>
+      <div class="table-data-normal">439.5</div>
+      <div class="table-data-normal">0.02</div>
+      <div class="table-data-normal">0</div>
     </div>
 
     <div class="table-row">
-      <div class="table-data">treatment-c</div>
-      <div class="table-data">213.2</div>
-      <div class="table-data">1.6</div>
-      <div class="table-data">428.5</div>
-      <div class="table-data">0.01</div>
-      <div class="table-data">0</div>
+      <div class="table-data-normal">treatment-c</div>
+      <div class="table-data-normal">213.2</div>
+      <div class="table-data-normal">1.6</div>
+      <div class="table-data-normal">428.5</div>
+      <div class="table-data-normal">0.01</div>
+      <div class="table-data-normal">0</div>
     </div>
 
   </div>
@@ -22564,11 +23536,290 @@ div.table {
   </h1>
   <div class="content">
   <code><pre>
-  
+  WITH buckets as (
+SELECT
+    i as bucket
+FROM
+    UNNEST(generate_array(0, 30000)) i
+),
+eventdata as (
+SELECT
+  normalized_os as segment,
+  mozfun.map.get_key(ping_info.experiments, "performance-metric-calibration").branch as branch,
+  SAFE_CAST((SELECT value FROM UNNEST(event.extra) WHERE key = 'fcp_time') AS int) AS fcp_time,
+  SAFE_CAST((SELECT value FROM UNNEST(event.extra) WHERE key = 'load_time') AS int) AS load_time,
+  SAFE_CAST((SELECT value FROM UNNEST(event.extra) WHERE key = 'response_time') AS int) AS response_time,
+  SAFE_CAST((SELECT value FROM UNNEST(event.extra) WHERE key = 'js_exec_time') AS int) AS js_exec_time,
+FROM
+  `moz-fx-data-shared-prod.firefox_desktop.pageload`
+CROSS JOIN
+  UNNEST(events) AS event
+WHERE
+  normalized_channel = "release"
+  AND DATE(submission_timestamp) >= DATE('2023-10-31')
+  AND DATE(submission_timestamp) <= DATE('2023-11-21')  
+  AND mozfun.map.get_key(ping_info.experiments, "performance-metric-calibration").branch is not null
+)
+SELECT
+  segment,
+  branch,
+  bucket,
+    COUNTIF(fcp_time = bucket) as fcp_time_counts,
+    COUNTIF(load_time = bucket) as load_time_counts,
+    COUNTIF(response_time = bucket) as response_time_counts,
+    COUNTIF(js_exec_time = bucket) as js_exec_time_counts,
+FROM
+  eventdata, buckets
+WHERE
+  load_time > 0
+GROUP BY
+  segment, branch, bucket
+ORDER BY
+  segment, branch, bucket
   </pre></code>
   </div>
   </section>
 
+
+  <section class="accordion">
+    <input type="checkbox" name="collapse" id="payload.processes.content.histograms.perf_page_load_time_ms-query">
+  <h1 class="handle">
+    <label for="payload.processes.content.histograms.perf_page_load_time_ms-query">Histogram: payload.processes.content.histograms.perf_page_load_time_ms</label>
+  </h1>
+  <div class="content">
+  <code><pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "performance-metric-calibration").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.perf_page_load_time_ms, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main`
+    WHERE
+        DATE(submission_timestamp) >= DATE('2023-10-31')
+        AND DATE(submission_timestamp) <= DATE('2023-11-21')
+        AND normalized_channel = "release"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.perf_page_load_time_ms is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count > 0
+        AND mozfun.map.get_key(environment.experiments, "performance-metric-calibration").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre></code>
+  </div>
+  </section>
+
+  <section class="accordion">
+    <input type="checkbox" name="collapse" id="payload.processes.content.histograms.perf_page_load_time_from_responsestart_ms-query">
+  <h1 class="handle">
+    <label for="payload.processes.content.histograms.perf_page_load_time_from_responsestart_ms-query">Histogram: payload.processes.content.histograms.perf_page_load_time_from_responsestart_ms</label>
+  </h1>
+  <div class="content">
+  <code><pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "performance-metric-calibration").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.perf_page_load_time_from_responsestart_ms, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main`
+    WHERE
+        DATE(submission_timestamp) >= DATE('2023-10-31')
+        AND DATE(submission_timestamp) <= DATE('2023-11-21')
+        AND normalized_channel = "release"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.perf_page_load_time_from_responsestart_ms is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count > 0
+        AND mozfun.map.get_key(environment.experiments, "performance-metric-calibration").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre></code>
+  </div>
+  </section>
+
+  <section class="accordion">
+    <input type="checkbox" name="collapse" id="payload.processes.content.histograms.perf_first_contentful_paint_ms-query">
+  <h1 class="handle">
+    <label for="payload.processes.content.histograms.perf_first_contentful_paint_ms-query">Histogram: payload.processes.content.histograms.perf_first_contentful_paint_ms</label>
+  </h1>
+  <div class="content">
+  <code><pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "performance-metric-calibration").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.perf_first_contentful_paint_ms, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main`
+    WHERE
+        DATE(submission_timestamp) >= DATE('2023-10-31')
+        AND DATE(submission_timestamp) <= DATE('2023-11-21')
+        AND normalized_channel = "release"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.perf_first_contentful_paint_ms is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count > 0
+        AND mozfun.map.get_key(environment.experiments, "performance-metric-calibration").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre></code>
+  </div>
+  </section>
+
+  <section class="accordion">
+    <input type="checkbox" name="collapse" id="payload.processes.content.histograms.perf_first_contentful_paint_from_responsestart_ms-query">
+  <h1 class="handle">
+    <label for="payload.processes.content.histograms.perf_first_contentful_paint_from_responsestart_ms-query">Histogram: payload.processes.content.histograms.perf_first_contentful_paint_from_responsestart_ms</label>
+  </h1>
+  <div class="content">
+  <code><pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "performance-metric-calibration").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.perf_first_contentful_paint_from_responsestart_ms, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main`
+    WHERE
+        DATE(submission_timestamp) >= DATE('2023-10-31')
+        AND DATE(submission_timestamp) <= DATE('2023-11-21')
+        AND normalized_channel = "release"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.perf_first_contentful_paint_from_responsestart_ms is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count > 0
+        AND mozfun.map.get_key(environment.experiments, "performance-metric-calibration").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre></code>
+  </div>
+  </section>
+
+  <section class="accordion">
+    <input type="checkbox" name="collapse" id="payload.processes.content.histograms.js_pageload_execution_ms-query">
+  <h1 class="handle">
+    <label for="payload.processes.content.histograms.js_pageload_execution_ms-query">Histogram: payload.processes.content.histograms.js_pageload_execution_ms</label>
+  </h1>
+  <div class="content">
+  <code><pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "performance-metric-calibration").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.js_pageload_execution_ms, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main`
+    WHERE
+        DATE(submission_timestamp) >= DATE('2023-10-31')
+        AND DATE(submission_timestamp) <= DATE('2023-11-21')
+        AND normalized_channel = "release"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.js_pageload_execution_ms is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count > 0
+        AND mozfun.map.get_key(environment.experiments, "performance-metric-calibration").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre></code>
+  </div>
+  </section>
 
 </div>
 
