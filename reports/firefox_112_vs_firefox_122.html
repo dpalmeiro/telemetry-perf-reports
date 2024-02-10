@@ -132,8 +132,11 @@ div.subtitle{
   width: 140%;
   margin-bottom: 10px;
   margin-top: 20px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
+  text-align: center;
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
 div.cell {
     margin-left: 35%;
@@ -144,6 +147,9 @@ div.cell {
     position: relative;
 }
 div.chart {
+  width: 100%;
+  height: 100%;
+  position: relative;
   margin-bottom: 30px;
   color: #000000;
 }
@@ -258,6 +264,12 @@ div.chart {
     text-align:center;
     padding:($half-spacing-unit * 1.5) 10;
     font-size: 14px;
+        a {
+          font-size: 14px;
+          padding-top: 13px;
+          padding-bottom: 13px;
+          color: #000000;
+        }
 }
 .summary-table thead tr {
     background-color: gray;
@@ -600,10 +612,10 @@ div.chart {
      <td class="desc-header">
       Branches
      </td>
-     <td>
+     <td style="border-top-style: solid;">
       Firefox112
      </td>
-     <td>
+     <td style="border-top-style: solid;">
       Firefox122
      </td>
     </tr>
@@ -678,7 +690,9 @@ div.chart {
    <tbody>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      perf_page_load_time_ms
+      <a href="#All-perf_page_load_time_ms-mean">
+       perf_page_load_time_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -698,7 +712,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      perf_first_contentful_paint_ms
+      <a href="#All-perf_first_contentful_paint_ms-mean">
+       perf_first_contentful_paint_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -718,7 +734,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      js_pageload_execution_ms
+      <a href="#All-js_pageload_execution_ms-mean">
+       js_pageload_execution_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -738,7 +756,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: fcp_time
+      <a href="#All-fcp_time-mean">
+       pageload event: fcp_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -758,7 +778,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: load_time
+      <a href="#All-load_time-mean">
+       pageload event: load_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -778,7 +800,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: response_time
+      <a href="#All-response_time-mean">
+       pageload event: response_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -798,7 +822,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: js_exec_time
+      <a href="#All-js_exec_time-mean">
+       pageload event: js_exec_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -856,7 +882,9 @@ div.chart {
    <tbody>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      perf_page_load_time_ms
+      <a href="#Windows-perf_page_load_time_ms-mean">
+       perf_page_load_time_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -876,7 +904,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      perf_first_contentful_paint_ms
+      <a href="#Windows-perf_first_contentful_paint_ms-mean">
+       perf_first_contentful_paint_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -896,7 +926,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      js_pageload_execution_ms
+      <a href="#Windows-js_pageload_execution_ms-mean">
+       js_pageload_execution_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -916,7 +948,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: fcp_time
+      <a href="#Windows-fcp_time-mean">
+       pageload event: fcp_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -936,7 +970,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: load_time
+      <a href="#Windows-load_time-mean">
+       pageload event: load_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -956,7 +992,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: response_time
+      <a href="#Windows-response_time-mean">
+       pageload event: response_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -976,7 +1014,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: js_exec_time
+      <a href="#Windows-js_exec_time-mean">
+       pageload event: js_exec_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -1034,7 +1074,9 @@ div.chart {
    <tbody>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      perf_page_load_time_ms
+      <a href="#Linux-perf_page_load_time_ms-mean">
+       perf_page_load_time_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1054,7 +1096,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      perf_first_contentful_paint_ms
+      <a href="#Linux-perf_first_contentful_paint_ms-mean">
+       perf_first_contentful_paint_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1074,7 +1118,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      js_pageload_execution_ms
+      <a href="#Linux-js_pageload_execution_ms-mean">
+       js_pageload_execution_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1094,7 +1140,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: fcp_time
+      <a href="#Linux-fcp_time-mean">
+       pageload event: fcp_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1114,7 +1162,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: load_time
+      <a href="#Linux-load_time-mean">
+       pageload event: load_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1134,7 +1184,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: response_time
+      <a href="#Linux-response_time-mean">
+       pageload event: response_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1154,7 +1206,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: js_exec_time
+      <a href="#Linux-js_exec_time-mean">
+       pageload event: js_exec_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1212,7 +1266,9 @@ div.chart {
    <tbody>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      perf_page_load_time_ms
+      <a href="#Mac-perf_page_load_time_ms-mean">
+       perf_page_load_time_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -1232,7 +1288,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      perf_first_contentful_paint_ms
+      <a href="#Mac-perf_first_contentful_paint_ms-mean">
+       perf_first_contentful_paint_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1252,7 +1310,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      js_pageload_execution_ms
+      <a href="#Mac-js_pageload_execution_ms-mean">
+       js_pageload_execution_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -1272,7 +1332,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: fcp_time
+      <a href="#Mac-fcp_time-mean">
+       pageload event: fcp_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -1292,7 +1354,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: load_time
+      <a href="#Mac-load_time-mean">
+       pageload event: load_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -1312,7 +1376,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: response_time
+      <a href="#Mac-response_time-mean">
+       pageload event: response_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1332,7 +1398,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: js_exec_time
+      <a href="#Mac-js_exec_time-mean">
+       pageload event: js_exec_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -1358,7 +1426,7 @@ div.chart {
    (All) - perf_page_load_time_ms
   </div>
   <div class="chart">
-   <canvas id="All-perf_page_load_time_ms-mean">
+   <canvas height="250px" id="All-perf_page_load_time_ms-mean">
    </canvas>
   </div>
   <script>
@@ -1392,6 +1460,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -1404,7 +1474,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -1526,6 +1596,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -1604,6 +1675,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -1733,6 +1805,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -1835,6 +1908,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -1916,7 +1990,7 @@ div.chart {
    (All) - perf_first_contentful_paint_ms
   </div>
   <div class="chart">
-   <canvas id="All-perf_first_contentful_paint_ms-mean">
+   <canvas height="250px" id="All-perf_first_contentful_paint_ms-mean">
    </canvas>
   </div>
   <script>
@@ -1950,6 +2024,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -1962,7 +2038,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -2084,6 +2160,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -2162,6 +2239,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -2291,6 +2369,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -2393,6 +2472,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -2474,7 +2554,7 @@ div.chart {
    (All) - js_pageload_execution_ms
   </div>
   <div class="chart">
-   <canvas id="All-js_pageload_execution_ms-mean">
+   <canvas height="250px" id="All-js_pageload_execution_ms-mean">
    </canvas>
   </div>
   <script>
@@ -2508,6 +2588,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -2520,7 +2602,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -2642,6 +2724,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -2720,6 +2803,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -2849,6 +2933,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -2951,6 +3036,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -3032,7 +3118,7 @@ div.chart {
    (All) - fcp_time
   </div>
   <div class="chart">
-   <canvas id="All-fcp_time-mean">
+   <canvas height="250px" id="All-fcp_time-mean">
    </canvas>
   </div>
   <script>
@@ -3066,6 +3152,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -3078,7 +3166,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -3200,6 +3288,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -3278,6 +3367,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -3407,6 +3497,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -3509,6 +3600,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -3590,7 +3682,7 @@ div.chart {
    (All) - load_time
   </div>
   <div class="chart">
-   <canvas id="All-load_time-mean">
+   <canvas height="250px" id="All-load_time-mean">
    </canvas>
   </div>
   <script>
@@ -3624,6 +3716,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -3636,7 +3730,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -3758,6 +3852,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -3836,6 +3931,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -3965,6 +4061,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -4067,6 +4164,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -4148,7 +4246,7 @@ div.chart {
    (All) - response_time
   </div>
   <div class="chart">
-   <canvas id="All-response_time-mean">
+   <canvas height="250px" id="All-response_time-mean">
    </canvas>
   </div>
   <script>
@@ -4182,6 +4280,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -4194,7 +4294,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -4316,6 +4416,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -4394,6 +4495,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -4523,6 +4625,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -4625,6 +4728,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -4706,7 +4810,7 @@ div.chart {
    (All) - js_exec_time
   </div>
   <div class="chart">
-   <canvas id="All-js_exec_time-mean">
+   <canvas height="250px" id="All-js_exec_time-mean">
    </canvas>
   </div>
   <script>
@@ -4740,6 +4844,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -4752,7 +4858,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -4874,6 +4980,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -4952,6 +5059,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -5081,6 +5189,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -5183,6 +5292,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -5264,7 +5374,7 @@ div.chart {
    (Windows) - perf_page_load_time_ms
   </div>
   <div class="chart">
-   <canvas id="Windows-perf_page_load_time_ms-mean">
+   <canvas height="250px" id="Windows-perf_page_load_time_ms-mean">
    </canvas>
   </div>
   <script>
@@ -5298,6 +5408,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -5310,7 +5422,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -5432,6 +5544,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -5510,6 +5623,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -5639,6 +5753,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -5741,6 +5856,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -5822,7 +5938,7 @@ div.chart {
    (Windows) - perf_first_contentful_paint_ms
   </div>
   <div class="chart">
-   <canvas id="Windows-perf_first_contentful_paint_ms-mean">
+   <canvas height="250px" id="Windows-perf_first_contentful_paint_ms-mean">
    </canvas>
   </div>
   <script>
@@ -5856,6 +5972,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -5868,7 +5986,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -5990,6 +6108,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -6068,6 +6187,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -6197,6 +6317,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -6299,6 +6420,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -6380,7 +6502,7 @@ div.chart {
    (Windows) - js_pageload_execution_ms
   </div>
   <div class="chart">
-   <canvas id="Windows-js_pageload_execution_ms-mean">
+   <canvas height="250px" id="Windows-js_pageload_execution_ms-mean">
    </canvas>
   </div>
   <script>
@@ -6414,6 +6536,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -6426,7 +6550,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -6548,6 +6672,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -6626,6 +6751,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -6755,6 +6881,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -6857,6 +6984,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -6938,7 +7066,7 @@ div.chart {
    (Windows) - fcp_time
   </div>
   <div class="chart">
-   <canvas id="Windows-fcp_time-mean">
+   <canvas height="250px" id="Windows-fcp_time-mean">
    </canvas>
   </div>
   <script>
@@ -6972,6 +7100,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -6984,7 +7114,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -7106,6 +7236,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -7184,6 +7315,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -7313,6 +7445,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -7415,6 +7548,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -7496,7 +7630,7 @@ div.chart {
    (Windows) - load_time
   </div>
   <div class="chart">
-   <canvas id="Windows-load_time-mean">
+   <canvas height="250px" id="Windows-load_time-mean">
    </canvas>
   </div>
   <script>
@@ -7530,6 +7664,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -7542,7 +7678,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -7664,6 +7800,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -7742,6 +7879,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -7871,6 +8009,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -7973,6 +8112,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -8054,7 +8194,7 @@ div.chart {
    (Windows) - response_time
   </div>
   <div class="chart">
-   <canvas id="Windows-response_time-mean">
+   <canvas height="250px" id="Windows-response_time-mean">
    </canvas>
   </div>
   <script>
@@ -8088,6 +8228,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -8100,7 +8242,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -8222,6 +8364,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -8300,6 +8443,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -8429,6 +8573,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -8531,6 +8676,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -8612,7 +8758,7 @@ div.chart {
    (Windows) - js_exec_time
   </div>
   <div class="chart">
-   <canvas id="Windows-js_exec_time-mean">
+   <canvas height="250px" id="Windows-js_exec_time-mean">
    </canvas>
   </div>
   <script>
@@ -8646,6 +8792,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -8658,7 +8806,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -8780,6 +8928,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -8858,6 +9007,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -8987,6 +9137,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -9089,6 +9240,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -9170,7 +9322,7 @@ div.chart {
    (Linux) - perf_page_load_time_ms
   </div>
   <div class="chart">
-   <canvas id="Linux-perf_page_load_time_ms-mean">
+   <canvas height="250px" id="Linux-perf_page_load_time_ms-mean">
    </canvas>
   </div>
   <script>
@@ -9204,6 +9356,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -9216,7 +9370,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -9338,6 +9492,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -9416,6 +9571,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -9545,6 +9701,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -9647,6 +9804,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -9728,7 +9886,7 @@ div.chart {
    (Linux) - perf_first_contentful_paint_ms
   </div>
   <div class="chart">
-   <canvas id="Linux-perf_first_contentful_paint_ms-mean">
+   <canvas height="250px" id="Linux-perf_first_contentful_paint_ms-mean">
    </canvas>
   </div>
   <script>
@@ -9762,6 +9920,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -9774,7 +9934,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -9896,6 +10056,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -9974,6 +10135,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -10103,6 +10265,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -10205,6 +10368,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -10286,7 +10450,7 @@ div.chart {
    (Linux) - js_pageload_execution_ms
   </div>
   <div class="chart">
-   <canvas id="Linux-js_pageload_execution_ms-mean">
+   <canvas height="250px" id="Linux-js_pageload_execution_ms-mean">
    </canvas>
   </div>
   <script>
@@ -10320,6 +10484,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -10332,7 +10498,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -10454,6 +10620,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -10532,6 +10699,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -10661,6 +10829,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -10763,6 +10932,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -10844,7 +11014,7 @@ div.chart {
    (Linux) - fcp_time
   </div>
   <div class="chart">
-   <canvas id="Linux-fcp_time-mean">
+   <canvas height="250px" id="Linux-fcp_time-mean">
    </canvas>
   </div>
   <script>
@@ -10878,6 +11048,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -10890,7 +11062,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -11012,6 +11184,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -11090,6 +11263,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -11219,6 +11393,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -11321,6 +11496,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -11402,7 +11578,7 @@ div.chart {
    (Linux) - load_time
   </div>
   <div class="chart">
-   <canvas id="Linux-load_time-mean">
+   <canvas height="250px" id="Linux-load_time-mean">
    </canvas>
   </div>
   <script>
@@ -11436,6 +11612,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -11448,7 +11626,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -11570,6 +11748,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -11648,6 +11827,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -11777,6 +11957,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -11879,6 +12060,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -11960,7 +12142,7 @@ div.chart {
    (Linux) - response_time
   </div>
   <div class="chart">
-   <canvas id="Linux-response_time-mean">
+   <canvas height="250px" id="Linux-response_time-mean">
    </canvas>
   </div>
   <script>
@@ -11994,6 +12176,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -12006,7 +12190,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -12128,6 +12312,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -12206,6 +12391,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -12335,6 +12521,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -12437,6 +12624,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -12518,7 +12706,7 @@ div.chart {
    (Linux) - js_exec_time
   </div>
   <div class="chart">
-   <canvas id="Linux-js_exec_time-mean">
+   <canvas height="250px" id="Linux-js_exec_time-mean">
    </canvas>
   </div>
   <script>
@@ -12552,6 +12740,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -12564,7 +12754,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -12686,6 +12876,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -12764,6 +12955,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -12893,6 +13085,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -12995,6 +13188,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -13076,7 +13270,7 @@ div.chart {
    (Mac) - perf_page_load_time_ms
   </div>
   <div class="chart">
-   <canvas id="Mac-perf_page_load_time_ms-mean">
+   <canvas height="250px" id="Mac-perf_page_load_time_ms-mean">
    </canvas>
   </div>
   <script>
@@ -13110,6 +13304,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -13122,7 +13318,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -13244,6 +13440,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -13322,6 +13519,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -13451,6 +13649,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -13553,6 +13752,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -13634,7 +13834,7 @@ div.chart {
    (Mac) - perf_first_contentful_paint_ms
   </div>
   <div class="chart">
-   <canvas id="Mac-perf_first_contentful_paint_ms-mean">
+   <canvas height="250px" id="Mac-perf_first_contentful_paint_ms-mean">
    </canvas>
   </div>
   <script>
@@ -13668,6 +13868,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -13680,7 +13882,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -13802,6 +14004,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -13880,6 +14083,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -14009,6 +14213,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -14111,6 +14316,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -14192,7 +14398,7 @@ div.chart {
    (Mac) - js_pageload_execution_ms
   </div>
   <div class="chart">
-   <canvas id="Mac-js_pageload_execution_ms-mean">
+   <canvas height="250px" id="Mac-js_pageload_execution_ms-mean">
    </canvas>
   </div>
   <script>
@@ -14226,6 +14432,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -14238,7 +14446,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -14360,6 +14568,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -14438,6 +14647,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -14567,6 +14777,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -14669,6 +14880,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -14750,7 +14962,7 @@ div.chart {
    (Mac) - fcp_time
   </div>
   <div class="chart">
-   <canvas id="Mac-fcp_time-mean">
+   <canvas height="250px" id="Mac-fcp_time-mean">
    </canvas>
   </div>
   <script>
@@ -14784,6 +14996,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -14796,7 +15010,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -14918,6 +15132,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -14996,6 +15211,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -15125,6 +15341,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -15227,6 +15444,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -15308,7 +15526,7 @@ div.chart {
    (Mac) - load_time
   </div>
   <div class="chart">
-   <canvas id="Mac-load_time-mean">
+   <canvas height="250px" id="Mac-load_time-mean">
    </canvas>
   </div>
   <script>
@@ -15342,6 +15560,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -15354,7 +15574,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -15476,6 +15696,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -15554,6 +15775,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -15683,6 +15905,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -15785,6 +16008,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -15866,7 +16090,7 @@ div.chart {
    (Mac) - response_time
   </div>
   <div class="chart">
-   <canvas id="Mac-response_time-mean">
+   <canvas height="250px" id="Mac-response_time-mean">
    </canvas>
   </div>
   <script>
@@ -15900,6 +16124,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -15912,7 +16138,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -16034,6 +16260,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -16112,6 +16339,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -16241,6 +16469,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -16343,6 +16572,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -16424,7 +16654,7 @@ div.chart {
    (Mac) - js_exec_time
   </div>
   <div class="chart">
-   <canvas id="Mac-js_exec_time-mean">
+   <canvas height="250px" id="Mac-js_exec_time-mean">
    </canvas>
   </div>
   <script>
@@ -16458,6 +16688,8 @@ div.chart {
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
@@ -16470,7 +16702,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -16592,6 +16824,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -16670,6 +16903,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -16799,6 +17033,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -16901,6 +17136,7 @@ div.chart {
     type: 'line',
     data,
     options: {
+      animation: false,
       responsive: true,
       plugins: {
           zoom: zoomOptions,
@@ -17045,10 +17281,23 @@ div.chart {
    </div>
   </section>
   <section class="accordion">
-   <input id="events_query" name="collapse" type="checkbox"/>
+   <input id="-query" name="collapse" type="checkbox"/>
    <h1 class="handle">
-    <label for="events_query">
-     Pageload Events Query
+    <label for="-query">
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="-query">
     </label>
    </h1>
    <div class="content">
