@@ -68,7 +68,7 @@ FROM
         SELECT * FROM histogram_{{segment.name}}
   {% endif %}
 {% endfor %}
-    ) s
+    )
 ORDER BY 
     segment, branch, bucket
 {% endautoescape %}

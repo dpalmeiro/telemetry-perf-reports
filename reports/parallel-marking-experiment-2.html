@@ -22,7 +22,6 @@ body {
 .tooltip {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
 }
 
 /* Tooltip text */
@@ -133,8 +132,11 @@ div.subtitle{
   width: 140%;
   margin-bottom: 10px;
   margin-top: 20px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
+  text-align: center;
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
 div.cell {
     margin-left: 35%;
@@ -145,6 +147,9 @@ div.cell {
     position: relative;
 }
 div.chart {
+  width: 100%;
+  height: 100%;
+  position: relative;
   margin-bottom: 30px;
   color: #000000;
 }
@@ -222,14 +227,49 @@ div.chart {
     }
   }
 }
+.desc-table {
+    margin-left: -10%;
+    width:120%;
+    border: double;
+    border-color: black;
+    text-align:center;
+    padding:($half-spacing-unit * 1.5) 10;
+    font-size: 14px;
+}
+.desc-table td {
+    padding: 0;
+    border-bottom-style: hidden;
+    border-top-style: hidden;
+    padding: 5px;
+}
+.desc-table tr {
+    border-bottom: 1px solid #dddddd;
+    border-bottom-style: hidden;
+    border-top-style: hidden;
+}
+.desc-header {
+    background-color: gray;
+    width:30%;
+    height:14px;
+    color: #ffffff;
+    text-align:center;
+    padding: 5px;
+    font-weight: bold;
+}
 .summary-table {
     margin-left: -10%;
     width:120%;
     border: double;
     border-color: black;
     text-align:center;
-    padding:($half-spacing-unit * 1.5) 0;
+    padding:($half-spacing-unit * 1.5) 10;
     font-size: 14px;
+        a {
+          font-size: 14px;
+          padding-top: 13px;
+          padding-bottom: 13px;
+          color: #000000;
+        }
 }
 .summary-table thead tr {
     background-color: gray;
@@ -237,6 +277,7 @@ div.chart {
     height:14px;
     color: #ffffff;
     text-align:center;
+    padding: 15px;
 }
 .summary-table th,
 .summary-table td {
@@ -245,6 +286,7 @@ div.chart {
     border-right-style: hidden;
     border-bottom-style: hidden;
     border-top-style: hidden;
+    padding: 15px;
 }
 .summary-table tbody tr {
     border-bottom: 1px solid #dddddd;
@@ -636,17 +678,69 @@ div.chart {
   <div class="title">
    Summary:
   </div>
+  <table border="1" cellpadding="0" cellspacing="0" class="desc-table">
+   <tbody>
+    <tr>
+     <td class="desc-header">
+      Experiment
+     </td>
+     <td colspan="2" style="border-bottom-style: solid;">
+      parallel-marking-experiment-2
+     </td>
+    </tr>
+    <tr>
+     <td class="desc-header">
+      StartDate
+     </td>
+     <td colspan="2" style="border-bottom-style: solid;">
+      2023-12-23
+     </td>
+    </tr>
+    <tr>
+     <td class="desc-header">
+      EndDate
+     </td>
+     <td colspan="2" style="border-bottom-style: solid;">
+      2024-01-08
+     </td>
+    </tr>
+    <tr>
+     <td class="desc-header">
+      Channel
+     </td>
+     <td colspan="2" style="border-bottom-style: solid;">
+      nightly
+     </td>
+    </tr>
+    <tr>
+     <td class="desc-header">
+      Branches
+     </td>
+     <td>
+      disabled
+     </td>
+     <td>
+      enabled
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="subtitle">
    All
   </div>
   <table border="1" cellpadding="0" cellspacing="0" class="summary-table">
    <thead>
     <tr>
-     <th>
+     <th style="border-right-style: solid;">
       metric
      </th>
      <th>
-      branch
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
      </th>
      <th>
       <div class="tooltip">
@@ -669,7 +763,9 @@ div.chart {
    <tbody>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      perf_page_load_time_ms
+      <a href="#All-perf_page_load_time_ms-mean">
+       perf_page_load_time_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -689,7 +785,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      perf_first_contentful_paint_ms
+      <a href="#All-perf_first_contentful_paint_ms-mean">
+       perf_first_contentful_paint_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -709,7 +807,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      gc_ms
+      <a href="#All-gc_ms-mean">
+       gc_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -729,7 +829,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      gc_max_pause_ms_2
+      <a href="#All-gc_max_pause_ms_2-mean">
+       gc_max_pause_ms_2
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -749,7 +851,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      gc_mark_ms
+      <a href="#All-gc_mark_ms-mean">
+       gc_mark_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -769,7 +873,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      gc_slice_during_idle
+      <a href="#All-gc_slice_during_idle-mean">
+       gc_slice_during_idle
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -789,7 +895,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      gc_sweep_ms
+      <a href="#All-gc_sweep_ms-mean">
+       gc_sweep_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -809,7 +917,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: fcp_time
+      <a href="#All-fcp_time-mean">
+       pageload event: fcp_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -829,7 +939,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: lcp_time
+      <a href="#All-lcp_time-mean">
+       pageload event: lcp_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -849,7 +961,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: load_time
+      <a href="#All-load_time-mean">
+       pageload event: load_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -869,7 +983,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: js_exec_time
+      <a href="#All-js_exec_time-mean">
+       pageload event: js_exec_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -895,11 +1011,16 @@ div.chart {
   <table border="1" cellpadding="0" cellspacing="0" class="summary-table">
    <thead>
     <tr>
-     <th>
+     <th style="border-right-style: solid;">
       metric
      </th>
      <th>
-      branch
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
      </th>
      <th>
       <div class="tooltip">
@@ -922,7 +1043,9 @@ div.chart {
    <tbody>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      perf_page_load_time_ms
+      <a href="#Windows-perf_page_load_time_ms-mean">
+       perf_page_load_time_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -942,7 +1065,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      perf_first_contentful_paint_ms
+      <a href="#Windows-perf_first_contentful_paint_ms-mean">
+       perf_first_contentful_paint_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -962,7 +1087,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      gc_ms
+      <a href="#Windows-gc_ms-mean">
+       gc_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -982,7 +1109,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      gc_max_pause_ms_2
+      <a href="#Windows-gc_max_pause_ms_2-mean">
+       gc_max_pause_ms_2
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1002,7 +1131,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      gc_mark_ms
+      <a href="#Windows-gc_mark_ms-mean">
+       gc_mark_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -1022,7 +1153,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      gc_slice_during_idle
+      <a href="#Windows-gc_slice_during_idle-mean">
+       gc_slice_during_idle
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1042,7 +1175,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      gc_sweep_ms
+      <a href="#Windows-gc_sweep_ms-mean">
+       gc_sweep_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1062,7 +1197,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: fcp_time
+      <a href="#Windows-fcp_time-mean">
+       pageload event: fcp_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1082,7 +1219,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: lcp_time
+      <a href="#Windows-lcp_time-mean">
+       pageload event: lcp_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1102,7 +1241,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: load_time
+      <a href="#Windows-load_time-mean">
+       pageload event: load_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -1122,7 +1263,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: js_exec_time
+      <a href="#Windows-js_exec_time-mean">
+       pageload event: js_exec_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1148,11 +1291,16 @@ div.chart {
   <table border="1" cellpadding="0" cellspacing="0" class="summary-table">
    <thead>
     <tr>
-     <th>
+     <th style="border-right-style: solid;">
       metric
      </th>
      <th>
-      branch
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
      </th>
      <th>
       <div class="tooltip">
@@ -1175,7 +1323,9 @@ div.chart {
    <tbody>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      perf_page_load_time_ms
+      <a href="#Linux-perf_page_load_time_ms-mean">
+       perf_page_load_time_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1195,7 +1345,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      perf_first_contentful_paint_ms
+      <a href="#Linux-perf_first_contentful_paint_ms-mean">
+       perf_first_contentful_paint_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1215,7 +1367,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      gc_ms
+      <a href="#Linux-gc_ms-mean">
+       gc_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -1235,7 +1389,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      gc_max_pause_ms_2
+      <a href="#Linux-gc_max_pause_ms_2-mean">
+       gc_max_pause_ms_2
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1255,7 +1411,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      gc_mark_ms
+      <a href="#Linux-gc_mark_ms-mean">
+       gc_mark_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -1275,7 +1433,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      gc_slice_during_idle
+      <a href="#Linux-gc_slice_during_idle-mean">
+       gc_slice_during_idle
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -1295,7 +1455,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      gc_sweep_ms
+      <a href="#Linux-gc_sweep_ms-mean">
+       gc_sweep_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1315,7 +1477,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: fcp_time
+      <a href="#Linux-fcp_time-mean">
+       pageload event: fcp_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1335,7 +1499,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: lcp_time
+      <a href="#Linux-lcp_time-mean">
+       pageload event: lcp_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1355,7 +1521,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: load_time
+      <a href="#Linux-load_time-mean">
+       pageload event: load_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1375,7 +1543,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: js_exec_time
+      <a href="#Linux-js_exec_time-mean">
+       pageload event: js_exec_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1401,11 +1571,16 @@ div.chart {
   <table border="1" cellpadding="0" cellspacing="0" class="summary-table">
    <thead>
     <tr>
-     <th>
+     <th style="border-right-style: solid;">
       metric
      </th>
      <th>
-      branch
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
      </th>
      <th>
       <div class="tooltip">
@@ -1428,7 +1603,9 @@ div.chart {
    <tbody>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      perf_page_load_time_ms
+      <a href="#Mac-perf_page_load_time_ms-mean">
+       perf_page_load_time_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1448,7 +1625,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      perf_first_contentful_paint_ms
+      <a href="#Mac-perf_first_contentful_paint_ms-mean">
+       perf_first_contentful_paint_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1468,7 +1647,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      gc_ms
+      <a href="#Mac-gc_ms-mean">
+       gc_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -1488,7 +1669,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      gc_max_pause_ms_2
+      <a href="#Mac-gc_max_pause_ms_2-mean">
+       gc_max_pause_ms_2
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -1508,7 +1691,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      gc_mark_ms
+      <a href="#Mac-gc_mark_ms-mean">
+       gc_mark_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -1528,7 +1713,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      gc_slice_during_idle
+      <a href="#Mac-gc_slice_during_idle-mean">
+       gc_slice_during_idle
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1548,7 +1735,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      gc_sweep_ms
+      <a href="#Mac-gc_sweep_ms-mean">
+       gc_sweep_ms
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: green;">
@@ -1568,7 +1757,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: fcp_time
+      <a href="#Mac-fcp_time-mean">
+       pageload event: fcp_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1588,7 +1779,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: lcp_time
+      <a href="#Mac-lcp_time-mean">
+       pageload event: lcp_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1608,7 +1801,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: load_time
+      <a href="#Mac-load_time-mean">
+       pageload event: load_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1628,7 +1823,9 @@ div.chart {
     </tr>
     <tr>
      <td rowspan="1" style="border-bottom-style: solid; border-right-style: solid;">
-      pageload event: js_exec_time
+      <a href="#Mac-js_exec_time-mean">
+       pageload event: js_exec_time
+      </a>
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
@@ -1700,7 +1897,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -2258,7 +2455,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -2816,7 +3013,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -3374,7 +3571,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -3932,7 +4129,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -4490,7 +4687,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -5048,7 +5245,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -5606,7 +5803,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -6164,7 +6361,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -6722,7 +6919,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -7280,7 +7477,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -7838,7 +8035,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -8396,7 +8593,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -8954,7 +9151,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -9512,7 +9709,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -10070,7 +10267,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -10628,7 +10825,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -11186,7 +11383,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -11744,7 +11941,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -12302,7 +12499,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -12860,7 +13057,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -13418,7 +13615,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -13976,7 +14173,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -14534,7 +14731,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -15092,7 +15289,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -15650,7 +15847,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -16208,7 +16405,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -16766,7 +16963,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -17324,7 +17521,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -17882,7 +18079,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -18440,7 +18637,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -18998,7 +19195,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -19556,7 +19753,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -20114,7 +20311,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -20672,7 +20869,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -21230,7 +21427,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -21788,7 +21985,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -22346,7 +22543,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -22904,7 +23101,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -23462,7 +23659,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -24020,7 +24217,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -24578,7 +24775,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -25136,7 +25333,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -25694,7 +25891,7 @@ div.chart {
             },
             font: {
               weight: 'bold',
-              size: 15
+                size: 14
             }
           },
           legend: {
@@ -26270,412 +26467,29 @@ div.chart {
    </div>
   </section>
   <section class="accordion">
-   <input id="events_query" name="collapse" type="checkbox"/>
+   <input id="-query" name="collapse" type="checkbox"/>
    <h1 class="handle">
-    <label for="events_query">
-     Pageload Events Query
+    <label for="-query">
     </label>
    </h1>
    <div class="content">
     <code>
      <pre>
-  WITH buckets as (
-SELECT
-    i as bucket
-FROM
-    UNNEST(generate_array(0, 30000)) i
-),
-eventdata as (
-SELECT
-  normalized_os as segment,
-  mozfun.map.get_key(ping_info.experiments, "parallel-marking-experiment-2").branch as branch,
-  SAFE_CAST((SELECT value FROM UNNEST(event.extra) WHERE key = 'fcp_time') AS int) AS fcp_time,
-  SAFE_CAST((SELECT value FROM UNNEST(event.extra) WHERE key = 'lcp_time') AS int) AS lcp_time,
-  SAFE_CAST((SELECT value FROM UNNEST(event.extra) WHERE key = 'load_time') AS int) AS load_time,
-  SAFE_CAST((SELECT value FROM UNNEST(event.extra) WHERE key = 'js_exec_time') AS int) AS js_exec_time,
-FROM
-  `moz-fx-data-shared-prod.firefox_desktop.pageload`
-CROSS JOIN
-  UNNEST(events) AS event
-WHERE
-  normalized_channel = "nightly"
-  AND DATE(submission_timestamp) &gt;= DATE('2023-12-23')
-  AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')  
-  AND mozfun.map.get_key(ping_info.experiments, "parallel-marking-experiment-2").branch is not null
-)
-SELECT
-  segment,
-  branch,
-  bucket,
-    COUNTIF(fcp_time = bucket) as fcp_time_counts,
-    COUNTIF(lcp_time = bucket) as lcp_time_counts,
-    COUNTIF(load_time = bucket) as load_time_counts,
-    COUNTIF(js_exec_time = bucket) as js_exec_time_counts,
-FROM
-  eventdata, buckets
-WHERE
-  load_time &gt; 0
-GROUP BY
-  segment, branch, bucket
-ORDER BY
-  segment, branch, bucket
+  
   </pre>
     </code>
    </div>
   </section>
   <section class="accordion">
-   <input id="payload.processes.content.histograms.perf_page_load_time_ms-query" name="collapse" type="checkbox"/>
+   <input id="-query" name="collapse" type="checkbox"/>
    <h1 class="handle">
-    <label for="payload.processes.content.histograms.perf_page_load_time_ms-query">
-     Histogram: payload.processes.content.histograms.perf_page_load_time_ms
+    <label for="-query">
     </label>
    </h1>
    <div class="content">
     <code>
      <pre>
-  with json_strings as (
-    SELECT 
-        normalized_os as segment,
-        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
-        JSON_EXTRACT(payload.processes.content.histograms.perf_page_load_time_ms, '$.values') as hist
-    FROM
-        `moz-fx-data-shared-prod.telemetry.main_nightly`
-    WHERE
-        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
-        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
-        AND normalized_channel = "nightly"
-        AND normalized_app_name = "Firefox"
-        AND payload.processes.content.histograms.perf_page_load_time_ms is not null
-        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
-        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
-),
-keyValuePairs as (
-SELECT
-    segment,
-    branch,
-    SAFE_CAST(key AS float64) as bucket,
-    INT64(PARSE_JSON(hist)[key]) as count
-FROM
-    json_strings,
-    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
-)
-SELECT
-    segment,
-    branch,
-    bucket,
-    SUM(count) as counts
-FROM
-    keyValuePairs
-GROUP BY
-   segment, branch, bucket
-ORDER BY
-   segment, branch, bucket
-  </pre>
-    </code>
-   </div>
-  </section>
-  <section class="accordion">
-   <input id="payload.processes.content.histograms.perf_first_contentful_paint_ms-query" name="collapse" type="checkbox"/>
-   <h1 class="handle">
-    <label for="payload.processes.content.histograms.perf_first_contentful_paint_ms-query">
-     Histogram: payload.processes.content.histograms.perf_first_contentful_paint_ms
-    </label>
-   </h1>
-   <div class="content">
-    <code>
-     <pre>
-  with json_strings as (
-    SELECT 
-        normalized_os as segment,
-        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
-        JSON_EXTRACT(payload.processes.content.histograms.perf_first_contentful_paint_ms, '$.values') as hist
-    FROM
-        `moz-fx-data-shared-prod.telemetry.main_nightly`
-    WHERE
-        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
-        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
-        AND normalized_channel = "nightly"
-        AND normalized_app_name = "Firefox"
-        AND payload.processes.content.histograms.perf_first_contentful_paint_ms is not null
-        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
-        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
-),
-keyValuePairs as (
-SELECT
-    segment,
-    branch,
-    SAFE_CAST(key AS float64) as bucket,
-    INT64(PARSE_JSON(hist)[key]) as count
-FROM
-    json_strings,
-    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
-)
-SELECT
-    segment,
-    branch,
-    bucket,
-    SUM(count) as counts
-FROM
-    keyValuePairs
-GROUP BY
-   segment, branch, bucket
-ORDER BY
-   segment, branch, bucket
-  </pre>
-    </code>
-   </div>
-  </section>
-  <section class="accordion">
-   <input id="payload.processes.content.histograms.gc_ms-query" name="collapse" type="checkbox"/>
-   <h1 class="handle">
-    <label for="payload.processes.content.histograms.gc_ms-query">
-     Histogram: payload.processes.content.histograms.gc_ms
-    </label>
-   </h1>
-   <div class="content">
-    <code>
-     <pre>
-  with json_strings as (
-    SELECT 
-        normalized_os as segment,
-        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
-        JSON_EXTRACT(payload.processes.content.histograms.gc_ms, '$.values') as hist
-    FROM
-        `moz-fx-data-shared-prod.telemetry.main_nightly`
-    WHERE
-        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
-        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
-        AND normalized_channel = "nightly"
-        AND normalized_app_name = "Firefox"
-        AND payload.processes.content.histograms.gc_ms is not null
-        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
-        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
-),
-keyValuePairs as (
-SELECT
-    segment,
-    branch,
-    SAFE_CAST(key AS float64) as bucket,
-    INT64(PARSE_JSON(hist)[key]) as count
-FROM
-    json_strings,
-    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
-)
-SELECT
-    segment,
-    branch,
-    bucket,
-    SUM(count) as counts
-FROM
-    keyValuePairs
-GROUP BY
-   segment, branch, bucket
-ORDER BY
-   segment, branch, bucket
-  </pre>
-    </code>
-   </div>
-  </section>
-  <section class="accordion">
-   <input id="payload.processes.content.histograms.gc_max_pause_ms_2-query" name="collapse" type="checkbox"/>
-   <h1 class="handle">
-    <label for="payload.processes.content.histograms.gc_max_pause_ms_2-query">
-     Histogram: payload.processes.content.histograms.gc_max_pause_ms_2
-    </label>
-   </h1>
-   <div class="content">
-    <code>
-     <pre>
-  with json_strings as (
-    SELECT 
-        normalized_os as segment,
-        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
-        JSON_EXTRACT(payload.processes.content.histograms.gc_max_pause_ms_2, '$.values') as hist
-    FROM
-        `moz-fx-data-shared-prod.telemetry.main_nightly`
-    WHERE
-        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
-        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
-        AND normalized_channel = "nightly"
-        AND normalized_app_name = "Firefox"
-        AND payload.processes.content.histograms.gc_max_pause_ms_2 is not null
-        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
-        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
-),
-keyValuePairs as (
-SELECT
-    segment,
-    branch,
-    SAFE_CAST(key AS float64) as bucket,
-    INT64(PARSE_JSON(hist)[key]) as count
-FROM
-    json_strings,
-    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
-)
-SELECT
-    segment,
-    branch,
-    bucket,
-    SUM(count) as counts
-FROM
-    keyValuePairs
-GROUP BY
-   segment, branch, bucket
-ORDER BY
-   segment, branch, bucket
-  </pre>
-    </code>
-   </div>
-  </section>
-  <section class="accordion">
-   <input id="payload.processes.content.histograms.gc_mark_ms-query" name="collapse" type="checkbox"/>
-   <h1 class="handle">
-    <label for="payload.processes.content.histograms.gc_mark_ms-query">
-     Histogram: payload.processes.content.histograms.gc_mark_ms
-    </label>
-   </h1>
-   <div class="content">
-    <code>
-     <pre>
-  with json_strings as (
-    SELECT 
-        normalized_os as segment,
-        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
-        JSON_EXTRACT(payload.processes.content.histograms.gc_mark_ms, '$.values') as hist
-    FROM
-        `moz-fx-data-shared-prod.telemetry.main_nightly`
-    WHERE
-        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
-        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
-        AND normalized_channel = "nightly"
-        AND normalized_app_name = "Firefox"
-        AND payload.processes.content.histograms.gc_mark_ms is not null
-        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
-        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
-),
-keyValuePairs as (
-SELECT
-    segment,
-    branch,
-    SAFE_CAST(key AS float64) as bucket,
-    INT64(PARSE_JSON(hist)[key]) as count
-FROM
-    json_strings,
-    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
-)
-SELECT
-    segment,
-    branch,
-    bucket,
-    SUM(count) as counts
-FROM
-    keyValuePairs
-GROUP BY
-   segment, branch, bucket
-ORDER BY
-   segment, branch, bucket
-  </pre>
-    </code>
-   </div>
-  </section>
-  <section class="accordion">
-   <input id="payload.processes.content.histograms.gc_slice_during_idle-query" name="collapse" type="checkbox"/>
-   <h1 class="handle">
-    <label for="payload.processes.content.histograms.gc_slice_during_idle-query">
-     Histogram: payload.processes.content.histograms.gc_slice_during_idle
-    </label>
-   </h1>
-   <div class="content">
-    <code>
-     <pre>
-  with json_strings as (
-    SELECT 
-        normalized_os as segment,
-        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
-        JSON_EXTRACT(payload.processes.content.histograms.gc_slice_during_idle, '$.values') as hist
-    FROM
-        `moz-fx-data-shared-prod.telemetry.main_nightly`
-    WHERE
-        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
-        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
-        AND normalized_channel = "nightly"
-        AND normalized_app_name = "Firefox"
-        AND payload.processes.content.histograms.gc_slice_during_idle is not null
-        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
-        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
-),
-keyValuePairs as (
-SELECT
-    segment,
-    branch,
-    SAFE_CAST(key AS float64) as bucket,
-    INT64(PARSE_JSON(hist)[key]) as count
-FROM
-    json_strings,
-    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
-)
-SELECT
-    segment,
-    branch,
-    bucket,
-    SUM(count) as counts
-FROM
-    keyValuePairs
-GROUP BY
-   segment, branch, bucket
-ORDER BY
-   segment, branch, bucket
-  </pre>
-    </code>
-   </div>
-  </section>
-  <section class="accordion">
-   <input id="payload.processes.content.histograms.gc_sweep_ms-query" name="collapse" type="checkbox"/>
-   <h1 class="handle">
-    <label for="payload.processes.content.histograms.gc_sweep_ms-query">
-     Histogram: payload.processes.content.histograms.gc_sweep_ms
-    </label>
-   </h1>
-   <div class="content">
-    <code>
-     <pre>
-  with json_strings as (
-    SELECT 
-        normalized_os as segment,
-        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
-        JSON_EXTRACT(payload.processes.content.histograms.gc_sweep_ms, '$.values') as hist
-    FROM
-        `moz-fx-data-shared-prod.telemetry.main_nightly`
-    WHERE
-        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
-        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
-        AND normalized_channel = "nightly"
-        AND normalized_app_name = "Firefox"
-        AND payload.processes.content.histograms.gc_sweep_ms is not null
-        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
-        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
-),
-keyValuePairs as (
-SELECT
-    segment,
-    branch,
-    SAFE_CAST(key AS float64) as bucket,
-    INT64(PARSE_JSON(hist)[key]) as count
-FROM
-    json_strings,
-    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
-)
-SELECT
-    segment,
-    branch,
-    bucket,
-    SUM(count) as counts
-FROM
-    keyValuePairs
-GROUP BY
-   segment, branch, bucket
-ORDER BY
-   segment, branch, bucket
+  
   </pre>
     </code>
    </div>

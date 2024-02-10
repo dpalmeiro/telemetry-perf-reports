@@ -55,9 +55,17 @@ def setupDirs(slug, dataDir, reportDir, generate_report):
 
 def getResultsForExperiment(dataDir, config, skipCache):
   sqlClient = TelemetryClient(dataDir, config, skipCache)
-  analyzer = DataAnalyzer(config)
-
   telemetryData = sqlClient.getResults()
+
+  # If this is not an experiment, adjust the branches
+  # list to pretend that it is.
+  if config['is_experiment'] == False:
+    branch_names = []
+    for i in range(len(config['branches'])):
+      branch_names.append(config['branches'][i]['name'])
+    config['branches'] = branch_names
+
+  analyzer = DataAnalyzer(config)
   results = analyzer.processTelemetryData(telemetryData)
 
   # save the queries into the results
@@ -97,17 +105,20 @@ if __name__ == "__main__":
 
   # If results not found, generate them.
   if results is None:
-    # Parse Nimbus API.
-    api = parseNimbusAPI(dataDir, slug, skipCache)
-    config = config | api
+    if config["is_experiment"] == True:
+      # Parse Nimbus API.
+      api = parseNimbusAPI(dataDir, slug, skipCache)
+      config = config | api
+
     print("Using Config:")
     configStr = json.dumps(config, indent=2)
     print(configStr)
 
     # Get statistical results
+    origConfig = config.copy()
     results = getResultsForExperiment(dataDir, config, skipCache)
     results = results | config
-    results['input'] = config
+    results['input'] = origConfig
 
     # Save results to disk.
     print("---------------------------------")

@@ -2,13 +2,103 @@
 <div id="summary" class="cell">
   <div class="title">Summary:</div>
 
+  <table border="1" cellspacing="0" cellpadding="0" class="desc-table">
+    <tbody>
+      <tr> 
+        <td class="desc-header">
+          {% if is_experiment == True %}
+          Experiment
+          {% else %}
+          Name
+          {% endif %}
+        </td>
+        <td colspan={{branchlen}} style="border-bottom-style: solid;">
+          {{slug}}
+        </td>
+      </tr>
+        {% if is_experiment == True %}
+      <tr> 
+        <td class="desc-header">
+          StartDate
+        </td>
+        <td colspan={{branchlen}} style="border-bottom-style: solid;">
+          {{startDate}}
+        </td>
+      </tr>
+      <tr> 
+        <td class="desc-header">
+          EndDate
+        </td>
+        <td colspan={{branchlen}} style="border-bottom-style: solid;">
+          {{endDate}}
+        </td>
+      </tr>
+      <tr> 
+        <td class="desc-header">
+          Channel
+        </td>
+        <td colspan={{branchlen}} style="border-bottom-style: solid;">
+          {{channel}}
+        </td>
+      </tr>
+        {% endif %}
+      <tr>
+        <td class="desc-header">
+          Branches
+        </td>
+        {% for branch in branches %}
+        <td>
+          {{branch.name}}
+        </td>
+        {% endfor %}
+      </tr>
+      {% if is_experiment == False %}
+        <td class="desc-header">
+          StartDate
+        </td>
+        {% for branch in branches %}
+        <td>
+          {{branch.startDate}}
+        </td>
+        {% endfor %}
+      </tr>
+      <tr>
+        <td class="desc-header">
+          EndDate
+        </td>
+        {% for branch in branches %}
+        <td>
+          {{branch.endDate}}
+        </td>
+        {% endfor %}
+      </tr>
+      <tr>
+        <td class="desc-header">
+          Channel
+        </td>
+        {% for branch in branches %}
+        <td>
+          {{branch.channel}}
+        </td>
+        {% endfor %}
+      </tr>
+      {% endif %}
+    </tbody>
+  </table>
+
   {% for segment in segments %}
   <div class="subtitle">{{segment.name}}</div>
   <table border="1" cellspacing="0" cellpadding="0" class="summary-table">
     <thead>
       <tr>
-        <th>metric</th>
-        <th>branch</th>
+        <th style="border-right-style: solid;">
+          metric
+        </th>
+        <th>
+          <div class="tooltip">branch
+            <span class="tooltiptext">All results compared against control.</span>
+          </div>
+        </th>
         <th>
           <div class="tooltip">uplift
             <span class="tooltiptext">Uplift of the mean.</span>
@@ -24,7 +114,11 @@
     <tbody>
     {% for metric in segment.metrics %}
       <tr>
-        <td rowspan={{metric.rowspan}} style="border-bottom-style: solid; border-right-style: solid;">{{metric.name}}</td>
+        <td rowspan={{metric.rowspan}} style="border-bottom-style: solid; border-right-style: solid;">
+          <a href="#{{segment.name}}-{{metric.name}}-mean">
+          {{metric.desc}}
+          </a>
+        </td>
     {% for data in metric.datasets %}
       {% if data.last == True %}
       <td style="border-bottom-style: solid;"><div style="{{data.style}};">{{data.branch}}</div></td>
