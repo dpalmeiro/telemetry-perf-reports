@@ -1,5 +1,5 @@
 {% autoescape off %}
-<div class="chart"><canvas id="{{segment}}-{{metric}}-mean"></canvas></div>
+<div class="chart"><canvas height="250px" id="{{segment}}-{{metric}}-mean"></canvas></div>
 <script>
   ctx = document.getElementById('{{segment}}-{{metric}}-mean');
 
@@ -25,6 +25,8 @@
       ]
     },
     options: {
+      animation: false,
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
           datalabels: {
