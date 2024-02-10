@@ -14,27 +14,15 @@
   </div>
   </section>
 
+{% for query in queries %}
   <section class="accordion">
-  <input type="checkbox" name="collapse" id="events_query">
+    <input type="checkbox" name="collapse" id="{{query.name}}-query">
   <h1 class="handle">
-    <label for="events_query">Pageload Events Query</label>
+    <label for="{{query.name}}-query">{{query.name}}</label>
   </h1>
   <div class="content">
   <code><pre>
-  {{queries.events}}
-  </pre></code>
-  </div>
-  </section>
-
-{% for histogram in queries.histograms %}
-  <section class="accordion">
-    <input type="checkbox" name="collapse" id="{{histogram.name}}-query">
-  <h1 class="handle">
-    <label for="{{histogram.name}}-query">Histogram: {{histogram.name}}</label>
-  </h1>
-  <div class="content">
-  <code><pre>
-  {{histogram.query}}
+  {{query.query}}
   </pre></code>
   </div>
   </section>

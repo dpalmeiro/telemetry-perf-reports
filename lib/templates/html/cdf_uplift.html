@@ -12,7 +12,7 @@
       {
           label: "{{dataset.branch}}",
           data: {{dataset.uplift}},
-          borderWidth: 1
+          borderWidth: 2
       },
 {% endfor %}
       ]
@@ -25,8 +25,23 @@
       responsive: true,
       plugins: {
           zoom: zoomOptions,
-          datalabels: { 
-            display: 'auto',
+          datalabels: {
+            display: function(context) {
+
+              let num_visible = 0;
+              for (let i =0 ; i < context.chart.data.datasets.length ; i++) {
+                if (context.chart.isDatasetVisible(i)) {
+                  num_visible++;
+                  if (num_visible !== 1) {
+                    return false;
+                  } 
+                }
+              }
+
+              const index = context.dataIndex;
+              const labelValue = context.chart.data.labels[index];
+              return (labelValue*100)%10 === 0 ? true : false;
+            },
             anchor: 'end',
             align: 'top',
             formatter: n => Math.round(n)+"%"
@@ -53,6 +68,8 @@
       },
       scales: {
         y: {
+          suggestedMax: {{upliftMax}},
+          suggestedMin: {{upliftMin}},
           beginAtZero: true,
           title: {
             text: "Uplift (%)",
@@ -65,13 +82,16 @@
             display: true
           },
           ticks: {
-            maxTicksLimit: 10
+            callback: function(val, index) {
+              x = this.getLabelForValue(val);
+              return Math.round(x*100) % 10 === 0 ? x : '';
+            }
           }
         }
       },
       elements: {
         point:{
-          radius: 1
+          radius: 0
         }
       }
     }

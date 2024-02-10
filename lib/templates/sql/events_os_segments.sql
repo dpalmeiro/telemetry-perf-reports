@@ -1,17 +1,9 @@
 {% autoescape off %}
-WITH buckets as (
-SELECT
-    i as bucket
-FROM
-    UNNEST(generate_array({{minBucket}}, {{maxBucket}})) i
-),
-eventdata as (
+with eventdata as (
 SELECT
   normalized_os as segment,
   mozfun.map.get_key(ping_info.experiments, "{{slug}}").branch as branch,
-{% for metric in metrics %}
   SAFE_CAST((SELECT value FROM UNNEST(event.extra) WHERE key = '{{metric}}') AS int) AS {{metric}},
-{% endfor %}
 FROM
   `moz-fx-data-shared-prod.firefox_desktop.pageload`
 CROSS JOIN
@@ -25,14 +17,12 @@ WHERE
 SELECT
   segment,
   branch,
-  bucket,
-{% for metric in metrics %}
-    COUNTIF({{metric}} = bucket) as {{metric}}_counts,
-{% endfor %}
+  {{metric}} as bucket,
+  COUNT(*) as counts
 FROM
-  eventdata, buckets
+  eventdata
 WHERE
-  load_time > 0
+  {{metric}} >= {{minVal}} AND {{metric}} <= {{maxVal}}
 GROUP BY
   segment, branch, bucket
 ORDER BY

@@ -143,12 +143,50 @@ class ReportGenerator:
             datasets.append(dataset);
 
           datasets[-1]["last"] = True
-          metrics.append({"name": metric_name, 
+          metrics.append({ "desc": metric_name, 
+                           "name": metric,
                            "datasets": datasets, 
                            "rowspan": len(datasets)})
       segments.append({"name": segment, "metrics": metrics}) 
 
-    context = { "segments": segments }
+    slug = self.data['slug']
+    is_experiment = self.data['is_experiment']
+
+    if is_experiment:
+      startDate = self.data['startDate']
+      endDate = self.data['endDate']
+      channel = self.data['channel']
+    else:
+      startDate = None,
+      endDate = None
+      channel = None
+
+    branches=[]
+    for i in range(len(self.data['input']['branches'])):
+      if is_experiment:
+        branchInfo = {
+            "name": self.data['input']['branches'][i]
+        }
+      else:
+        branchInfo = {
+            "name": self.data['input']['branches'][i]['name'],
+            "startDate": self.data['input']['branches'][i]['startDate'],
+            "endDate": self.data['input']['branches'][i]['endDate'],
+            "channel": self.data['input']['branches'][i]['channel']
+            
+        }
+      branches.append(branchInfo)
+
+    context = { 
+      "slug": slug,
+      "is_experiment": is_experiment,
+      "startDate": startDate,
+      "endDate": endDate,
+      "channel": channel,
+      "branches": branches,
+      "segments": segments,
+      "branchlen": len(branches)
+    }
     self.doc(t.render(context))
 
   def createConfigSection(self):
@@ -169,7 +207,7 @@ class ReportGenerator:
       density = self.data[branch][segment][metric_type][metric]["pdf"]["density"]
       cdf = self.data[branch][segment][metric_type][metric]["pdf"]["cdf"]
 
-      # Reduce the arrays to about 100 values so the report doesn't take forever.
+      # Reduce the arrays to about 100 values so the report doesn't take forever to load.
       if len(cdf) > 100:
         n = int(len(cdf)/100)
       else:
@@ -250,12 +288,12 @@ class ReportGenerator:
     cdf_control = self.data[control][segment][metric_type][metric]["pdf"]["cdf"]
     values_control = self.data[control][segment][metric_type][metric]["pdf"]["values"]
     [cdf_control_n, values_control_n] = cubic_spline_prep(cdf_control, values_control)
-    cs_control = CubicSpline(cdf_control_n, values_control_n)
+    cs_control = interpolate.CubicSpline(cdf_control_n, values_control_n)
 
     cdf_branch = self.data[branch][segment][metric_type][metric]["pdf"]["cdf"]
     values_branch = self.data[branch][segment][metric_type][metric]["pdf"]["values"]
     [cdf_branch_n, values_branch_n] = cubic_spline_prep(cdf_branch, values_branch)
-    cs_branch = CubicSpline(cdf_branch_n, values_branch_n)
+    cs_branch = interpolate.CubicSpline(cdf_branch_n, values_branch_n)
 
     cdf_uplift = []
     for q in quantiles:
