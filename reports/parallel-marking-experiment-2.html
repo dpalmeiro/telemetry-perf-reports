@@ -2249,7 +2249,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -2293,7 +2293,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -2396,7 +2398,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -2813,7 +2817,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -2857,7 +2861,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -2960,7 +2966,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -3377,7 +3385,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -3421,7 +3429,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -3524,7 +3534,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -3941,7 +3953,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -3985,7 +3997,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -4088,7 +4102,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -4505,7 +4521,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -4549,7 +4565,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -4652,7 +4670,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -5069,7 +5089,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -5113,7 +5133,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -5216,7 +5238,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -5633,7 +5657,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -5677,7 +5701,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -5780,7 +5806,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -6197,7 +6225,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -6241,7 +6269,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -6344,7 +6374,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -6761,7 +6793,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -6805,7 +6837,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -6908,7 +6942,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -7325,7 +7361,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -7369,7 +7405,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -7472,7 +7510,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -7889,7 +7929,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -7933,7 +7973,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -8036,7 +8078,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -8453,7 +8497,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -8497,7 +8541,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -8600,7 +8646,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -9017,7 +9065,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -9061,7 +9109,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -9164,7 +9214,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -9581,7 +9633,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -9625,7 +9677,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -9728,7 +9782,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -10145,7 +10201,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -10189,7 +10245,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -10292,7 +10350,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -10709,7 +10769,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -10753,7 +10813,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -10856,7 +10918,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -11273,7 +11337,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -11317,7 +11381,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -11420,7 +11486,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -11837,7 +11905,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -11881,7 +11949,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -11984,7 +12054,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -12401,7 +12473,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -12445,7 +12517,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -12548,7 +12622,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -12965,7 +13041,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -13009,7 +13085,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -13112,7 +13190,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -13529,7 +13609,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -13573,7 +13653,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -13676,7 +13758,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -14093,7 +14177,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -14137,7 +14221,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -14240,7 +14326,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -14657,7 +14745,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -14701,7 +14789,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -14804,7 +14894,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -15221,7 +15313,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -15265,7 +15357,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -15368,7 +15462,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -15785,7 +15881,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -15829,7 +15925,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -15932,7 +16030,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -16349,7 +16449,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -16393,7 +16493,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -16496,7 +16598,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -16913,7 +17017,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -16957,7 +17061,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -17060,7 +17166,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -17477,7 +17585,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -17521,7 +17629,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -17624,7 +17734,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -18041,7 +18153,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -18085,7 +18197,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -18188,7 +18302,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -18605,7 +18721,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -18649,7 +18765,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -18752,7 +18870,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -19169,7 +19289,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -19213,7 +19333,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -19316,7 +19438,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -19733,7 +19857,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -19777,7 +19901,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -19880,7 +20006,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -20297,7 +20425,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -20341,7 +20469,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -20444,7 +20574,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -20861,7 +20993,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -20905,7 +21037,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -21008,7 +21142,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -21425,7 +21561,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -21469,7 +21605,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -21572,7 +21710,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -21989,7 +22129,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -22033,7 +22173,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -22136,7 +22278,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -22553,7 +22697,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -22597,7 +22741,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -22700,7 +22846,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -23117,7 +23265,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -23161,7 +23309,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -23264,7 +23414,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -23681,7 +23833,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -23725,7 +23877,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -23828,7 +23982,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -24245,7 +24401,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -24289,7 +24445,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -24392,7 +24550,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -24809,7 +24969,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -24853,7 +25013,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -24956,7 +25118,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -25373,7 +25537,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -25417,7 +25581,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -25520,7 +25686,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -25937,7 +26105,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -25981,7 +26149,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -26084,7 +26254,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -26501,7 +26673,7 @@ div.chart {
 
               const index = context.dataIndex;
               const labelValue = context.chart.data.labels[index];
-              return (labelValue*100)%10 === 0 ? true : false;
+              return Math.round(labelValue*100)%10 === 0 ? true : false;
             },
             anchor: 'end',
             align: 'top',
@@ -26545,7 +26717,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
@@ -26648,7 +26822,9 @@ div.chart {
           ticks: {
             callback: function(val, index) {
               x = this.getLabelForValue(val);
-              return Math.round(x*100) % 10 === 0 ? x : '';
+              if (Math.round(x*100) % 10 === 0 || x==0.99) {
+                  return x;
+              }
             }
           }
         }
