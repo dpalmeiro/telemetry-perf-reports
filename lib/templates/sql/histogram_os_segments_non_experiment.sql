@@ -19,7 +19,8 @@ with
         AND normalized_app_name = "Firefox"
         AND {{histogram}} is not null
         {{branch.ver_condition}}
-{% for condition in branch.conditions %}
+        {{branch.arch_condition}}
+{% for condition in branch.histogram_conditions %}
         {{condition}}
 {% endfor %}
 ),

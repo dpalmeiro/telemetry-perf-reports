@@ -110,6 +110,16 @@ if __name__ == "__main__":
       api = parseNimbusAPI(dataDir, slug, skipCache)
       config = config | api
 
+      # Make control the first element if not already.
+      if "control" in config:
+        control = config["control"]
+        if config["branches"][0] != control:
+          i = config["branches"].index(control)
+          tmp = config["branches"][0]
+          config["branches"][0] = control
+          config["branches"][i] = tmp
+        
+
     print("Using Config:")
     configStr = json.dumps(config, indent=2)
     print(configStr)

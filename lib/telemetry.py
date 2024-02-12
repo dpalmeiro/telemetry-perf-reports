@@ -38,8 +38,8 @@ class TelemetryClient:
       # end up having 1-5 samples in them.  Filter these out entirely.
       remove=[]
       for i in range(1,len(counts)-1):
-        if counts[i-1] > 1000 and counts[i+1] > 1000 and \
-           counts[i] < counts[i-1]/10 and counts[i] < counts[i+1]/100:
+        if (counts[i-1] > 1000 and counts[i] < counts[i-1]/100) or \
+           (counts[i+1] > 1000 and counts[i] < counts[i+1]/100):
           remove.append(i)
       for i in sorted(remove, reverse=True):
         del buckets[i]
@@ -68,47 +68,6 @@ class TelemetryClient:
       results[branch][segment]['pageload_event_metrics'][metric]['counts'] = counts
       print(f"    segment={segment} len(pageload event: {metric}) = ", len(buckets))
 
-  # Do not use 
-  def collectResultsFromQuery_OS_segments_old(self, results, branch, segment, df_events, histograms):
-    for histogram in self.config['histograms']:
-      df = histograms[histogram]
-      if segment == "All":
-        subset = df[df["branch"] == branch][['bucket', 'counts']].groupby(['bucket']).sum()
-        buckets = list(subset.index)
-        counts = list(subset['counts'])
-      else:
-        subset = df[(df["segment"] == segment) & (df["branch"] == branch)]
-        buckets = list(subset['bucket'])
-        counts = list(subset['counts'])
-
-      assert len(buckets) == len(counts)
-      results[branch][segment]['histograms'][histogram] = {}
-      results[branch][segment]['histograms'][histogram]['bins'] = buckets
-      results[branch][segment]['histograms'][histogram]['counts'] = counts
-      print(f"    len({histogram}) = ", len(buckets))
-
-    for metric in self.config['pageload_event_metrics']:
-      minval = self.config["pageload_event_metrics"][metric][0]
-      maxval = self.config["pageload_event_metrics"][metric][1]
-
-      if segment == "All":
-        subset = df_events[(df_events["branch"] == branch) & 
-          df_events['bucket'].between(minval, maxval)][['bucket', f"{metric}_counts"]].groupby(['bucket']).sum()
-        buckets = list(subset.index)
-        counts = list(subset[f"{metric}_counts"])
-      else:
-        subset = df_events[(df_events["segment"] == segment) & 
-                           (df_events["branch"] == branch) & 
-                            df_events['bucket'].between(minval, maxval)]
-        buckets = list(subset["bucket"])
-        counts = list(subset[f"{metric}_counts"])
-      assert len(buckets) == len(counts)
-
-      results[branch][segment]['pageload_event_metrics'][metric] = {}
-      results[branch][segment]['pageload_event_metrics'][metric]['bins'] = buckets
-      results[branch][segment]['pageload_event_metrics'][metric]['counts'] = counts
-      print(f"    len(pageload event: {metric}) = ", len(buckets))
-
   def getResults(self):
     if self.config['is_experiment'] is True:
       return self.getResultsForExperiment()
@@ -124,9 +83,20 @@ class TelemetryClient:
 
     #Get data for each histogram in this segment.
     histograms = {}
+    remove = []
     for histogram in self.config['histograms']:
-      histograms[histogram] = self.getHistogramDataNonExperiment(self.config, histogram)
+      df = self.getHistogramDataNonExperiment(self.config, histogram)
+      # Remove empty histogram data.
+      if df.empty:
+        remove.append(self.config['histograms'].index(histogram))
+        continue
+      histograms[histogram] = df
       print(histograms[histogram])
+
+    for i in sorted(remove, reverse=True):
+      histogram=self.config['histograms'][i]
+      print(f"Empty dataset found, removing: {histogram}.")
+      del self.config['histograms'][i]
 
     # Combine histogram and pageload event results.
     results = {}
@@ -181,7 +151,10 @@ class TelemetryClient:
       branches[i]["last"] = False
       if "version" in self.config["branches"][i]:
         version = self.config["branches"][i]["version"]
-        branches[i]["conditions"].append(f"AND SPLIT(client_info.app_display_version, '.')[offset(0)] = \"{version}\"")
+        branches[i]["ver_condition"] = f"AND SPLIT(client_info.app_display_version, '.')[offset(0)] = \"{version}\""
+      if "architecture" in self.config["branches"][i]:
+        arch = self.config["branches"][i]["architecture"]
+        branches[i]["arch_condition"] = f"AND client_info.architecture = \"{arch}\""
     branches[-1]["last"] = True
 
     print(branches)
@@ -296,6 +269,10 @@ class TelemetryClient:
       if "version" in self.config["branches"][i]:
         version = self.config["branches"][i]["version"]
         branches[i]["ver_condition"] = f"AND SPLIT(application.display_version, '.')[offset(0)] = \"{version}\""
+      if "architecture" in self.config["branches"][i]:
+        arch = self.config["branches"][i]["architecture"]
+        branches[i]["arch_condition"] = f"AND application.architecture = \"{arch}\""
+
     branches[-1]["last"] = True
 
     context = {

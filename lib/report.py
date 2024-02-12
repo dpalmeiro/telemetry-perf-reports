@@ -219,7 +219,7 @@ class ReportGenerator:
       dataset = {
           "branch": branch,
           "cdf": cdf_reduced,
-          "density": density_reduced
+          "density": density_reduced,
       }
 
       datasets.append(dataset)
@@ -233,19 +233,19 @@ class ReportGenerator:
     self.doc(t.render(context))
     return
 
-  def calculate_uplift_smooth(self, quantiles, branch, segment, metric_type, metric):
+  def calculate_uplift_interp(self, quantiles, branch, segment, metric_type, metric):
     control = self.data["branches"][0]
 
     quantiles_control = self.data[control][segment][metric_type][metric]["quantiles"]
     values_control = self.data[control][segment][metric_type][metric]["quantile_vals"]
     [quantiles_control_n, values_control_n] = cubic_spline_prep(quantiles_control, values_control)
-    tck = interpolate.splrep(quantiles_control_n, values_control_n, k=3)
+    tck = interpolate.splrep(quantiles_control_n, values_control_n, k=1)
     values_control_n = interpolate.splev(quantiles, tck, der=0)
 
     quantiles_branch = self.data[branch][segment][metric_type][metric]["quantiles"]
     values_branch = self.data[branch][segment][metric_type][metric]["quantile_vals"]
     [quantiles_branch_n, values_branch_n] = cubic_spline_prep(quantiles_branch, values_branch)
-    tck = interpolate.splrep(quantiles_branch_n, values_branch_n, k=3)
+    tck = interpolate.splrep(quantiles_branch_n, values_branch_n, k=1)
     values_branch_n = interpolate.splev(quantiles, tck, der=0)
 
     uplifts = []
@@ -256,64 +256,39 @@ class ReportGenerator:
       diffs.append(diff)
       uplifts.append(uplift)
 
-    return [diffs, uplifts]
 
-  def calculate_uplift_spline(self, quantiles, branch, segment, metric_type, metric):
-    control = self.data["branches"][0]
+    #quantiles_control = self.data[control][segment][metric_type][metric]["quantiles"]
+    #values_control = self.data[control][segment][metric_type][metric]["quantile_vals"]
+    #[quantiles_control_n, values_control_n] = cubic_spline_prep(quantiles_control, values_control)
+    #control_f = interpolate.interp1d(quantiles_control_n, values_control_n, fill_value='extrapolate')
 
-    quantiles_control = self.data[control][segment][metric_type][metric]["quantiles"]
-    values_control = self.data[control][segment][metric_type][metric]["quantile_vals"]
-    [quantiles_control_n, values_control_n] = cubic_spline_prep(quantiles_control, values_control)
-    cs_control = interpolate.CubicSpline(quantiles_control_n, values_control_n)
+    #quantiles_branch = self.data[branch][segment][metric_type][metric]["quantiles"]
+    #values_branch = self.data[branch][segment][metric_type][metric]["quantile_vals"]
+    #[quantiles_branch_n, values_branch_n] = cubic_spline_prep(quantiles_branch, values_branch)
+    #branch_f = interpolate.interp1d(quantiles_branch_n, values_branch_n, fill_value='extrapolate')
 
-    quantiles_branch = self.data[branch][segment][metric_type][metric]["quantiles"]
-    values_branch = self.data[branch][segment][metric_type][metric]["quantile_vals"]
-    [quantiles_branch_n, values_branch_n] = cubic_spline_prep(quantiles_branch, values_branch)
-    cs_branch = interpolate.CubicSpline(quantiles_branch_n, values_branch_n)
-
-    uplifts = []
-    diffs = []
-    for q in quantiles:
-      diff = cs_branch(q) - cs_control(q)
-      uplift = diff/cs_control(q)*100
-      diffs.append(diff)
-      uplifts.append(uplift)
+    #uplifts = []
+    #diffs = []
+    #for q in quantiles:
+    #  diff = branch_f(q)-control_f(q)
+    #  uplift = diff/control_f(q)*100
+    #  diffs.append(diff)
+    #  uplifts.append(uplift)
 
     return [diffs, uplifts]
-
-
-  def calculate_cdf_uplift_spline(self, quantiles, branch, segment, metric_type, metric):
-    control = self.data["branches"][0]
-
-    cdf_control = self.data[control][segment][metric_type][metric]["pdf"]["cdf"]
-    values_control = self.data[control][segment][metric_type][metric]["pdf"]["values"]
-    [cdf_control_n, values_control_n] = cubic_spline_prep(cdf_control, values_control)
-    cs_control = interpolate.CubicSpline(cdf_control_n, values_control_n)
-
-    cdf_branch = self.data[branch][segment][metric_type][metric]["pdf"]["cdf"]
-    values_branch = self.data[branch][segment][metric_type][metric]["pdf"]["values"]
-    [cdf_branch_n, values_branch_n] = cubic_spline_prep(cdf_branch, values_branch)
-    cs_branch = interpolate.CubicSpline(cdf_branch_n, values_branch_n)
-
-    cdf_uplift = []
-    for q in quantiles:
-      uplift = (cs_branch(q) - cs_control(q))/cs_control(q)*100
-      cdf_uplift.append(uplift)
-
-    return cdf_uplift
 
   def createUpliftComparison(self, segment, metric, metric_type):
     t = get_template("uplift.html")
 
     control = self.data["branches"][0]
-    quantiles = list(np.around(np.linspace(0.1, 0.99, 90), 2))
+    quantiles = list(np.around(np.linspace(0.1, 0.90, 89), 2))
 
     datasets = []
     for branch in self.data["branches"]:
       if branch == control:
         continue
 
-      [diff, uplift] = self.calculate_uplift_smooth(quantiles, branch, segment, metric_type, metric)
+      [diff, uplift] = self.calculate_uplift_interp(quantiles, branch, segment, metric_type, metric)
       dataset = {
           "branch": branch,
           "diff": diff,
@@ -350,6 +325,8 @@ class ReportGenerator:
     control=self.data["branches"][0]
       
     for branch in self.data["branches"]:
+      n = int(self.data[branch][segment][metric_type][metric]["n"])
+      n = f'{n:,}'
       mean = "{0:.1f}".format(self.data[branch][segment][metric_type][metric]["mean"])
 
       if branch != control:
@@ -374,6 +351,7 @@ class ReportGenerator:
           "branch": branch,
           "mean": mean,
           "uplift": uplift,
+          "n": n,
           "se": se,
           "std": std,
           "effect": effect,

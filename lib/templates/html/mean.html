@@ -70,9 +70,10 @@
 <div class="mean-table">
   <div class="mean-table-header">
     <div class="header__item">branch</div>
+    <div class="header__item">n</div>
     <div class="header__item">mean</div>
-    <div class="header__item">uplift(%)</div>
     <div class="header__item">stddev</div>
+    <div class="header__item">uplift(%)</div>
     <div class="header__item">effect size</div>
     <div class="header__item">p-value</div>
   </div>
@@ -80,9 +81,10 @@
 {% for dataset in datasets %}
     <div class="mean-table-row">
       <div class="mean-table-data">{{dataset.branch}}</div>
+      <div class="mean-table-data">{{dataset.n}}</div>
       <div class="mean-table-data">{{dataset.mean}}</div>
-      <div class="mean-table-data">{{dataset.uplift}}</div>
       <div class="mean-table-data">{{dataset.std}}</div>
+      <div class="mean-table-data">{{dataset.uplift}}</div>
       <div class="mean-table-data">{{dataset.effect}}</div>
       <div class="mean-table-data">{{dataset.pval}}</div>
     </div>

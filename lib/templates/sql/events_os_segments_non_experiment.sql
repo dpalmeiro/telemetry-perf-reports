@@ -14,7 +14,9 @@ eventdata_{{branch.name}} as (
         AND DATE(submission_timestamp) <= DATE('{{branch.endDate}}')
         AND normalized_channel = "{{branch.channel}}"
         AND normalized_app_name = "Firefox"
-{% for condition in branch.conditions %}
+        {{branch.ver_condition}}
+        {{branch.arch_condition}}
+{% for condition in branch.event_conditions %}
         {{condition}}
 {% endfor %}
 ),
