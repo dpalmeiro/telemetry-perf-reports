@@ -246,39 +246,11 @@ class DataAnalyzer:
         # Calculate stats
         calculate_histogram_stats(bins, counts, self.results[branch][segment]["histograms"][hist_name])
 
-        # Calculate mean, std, and var
-        #[mean, var, std, n] = calc_histogram_mean_var(bins, counts)
-        #self.results[branch][segment]["histograms"][hist_name]['mean'] = mean
-        #self.results[branch][segment]["histograms"][hist_name]['std'] = std
-        #self.results[branch][segment]["histograms"][hist_name]['var'] = var
-        #self.results[branch][segment]["histograms"][hist_name]['n'] = n
-
-        ## Calculate densities
-        #[density, cdf] = calc_histogram_density(counts, n)
-        #self.results[branch][segment]["histograms"][hist_name]["pdf"]["cdf"] = cdf
-        #self.results[branch][segment]["histograms"][hist_name]["pdf"]["density"] = density
-        #self.results[branch][segment]["histograms"][hist_name]["pdf"]["values"] = bins
-
-        ## Calculate quantiles
-        #[quantiles, vals] = calc_histogram_quantiles(bins, density)
-        #self.results[branch][segment]["histograms"][hist_name]["quantiles"] = quantiles
-        #self.results[branch][segment]["histograms"][hist_name]["quantile_vals"] = vals
-
+        # Calculate statistical tests
         if branch != self.control:
           control_data = self.results[self.control][segment]["histograms"][hist_name]
           branch_data = self.results[branch][segment]["histograms"][hist_name]
           calculate_histogram_tests(bins, counts, branch_data, control_data)
-
-          ## Get mean, var, and n from results
-          #mean_control = self.results[self.control][segment]["histograms"][hist_name]['mean']
-          #std_control = self.results[self.control][segment]["histograms"][hist_name]['std']
-          #n_control = self.results[self.control][segment]["histograms"][hist_name]['n']
-          ## Calculate t-test
-          #[t_value, p_value, effect] = calc_t_test(mean, mean_control, std, std_control, n, n_control)
-          #self.results[branch][segment]["histograms"][hist_name]["t-test"] = {}
-          #self.results[branch][segment]["histograms"][hist_name]["t-test"]["score"] = t_value
-          #self.results[branch][segment]["histograms"][hist_name]["t-test"]["p-value"] = p_value
-          #self.results[branch][segment]["histograms"][hist_name]["t-test"]["effect"] = effect
 
   def processPageLoadEventData(self, data, branch):
     print(f"Calculating pageload event statistics for branch: {branch}")
@@ -291,33 +263,11 @@ class DataAnalyzer:
         bins = data[branch][segment]["pageload_event_metrics"][metric]["bins"]
         counts = data[branch][segment]["pageload_event_metrics"][metric]["counts"]
 
-        # Calculate mean, std, and var
-        [mean, var, std, n] = calc_histogram_mean_var(bins, counts)
-        self.results[branch][segment]["pageload_event_metrics"][metric]['mean'] = mean
-        self.results[branch][segment]["pageload_event_metrics"][metric]['std'] = std
-        self.results[branch][segment]["pageload_event_metrics"][metric]['var'] = var
-        self.results[branch][segment]["pageload_event_metrics"][metric]['n'] = n
+        # Calculate stats
+        calculate_histogram_stats(bins, counts, self.results[branch][segment]["pageload_event_metrics"][metric])
 
-        # Calculate densities
-        [density, cdf] = calc_histogram_density(counts, n)
-        self.results[branch][segment]["pageload_event_metrics"][metric]["pdf"]["cdf"] = cdf
-        self.results[branch][segment]["pageload_event_metrics"][metric]["pdf"]["density"] = density
-        self.results[branch][segment]["pageload_event_metrics"][metric]["pdf"]["values"] = bins
-
-        # Calculate quantiles
-        # Calculate quantiles
-        [quantiles, vals] = calc_histogram_quantiles(bins, density)
-        self.results[branch][segment]["pageload_event_metrics"][metric]["quantiles"] = quantiles
-        self.results[branch][segment]["pageload_event_metrics"][metric]["quantile_vals"] = vals
-
+        # Calculate statistical tests
         if branch != self.control:
-          # Get mean, var, and n from results
-          mean_control = self.results[self.control][segment]["pageload_event_metrics"][metric]['mean']
-          std_control = self.results[self.control][segment]["pageload_event_metrics"][metric]['std']
-          n_control = self.results[self.control][segment]["pageload_event_metrics"][metric]['n']
-          # Calculate t-test
-          [t_value, p_value, effect] = calc_t_test(mean, mean_control, std, std_control, n, n_control)
-          self.results[branch][segment]["pageload_event_metrics"][metric]["t-test"] = {}
-          self.results[branch][segment]["pageload_event_metrics"][metric]["t-test"]["score"] = t_value
-          self.results[branch][segment]["pageload_event_metrics"][metric]["t-test"]["p-value"] = p_value
-          self.results[branch][segment]["pageload_event_metrics"][metric]["t-test"]["effect"] = effect
+          control_data = self.results[self.control][segment]["pageload_event_metrics"][metric]
+          branch_data = self.results[branch][segment]["pageload_event_metrics"][metric]
+          calculate_histogram_tests(bins, counts, branch_data, control_data)
