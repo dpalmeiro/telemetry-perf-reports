@@ -256,25 +256,6 @@ class ReportGenerator:
       diffs.append(diff)
       uplifts.append(uplift)
 
-
-    #quantiles_control = self.data[control][segment][metric_type][metric]["quantiles"]
-    #values_control = self.data[control][segment][metric_type][metric]["quantile_vals"]
-    #[quantiles_control_n, values_control_n] = cubic_spline_prep(quantiles_control, values_control)
-    #control_f = interpolate.interp1d(quantiles_control_n, values_control_n, fill_value='extrapolate')
-
-    #quantiles_branch = self.data[branch][segment][metric_type][metric]["quantiles"]
-    #values_branch = self.data[branch][segment][metric_type][metric]["quantile_vals"]
-    #[quantiles_branch_n, values_branch_n] = cubic_spline_prep(quantiles_branch, values_branch)
-    #branch_f = interpolate.interp1d(quantiles_branch_n, values_branch_n, fill_value='extrapolate')
-
-    #uplifts = []
-    #diffs = []
-    #for q in quantiles:
-    #  diff = branch_f(q)-control_f(q)
-    #  uplift = diff/control_f(q)*100
-    #  diffs.append(diff)
-    #  uplifts.append(uplift)
-
     return [diffs, uplifts]
 
   def createUpliftComparison(self, segment, metric, metric_type):
