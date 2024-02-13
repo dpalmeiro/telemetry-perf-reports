@@ -14,6 +14,8 @@ Ensure you have the following Python libraries installed:
 - [livestats]: `pip install livestats`
 - [airium]: `pip install airium`
 
+Ensure that the Google Cloud, `gcloud` cli is installed and that you are authenticated with a project defined.
+
 ## Usage
 
 1. Install the required dependencies.
