@@ -15,7 +15,7 @@ Ensure you have the following Python libraries installed:
 - [airium]: `pip install airium`
 - [db-dtypes]: `pip install db-dtypes`
 
-Ensure that the Google Cloud, `gcloud` cli is installed and that you are authenticated with a project defined.
+Ensure that the Google Cloud, `gcloud` cli is installed and that you are authenticated with a project defined (e.g. `gcloud config set project mozdata`)
 
 ## Usage
 
