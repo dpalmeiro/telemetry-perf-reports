@@ -69,10 +69,10 @@ def getResultsForExperiment(dataDir, config, skipCache):
   results = analyzer.processTelemetryData(telemetryData)
 
   # Save the queries into the results and cache them.
-  queriesFile= os.path.join(dataDir, f"{slug}-queries.json")
-  if queries in telemetryData:
+  queriesFile=os.path.join(dataDir, f"{slug}-queries.json")
+  if 'queries' in telemetryData and telemetryData['queries']:
     with open(queriesFile, 'w') as f:
-      json.dump(results['queries'], f, indent=2, cls=NpEncoder)
+      json.dump(telemetryData['queries'], f, indent=2, cls=NpEncoder)
   else:
     queries = checkForLocalResults(queriesFile)
     if queries is not None:
