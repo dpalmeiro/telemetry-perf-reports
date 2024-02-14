@@ -29,6 +29,20 @@ def cubic_spline_prep(x, y):
       new_y.append(y[i])
   return [new_x, new_y]
 
+def cubic_spline_smooth(x, y, x_new):
+  [x_prep, y_prep] = cubic_spline_prep(x, y)
+  tck = interpolate.splrep(x_prep, y_prep, k=3)
+  y_new = interpolate.splev(x_new, tck, der=0)
+  return list(y_new)
+
+def find_value_at_quantile(values, cdf, q=0.95):
+  for i, e in reversed(list(enumerate(cdf))):
+    if cdf[i] <= q:
+      if i==len(cdf)-1:
+        return values[i]
+      else:
+        return values[i+1]
+
 def getIconForSegment(segment):
   iconMap = {
       "All": "fa-solid fa-globe",
@@ -200,26 +214,27 @@ class ReportGenerator:
   def createCDFComparison(self, segment, metric, metric_type):
     t = get_template("cdf.html")
 
-    datasets = []
     control = self.data["branches"][0]
+    values_control = self.data[control][segment][metric_type][metric]["pdf"]["values"]
+    cdf_control = self.data[control][segment][metric_type][metric]["pdf"]["cdf"]
+
+    maxValue = find_value_at_quantile(values_control, cdf_control)
+    values_int = list(np.around(np.linspace(0, maxValue, 100), 2))
+
+    datasets = []
     for branch in self.data["branches"]:
       values = self.data[branch][segment][metric_type][metric]["pdf"]["values"]
       density = self.data[branch][segment][metric_type][metric]["pdf"]["density"]
       cdf = self.data[branch][segment][metric_type][metric]["pdf"]["cdf"]
 
-      # Reduce the arrays to about 100 values so the report doesn't take forever to load.
-      if len(cdf) > 100:
-        n = int(len(cdf)/100)
-      else:
-        n = 1
-      cdf_reduced = cdf[0::n]
-      values_reduced = values[0::n]
-      density_reduced = density[0::n]
+      # Smooth out pdf and cdf, and use common X values for each branch.
+      density_int = cubic_spline_smooth(values, density, values_int)
+      cdf_int = cubic_spline_smooth(values, cdf, values_int)
 
       dataset = {
           "branch": branch,
-          "cdf": cdf_reduced,
-          "density": density_reduced,
+          "cdf": cdf_int,
+          "density": density_int,
       }
 
       datasets.append(dataset)
@@ -227,7 +242,7 @@ class ReportGenerator:
     context = {
         "segment": segment,
         "metric": metric,
-        "values": values_reduced,
+        "values": values_int,
         "datasets": datasets
     }
     self.doc(t.render(context))
