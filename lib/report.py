@@ -123,13 +123,13 @@ class ReportGenerator:
             uplift = (branch_mean-control_mean)/control_mean*100.0
             uplift_str = "{0:.1f}".format(uplift)
 
-            pval = self.data[branch][segment][metric_type][metric]["t-test"]["p-value"]
-            effect_size = self.data[branch][segment][metric_type][metric]["t-test"]["effect"]
+            pval = self.data[branch][segment][metric_type][metric]["tests"]["ttest"]["p-value"]
+            effect_size = self.data[branch][segment][metric_type][metric]["tests"]["ttest"]["effect"]
             effect_meaning = get_cohen_effect_meaning(effect_size)
             effect_size = "{0:.2f}".format(effect_size)
             effect = f"{effect_meaning} (d={effect_size})"
         
-            if pval >= 0.05:
+            if pval >= 0.001:
               pval = "{0:.2f}".format(pval)
               effect = f"None (p={pval})"
               effect_meaning = "None"
@@ -336,13 +336,6 @@ class ReportGenerator:
       se   = "{0:.1f}".format(self.data[branch][segment][metric_type][metric]["se"])
       std  = "{0:.1f}".format(self.data[branch][segment][metric_type][metric]["std"])
 
-      if "t-test" in self.data[branch][segment][metric_type][metric]:
-        effect = "{0:.2f}".format(self.data[branch][segment][metric_type][metric]["t-test"]["effect"])
-        pval = "{0:.2g}".format(self.data[branch][segment][metric_type][metric]["t-test"]["p-value"])
-      else:
-        effect = ""
-        pval = ""
-
       dataset = {
           "branch": branch,
           "mean": mean,
@@ -350,9 +343,18 @@ class ReportGenerator:
           "n": n,
           "se": se,
           "std": std,
-          "effect": effect,
-          "pval": pval,
+          "control": branch==control
       }
+      
+      if branch != control:
+        for test in self.data[branch][segment][metric_type][metric]["tests"]:
+          effect = "{0:.2f}".format(self.data[branch][segment][metric_type][metric]["tests"][test]["effect"])
+          pval = "{0:.2g}".format(self.data[branch][segment][metric_type][metric]["tests"][test]["p-value"])
+          dataset[test] = {
+              "effect": effect,
+              "pval": pval
+          }
+
       datasets.append(dataset)
 
     context = {

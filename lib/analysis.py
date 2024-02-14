@@ -11,10 +11,12 @@ def expand_histogram(bins, counts):
       array.append(bins[i])
   return array
 
+# effect size calculation for t-test
 def calc_cohen_d(x1, x2, s1, s2, n1, n2):
   effect_size = (x1-x2)/np.sqrt(((n1-1)*s1**2 + (n2-1)*s2**2) / (n1+n2-2))
   return effect_size
 
+# effect size calculation for mwu
 def rank_biserial_correlation(n1, n2, U):
   return (1-2*U/(n1*n2))
 
@@ -27,32 +29,15 @@ def calc_t_test(x1, x2, s1, s2, n1, n2):
     df = (s1**2/n1 + s2**2/n2)**2/( (s1**2/n1)**2/(n1-1) + (s2**2/n2)**2/(n2-1) )
     p_value = 2 * (1-(stats.t.cdf(abs(t_value), df)))
     effect_size = calc_cohen_d(x1, x2, s1, s2, n1, n2)
-
     return [t_value, p_value, effect_size]
 
-# Calculate Mann-Whitney U test when input datasets are histograms.
-# TODO:  Actually implement this.
-def calc_mwu_test(bins1, counts1, bins2, counts2):
-  u_value = 0
-  p_value = 0
-  effect_size = 0
-  return [u_value, p_value, effect_size]
-
-# Calculate Chi squared test when input datasets are histograms.
-# TODO:  Actually implement this.
-def calc_chi_sq_test(bins1, counts1, bins2, counts2):
-  chi_value = 0
-  p_value = 0
-  effect_size = 0
-  return [chi_value, p_value, effect_size]
-
-# Calculate Kolmogorov–Smirnov test when input datasets are histograms.
-# TODO:  Actually implement this.
-def calc_ks_test(bins1, counts1, bins2, counts2):
-  ks_value = 0
-  p_value = 0
-  effect_size = 0
-  return [ks_value, p_value, effect_size]
+def create_subsample(bins, counts, sample_size=100000):
+  total_counts = sum(counts)
+  ratio = total_counts/sample_size
+  subsample = []
+  for i in range(len(bins)):
+    subsample.extend(np.repeat(bins[i], counts[i]/ratio))
+  return subsample
 
 def calc_cdf_from_density(density, vals):
   cdf = []
@@ -132,7 +117,45 @@ def calculate_histogram_stats(bins, counts, data):
   data["quantiles"] = quantiles
   data["quantile_vals"] = vals
 
-def calculate_histogram_tests(bins, counts, data, control):
+def calculate_histogram_tests_subsampling(control_data, branch_data, result):
+  bins_control = control_data["bins"]
+  counts_control = control_data["counts"]
+  control_sample = create_subsample(bins_control, counts_control)
+
+  bins_branch = branch_data["bins"]
+  counts_branch = branch_data["counts"]
+  branch_sample = create_subsample(bins_branch, counts_branch)
+
+  # Calculate t-test and effect
+  x1 = np.mean(control_sample)
+  s1 = np.std(control_sample)
+  n1 = len(control_sample)
+  x2 = np.mean(branch_sample)
+  s2 = np.std(branch_sample)
+  n2 = len(branch_sample)
+  effect = calc_cohen_d(x1, x2, s1, s2, n1, n2)
+  [t, p] = stats.ttest_ind(control_sample, branch_sample)
+  result["tests"]["ttest"] = {}
+  result["tests"]["ttest"]["score"] = t
+  result["tests"]["ttest"]["p-value"] = p
+  result["tests"]["ttest"]["effect"] = effect
+
+  # Calculate mwu-test
+  [U, p] = stats.mannwhitneyu(control_sample, branch_sample)
+  r = rank_biserial_correlation(n1, n2, U)
+  result["tests"]["mwu"] = {}
+  result["tests"]["mwu"]["score"] = U
+  result["tests"]["mwu"]["p-value"] = p
+  result["tests"]["mwu"]["effect"] = r
+
+  # Calculate ks-test
+  [D, p] = stats.ks_2samp(control_sample, branch_sample)
+  result["tests"]["ks"] = {}
+  result["tests"]["ks"]["score"] = D
+  result["tests"]["ks"]["p-value"] = p
+  result["tests"]["ks"]["effect"] = D
+
+def calculate_histogram_ttest(bins, counts, data, control):
   mean_control = control['mean']
   std_control = control['std']
   n_control = control['n']
@@ -143,10 +166,10 @@ def calculate_histogram_tests(bins, counts, data, control):
   
   # Calculate t-test
   [t_value, p_value, effect] = calc_t_test(mean, mean_control, std, std_control, n, n_control)
-  data["t-test"] = {}
-  data["t-test"]["score"] = t_value
-  data["t-test"]["p-value"] = p_value
-  data["t-test"]["effect"] = effect
+  data["tests"]["ttest"] = {}
+  data["tests"]["ttest"]["score"] = t_value
+  data["tests"]["ttest"]["p-value"] = p_value
+  data["tests"]["ttest"]["effect"] = effect
 
 def calc_confidence_interval(data, confidence=0.95):
     a = 1.0 * np.array(data)
@@ -185,7 +208,8 @@ def createEmptyResultsTemplate(config):
                         "cdf": []
                        },
                   "quantiles": [],
-                  "quantile_vals": []
+                  "quantile_vals": [],
+                  "tests": {}
         }
 
         for metric in config["pageload_event_metrics"]:
@@ -206,7 +230,8 @@ def createEmptyResultsTemplate(config):
                           "cdf": []
                          },
                    "quantiles": [],
-                   "quantile_vals": []
+                   "quantile_vals": [],
+                  "tests": {}
           }
   return template
 
@@ -239,17 +264,23 @@ class DataAnalyzer:
         hist_name = hist.split('.')[-1]
         print(f"      processing histogram: {hist}")
 
+        # Calculate stats
         bins = data[branch][segment]["histograms"][hist]["bins"]
         counts = data[branch][segment]["histograms"][hist]["counts"]
-
-        # Calculate stats
         calculate_histogram_stats(bins, counts, self.results[branch][segment]["histograms"][hist_name])
 
         # Calculate statistical tests
         if branch != self.control:
-          control_data = self.results[self.control][segment]["histograms"][hist_name]
-          branch_data = self.results[branch][segment]["histograms"][hist_name]
-          calculate_histogram_tests(bins, counts, branch_data, control_data)
+          control_data = data[self.control][segment]["histograms"][hist]
+          branch_data = data[branch][segment]["histograms"][hist]
+          result = self.results[branch][segment]["histograms"][hist_name]
+          calculate_histogram_tests_subsampling(control_data, branch_data, result)
+
+        # Calculate statistical tests
+        #if branch != self.control:
+        #  control_data = self.results[self.control][segment]["histograms"][hist_name]
+        #  branch_data = self.results[branch][segment]["histograms"][hist_name]
+        #  calculate_histogram_ttest(bins, counts, branch_data, control_data)
 
   def processPageLoadEventData(self, data, branch):
     print(f"Calculating pageload event statistics for branch: {branch}")
@@ -259,14 +290,20 @@ class DataAnalyzer:
       for metric in self.config["pageload_event_metrics"]:
         print(f"      processing metric: {metric}")
 
+        # Calculate stats
         bins = data[branch][segment]["pageload_event_metrics"][metric]["bins"]
         counts = data[branch][segment]["pageload_event_metrics"][metric]["counts"]
-
-        # Calculate stats
         calculate_histogram_stats(bins, counts, self.results[branch][segment]["pageload_event_metrics"][metric])
 
         # Calculate statistical tests
         if branch != self.control:
-          control_data = self.results[self.control][segment]["pageload_event_metrics"][metric]
-          branch_data = self.results[branch][segment]["pageload_event_metrics"][metric]
-          calculate_histogram_tests(bins, counts, branch_data, control_data)
+          control_data = data[self.control][segment]["pageload_event_metrics"][metric]
+          branch_data = data[branch][segment]["pageload_event_metrics"][metric]
+          result = self.results[branch][segment]["pageload_event_metrics"][metric]
+          calculate_histogram_tests_subsampling(control_data, branch_data, result)
+
+        # Calculate statistical tests
+        #if branch != self.control:
+        #  control_data = self.results[self.control][segment]["pageload_event_metrics"][metric]
+        #  branch_data = self.results[branch][segment]["pageload_event_metrics"][metric]
+        #  calculate_histogram_ttest(bins, counts, branch_data, control_data)
