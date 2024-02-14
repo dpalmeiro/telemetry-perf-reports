@@ -9,11 +9,12 @@ Telemetry Perf Reports is a Python project designed for analyzing and generating
 Ensure you have the following Python libraries installed:
 
 - [NumPy](https://numpy.org/): `pip install numpy`
+- [SciPy](https://scipy.org/): `pip install scipy`
 - [Django](https://www.djangoproject.com/): `pip install django`
 - [google-cloud-query]: `pip install google-cloud-bigquery`
-- [livestats]: `pip install livestats`
 - [airium]: `pip install airium`
 - [db-dtypes]: `pip install db-dtypes`
+- [BeautifulSoup]: `pip install bs4`
 
 Ensure that the Google Cloud, `gcloud` cli is installed and that you are authenticated with a project defined (e.g. `gcloud config set project mozdata`)
 
