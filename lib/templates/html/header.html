@@ -25,11 +25,11 @@ body {
 /* Tooltip text */
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 120px;
+  width: 140px;
   background-color: #555;
   color: #fff;
   text-align: center;
-  padding: 5px 0;
+  padding: 10px 0;
   border-radius: 6px;
 
   /* Position the tooltip text */
@@ -225,6 +225,34 @@ div.chart {
     }
   }
 }
+.stat-table {
+    table-layout: fixed;
+    width:100%;
+    border: double;
+    border-color: black;
+    text-align:center;
+    font-size: 14px;
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+.stat-table td {
+    padding: 0;
+    border-bottom-style: hidden;
+    border-top-style: hidden;
+    text-align:center;
+}
+.stat-table tr {
+    border-bottom: 1px solid #dddddd;
+    border-bottom-style: hidden;
+    border-top-style: hidden;
+}
+.stat-table th {
+    background-color: gray;
+    width:30%;
+    height:14px;
+    color: #ffffff;
+    text-align:center;
+}
 .desc-table {
     margin-left: -10%;
     width:120%;
@@ -300,37 +328,6 @@ div.chart {
 .summary-table tbody tr.active-row {
     font-weight: bold;
     color: #009879;
-}
-.mean-table {
-	width:100%;
-        margin-bottom: 10px;
-        border: double;
-        border-color: black;
-        font-size: 14px;
-        color: #000000;
-}
-.mean-table-header {
-	display:flex;
-	width:100%;
-	background:gray;
-	padding:($half-spacing-unit * 1.5) 0;
-}
-.mean-table-row {
-	display:flex;
-	width:100%;
-	padding:($half-spacing-unit * 1.5) 0;
-
-	&:nth-of-type(odd) {
-		background:$color-form-highlight;
-	}
-}
-.mean-table-data, .header__item {
-	flex: 1 1 20%;
-	text-align:center;
-}
-.header__item {
-        color:white;
-        text-align:center;
 }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>

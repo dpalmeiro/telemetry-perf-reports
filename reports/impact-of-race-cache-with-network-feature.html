@@ -27,11 +27,11 @@ body {
 /* Tooltip text */
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 120px;
+  width: 140px;
   background-color: #555;
   color: #fff;
   text-align: center;
-  padding: 5px 0;
+  padding: 10px 0;
   border-radius: 6px;
 
   /* Position the tooltip text */
@@ -227,6 +227,34 @@ div.chart {
     }
   }
 }
+.stat-table {
+    table-layout: fixed;
+    width:100%;
+    border: double;
+    border-color: black;
+    text-align:center;
+    font-size: 14px;
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+.stat-table td {
+    padding: 0;
+    border-bottom-style: hidden;
+    border-top-style: hidden;
+    text-align:center;
+}
+.stat-table tr {
+    border-bottom: 1px solid #dddddd;
+    border-bottom-style: hidden;
+    border-top-style: hidden;
+}
+.stat-table th {
+    background-color: gray;
+    width:30%;
+    height:14px;
+    color: #ffffff;
+    text-align:center;
+}
 .desc-table {
     margin-left: -10%;
     width:120%;
@@ -302,37 +330,6 @@ div.chart {
 .summary-table tbody tr.active-row {
     font-weight: bold;
     color: #009879;
-}
-.mean-table {
-	width:100%;
-        margin-bottom: 10px;
-        border: double;
-        border-color: black;
-        font-size: 14px;
-        color: #000000;
-}
-.mean-table-header {
-	display:flex;
-	width:100%;
-	background:gray;
-	padding:($half-spacing-unit * 1.5) 0;
-}
-.mean-table-row {
-	display:flex;
-	width:100%;
-	padding:($half-spacing-unit * 1.5) 0;
-
-	&:nth-of-type(odd) {
-		background:$color-form-highlight;
-	}
-}
-.mean-table-data, .header__item {
-	flex: 1 1 20%;
-	text-align:center;
-}
-.header__item {
-        color:white;
-        text-align:center;
 }
  </style>
  <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8">
@@ -719,7 +716,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=0.00)
+       None (p=0.29)
       </div>
      </td>
     </tr>
@@ -741,7 +738,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=0.00)
+       None (p=0.37)
       </div>
      </td>
     </tr>
@@ -763,7 +760,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=0.00)
+       None (p=0.59)
       </div>
      </td>
     </tr>
@@ -785,7 +782,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=0.00)
+       None (p=0.69)
       </div>
      </td>
     </tr>
@@ -807,7 +804,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=0.00)
+       None (p=0.58)
       </div>
      </td>
     </tr>
@@ -829,7 +826,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=-0.00)
+       None (p=0.57)
       </div>
      </td>
     </tr>
@@ -851,7 +848,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=0.00)
+       None (p=0.24)
       </div>
      </td>
     </tr>
@@ -873,7 +870,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=0.00)
+       None (p=0.73)
       </div>
      </td>
     </tr>
@@ -933,7 +930,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=0.01)
+       None (p=0.21)
       </div>
      </td>
     </tr>
@@ -955,7 +952,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=0.01)
+       None (p=0.23)
       </div>
      </td>
     </tr>
@@ -977,7 +974,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=0.00)
+       None (p=0.62)
       </div>
      </td>
     </tr>
@@ -999,7 +996,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=0.00)
+       None (p=0.55)
       </div>
      </td>
     </tr>
@@ -1021,7 +1018,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=0.00)
+       None (p=0.59)
       </div>
      </td>
     </tr>
@@ -1043,7 +1040,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=-0.00)
+       None (p=0.61)
       </div>
      </td>
     </tr>
@@ -1065,7 +1062,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=0.01)
+       None (p=0.10)
       </div>
      </td>
     </tr>
@@ -1087,7 +1084,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       None (p=0.70)
+       None (p=0.22)
       </div>
      </td>
     </tr>
@@ -1147,7 +1144,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=-0.00)
+       None (p=0.36)
       </div>
      </td>
     </tr>
@@ -1169,7 +1166,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=-0.02)
+       Small (d=0.03)
       </div>
      </td>
     </tr>
@@ -1191,7 +1188,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=0.02)
+       Small (d=-0.02)
       </div>
      </td>
     </tr>
@@ -1213,7 +1210,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=0.00)
+       None (p=0.47)
       </div>
      </td>
     </tr>
@@ -1235,7 +1232,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       None (p=0.82)
+       None (p=0.98)
       </div>
      </td>
     </tr>
@@ -1257,7 +1254,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=0.01)
+       None (p=0.12)
       </div>
      </td>
     </tr>
@@ -1279,7 +1276,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=-0.00)
+       Small (d=0.02)
       </div>
      </td>
     </tr>
@@ -1301,7 +1298,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: bold; color: red;">
-       Medium (d=0.05)
+       Medium (d=-0.09)
       </div>
      </td>
     </tr>
@@ -1361,7 +1358,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=-0.00)
+       None (p=0.70)
       </div>
      </td>
     </tr>
@@ -1383,7 +1380,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=-0.00)
+       None (p=0.65)
       </div>
      </td>
     </tr>
@@ -1405,7 +1402,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       None (p=0.30)
+       None (p=0.85)
       </div>
      </td>
     </tr>
@@ -1427,7 +1424,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       None (p=0.96)
+       None (p=0.97)
       </div>
      </td>
     </tr>
@@ -1449,7 +1446,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=0.00)
+       None (p=0.42)
       </div>
      </td>
     </tr>
@@ -1471,7 +1468,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=-0.01)
+       None (p=0.12)
       </div>
      </td>
     </tr>
@@ -1493,7 +1490,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=-0.00)
+       None (p=0.26)
       </div>
      </td>
     </tr>
@@ -1515,7 +1512,7 @@ div.chart {
      </td>
      <td style="border-bottom-style: solid;">
       <div style="font-weight: normal;">
-       Small (d=-0.01)
+       None (p=0.02)
       </div>
      </td>
     </tr>
@@ -1603,76 +1600,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       82,144,945
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2084.9
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       3989.3
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       82,332,427
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2104.0
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       4028.8
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       0.9
-     </div>
-     <div class="mean-table-data">
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      -0.00
+     </td>
+     <td>
+      0.29
+     </td>
+     <td>
       0.00
-     </div>
-     <div class="mean-table-data">
-      0
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+     <td>
+      0.055
+     </td>
+     <td>
+      0.00
+     </td>
+     <td>
+      0.29
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="All_perf_page_load_time_ms_pdf">
    </canvas>
@@ -2180,76 +2246,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       82,144,945
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1408.6
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       3317.5
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       82,332,427
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1421.2
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       3344.9
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       0.9
-     </div>
-     <div class="mean-table-data">
-      0.00
-     </div>
-     <div class="mean-table-data">
-      0
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      -0.00
+     </td>
+     <td>
+      0.37
+     </td>
+     <td>
+      0.01
+     </td>
+     <td>
+      0.049
+     </td>
+     <td>
+      0.01
+     </td>
+     <td>
+      0.099
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="All_perf_page_load_time_from_responsestart_ms_pdf">
    </canvas>
@@ -2757,76 +2892,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       67,792,053
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1179.9
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2353.9
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       67,908,289
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1186.1
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2376.9
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       0.5
-     </div>
-     <div class="mean-table-data">
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      -0.00
+     </td>
+     <td>
+      0.59
+     </td>
+     <td>
       0.00
-     </div>
-     <div class="mean-table-data">
-      0
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+     <td>
+      0.67
+     </td>
+     <td>
+      0.00
+     </td>
+     <td>
+      0.99
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="All_perf_first_contentful_paint_ms_pdf">
    </canvas>
@@ -3334,76 +3538,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       67,792,054
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       501.0
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1406.6
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       67,908,305
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       503.4
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1423.1
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       0.5
-     </div>
-     <div class="mean-table-data">
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      -0.00
+     </td>
+     <td>
+      0.69
+     </td>
+     <td>
       0.00
-     </div>
-     <div class="mean-table-data">
-      0
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+     <td>
+      0.32
+     </td>
+     <td>
+      0.00
+     </td>
+     <td>
+      0.38
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="All_perf_first_contentful_paint_from_responsestart_ms_pdf">
    </canvas>
@@ -3911,76 +4184,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       56,626,024
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       835.7
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       3297.9
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       56,816,165
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       843.9
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       3347.7
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1.0
-     </div>
-     <div class="mean-table-data">
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      -0.00
+     </td>
+     <td>
+      0.58
+     </td>
+     <td>
+      -0.00
+     </td>
+     <td>
+      0.73
+     </td>
+     <td>
       0.00
-     </div>
-     <div class="mean-table-data">
-      0
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+     <td>
+      1
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="All_time_to_response_start_ms_pdf">
    </canvas>
@@ -4488,76 +4830,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       45,797,911
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       981.2
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1089.6
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       45,706,796
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       980.4
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1090.5
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       -0.1
-     </div>
-     <div class="mean-table-data">
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      0.00
+     </td>
+     <td>
+      0.57
+     </td>
+     <td>
       -0.00
-     </div>
-     <div class="mean-table-data">
-      0.00032
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+     <td>
+      0.78
+     </td>
+     <td>
+      0.00
+     </td>
+     <td>
+      0.85
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="All_fcp_time_pdf">
    </canvas>
@@ -5065,76 +5476,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       58,164,020
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1742.5
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2428.5
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       58,119,758
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1752.5
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2439.7
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       0.6
-     </div>
-     <div class="mean-table-data">
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      -0.01
+     </td>
+     <td>
+      0.24
+     </td>
+     <td>
       0.00
-     </div>
-     <div class="mean-table-data">
-      0
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+     <td>
+      0.11
+     </td>
+     <td>
+      0.00
+     </td>
+     <td>
+      0.22
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="All_load_time_pdf">
    </canvas>
@@ -5642,76 +6122,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       58,090,952
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       569.2
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       874.9
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       58,038,168
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       570.6
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       879.6
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       0.2
-     </div>
-     <div class="mean-table-data">
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
       0.00
-     </div>
-     <div class="mean-table-data">
-      0
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+     <td>
+      0.73
+     </td>
+     <td>
+      -0.00
+     </td>
+     <td>
+      0.13
+     </td>
+     <td>
+      0.01
+     </td>
+     <td>
+      0.00041
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="All_response_time_pdf">
    </canvas>
@@ -6219,76 +6768,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       73,541,720
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2102.3
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       4038.0
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       73,521,652
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2125.2
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       4086.5
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1.1
-     </div>
-     <div class="mean-table-data">
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      -0.01
+     </td>
+     <td>
+      0.21
+     </td>
+     <td>
       0.01
-     </div>
-     <div class="mean-table-data">
-      0
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+     <td>
+      0.026
+     </td>
+     <td>
+      0.01
+     </td>
+     <td>
+      0.13
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="Windows_perf_page_load_time_ms_pdf">
    </canvas>
@@ -6796,76 +7414,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       73,541,720
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1423.1
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       3363.9
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       73,521,652
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1441.1
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       3401.0
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1.3
-     </div>
-     <div class="mean-table-data">
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      -0.01
+     </td>
+     <td>
+      0.23
+     </td>
+     <td>
       0.01
-     </div>
-     <div class="mean-table-data">
-      0
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+     <td>
+      0.00068
+     </td>
+     <td>
+      0.01
+     </td>
+     <td>
+      0.0033
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="Windows_perf_page_load_time_from_responsestart_ms_pdf">
    </canvas>
@@ -7373,76 +8060,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       60,666,893
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1192.3
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2389.6
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       60,774,266
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1198.1
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2411.8
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       0.5
-     </div>
-     <div class="mean-table-data">
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      -0.00
+     </td>
+     <td>
+      0.62
+     </td>
+     <td>
       0.00
-     </div>
-     <div class="mean-table-data">
-      0
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+     <td>
+      0.7
+     </td>
+     <td>
+      0.00
+     </td>
+     <td>
+      0.98
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="Windows_perf_first_contentful_paint_ms_pdf">
    </canvas>
@@ -7950,76 +8706,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       60,666,894
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       509.0
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1435.0
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       60,774,282
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       511.8
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1452.6
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       0.5
-     </div>
-     <div class="mean-table-data">
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      -0.00
+     </td>
+     <td>
+      0.55
+     </td>
+     <td>
       0.00
-     </div>
-     <div class="mean-table-data">
-      0
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+     <td>
+      0.23
+     </td>
+     <td>
+      0.00
+     </td>
+     <td>
+      0.2
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="Windows_perf_first_contentful_paint_from_responsestart_ms_pdf">
    </canvas>
@@ -8527,76 +9352,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       49,859,758
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       848.2
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       3342.3
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       50,122,415
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       856.5
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       3396.9
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1.0
-     </div>
-     <div class="mean-table-data">
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      -0.00
+     </td>
+     <td>
+      0.59
+     </td>
+     <td>
+      -0.00
+     </td>
+     <td>
+      0.48
+     </td>
+     <td>
       0.00
-     </div>
-     <div class="mean-table-data">
-      0
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+     <td>
+      0.92
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="Windows_time_to_response_start_ms_pdf">
    </canvas>
@@ -9104,76 +9998,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       39,973,985
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       984.0
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1096.1
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       39,875,843
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       983.5
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1097.4
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       -0.1
-     </div>
-     <div class="mean-table-data">
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      0.00
+     </td>
+     <td>
+      0.61
+     </td>
+     <td>
       -0.00
-     </div>
-     <div class="mean-table-data">
-      0.031
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+     <td>
+      0.74
+     </td>
+     <td>
+      0.00
+     </td>
+     <td>
+      0.82
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="Windows_fcp_time_pdf">
    </canvas>
@@ -9681,76 +10644,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       50,876,868
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1741.4
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2450.0
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       50,630,952
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1753.7
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2464.1
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       0.7
-     </div>
-     <div class="mean-table-data">
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      -0.01
+     </td>
+     <td>
+      0.1
+     </td>
+     <td>
       0.01
-     </div>
-     <div class="mean-table-data">
-      0
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+     <td>
+      0.046
+     </td>
+     <td>
+      0.01
+     </td>
+     <td>
+      0.013
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="Windows_load_time_pdf">
    </canvas>
@@ -10258,76 +11290,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       50,812,325
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       567.6
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       877.0
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       50,564,094
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       567.6
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       884.0
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       0.0
-     </div>
-     <div class="mean-table-data">
-      0.00
-     </div>
-     <div class="mean-table-data">
-      0.7
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      0.01
+     </td>
+     <td>
+      0.22
+     </td>
+     <td>
+      -0.01
+     </td>
+     <td>
+      0.0051
+     </td>
+     <td>
+      0.01
+     </td>
+     <td>
+      2.3e-06
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="Windows_response_time_pdf">
    </canvas>
@@ -10835,76 +11936,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       2,844,103
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1950.7
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       3917.1
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2,912,017
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1935.1
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       3853.3
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       -0.8
-     </div>
-     <div class="mean-table-data">
-      -0.00
-     </div>
-     <div class="mean-table-data">
-      1.3e-06
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      0.00
+     </td>
+     <td>
+      0.36
+     </td>
+     <td>
+      0.00
+     </td>
+     <td>
+      0.48
+     </td>
+     <td>
+      0.03
+     </td>
+     <td>
+      2e-28
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="Linux_perf_page_load_time_ms_pdf">
    </canvas>
@@ -11412,76 +12582,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       2,844,103
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1291.3
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       3129.3
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2,912,017
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1214.7
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       3043.6
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       -5.9
-     </div>
-     <div class="mean-table-data">
-      -0.02
-     </div>
-     <div class="mean-table-data">
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      0.03
+     </td>
+     <td>
+      2e-08
+     </td>
+     <td>
+      -0.07
+     </td>
+     <td>
+      2.6e-185
+     </td>
+     <td>
+      0.10
+     </td>
+     <td>
       0
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="Linux_perf_page_load_time_from_responsestart_ms_pdf">
    </canvas>
@@ -11989,76 +13228,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       2,224,254
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1159.2
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2361.1
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2,113,204
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1202.6
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2396.3
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       3.7
-     </div>
-     <div class="mean-table-data">
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      -0.02
+     </td>
+     <td>
+      4.2e-05
+     </td>
+     <td>
       0.02
-     </div>
-     <div class="mean-table-data">
-      0
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+     <td>
+      2.2e-12
+     </td>
+     <td>
+      0.02
+     </td>
+     <td>
+      9.7e-13
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="Linux_perf_first_contentful_paint_ms_pdf">
    </canvas>
@@ -12566,76 +13874,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       2,224,254
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       505.4
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1340.5
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2,113,204
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       509.5
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1315.7
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       0.8
-     </div>
-     <div class="mean-table-data">
-      0.00
-     </div>
-     <div class="mean-table-data">
-      0.0013
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      -0.00
+     </td>
+     <td>
+      0.47
+     </td>
+     <td>
+      0.01
+     </td>
+     <td>
+      0.00097
+     </td>
+     <td>
+      0.01
+     </td>
+     <td>
+      4.1e-05
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="Linux_perf_first_contentful_paint_from_responsestart_ms_pdf">
    </canvas>
@@ -13143,76 +14520,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       1,878,588
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       877.0
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       3775.7
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1,846,833
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       877.9
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       3744.4
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       0.1
-     </div>
-     <div class="mean-table-data">
-      0.00
-     </div>
-     <div class="mean-table-data">
-      0.82
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      -0.00
+     </td>
+     <td>
+      0.98
+     </td>
+     <td>
+      0.01
+     </td>
+     <td>
+      0.00077
+     </td>
+     <td>
+      0.01
+     </td>
+     <td>
+      0.0019
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="Linux_time_to_response_start_ms_pdf">
    </canvas>
@@ -13720,76 +15166,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       1,662,232
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       977.3
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1070.3
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1,515,444
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       986.0
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1069.0
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       0.9
-     </div>
-     <div class="mean-table-data">
-      0.01
-     </div>
-     <div class="mean-table-data">
-      3.2e-13
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      -0.01
+     </td>
+     <td>
+      0.12
+     </td>
+     <td>
+      0.02
+     </td>
+     <td>
+      8.3e-13
+     </td>
+     <td>
+      0.02
+     </td>
+     <td>
+      2.7e-18
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="Linux_fcp_time_pdf">
    </canvas>
@@ -14297,76 +15812,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       2,268,375
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1622.7
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2306.6
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2,283,621
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1614.3
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2309.8
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       -0.5
-     </div>
-     <div class="mean-table-data">
-      -0.00
-     </div>
-     <div class="mean-table-data">
-      0.00012
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      0.02
+     </td>
+     <td>
+      2.3e-06
+     </td>
+     <td>
+      0.00
+     </td>
+     <td>
+      0.18
+     </td>
+     <td>
+      0.03
+     </td>
+     <td>
+      2.1e-38
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="Linux_load_time_pdf">
    </canvas>
@@ -14874,76 +16458,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       2,264,250
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       550.8
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       870.2
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2,273,820
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       594.4
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       840.5
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       7.9
-     </div>
-     <div class="mean-table-data">
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      -0.09
+     </td>
+     <td>
+      6.3e-89
+     </td>
+     <td>
+      0.06
+     </td>
+     <td>
+      5.9e-125
+     </td>
+     <td>
       0.05
-     </div>
-     <div class="mean-table-data">
-      0
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+     <td>
+      1.4e-122
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="Linux_response_time_pdf">
    </canvas>
@@ -15451,76 +17104,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       5,759,122
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1929.6
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       3340.9
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       5,898,758
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1923.1
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       3320.8
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       -0.3
-     </div>
-     <div class="mean-table-data">
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      0.00
+     </td>
+     <td>
+      0.7
+     </td>
+     <td>
       -0.00
-     </div>
-     <div class="mean-table-data">
-      0.0009
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+     <td>
+      0.11
+     </td>
+     <td>
+      0.01
+     </td>
+     <td>
+      0.066
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="Mac_perf_page_load_time_ms_pdf">
    </canvas>
@@ -16028,76 +17750,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       5,759,122
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1280.9
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2760.9
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       5,898,758
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1274.9
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2716.6
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       -0.5
-     </div>
-     <div class="mean-table-data">
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      0.00
+     </td>
+     <td>
+      0.65
+     </td>
+     <td>
       -0.00
-     </div>
-     <div class="mean-table-data">
-      0.00017
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+     <td>
+      0.22
+     </td>
+     <td>
+      0.01
+     </td>
+     <td>
+      0.0067
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="Mac_perf_page_load_time_from_responsestart_ms_pdf">
    </canvas>
@@ -16605,76 +18396,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       4,900,906
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1035.7
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1846.7
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       5,020,819
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1034.5
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1886.1
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       -0.1
-     </div>
-     <div class="mean-table-data">
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      0.00
+     </td>
+     <td>
+      0.85
+     </td>
+     <td>
       -0.00
-     </div>
-     <div class="mean-table-data">
-      0.3
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+     <td>
+      0.17
+     </td>
+     <td>
+      0.00
+     </td>
+     <td>
+      0.54
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="Mac_perf_first_contentful_paint_ms_pdf">
    </canvas>
@@ -17182,76 +19042,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       4,900,906
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       399.1
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1025.6
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       5,020,819
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       399.0
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1053.5
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       -0.0
-     </div>
-     <div class="mean-table-data">
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
       -0.00
-     </div>
-     <div class="mean-table-data">
-      0.96
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+     <td>
+      0.97
+     </td>
+     <td>
+      -0.00
+     </td>
+     <td>
+      0.15
+     </td>
+     <td>
+      0.00
+     </td>
+     <td>
+      0.19
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="Mac_perf_first_contentful_paint_from_responsestart_ms_pdf">
    </canvas>
@@ -17759,76 +19688,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       4,887,678
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       691.7
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2559.3
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       4,846,917
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       700.8
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2585.9
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1.3
-     </div>
-     <div class="mean-table-data">
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      -0.00
+     </td>
+     <td>
+      0.42
+     </td>
+     <td>
       0.00
-     </div>
-     <div class="mean-table-data">
-      3.8e-08
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+     <td>
+      0.091
+     </td>
+     <td>
+      0.01
+     </td>
+     <td>
+      0.16
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="Mac_time_to_response_start_ms_pdf">
    </canvas>
@@ -18336,76 +20334,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       4,161,694
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       956.1
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1033.3
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       4,315,509
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       950.1
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1032.3
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       -0.6
-     </div>
-     <div class="mean-table-data">
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      0.01
+     </td>
+     <td>
+      0.12
+     </td>
+     <td>
       -0.01
-     </div>
-     <div class="mean-table-data">
-      0
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+     <td>
+      0.015
+     </td>
+     <td>
+      0.01
+     </td>
+     <td>
+      0.051
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="Mac_fcp_time_pdf">
    </canvas>
@@ -18913,76 +20980,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       5,018,777
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1808.1
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2254.7
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       5,205,185
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       1801.1
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       2246.6
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       -0.4
-     </div>
-     <div class="mean-table-data">
-      -0.00
-     </div>
-     <div class="mean-table-data">
-      5.4e-07
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      0.01
+     </td>
+     <td>
+      0.26
+     </td>
+     <td>
+      -0.01
+     </td>
+     <td>
+      0.0026
+     </td>
+     <td>
+      0.01
+     </td>
+     <td>
+      0.0018
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="Mac_load_time_pdf">
    </canvas>
@@ -19490,76 +21626,145 @@ div.chart {
     }
   });
   </script>
-  <div class="mean-table">
-   <div class="mean-table-header">
-    <div class="header__item">
-     branch
-    </div>
-    <div class="header__item">
-     n
-    </div>
-    <div class="header__item">
-     mean
-    </div>
-    <div class="header__item">
-     stddev
-    </div>
-    <div class="header__item">
-     uplift(%)
-    </div>
-    <div class="header__item">
-     effect size
-    </div>
-    <div class="header__item">
-     p-value
-    </div>
-   </div>
-   <div class="table-content">
-    <div class="mean-table-row">
-     <div class="mean-table-data">
-      rcwn-disabled
-     </div>
-     <div class="mean-table-data">
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th>
+      branch
+     </th>
+     <th>
+      n
+     </th>
+     <th>
+      mean
+     </th>
+     <th>
+      stddev
+     </th>
+     <th>
+      uplift(%)
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-disabled (control)
+     </td>
+     <td>
       5,014,377
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       593.6
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       855.3
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-     <div class="mean-table-data">
-     </div>
-    </div>
-    <div class="mean-table-row">
-     <div class="mean-table-data">
+     </td>
+     <td>
+     </td>
+    </tr>
+    <tr>
+     <td>
       rcwn-enabled
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       5,200,254
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       588.5
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       852.4
-     </div>
-     <div class="mean-table-data">
+     </td>
+     <td>
       -0.8
-     </div>
-     <div class="mean-table-data">
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table border="1" cellpadding="0" cellspacing="0" class="stat-table">
+   <thead>
+    <tr>
+     <th rowspan="2">
+      <div class="tooltip">
+       branch
+       <span class="tooltiptext">
+        All results compared against control.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       t-test
+       <span class="tooltiptext">
+        Student t-test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       mwu
+       <span class="tooltiptext">
+        Mann-Whitney U test statistic.
+       </span>
+      </div>
+     </th>
+     <th colspan="2">
+      <div class="tooltip">
+       ks
+       <span class="tooltiptext">
+        Kolmogorov-Smirnov test statistic.
+       </span>
+      </div>
+     </th>
+    </tr>
+    <tr>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+     <th>
+      effect
+     </th>
+     <th>
+      p-value
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      rcwn-enabled
+     </td>
+     <td>
+      0.01
+     </td>
+     <td>
+      0.025
+     </td>
+     <td>
       -0.01
-     </div>
-     <div class="mean-table-data">
-      0
-     </div>
-    </div>
-   </div>
-  </div>
+     </td>
+     <td>
+      0.0098
+     </td>
+     <td>
+      0.01
+     </td>
+     <td>
+      0.16
+     </td>
+    </tr>
+   </tbody>
+  </table>
   <div class="chart">
    <canvas id="Mac_response_time_pdf">
    </canvas>
