@@ -1,0 +1,65 @@
+#!/usr/bin/env python3
+import os
+import json
+import glob
+import django
+from django.conf import settings
+from django.template.loader import get_template
+from bs4 import BeautifulSoup as bs
+
+def setupDjango():
+  TEMPLATES = [
+      {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        'DIRS': [os.path.join(os.path.dirname(__file__),'lib','templates','html')]
+        }
+      ]
+  settings.configure(TEMPLATES=TEMPLATES)
+  django.setup()
+
+########### Start Program Here ###########
+if __name__ == "__main__":
+  setupDjango()
+  t = get_template("index.html")
+
+experiment_reports = []
+other_reports = []
+for filename in glob.glob("reports/*.html"):
+  if filename == "reports/index.html":
+    continue
+
+  print("Reading " + filename)
+
+  with open(filename) as fp:
+    soup = bs(fp, 'html.parser')
+    element_by_id=soup.find("div",{"id":"config"})
+    config = json.loads(element_by_id.section.div.code.pre.text)
+    if config["is_experiment"]==True:
+      experiment_reports.append(config)
+    else:
+      # We dump some branch data for non-experiment reports
+      # so, add some additional info for styling.
+      config["branchlen"] = len(config["branches"])
+      for i in range(len(config["branches"])):
+        config["branches"][-1]["last"] = False
+      config["branches"][-1]["last"] = True
+      if len(other_reports)%2==0:
+        config["style"] = "background:#ececec"
+      else:
+        config["style"] = "background:white"
+
+      other_reports.append(config)
+
+
+context = {
+    "title": "Telemetry Performance Report Index",
+    "experiment_reports": experiment_reports,
+    "other_reports": other_reports
+}
+
+# Render and Prettify
+html = t.render(context)
+soup = bs(html, 'html.parser')
+
+with open("reports/index.html", "w") as f:
+  f.write(soup.prettify())

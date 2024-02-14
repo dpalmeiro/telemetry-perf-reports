@@ -20042,5 +20042,386 @@ div.chart {
     </code>
    </div>
   </section>
+  <section class="accordion">
+   <input id="Pageload event: fcp_time-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Pageload event: fcp_time-query">
+     Pageload event: fcp_time
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with eventdata as (
+SELECT
+  normalized_os as segment,
+  mozfun.map.get_key(ping_info.experiments, "impact-of-race-cache-with-network-feature").branch as branch,
+  SAFE_CAST((SELECT value FROM UNNEST(event.extra) WHERE key = 'fcp_time') AS int) AS fcp_time,
+FROM
+  `moz-fx-data-shared-prod.firefox_desktop.pageload`
+CROSS JOIN
+  UNNEST(events) AS event
+WHERE
+  normalized_channel = "release"
+  AND DATE(submission_timestamp) &gt;= DATE('2023-08-01')
+  AND DATE(submission_timestamp) &lt;= DATE('2023-08-09')  
+  AND mozfun.map.get_key(ping_info.experiments, "impact-of-race-cache-with-network-feature").branch is not null
+)
+SELECT
+  segment,
+  branch,
+  fcp_time as bucket,
+  COUNT(*) as counts
+FROM
+  eventdata
+WHERE
+  fcp_time &gt;= 0 AND fcp_time &lt;= 10000
+GROUP BY
+  segment, branch, bucket
+ORDER BY
+  segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Pageload event: load_time-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Pageload event: load_time-query">
+     Pageload event: load_time
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with eventdata as (
+SELECT
+  normalized_os as segment,
+  mozfun.map.get_key(ping_info.experiments, "impact-of-race-cache-with-network-feature").branch as branch,
+  SAFE_CAST((SELECT value FROM UNNEST(event.extra) WHERE key = 'load_time') AS int) AS load_time,
+FROM
+  `moz-fx-data-shared-prod.firefox_desktop.pageload`
+CROSS JOIN
+  UNNEST(events) AS event
+WHERE
+  normalized_channel = "release"
+  AND DATE(submission_timestamp) &gt;= DATE('2023-08-01')
+  AND DATE(submission_timestamp) &lt;= DATE('2023-08-09')  
+  AND mozfun.map.get_key(ping_info.experiments, "impact-of-race-cache-with-network-feature").branch is not null
+)
+SELECT
+  segment,
+  branch,
+  load_time as bucket,
+  COUNT(*) as counts
+FROM
+  eventdata
+WHERE
+  load_time &gt;= 0 AND load_time &lt;= 30000
+GROUP BY
+  segment, branch, bucket
+ORDER BY
+  segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Pageload event: response_time-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Pageload event: response_time-query">
+     Pageload event: response_time
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with eventdata as (
+SELECT
+  normalized_os as segment,
+  mozfun.map.get_key(ping_info.experiments, "impact-of-race-cache-with-network-feature").branch as branch,
+  SAFE_CAST((SELECT value FROM UNNEST(event.extra) WHERE key = 'response_time') AS int) AS response_time,
+FROM
+  `moz-fx-data-shared-prod.firefox_desktop.pageload`
+CROSS JOIN
+  UNNEST(events) AS event
+WHERE
+  normalized_channel = "release"
+  AND DATE(submission_timestamp) &gt;= DATE('2023-08-01')
+  AND DATE(submission_timestamp) &lt;= DATE('2023-08-09')  
+  AND mozfun.map.get_key(ping_info.experiments, "impact-of-race-cache-with-network-feature").branch is not null
+)
+SELECT
+  segment,
+  branch,
+  response_time as bucket,
+  COUNT(*) as counts
+FROM
+  eventdata
+WHERE
+  response_time &gt;= 0 AND response_time &lt;= 10000
+GROUP BY
+  segment, branch, bucket
+ORDER BY
+  segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Histogram: payload.processes.content.histograms.perf_page_load_time_ms-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Histogram: payload.processes.content.histograms.perf_page_load_time_ms-query">
+     Histogram: payload.processes.content.histograms.perf_page_load_time_ms
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "impact-of-race-cache-with-network-feature").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.perf_page_load_time_ms, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main`
+    WHERE
+        DATE(submission_timestamp) &gt;= DATE('2023-08-01')
+        AND DATE(submission_timestamp) &lt;= DATE('2023-08-09')
+        AND normalized_channel = "release"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.perf_page_load_time_ms is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
+        AND mozfun.map.get_key(environment.experiments, "impact-of-race-cache-with-network-feature").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Histogram: payload.processes.content.histograms.perf_page_load_time_from_responsestart_ms-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Histogram: payload.processes.content.histograms.perf_page_load_time_from_responsestart_ms-query">
+     Histogram: payload.processes.content.histograms.perf_page_load_time_from_responsestart_ms
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "impact-of-race-cache-with-network-feature").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.perf_page_load_time_from_responsestart_ms, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main`
+    WHERE
+        DATE(submission_timestamp) &gt;= DATE('2023-08-01')
+        AND DATE(submission_timestamp) &lt;= DATE('2023-08-09')
+        AND normalized_channel = "release"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.perf_page_load_time_from_responsestart_ms is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
+        AND mozfun.map.get_key(environment.experiments, "impact-of-race-cache-with-network-feature").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Histogram: payload.processes.content.histograms.perf_first_contentful_paint_ms-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Histogram: payload.processes.content.histograms.perf_first_contentful_paint_ms-query">
+     Histogram: payload.processes.content.histograms.perf_first_contentful_paint_ms
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "impact-of-race-cache-with-network-feature").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.perf_first_contentful_paint_ms, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main`
+    WHERE
+        DATE(submission_timestamp) &gt;= DATE('2023-08-01')
+        AND DATE(submission_timestamp) &lt;= DATE('2023-08-09')
+        AND normalized_channel = "release"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.perf_first_contentful_paint_ms is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
+        AND mozfun.map.get_key(environment.experiments, "impact-of-race-cache-with-network-feature").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Histogram: payload.processes.content.histograms.perf_first_contentful_paint_from_responsestart_ms-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Histogram: payload.processes.content.histograms.perf_first_contentful_paint_from_responsestart_ms-query">
+     Histogram: payload.processes.content.histograms.perf_first_contentful_paint_from_responsestart_ms
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "impact-of-race-cache-with-network-feature").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.perf_first_contentful_paint_from_responsestart_ms, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main`
+    WHERE
+        DATE(submission_timestamp) &gt;= DATE('2023-08-01')
+        AND DATE(submission_timestamp) &lt;= DATE('2023-08-09')
+        AND normalized_channel = "release"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.perf_first_contentful_paint_from_responsestart_ms is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
+        AND mozfun.map.get_key(environment.experiments, "impact-of-race-cache-with-network-feature").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Histogram: payload.processes.content.histograms.time_to_response_start_ms-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Histogram: payload.processes.content.histograms.time_to_response_start_ms-query">
+     Histogram: payload.processes.content.histograms.time_to_response_start_ms
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "impact-of-race-cache-with-network-feature").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.time_to_response_start_ms, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main`
+    WHERE
+        DATE(submission_timestamp) &gt;= DATE('2023-08-01')
+        AND DATE(submission_timestamp) &lt;= DATE('2023-08-09')
+        AND normalized_channel = "release"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.time_to_response_start_ms is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
+        AND mozfun.map.get_key(environment.experiments, "impact-of-race-cache-with-network-feature").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
  </div>
 </body>
