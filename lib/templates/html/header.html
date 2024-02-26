@@ -29,7 +29,7 @@ body {
   background-color: #555;
   color: #fff;
   text-align: center;
-  padding: 10px 0;
+  padding: 10px 10px;
   border-radius: 6px;
 
   /* Position the tooltip text */
@@ -260,6 +260,8 @@ div.chart {
     border-color: black;
     text-align:center;
     padding:($half-spacing-unit * 1.5) 10;
+    padding-bottom: 10;
+    padding-top: 10;
     font-size: 14px;
 }
 .desc-table td {
@@ -276,7 +278,7 @@ div.chart {
 .desc-header {
     background-color: gray;
     width:30%;
-    height:14px;
+    height:12px;
     color: #ffffff;
     text-align:center;
     padding: 5px;
@@ -320,10 +322,6 @@ div.chart {
     border-right-style: hidden;
     border-bottom-style: hidden;
     border-top-style: hidden;
-
-    &:nth-of-type(odd) {
-    	background:#ececec;
-    }
 }
 .summary-table tbody tr.active-row {
     font-weight: bold;

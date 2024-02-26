@@ -178,7 +178,41 @@ def calc_confidence_interval(data, confidence=0.95):
     h = se * stats.t.ppf((1 + confidence) / 2., n-1)
     return [m, se, m-h, m+h]
 
-def createEmptyResultsTemplate(config):
+def createNumericalTemplate():
+  template = {
+      "desc": "",
+      "mean": 0,
+      "confidence": {
+        "min": 0,
+        "max": 0
+        },
+      "se": 0,
+      "var": 0,
+      "std": 0,
+      "n": 0,
+      "pdf":
+      {
+        "values" : [],
+        "density" : [],
+        "cdf": []
+        },
+      "quantiles": [],
+      "quantile_vals": [],
+      "tests": {}
+  }
+  return template
+
+def createCategoricalTemplate():
+  template = {
+      "desc": "",
+      "labels": [],
+      "counts": [],
+      "ratios": [],
+      "sum": 0
+  }
+  return template
+
+def createResultsTemplate(config):
   template = {}
   for branch in config['branches']:
     template[branch] = {}
@@ -191,48 +225,14 @@ def createEmptyResultsTemplate(config):
       
       for histogram in config['histograms']:
         hist_name = histogram.split(".")[-1]
-        template[branch][segment]["histograms"][hist_name] = {
-                 "mean": 0,
-                 "confidence": {
-                    "min": 0,
-                    "max": 0
-                 },
-                 "se": 0,
-                 "var": 0,
-                 "std": 0,
-                 "n": 0,
-                 "pdf":
-                       {
-                        "values" : [],
-                        "density" : [],
-                        "cdf": []
-                       },
-                  "quantiles": [],
-                  "quantile_vals": [],
-                  "tests": {}
-        }
+        if config['histograms'][histogram]['kind'] == 'categorical':
+          template[branch][segment]["histograms"][hist_name] = createCategoricalTemplate()
+        else:
+          template[branch][segment]["histograms"][hist_name] = createNumericalTemplate()
 
         for metric in config["pageload_event_metrics"]:
-          template[branch][segment]["pageload_event_metrics"][metric] = {
-                   "mean": 0,
-                   "confidence": {
-                      "min": 0,
-                      "max": 0
-                   },
-                   "se": 0,
-                   "var": 0,
-                   "std": 0,
-                   "n": 0,
-                   "pdf":
-                         {
-                          "values" : [],
-                          "density" : [],
-                          "cdf": []
-                         },
-                   "quantiles": [],
-                   "quantile_vals": [],
-                  "tests": {}
-          }
+          template[branch][segment]["pageload_event_metrics"][metric] = createNumericalTemplate()
+
   return template
 
 class DataAnalyzer:
@@ -240,7 +240,7 @@ class DataAnalyzer:
     self.config = config
     self.event_controldf = None
     self.control = self.config["branches"][0]
-    self.results = createEmptyResultsTemplate(config)
+    self.results = createResultsTemplate(config)
 
     self.binVals = {}
     for field in self.config["pageload_event_metrics"]:
@@ -255,32 +255,61 @@ class DataAnalyzer:
     self.processHistogramData(data, branch)
     self.processPageLoadEventData(data, branch)
 
+  def processNumericalHistogramData(self, hist, data, branch, segment):
+    hist_name = hist.split('.')[-1]
+    print(f"      processing numerical histogram: {hist}")
+
+    # Calculate stats
+    bins = data[branch][segment]["histograms"][hist]["bins"]
+    counts = data[branch][segment]["histograms"][hist]["counts"]
+
+    desc = self.config["histograms"][hist]["desc"]
+    self.results[branch][segment]["histograms"][hist_name]["desc"] = desc
+
+    calculate_histogram_stats(bins, counts, self.results[branch][segment]["histograms"][hist_name])
+
+    # Calculate statistical tests
+    if branch != self.control:
+      control_data = data[self.control][segment]["histograms"][hist]
+      branch_data = data[branch][segment]["histograms"][hist]
+      result = self.results[branch][segment]["histograms"][hist_name]
+      calculate_histogram_tests_subsampling(control_data, branch_data, result)
+
+  def processCategoricalHistogramData(self, hist, data, branch, segment):
+    hist_name = hist.split('.')[-1]
+    print(f"      processing categorical histogram: {hist}")
+    desc = self.config["histograms"][hist]["desc"]
+    labels = data[branch][segment]["histograms"][hist]["bins"]
+    counts = data[branch][segment]["histograms"][hist]["counts"]
+
+    self.results[branch][segment]["histograms"][hist_name]["desc"] = desc
+    self.results[branch][segment]["histograms"][hist_name]["labels"] = labels
+    self.results[branch][segment]["histograms"][hist_name]["counts"] = counts
+    total = sum(counts)
+
+    self.results[branch][segment]["histograms"][hist_name]["sum"] = total
+    ratios = [x/total for x in counts]
+    self.results[branch][segment]["histograms"][hist_name]["ratios"] = ratios
+
+    if branch != self.control:
+      ratios_control = self.results[self.control][segment]["histograms"][hist_name]["ratios"]
+      uplift = []
+      for i in range(len(ratios)):
+        uplift.append((ratios[i]-ratios_control[i])*100)
+        self.results[branch][segment]["histograms"][hist_name]["uplift"] = uplift
+
   def processHistogramData(self, data, branch):
     print(f"Calculating histogram statistics for branch: {branch}")
     for segment in self.config['segments']:
       print(f"  processing segment: {segment}")
     
       for hist in self.config["histograms"]:
-        hist_name = hist.split('.')[-1]
-        print(f"      processing histogram: {hist}")
+        kind = self.config["histograms"][hist]["kind"]
+        if kind=="categorical":
+          self.processCategoricalHistogramData(hist, data, branch, segment)
+        else:
+          self.processNumericalHistogramData(hist, data, branch, segment)
 
-        # Calculate stats
-        bins = data[branch][segment]["histograms"][hist]["bins"]
-        counts = data[branch][segment]["histograms"][hist]["counts"]
-        calculate_histogram_stats(bins, counts, self.results[branch][segment]["histograms"][hist_name])
-
-        # Calculate statistical tests
-        if branch != self.control:
-          control_data = data[self.control][segment]["histograms"][hist]
-          branch_data = data[branch][segment]["histograms"][hist]
-          result = self.results[branch][segment]["histograms"][hist_name]
-          calculate_histogram_tests_subsampling(control_data, branch_data, result)
-
-        # Calculate statistical tests
-        #if branch != self.control:
-        #  control_data = self.results[self.control][segment]["histograms"][hist_name]
-        #  branch_data = self.results[branch][segment]["histograms"][hist_name]
-        #  calculate_histogram_ttest(bins, counts, branch_data, control_data)
 
   def processPageLoadEventData(self, data, branch):
     print(f"Calculating pageload event statistics for branch: {branch}")
@@ -293,6 +322,9 @@ class DataAnalyzer:
         # Calculate stats
         bins = data[branch][segment]["pageload_event_metrics"][metric]["bins"]
         counts = data[branch][segment]["pageload_event_metrics"][metric]["counts"]
+        desc = self.config["pageload_event_metrics"][metric]["desc"]
+
+        self.results[branch][segment]["pageload_event_metrics"][metric]["desc"] = desc
         calculate_histogram_stats(bins, counts, self.results[branch][segment]["pageload_event_metrics"][metric])
 
         # Calculate statistical tests
