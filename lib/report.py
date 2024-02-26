@@ -18,6 +18,15 @@ def get_cohen_effect_meaning(d):
   else:
     return "Large"
 
+def get_rank_biserial_corr_meaning(r):
+  r_abs = abs(r)
+  if r_abs <= 0.05:
+    return "Small"
+  if r_abs <= 0.1:
+    return "Medium"
+  else:
+    return "Large"
+
 # CubicSpline requires a monotonically increasing x.
 # Remove duplicates.
 def cubic_spline_prep(x, y):
@@ -195,11 +204,11 @@ class ReportGenerator:
             else:
               uplift_str = "{0:.1f}".format(uplift)
 
-            pval = self.data[branch][segment][metric_type][metric]["tests"]["ttest"]["p-value"]
-            effect_size = self.data[branch][segment][metric_type][metric]["tests"]["ttest"]["effect"]
-            effect_meaning = get_cohen_effect_meaning(effect_size)
+            pval = self.data[branch][segment][metric_type][metric]["tests"]["mwu"]["p-value"]
+            effect_size = self.data[branch][segment][metric_type][metric]["tests"]["mwu"]["effect"]
+            effect_meaning = get_rank_biserial_corr_meaning(effect_size)
             effect_size = "{0:.2f}".format(effect_size)
-            effect = f"{effect_meaning} (d={effect_size})"
+            effect = f"{effect_meaning} (r={effect_size})"
         
             if pval >= 0.001:
               pval = "{0:.2f}".format(pval)
