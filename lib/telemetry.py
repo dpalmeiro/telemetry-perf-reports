@@ -6,6 +6,24 @@ from google.cloud import bigquery
 from django.template import Template, Context
 from django.template.loader import get_template
 
+# Remove any histograms that have empty datasets in
+# either a branch, or branch segment.
+def invalidDataSet(df, branches, segments):
+  if df.empty:
+    return True
+
+  for branch in branches:
+    branch_df = df[df["branch"]==branch]
+    if branch_df.empty:
+      return True
+    for segment in segments:
+      if segment=="All":
+        continue
+      branch_segment_df = branch_df[branch_df["segment"]==segment]
+      if branch_segment_df.empty:
+        return True
+
+  return False
 
 def segments_are_all_OS(segments):
   os_segments = set(["Windows", "All", "Linux", "Mac"])
@@ -31,19 +49,31 @@ class TelemetryClient:
         counts = list(subset['counts'])
       else:
         subset = df[(df["segment"] == segment) & (df["branch"] == branch)]
+        print(subset)
         buckets = list(subset['bucket'])
         counts = list(subset['counts'])
 
       # Some clients report bucket sizes that are not real, and these buckets
       # end up having 1-5 samples in them.  Filter these out entirely.
-      remove=[]
-      for i in range(1,len(counts)-1):
-        if (counts[i-1] > 1000 and counts[i] < counts[i-1]/100) or \
-           (counts[i+1] > 1000 and counts[i] < counts[i+1]/100):
-          remove.append(i)
-      for i in sorted(remove, reverse=True):
-        del buckets[i]
-        del counts[i]
+      if self.config['histograms'][histogram]['kind'] == 'numerical':
+        remove=[]
+        for i in range(1,len(counts)-1):
+          if (counts[i-1] > 1000 and counts[i] < counts[i-1]/100) or \
+             (counts[i+1] > 1000 and counts[i] < counts[i+1]/100):
+            remove.append(i)
+        for i in sorted(remove, reverse=True):
+          del buckets[i]
+          del counts[i]
+
+      # Add labels to the buckets for categorical histograms.
+      if self.config['histograms'][histogram]['kind'] == 'categorical':
+        labels = self.config['histograms'][histogram]['labels']
+        # Remove overflow bucket if it exists
+        if len(labels)==(len(buckets)-1) and counts[-1]==0:
+          del buckets[-1]
+          del counts[-1]
+        for i in range(min(len(labels),len(buckets))):
+          buckets[i] = labels[i]
 
       assert len(buckets) == len(counts)
       results[branch][segment]['histograms'][histogram] = {}
@@ -86,17 +116,18 @@ class TelemetryClient:
     remove = []
     for histogram in self.config['histograms']:
       df = self.getHistogramDataNonExperiment(self.config, histogram)
-      # Remove empty histogram data.
-      if df.empty:
-        remove.append(self.config['histograms'].index(histogram))
+      print(df)
+
+      # Remove histograms that are empty.
+      if invalidDataSet(df, self.config['branches'], self.config['segments']):
+        remove.append(histogram)
         continue
       histograms[histogram] = df
-      print(histograms[histogram])
 
-    for i in sorted(remove, reverse=True):
-      histogram=self.config['histograms'][i]
-      print(f"Empty dataset found, removing: {histogram}.")
-      del self.config['histograms'][i]
+    for hist in remove:
+      if hist in self.config['histograms']:
+        print(f"Empty dataset found, removing: {histogram}.")
+        del self.config['histograms'][hist]
 
     # Combine histogram and pageload event results.
     results = {}
@@ -122,9 +153,20 @@ class TelemetryClient:
 
     #Get data for each histogram in this segment.
     histograms = {}
+    remove = []
     for histogram in self.config['histograms']:
-      histograms[histogram] = self.getHistogramData(self.config, histogram)
-      print(histograms[histogram])
+      df = self.getHistogramData(self.config, histogram)
+
+      # Remove invalid histogram data.
+      if invalidDataSet(df, self.config['branches'], self.config['segments']):
+        remove.append(histogram)
+        continue
+      histograms[histogram] = df
+
+    for hist in remove:
+      if hist in self.config['histograms']:
+        print(f"Empty dataset found, removing: {histogram}.")
+        del self.config['histograms'][hist]
 
     # Combine histogram and pageload event results.
     results = {}
@@ -143,8 +185,8 @@ class TelemetryClient:
   def generatePageloadEventQuery_OS_segments_non_experiment(self, metric):
     t = get_template("events_os_segments_non_experiment.sql")
 
-    minVal = self.config['pageload_event_metrics'][metric][0]
-    maxVal = self.config['pageload_event_metrics'][metric][1]
+    minVal = self.config['pageload_event_metrics'][metric]['min']
+    maxVal = self.config['pageload_event_metrics'][metric]['max']
 
     branches = self.config["branches"]
     for i in range(len(branches)):
@@ -212,8 +254,8 @@ class TelemetryClient:
     maxBucket = 0
     minBucket = 30000
     for metric in self.config['pageload_event_metrics']:
-      metricMin = self.config['pageload_event_metrics'][metric][0]
-      metricMax = self.config['pageload_event_metrics'][metric][1]
+      metricMin = self.config['pageload_event_metrics'][metric]['min']
+      metricMax = self.config['pageload_event_metrics'][metric]['max']
       if metricMax > maxBucket:
         maxBucket = metricMax
       if metricMin < minBucket:

@@ -5,8 +5,8 @@ import sys
 import argparse
 import numpy as np
 import django
+import lib.parser as parser
 from django.conf import settings
-from lib.parser import parseConfigFile, parseNimbusAPI
 from lib.telemetry import TelemetryClient
 from lib.analysis import DataAnalyzer
 from lib.report import ReportGenerator
@@ -95,7 +95,7 @@ if __name__ == "__main__":
 
   # Parse config file.
   print("Loading config file: ", args.config)
-  config = parseConfigFile(args.config)
+  config = parser.parseConfigFile(args.config)
   slug = config['slug']
 
   # Setup local dirs
@@ -114,9 +114,12 @@ if __name__ == "__main__":
 
   # If results not found, generate them.
   if results is None:
+    # Annotate metrics
+    parser.annotateMetrics(dataDir, config, skipCache)
+
     if config["is_experiment"] == True:
       # Parse Nimbus API.
-      api = parseNimbusAPI(dataDir, slug, skipCache)
+      api = parser.parseNimbusAPI(dataDir, slug, skipCache)
       config = config | api
 
       # Make control the first element if not already.

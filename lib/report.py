@@ -55,6 +55,12 @@ def getIconForSegment(segment):
   else:
     return "fa-solid fa-chart-simple"
 
+def flip_row_background(color):
+  if color == "white":
+    return "#ececec"
+  else:
+    return "white"
+
 class ReportGenerator:
   def __init__(self, data):
     self.data = data
@@ -99,17 +105,80 @@ class ReportGenerator:
     t = get_template("summary.html")
     control=self.data["branches"][0]
 
+    row_background="white";
+
     segments = []
     for segment in self.data["segments"]:
-      metrics = []
+      numerical_metrics = []
+      categorical_metrics = []
       for metric_type in ["histograms", "pageload_event_metrics"]:
         for metric in self.data[metric_type]:
+          # Alternate between white and #ececec for row backgound.
+          row_background = flip_row_background(row_background)
+
           if metric_type == "pageload_event_metrics":
+            kind = "numerical"
             metric_name = f"pageload event: {metric}"
           else:
+            kind = self.data[metric_type][metric]["kind"]
             metric = metric.split(".")[-1]
             metric_name = metric
 
+          # Generate summary for categorical histograms here.
+          if kind == "categorical":
+            branches = []
+            for branch in self.data["branches"]:
+              if "uplift" in self.data[branch][segment][metric_type][metric]:
+                rows = []
+                for i in range(len(self.data[branch][segment][metric_type][metric]["labels"])):
+                  label = self.data[branch][segment][metric_type][metric]["labels"][i]
+                  #uplift = "{0:.2f}".format(self.data[branch][segment][metric_type][metric]["uplift"][i])
+                  uplift = self.data[branch][segment][metric_type][metric]["uplift"][i]
+
+                  weight="font-weight:normal;"
+                  if abs(uplift) >= 10:
+                    effect = "Large"
+                    weight = "font-weight:bold;"
+                  elif abs(uplift) >= 5:
+                    effect = "Medium"
+                    weight = "font-weight:bold;"
+                  elif abs(uplift) >= 2:
+                    effect = "Small"
+                  else:
+                    effect = "None"
+
+                  if uplift > 0:
+                    uplift = "+{0:.2f}".format(self.data[branch][segment][metric_type][metric]["uplift"][i])
+                  else:
+                    uplift = "{0:.2f}".format(self.data[branch][segment][metric_type][metric]["uplift"][i])
+
+                  uplift_desc=f"{label:<15}: {uplift}%"
+                  rows.append({
+                    "uplift": uplift_desc,
+                    "effect": effect,
+                    "weight": weight,
+                    "style": f"background:{row_background};",
+                  })
+                rows[-1]["style"] = rows[-1]["style"] + "border-bottom-style: solid;"
+
+                branches.append({
+                  "branch": branch,
+                  "style": f"background:{row_background};",
+                  "branch_rowspan": len(rows),
+                  "rows": rows
+                })
+                branches[-1]["style"] = branches[-1]["style"] + "border-bottom-style: solid;"
+
+            categorical_metrics.append({
+              "name": metric_name,
+              "desc": self.data[branch][segment][metric_type][metric]["desc"],
+              "style": f"background:{row_background}; border-bottom-style: solid; border-right-style: solid;",
+              "name_rowspan": len(branches)*branches[0]["branch_rowspan"],
+              "branches": branches
+            })
+            continue
+
+          # Generate summary for numerical histograms here.
           datasets = []
           for branch in self.data["branches"]:
             if branch == control:
@@ -121,7 +190,10 @@ class ReportGenerator:
             branch_mean = self.data[branch][segment][metric_type][metric]["mean"]
             control_mean = self.data[control][segment][metric_type][metric]["mean"]
             uplift = (branch_mean-control_mean)/control_mean*100.0
-            uplift_str = "{0:.1f}".format(uplift)
+            if uplift > 0:
+              uplift_str = "+{0:.1f}".format(uplift)
+            else:
+              uplift_str = "{0:.1f}".format(uplift)
 
             pval = self.data[branch][segment][metric_type][metric]["tests"]["ttest"]["p-value"]
             effect_size = self.data[branch][segment][metric_type][metric]["tests"]["ttest"]["effect"]
@@ -135,14 +207,14 @@ class ReportGenerator:
               effect_meaning = "None"
 
             if effect_meaning == "None" or effect_meaning == "Small":
-              style="font-weight: normal"
+              color="font-weight: normal"
             else:
               if uplift >= 1.5:
-                style="font-weight: bold; color: red"
+                color="font-weight: bold; color: red"
               elif uplift <= -1.5:
-                style="font-weight: bold; color: green"
+                color="font-weight: bold; color: green"
               else:
-                style="font-weight: normal"
+                color="font-weight: normal"
 
 
             dataset = {
@@ -151,17 +223,24 @@ class ReportGenerator:
                 "uplift": uplift_str,
                 "std": std,
                 "effect": effect,
-                "style": style,
-                "last": False
+                "color": color,
+                "style": f"background:{row_background};"
             }
             datasets.append(dataset);
+          datasets[-1]["style"] = datasets[-1]["style"] + "border-bottom-style:solid;"
 
-          datasets[-1]["last"] = True
-          metrics.append({ "desc": metric_name, 
+          numerical_metrics.append({ "desc": metric_name, 
                            "name": metric,
+                           "desc": self.data[branch][segment][metric_type][metric]["desc"],
+                           "style": f"background:{row_background}; border-bottom-style:solid; border-right-style:solid;",
                            "datasets": datasets, 
                            "rowspan": len(datasets)})
-      segments.append({"name": segment, "metrics": metrics}) 
+
+      segments.append({
+        "name": segment, 
+        "numerical_metrics": numerical_metrics,
+        "categorical_metrics": categorical_metrics
+      }) 
 
     slug = self.data['slug']
     is_experiment = self.data['is_experiment']
@@ -313,7 +392,7 @@ class ReportGenerator:
         "diffMin": -maxVal
     }
     self.doc(t.render(context))
-
+  
   def createMeanComparison(self, segment, metric, metric_type):
     t = get_template("mean.html")
 
@@ -365,7 +444,39 @@ class ReportGenerator:
     }
     self.doc(t.render(context))
 
-  def createMetrics(self, segment, metric, metric_type):
+  def createCategoricalComparison(self, segment, metric, metric_type):
+    t = get_template("categorical.html")
+
+    control = self.data["branches"][0]
+    datasets=[]
+    for branch in self.data["branches"]:
+      ratios_branch = self.data[branch][segment][metric_type][metric]["ratios"]
+      datasets.append({
+        "branch": branch,
+        "ratios": ratios_branch,
+      })
+
+      if branch != control:
+        ratios_control = self.data[control][segment][metric_type][metric]["ratios"]
+        uplift = self.data[branch][segment][metric_type][metric]["uplift"]
+        datasets[-1]["uplift"] = uplift
+
+    labels=self.data[control][segment][metric_type][metric]["labels"]
+    context = {
+      "labels": labels,
+      "datasets": datasets,
+      "metric": metric,
+      "segment": segment
+        
+    }
+    self.doc(t.render(context))
+
+  def createMetrics(self, segment, metric, metric_type, kind):
+    # Perform a separate comparison when data is categorical.
+    if kind=="categorical":
+      self.createCategoricalComparison(segment, metric, metric_type)
+      return
+
     # Add mean comparison
     self.createMeanComparison(segment, metric, metric_type)
     # Add PDF and CDF comparison
@@ -379,16 +490,17 @@ class ReportGenerator:
         # Add title for metric
         with self.doc.div(klass="title"):
           self.doc(f"({segment}) - {metric}")
-        self.createMetrics(segment, metric, "pageload_event_metrics")
+        self.createMetrics(segment, metric, "pageload_event_metrics", "numerical")
 
   def createHistogramMetrics(self, segment):
     for hist in self.data['histograms']:
+      kind = self.data["histograms"][hist]["kind"]
       metric = hist.split('.')[-1]
       with self.doc.div(id=f"{segment}-{metric}", klass="cell"):
         # Add title for metric
         with self.doc.div(klass="title"):
           self.doc(f"({segment}) - {metric}")
-        self.createMetrics(segment, metric, "histograms")
+        self.createMetrics(segment, metric, "histograms", kind)
     return
 
   def createHTMLReport(self):

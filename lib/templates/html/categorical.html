@@ -1,0 +1,70 @@
+{% autoescape off %}
+<div class="chart"><canvas height="250px" id="{{segment}}-{{metric}}-categorical"></canvas></div>
+<script>
+  ctx = document.getElementById('{{segment}}-{{metric}}-categorical');
+
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: {{labels}},
+      datasets: [
+{% for dataset in datasets %}
+        {
+          label: "{{dataset.branch}}",
+          data: {{dataset.ratios}},
+          {% if dataset.uplift %}
+          uplift: {{dataset.uplift}}
+          {% endif %}
+        },
+{% endfor %}
+      ]
+    },
+    options: {
+      animation: false,
+      maintainAspectRatio: false,
+      responsive: true,
+      plugins: {
+          datalabels: {
+            anchor: 'end',
+            align: 'top',
+            formatter: (val, context) => {
+                i = context.dataIndex;
+                if (context.dataset.hasOwnProperty('uplift')) {
+                  uplift = context.dataset.uplift[i];
+                  return val.toFixed(2) + "  (" + (uplift > 0 ? "+" : "") + uplift.toFixed(1) + ")%";
+                } else {
+                  return val.toFixed(2);
+                }
+            },
+            font: {
+              weight: 'bold',
+                size: 14
+            }
+          },
+          legend: {
+              display: true,
+              position: 'top',
+            },
+          title: {
+              display: true,
+              text: ["{{metric}} mean", "segment: {{segment}}"]
+            }
+      },
+      scales: {
+        y: {
+          grace: '50%',
+          beginAtZero: true,
+          title: {
+            text: "Proportion",
+            display: true
+          }
+        },
+        x: {
+          type: "category",
+        }
+      },
+    }
+  });
+</script>
+{% endautoescape %}

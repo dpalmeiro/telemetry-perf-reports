@@ -100,9 +100,7 @@
           </div>
         </th>
         <th>
-          <div class="tooltip">uplift
-            <span class="tooltiptext">Uplift of the mean.</span>
-          </div>
+          uplift
         </th>
         <th> 
           <div class="tooltip">effect size (t-test)
@@ -112,27 +110,56 @@
       </tr>
     </thead>
     <tbody>
-    {% for metric in segment.metrics %}
+    {% for metric in segment.numerical_metrics %}
       <tr>
-        <td rowspan={{metric.rowspan}} style="border-bottom-style: solid; border-right-style: solid;">
+        <td rowspan={{metric.rowspan}} style="{{metric.style}}">
+          <div class="tooltip">
           <a href="#{{segment.name}}-{{metric.name}}-mean">
-          {{metric.desc}}
+            {{metric.name}}
           </a>
+          <span class="tooltiptext">
+            {{metric.desc}}
+          </span>
+          </div>
         </td>
     {% for data in metric.datasets %}
-      {% if data.last == True %}
-      <td style="border-bottom-style: solid;"><div style="{{data.style}};">{{data.branch}}</div></td>
-      <td style="border-bottom-style: solid;"><div style="{{data.style}};">{{data.uplift}}%</div></td>
-      <td style="border-bottom-style: solid;"><div style="{{data.style}};">{{data.effect}}</div></td>
-      </tr>
-      {% else %}
-      <td><div style="{{data.style}}">{{data.branch}}</div></td>
-      <td><div style="{{data.style}};">{{data.uplift}}%</div></td>
-      <td><div style="{{data.style}}">{{data.effect}}</div></td>
+      <td style="{{data.style}}"><div style="{{data.color}};">{{data.branch}}</div></td>
+      <td style="{{data.style}}"><div style="{{data.color}};">{{data.uplift}}%</div></td>
+      <td style="{{data.style}}"><div style="{{data.color}};">{{data.effect}}</div></td>
       </tr>
       <tr>
-      {% endif %}
     {% endfor %}
+    {% endfor %}
+
+    {% for metric in segment.categorical_metrics %}
+    <td style="{{metric.style}}" rowspan={{metric.name_rowspan}}>
+          <div class="tooltip">
+            <a href="#{{segment.name}}-{{metric.name}}-categorical">
+              {{metric.name}}
+            </a>
+            <span class="tooltiptext">
+              {{metric.desc}}
+            </span>
+          </div>
+        </a>
+      </td>
+      {% for branch in metric.branches %}
+      <td style="{{branch.style}}" rowspan={{branch.branch_rowspan}}>
+        {{branch.branch}}
+      </td>
+        {% for row in branch.rows %}
+        <td style="{{row.style}}">
+          <div style="{{row.weight}};">{{row.uplift}}</div>
+        </td>
+        <td style="{{row.style}}">
+          <div style="{{row.weight}};">{{row.effect}}</div>
+        </td>
+        </tr>
+        <tr>
+        {% endfor %}
+      {% endfor %}
+    </tr>
+    <tr>
     {% endfor %}
     </tbody>
   </table>
