@@ -942,9 +942,9 @@ div.chart {
      </th>
      <th>
       <div class="tooltip">
-       effect size (t-test)
+       effect size (mwu)
        <span class="tooltiptext">
-        Effect size calculated by Cohen's d.
+        Effect size calculated by Rank Biserial Correlation.
        </span>
       </div>
      </th>
@@ -974,7 +974,7 @@ div.chart {
      </td>
      <td style="background:#ececec;border-bottom-style:solid;">
       <div style="font-weight: normal;">
-       Small (d=0.04)
+       Small (r=-0.03)
       </div>
      </td>
     </tr>
@@ -1002,7 +1002,7 @@ div.chart {
       </td>
       <td style="background:white;border-bottom-style:solid;">
        <div style="font-weight: normal;">
-        None (p=0.05)
+        None (p=0.06)
        </div>
       </td>
      </tr>
@@ -1030,7 +1030,7 @@ div.chart {
        </td>
        <td style="background:#ececec;border-bottom-style:solid;">
         <div style="font-weight: normal;">
-         Small (d=0.03)
+         Small (r=-0.01)
         </div>
        </td>
       </tr>
@@ -1058,7 +1058,7 @@ div.chart {
         </td>
         <td style="background:white;border-bottom-style:solid;">
          <div style="font-weight: normal;">
-          None (p=0.25)
+          Small (r=-0.03)
          </div>
         </td>
        </tr>
@@ -1086,7 +1086,7 @@ div.chart {
          </td>
          <td style="background:#ececec;border-bottom-style:solid;">
           <div style="font-weight: normal;">
-           Small (d=0.02)
+           None (p=0.29)
           </div>
          </td>
         </tr>
@@ -1114,7 +1114,7 @@ div.chart {
           </td>
           <td style="background:white;border-bottom-style:solid;">
            <div style="font-weight: normal;">
-            None (p=0.20)
+            None (p=0.06)
            </div>
           </td>
          </tr>
@@ -1142,7 +1142,7 @@ div.chart {
            </td>
            <td style="background:#ececec;border-bottom-style:solid;">
             <div style="font-weight: normal;">
-             None (p=0.07)
+             None (p=0.73)
             </div>
            </td>
           </tr>
@@ -1159,18 +1159,18 @@ div.chart {
              </div>
             </td>
             <td style="background:white;border-bottom-style:solid;">
-             <div style="font-weight: normal;">
+             <div style="font-weight: bold; color: green;">
               enabled
              </div>
             </td>
             <td style="background:white;border-bottom-style:solid;">
-             <div style="font-weight: normal;">
+             <div style="font-weight: bold; color: green;">
               -13.1%
              </div>
             </td>
             <td style="background:white;border-bottom-style:solid;">
-             <div style="font-weight: normal;">
-              Small (d=0.02)
+             <div style="font-weight: bold; color: green;">
+              Medium (r=-0.07)
              </div>
             </td>
            </tr>
@@ -1198,7 +1198,7 @@ div.chart {
              </td>
              <td style="background:#ececec;border-bottom-style:solid;">
               <div style="font-weight: bold; color: green;">
-               Large (d=0.12)
+               Large (r=-0.12)
               </div>
              </td>
             </tr>
@@ -1226,7 +1226,7 @@ div.chart {
               </td>
               <td style="background:white;border-bottom-style:solid;">
                <div style="font-weight: bold; color: green;">
-                Large (d=0.11)
+                Medium (r=-0.10)
                </div>
               </td>
              </tr>
@@ -1254,7 +1254,7 @@ div.chart {
                </td>
                <td style="background:#ececec;border-bottom-style:solid;">
                 <div style="font-weight: bold; color: red;">
-                 Large (d=-0.57)
+                 Large (r=0.34)
                 </div>
                </td>
               </tr>
@@ -1282,7 +1282,7 @@ div.chart {
                 </td>
                 <td style="background:white;border-bottom-style:solid;">
                  <div style="font-weight: normal;">
-                  Small (d=0.02)
+                  Small (r=-0.04)
                  </div>
                 </td>
                </tr>
@@ -1310,7 +1310,7 @@ div.chart {
                  </td>
                  <td style="background:#ececec;border-bottom-style:solid;">
                   <div style="font-weight: bold; color: green;">
-                   Large (d=0.15)
+                   Medium (r=-0.08)
                   </div>
                  </td>
                 </tr>
@@ -1327,18 +1327,18 @@ div.chart {
                    </div>
                   </td>
                   <td style="background:#ececec;border-bottom-style:solid;">
-                   <div style="font-weight: normal;">
+                   <div style="font-weight: bold; color: red;">
                     enabled
                    </div>
                   </td>
                   <td style="background:#ececec;border-bottom-style:solid;">
-                   <div style="font-weight: normal;">
+                   <div style="font-weight: bold; color: red;">
                     +31.0%
                    </div>
                   </td>
                   <td style="background:#ececec;border-bottom-style:solid;">
-                   <div style="font-weight: normal;">
-                    Small (d=-0.04)
+                   <div style="font-weight: bold; color: red;">
+                    Large (r=0.38)
                    </div>
                   </td>
                  </tr>
@@ -1366,7 +1366,7 @@ div.chart {
                    </td>
                    <td style="background:#ececec;border-bottom-style:solid;">
                     <div style="font-weight: bold; color: green;">
-                     Medium (d=0.06)
+                     Large (r=-0.15)
                     </div>
                    </td>
                   </tr>
@@ -1394,7 +1394,7 @@ div.chart {
                     </td>
                     <td style="background:white;border-bottom-style:solid;">
                      <div style="font-weight: normal;">
-                      Small (d=0.02)
+                      Small (r=-0.01)
                      </div>
                     </td>
                    </tr>
@@ -1411,18 +1411,18 @@ div.chart {
                       </div>
                      </td>
                      <td style="background:#ececec;border-bottom-style:solid;">
-                      <div style="font-weight: bold; color: green;">
+                      <div style="font-weight: normal;">
                        enabled
                       </div>
                      </td>
                      <td style="background:#ececec;border-bottom-style:solid;">
-                      <div style="font-weight: bold; color: green;">
+                      <div style="font-weight: normal;">
                        -7.1%
                       </div>
                      </td>
                      <td style="background:#ececec;border-bottom-style:solid;">
-                      <div style="font-weight: bold; color: green;">
-                       Medium (d=0.07)
+                      <div style="font-weight: normal;">
+                       Small (r=-0.04)
                       </div>
                      </td>
                     </tr>
@@ -1450,7 +1450,7 @@ div.chart {
                       </td>
                       <td style="background:white;border-bottom-style:solid;">
                        <div style="font-weight: normal;">
-                        None (p=0.29)
+                        None (p=0.00)
                        </div>
                       </td>
                      </tr>
@@ -1467,18 +1467,18 @@ div.chart {
                         </div>
                        </td>
                        <td style="background:#ececec;border-bottom-style:solid;">
-                        <div style="font-weight: bold; color: green;">
+                        <div style="font-weight: normal;">
                          enabled
                         </div>
                        </td>
                        <td style="background:#ececec;border-bottom-style:solid;">
-                        <div style="font-weight: bold; color: green;">
+                        <div style="font-weight: normal;">
                          -5.9%
                         </div>
                        </td>
                        <td style="background:#ececec;border-bottom-style:solid;">
-                        <div style="font-weight: bold; color: green;">
-                         Medium (d=0.07)
+                        <div style="font-weight: normal;">
+                         Small (r=-0.03)
                         </div>
                        </td>
                       </tr>
@@ -1604,9 +1604,9 @@ div.chart {
      </th>
      <th>
       <div class="tooltip">
-       effect size (t-test)
+       effect size (mwu)
        <span class="tooltiptext">
-        Effect size calculated by Cohen's d.
+        Effect size calculated by Rank Biserial Correlation.
        </span>
       </div>
      </th>
@@ -1636,7 +1636,7 @@ div.chart {
      </td>
      <td style="background:white;border-bottom-style:solid;">
       <div style="font-weight: normal;">
-       Small (d=0.04)
+       Small (r=-0.04)
       </div>
      </td>
     </tr>
@@ -1664,7 +1664,7 @@ div.chart {
       </td>
       <td style="background:#ececec;border-bottom-style:solid;">
        <div style="font-weight: normal;">
-        None (p=0.06)
+        None (p=0.08)
        </div>
       </td>
      </tr>
@@ -1692,7 +1692,7 @@ div.chart {
        </td>
        <td style="background:white;border-bottom-style:solid;">
         <div style="font-weight: normal;">
-         Small (d=0.03)
+         Small (r=-0.01)
         </div>
        </td>
       </tr>
@@ -1720,7 +1720,7 @@ div.chart {
         </td>
         <td style="background:#ececec;border-bottom-style:solid;">
          <div style="font-weight: normal;">
-          None (p=0.42)
+          Small (r=-0.03)
          </div>
         </td>
        </tr>
@@ -1748,7 +1748,7 @@ div.chart {
          </td>
          <td style="background:white;border-bottom-style:solid;">
           <div style="font-weight: normal;">
-           None (p=0.12)
+           None (p=0.39)
           </div>
          </td>
         </tr>
@@ -1776,7 +1776,7 @@ div.chart {
           </td>
           <td style="background:#ececec;border-bottom-style:solid;">
            <div style="font-weight: normal;">
-            None (p=0.33)
+            None (p=0.23)
            </div>
           </td>
          </tr>
@@ -1804,7 +1804,7 @@ div.chart {
            </td>
            <td style="background:white;border-bottom-style:solid;">
             <div style="font-weight: normal;">
-             Small (d=-0.02)
+             None (p=0.05)
             </div>
            </td>
           </tr>
@@ -1821,18 +1821,18 @@ div.chart {
              </div>
             </td>
             <td style="background:#ececec;border-bottom-style:solid;">
-             <div style="font-weight: normal;">
+             <div style="font-weight: bold; color: green;">
               enabled
              </div>
             </td>
             <td style="background:#ececec;border-bottom-style:solid;">
-             <div style="font-weight: normal;">
+             <div style="font-weight: bold; color: green;">
               -4.0%
              </div>
             </td>
             <td style="background:#ececec;border-bottom-style:solid;">
-             <div style="font-weight: normal;">
-              None (p=0.10)
+             <div style="font-weight: bold; color: green;">
+              Medium (r=-0.05)
              </div>
             </td>
            </tr>
@@ -1860,7 +1860,7 @@ div.chart {
              </td>
              <td style="background:white;border-bottom-style:solid;">
               <div style="font-weight: bold; color: green;">
-               Medium (d=0.08)
+               Medium (r=-0.10)
               </div>
              </td>
             </tr>
@@ -1888,7 +1888,7 @@ div.chart {
               </td>
               <td style="background:#ececec;border-bottom-style:solid;">
                <div style="font-weight: bold; color: green;">
-                Medium (d=0.06)
+                Medium (r=-0.07)
                </div>
               </td>
              </tr>
@@ -1916,7 +1916,7 @@ div.chart {
                </td>
                <td style="background:white;border-bottom-style:solid;">
                 <div style="font-weight: bold; color: red;">
-                 Large (d=-0.59)
+                 Large (r=0.35)
                 </div>
                </td>
               </tr>
@@ -1944,7 +1944,7 @@ div.chart {
                 </td>
                 <td style="background:#ececec;border-bottom-style:solid;">
                  <div style="font-weight: normal;">
-                  Small (d=0.02)
+                  Small (r=-0.03)
                  </div>
                 </td>
                </tr>
@@ -1972,7 +1972,7 @@ div.chart {
                  </td>
                  <td style="background:white;border-bottom-style:solid;">
                   <div style="font-weight: bold; color: green;">
-                   Large (d=0.13)
+                   Medium (r=-0.06)
                   </div>
                  </td>
                 </tr>
@@ -2000,7 +2000,7 @@ div.chart {
                   </td>
                   <td style="background:white;border-bottom-style:solid;">
                    <div style="font-weight: bold; color: red;">
-                    Medium (d=-0.06)
+                    Large (r=0.43)
                    </div>
                   </td>
                  </tr>
@@ -2028,7 +2028,7 @@ div.chart {
                    </td>
                    <td style="background:white;border-bottom-style:solid;">
                     <div style="font-weight: bold; color: green;">
-                     Medium (d=0.05)
+                     Large (r=-0.15)
                     </div>
                    </td>
                   </tr>
@@ -2056,7 +2056,7 @@ div.chart {
                     </td>
                     <td style="background:#ececec;border-bottom-style:solid;">
                      <div style="font-weight: normal;">
-                      Small (d=0.02)
+                      Small (r=-0.01)
                      </div>
                     </td>
                    </tr>
@@ -2073,18 +2073,18 @@ div.chart {
                       </div>
                      </td>
                      <td style="background:white;border-bottom-style:solid;">
-                      <div style="font-weight: bold; color: green;">
+                      <div style="font-weight: normal;">
                        enabled
                       </div>
                      </td>
                      <td style="background:white;border-bottom-style:solid;">
-                      <div style="font-weight: bold; color: green;">
+                      <div style="font-weight: normal;">
                        -8.6%
                       </div>
                      </td>
                      <td style="background:white;border-bottom-style:solid;">
-                      <div style="font-weight: bold; color: green;">
-                       Medium (d=0.09)
+                      <div style="font-weight: normal;">
+                       Small (r=-0.04)
                       </div>
                      </td>
                     </tr>
@@ -2112,7 +2112,7 @@ div.chart {
                       </td>
                       <td style="background:#ececec;border-bottom-style:solid;">
                        <div style="font-weight: normal;">
-                        None (p=0.04)
+                        Small (r=-0.01)
                        </div>
                       </td>
                      </tr>
@@ -2129,18 +2129,18 @@ div.chart {
                         </div>
                        </td>
                        <td style="background:white;border-bottom-style:solid;">
-                        <div style="font-weight: bold; color: green;">
+                        <div style="font-weight: normal;">
                          enabled
                         </div>
                        </td>
                        <td style="background:white;border-bottom-style:solid;">
-                        <div style="font-weight: bold; color: green;">
+                        <div style="font-weight: normal;">
                          -6.6%
                         </div>
                        </td>
                        <td style="background:white;border-bottom-style:solid;">
-                        <div style="font-weight: bold; color: green;">
-                         Medium (d=0.08)
+                        <div style="font-weight: normal;">
+                         Small (r=-0.04)
                         </div>
                        </td>
                       </tr>
@@ -2266,9 +2266,9 @@ div.chart {
      </th>
      <th>
       <div class="tooltip">
-       effect size (t-test)
+       effect size (mwu)
        <span class="tooltiptext">
-        Effect size calculated by Cohen's d.
+        Effect size calculated by Rank Biserial Correlation.
        </span>
       </div>
      </th>
@@ -2298,7 +2298,7 @@ div.chart {
      </td>
      <td style="background:#ececec;border-bottom-style:solid;">
       <div style="font-weight: normal;">
-       None (p=0.88)
+       Small (r=0.01)
       </div>
      </td>
     </tr>
@@ -2326,7 +2326,7 @@ div.chart {
       </td>
       <td style="background:white;border-bottom-style:solid;">
        <div style="font-weight: normal;">
-        Small (d=0.02)
+        None (p=0.00)
        </div>
       </td>
      </tr>
@@ -2354,7 +2354,7 @@ div.chart {
        </td>
        <td style="background:#ececec;border-bottom-style:solid;">
         <div style="font-weight: normal;">
-         None (p=0.01)
+         Small (r=-0.01)
         </div>
        </td>
       </tr>
@@ -2382,7 +2382,7 @@ div.chart {
         </td>
         <td style="background:white;border-bottom-style:solid;">
          <div style="font-weight: normal;">
-          None (p=0.14)
+          None (p=0.00)
          </div>
         </td>
        </tr>
@@ -2410,7 +2410,7 @@ div.chart {
          </td>
          <td style="background:#ececec;border-bottom-style:solid;">
           <div style="font-weight: bold; color: red;">
-           Medium (d=-0.08)
+           Medium (r=0.06)
           </div>
          </td>
         </tr>
@@ -2438,7 +2438,7 @@ div.chart {
           </td>
           <td style="background:white;border-bottom-style:solid;">
            <div style="font-weight: normal;">
-            Small (d=0.04)
+            None (p=0.23)
            </div>
           </td>
          </tr>
@@ -2466,7 +2466,7 @@ div.chart {
            </td>
            <td style="background:#ececec;border-bottom-style:solid;">
             <div style="font-weight: normal;">
-             None (p=0.01)
+             None (p=0.69)
             </div>
            </td>
           </tr>
@@ -2494,7 +2494,7 @@ div.chart {
             </td>
             <td style="background:white;border-bottom-style:solid;">
              <div style="font-weight: normal;">
-              Small (d=0.02)
+              Small (r=-0.04)
              </div>
             </td>
            </tr>
@@ -2522,7 +2522,7 @@ div.chart {
              </td>
              <td style="background:#ececec;border-bottom-style:solid;">
               <div style="font-weight: bold; color: green;">
-               Medium (d=0.08)
+               Large (r=-0.12)
               </div>
              </td>
             </tr>
@@ -2550,7 +2550,7 @@ div.chart {
               </td>
               <td style="background:white;border-bottom-style:solid;">
                <div style="font-weight: bold; color: green;">
-                Medium (d=0.08)
+                Large (r=-0.11)
                </div>
               </td>
              </tr>
@@ -2578,7 +2578,7 @@ div.chart {
                </td>
                <td style="background:#ececec;border-bottom-style:solid;">
                 <div style="font-weight: bold; color: red;">
-                 Large (d=-0.41)
+                 Large (r=0.20)
                 </div>
                </td>
               </tr>
@@ -2606,7 +2606,7 @@ div.chart {
                 </td>
                 <td style="background:white;border-bottom-style:solid;">
                  <div style="font-weight: normal;">
-                  Small (d=-0.02)
+                  Small (r=-0.05)
                  </div>
                 </td>
                </tr>
@@ -2634,7 +2634,7 @@ div.chart {
                  </td>
                  <td style="background:#ececec;border-bottom-style:solid;">
                   <div style="font-weight: bold; color: green;">
-                   Large (d=0.20)
+                   Large (r=-0.13)
                   </div>
                  </td>
                 </tr>
@@ -2662,7 +2662,7 @@ div.chart {
                   </td>
                   <td style="background:#ececec;border-bottom-style:solid;">
                    <div style="font-weight: bold; color: red;">
-                    Medium (d=-0.05)
+                    Large (r=0.43)
                    </div>
                   </td>
                  </tr>
@@ -2679,18 +2679,18 @@ div.chart {
                     </div>
                    </td>
                    <td style="background:#ececec;border-bottom-style:solid;">
-                    <div style="font-weight: normal;">
+                    <div style="font-weight: bold; color: green;">
                      enabled
                     </div>
                    </td>
                    <td style="background:#ececec;border-bottom-style:solid;">
-                    <div style="font-weight: normal;">
+                    <div style="font-weight: bold; color: green;">
                      -8.5%
                     </div>
                    </td>
                    <td style="background:#ececec;border-bottom-style:solid;">
-                    <div style="font-weight: normal;">
-                     Small (d=0.03)
+                    <div style="font-weight: bold; color: green;">
+                     Medium (r=-0.08)
                     </div>
                    </td>
                   </tr>
@@ -2718,7 +2718,7 @@ div.chart {
                     </td>
                     <td style="background:white;border-bottom-style:solid;">
                      <div style="font-weight: normal;">
-                      Small (d=0.02)
+                      Small (r=-0.01)
                      </div>
                     </td>
                    </tr>
@@ -2746,7 +2746,7 @@ div.chart {
                      </td>
                      <td style="background:#ececec;border-bottom-style:solid;">
                       <div style="font-weight: normal;">
-                       Small (d=-0.02)
+                       Small (r=0.02)
                       </div>
                      </td>
                     </tr>
@@ -2774,7 +2774,7 @@ div.chart {
                       </td>
                       <td style="background:white;border-bottom-style:solid;">
                        <div style="font-weight: normal;">
-                        None (p=0.01)
+                        None (p=0.20)
                        </div>
                       </td>
                      </tr>
@@ -2802,7 +2802,7 @@ div.chart {
                        </td>
                        <td style="background:#ececec;border-bottom-style:solid;">
                         <div style="font-weight: normal;">
-                         None (p=0.36)
+                         None (p=0.00)
                         </div>
                        </td>
                       </tr>
@@ -2928,9 +2928,9 @@ div.chart {
      </th>
      <th>
       <div class="tooltip">
-       effect size (t-test)
+       effect size (mwu)
        <span class="tooltiptext">
-        Effect size calculated by Cohen's d.
+        Effect size calculated by Rank Biserial Correlation.
        </span>
       </div>
      </th>
@@ -2960,7 +2960,7 @@ div.chart {
      </td>
      <td style="background:white;border-bottom-style:solid;">
       <div style="font-weight: normal;">
-       Small (d=0.02)
+       None (p=0.02)
       </div>
      </td>
     </tr>
@@ -2988,7 +2988,7 @@ div.chart {
       </td>
       <td style="background:#ececec;border-bottom-style:solid;">
        <div style="font-weight: normal;">
-        None (p=0.38)
+        None (p=0.05)
        </div>
       </td>
      </tr>
@@ -3016,7 +3016,7 @@ div.chart {
        </td>
        <td style="background:white;border-bottom-style:solid;">
         <div style="font-weight: normal;">
-         Small (d=0.02)
+         None (p=0.90)
         </div>
        </td>
       </tr>
@@ -3044,7 +3044,7 @@ div.chart {
         </td>
         <td style="background:#ececec;border-bottom-style:solid;">
          <div style="font-weight: normal;">
-          Small (d=0.03)
+          Small (r=-0.02)
          </div>
         </td>
        </tr>
@@ -3061,18 +3061,18 @@ div.chart {
           </div>
          </td>
          <td style="background:white;border-bottom-style:solid;">
-          <div style="font-weight: bold; color: green;">
+          <div style="font-weight: normal;">
            enabled
           </div>
          </td>
          <td style="background:white;border-bottom-style:solid;">
-          <div style="font-weight: bold; color: green;">
+          <div style="font-weight: normal;">
            -5.7%
           </div>
          </td>
          <td style="background:white;border-bottom-style:solid;">
-          <div style="font-weight: bold; color: green;">
-           Medium (d=0.07)
+          <div style="font-weight: normal;">
+           Small (r=-0.02)
           </div>
          </td>
         </tr>
@@ -3100,7 +3100,7 @@ div.chart {
           </td>
           <td style="background:#ececec;border-bottom-style:solid;">
            <div style="font-weight: normal;">
-            None (p=0.56)
+            Small (r=0.01)
            </div>
           </td>
          </tr>
@@ -3128,7 +3128,7 @@ div.chart {
            </td>
            <td style="background:white;border-bottom-style:solid;">
             <div style="font-weight: normal;">
-             Small (d=0.02)
+             Small (r=-0.03)
             </div>
            </td>
           </tr>
@@ -3156,7 +3156,7 @@ div.chart {
             </td>
             <td style="background:#ececec;border-bottom-style:solid;">
              <div style="font-weight: bold; color: green;">
-              Medium (d=0.07)
+              Large (r=-0.15)
              </div>
             </td>
            </tr>
@@ -3184,7 +3184,7 @@ div.chart {
              </td>
              <td style="background:white;border-bottom-style:solid;">
               <div style="font-weight: bold; color: green;">
-               Large (d=0.27)
+               Large (r=-0.25)
               </div>
              </td>
             </tr>
@@ -3212,7 +3212,7 @@ div.chart {
               </td>
               <td style="background:#ececec;border-bottom-style:solid;">
                <div style="font-weight: bold; color: green;">
-                Large (d=0.28)
+                Large (r=-0.25)
                </div>
               </td>
              </tr>
@@ -3240,7 +3240,7 @@ div.chart {
                </td>
                <td style="background:white;border-bottom-style:solid;">
                 <div style="font-weight: bold; color: red;">
-                 Large (d=-0.55)
+                 Large (r=0.43)
                 </div>
                </td>
               </tr>
@@ -3268,7 +3268,7 @@ div.chart {
                 </td>
                 <td style="background:#ececec;border-bottom-style:solid;">
                  <div style="font-weight: bold; color: green;">
-                  Medium (d=0.06)
+                  Large (r=-0.11)
                  </div>
                 </td>
                </tr>
@@ -3296,7 +3296,7 @@ div.chart {
                  </td>
                  <td style="background:white;border-bottom-style:solid;">
                   <div style="font-weight: bold; color: green;">
-                   Large (d=0.30)
+                   Large (r=-0.22)
                   </div>
                  </td>
                 </tr>
@@ -3313,18 +3313,18 @@ div.chart {
                    </div>
                   </td>
                   <td style="background:white;border-bottom-style:solid;">
-                   <div style="font-weight: normal;">
+                   <div style="font-weight: bold; color: red;">
                     enabled
                    </div>
                   </td>
                   <td style="background:white;border-bottom-style:solid;">
-                   <div style="font-weight: normal;">
+                   <div style="font-weight: bold; color: red;">
                     +20.2%
                    </div>
                   </td>
                   <td style="background:white;border-bottom-style:solid;">
-                   <div style="font-weight: normal;">
-                    Small (d=-0.04)
+                   <div style="font-weight: bold; color: red;">
+                    Large (r=0.21)
                    </div>
                   </td>
                  </tr>
@@ -3352,7 +3352,7 @@ div.chart {
                    </td>
                    <td style="background:white;border-bottom-style:solid;">
                     <div style="font-weight: bold; color: green;">
-                     Large (d=0.10)
+                     Large (r=-0.14)
                     </div>
                    </td>
                   </tr>
@@ -3380,7 +3380,7 @@ div.chart {
                     </td>
                     <td style="background:#ececec;border-bottom-style:solid;">
                      <div style="font-weight: normal;">
-                      None (p=0.25)
+                      None (p=0.34)
                      </div>
                     </td>
                    </tr>
@@ -3408,7 +3408,7 @@ div.chart {
                      </td>
                      <td style="background:white;border-bottom-style:solid;">
                       <div style="font-weight: normal;">
-                       None (p=0.01)
+                       Small (r=-0.01)
                       </div>
                      </td>
                     </tr>
@@ -3436,7 +3436,7 @@ div.chart {
                       </td>
                       <td style="background:#ececec;border-bottom-style:solid;">
                        <div style="font-weight: normal;">
-                        Small (d=0.02)
+                        None (p=0.17)
                        </div>
                       </td>
                      </tr>
@@ -3464,7 +3464,7 @@ div.chart {
                        </td>
                        <td style="background:white;border-bottom-style:solid;">
                         <div style="font-weight: normal;">
-                         Small (d=0.05)
+                         None (p=0.11)
                         </div>
                        </td>
                       </tr>
@@ -3522,24 +3522,24 @@ div.chart {
                         enabled
                        </td>
                        <td style="background:#ececec;">
-                        <div style="font-weight:bold;;">
+                        <div style="font-weight:normal;;">
                          no             : +4.65%
                         </div>
                        </td>
                        <td style="background:#ececec;">
-                        <div style="font-weight:bold;;">
+                        <div style="font-weight:normal;;">
                          Small
                         </div>
                        </td>
                       </tr>
                       <tr>
                        <td style="background:#ececec;border-bottom-style: solid;">
-                        <div style="font-weight:bold;;">
+                        <div style="font-weight:normal;;">
                          yes            : -4.65%
                         </div>
                        </td>
                        <td style="background:#ececec;border-bottom-style: solid;">
-                        <div style="font-weight:bold;;">
+                        <div style="font-weight:normal;;">
                          Small
                         </div>
                        </td>
@@ -53452,6 +53452,1194 @@ div.chart {
         "enabled"
     ]
 }
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Pageload event: fcp_time-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Pageload event: fcp_time-query">
+     Pageload event: fcp_time
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with eventdata as (
+SELECT
+  normalized_os as segment,
+  mozfun.map.get_key(ping_info.experiments, "parallel-marking-experiment-2").branch as branch,
+  SAFE_CAST((SELECT value FROM UNNEST(event.extra) WHERE key = 'fcp_time') AS int) AS fcp_time,
+FROM
+  `moz-fx-data-shared-prod.firefox_desktop.pageload`
+CROSS JOIN
+  UNNEST(events) AS event
+WHERE
+  normalized_channel = "nightly"
+  AND DATE(submission_timestamp) &gt;= DATE('2023-12-23')
+  AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')  
+  AND mozfun.map.get_key(ping_info.experiments, "parallel-marking-experiment-2").branch is not null
+)
+SELECT
+  segment,
+  branch,
+  fcp_time as bucket,
+  COUNT(*) as counts
+FROM
+  eventdata
+WHERE
+  fcp_time &gt;= 0 AND fcp_time &lt;= 10000
+GROUP BY
+  segment, branch, bucket
+ORDER BY
+  segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Pageload event: load_time-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Pageload event: load_time-query">
+     Pageload event: load_time
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with eventdata as (
+SELECT
+  normalized_os as segment,
+  mozfun.map.get_key(ping_info.experiments, "parallel-marking-experiment-2").branch as branch,
+  SAFE_CAST((SELECT value FROM UNNEST(event.extra) WHERE key = 'load_time') AS int) AS load_time,
+FROM
+  `moz-fx-data-shared-prod.firefox_desktop.pageload`
+CROSS JOIN
+  UNNEST(events) AS event
+WHERE
+  normalized_channel = "nightly"
+  AND DATE(submission_timestamp) &gt;= DATE('2023-12-23')
+  AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')  
+  AND mozfun.map.get_key(ping_info.experiments, "parallel-marking-experiment-2").branch is not null
+)
+SELECT
+  segment,
+  branch,
+  load_time as bucket,
+  COUNT(*) as counts
+FROM
+  eventdata
+WHERE
+  load_time &gt;= 0 AND load_time &lt;= 30000
+GROUP BY
+  segment, branch, bucket
+ORDER BY
+  segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Pageload event: response_time-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Pageload event: response_time-query">
+     Pageload event: response_time
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with eventdata as (
+SELECT
+  normalized_os as segment,
+  mozfun.map.get_key(ping_info.experiments, "parallel-marking-experiment-2").branch as branch,
+  SAFE_CAST((SELECT value FROM UNNEST(event.extra) WHERE key = 'response_time') AS int) AS response_time,
+FROM
+  `moz-fx-data-shared-prod.firefox_desktop.pageload`
+CROSS JOIN
+  UNNEST(events) AS event
+WHERE
+  normalized_channel = "nightly"
+  AND DATE(submission_timestamp) &gt;= DATE('2023-12-23')
+  AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')  
+  AND mozfun.map.get_key(ping_info.experiments, "parallel-marking-experiment-2").branch is not null
+)
+SELECT
+  segment,
+  branch,
+  response_time as bucket,
+  COUNT(*) as counts
+FROM
+  eventdata
+WHERE
+  response_time &gt;= 0 AND response_time &lt;= 10000
+GROUP BY
+  segment, branch, bucket
+ORDER BY
+  segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Pageload event: js_exec_time-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Pageload event: js_exec_time-query">
+     Pageload event: js_exec_time
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with eventdata as (
+SELECT
+  normalized_os as segment,
+  mozfun.map.get_key(ping_info.experiments, "parallel-marking-experiment-2").branch as branch,
+  SAFE_CAST((SELECT value FROM UNNEST(event.extra) WHERE key = 'js_exec_time') AS int) AS js_exec_time,
+FROM
+  `moz-fx-data-shared-prod.firefox_desktop.pageload`
+CROSS JOIN
+  UNNEST(events) AS event
+WHERE
+  normalized_channel = "nightly"
+  AND DATE(submission_timestamp) &gt;= DATE('2023-12-23')
+  AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')  
+  AND mozfun.map.get_key(ping_info.experiments, "parallel-marking-experiment-2").branch is not null
+)
+SELECT
+  segment,
+  branch,
+  js_exec_time as bucket,
+  COUNT(*) as counts
+FROM
+  eventdata
+WHERE
+  js_exec_time &gt;= 0 AND js_exec_time &lt;= 10000
+GROUP BY
+  segment, branch, bucket
+ORDER BY
+  segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Histogram: payload.processes.content.histograms.perf_page_load_time_ms-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Histogram: payload.processes.content.histograms.perf_page_load_time_ms-query">
+     Histogram: payload.processes.content.histograms.perf_page_load_time_ms
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.perf_page_load_time_ms, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main_nightly`
+    WHERE
+        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
+        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
+        AND normalized_channel = "nightly"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.perf_page_load_time_ms is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
+        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Histogram: payload.processes.content.histograms.time_to_first_interaction_ms-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Histogram: payload.processes.content.histograms.time_to_first_interaction_ms-query">
+     Histogram: payload.processes.content.histograms.time_to_first_interaction_ms
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.time_to_first_interaction_ms, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main_nightly`
+    WHERE
+        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
+        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
+        AND normalized_channel = "nightly"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.time_to_first_interaction_ms is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
+        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Histogram: payload.processes.content.histograms.perf_first_contentful_paint_ms-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Histogram: payload.processes.content.histograms.perf_first_contentful_paint_ms-query">
+     Histogram: payload.processes.content.histograms.perf_first_contentful_paint_ms
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.perf_first_contentful_paint_ms, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main_nightly`
+    WHERE
+        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
+        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
+        AND normalized_channel = "nightly"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.perf_first_contentful_paint_ms is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
+        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Histogram: payload.processes.content.histograms.js_pageload_execution_ms-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Histogram: payload.processes.content.histograms.js_pageload_execution_ms-query">
+     Histogram: payload.processes.content.histograms.js_pageload_execution_ms
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.js_pageload_execution_ms, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main_nightly`
+    WHERE
+        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
+        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
+        AND normalized_channel = "nightly"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.js_pageload_execution_ms is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
+        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Histogram: payload.histograms.memory_total-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Histogram: payload.histograms.memory_total-query">
+     Histogram: payload.histograms.memory_total
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
+        JSON_EXTRACT(payload.histograms.memory_total, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main_nightly`
+    WHERE
+        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
+        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
+        AND normalized_channel = "nightly"
+        AND normalized_app_name = "Firefox"
+        AND payload.histograms.memory_total is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
+        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Histogram: payload.processes.content.histograms.input_event_response_ms-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Histogram: payload.processes.content.histograms.input_event_response_ms-query">
+     Histogram: payload.processes.content.histograms.input_event_response_ms
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.input_event_response_ms, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main_nightly`
+    WHERE
+        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
+        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
+        AND normalized_channel = "nightly"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.input_event_response_ms is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
+        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Histogram: payload.processes.content.histograms.cycle_collector_max_pause-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Histogram: payload.processes.content.histograms.cycle_collector_max_pause-query">
+     Histogram: payload.processes.content.histograms.cycle_collector_max_pause
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.cycle_collector_max_pause, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main_nightly`
+    WHERE
+        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
+        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
+        AND normalized_channel = "nightly"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.cycle_collector_max_pause is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
+        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Histogram: payload.processes.content.histograms.gc_max_pause_ms_2-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Histogram: payload.processes.content.histograms.gc_max_pause_ms_2-query">
+     Histogram: payload.processes.content.histograms.gc_max_pause_ms_2
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.gc_max_pause_ms_2, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main_nightly`
+    WHERE
+        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
+        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
+        AND normalized_channel = "nightly"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.gc_max_pause_ms_2 is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
+        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Histogram: payload.processes.content.histograms.gc_ms-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Histogram: payload.processes.content.histograms.gc_ms-query">
+     Histogram: payload.processes.content.histograms.gc_ms
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.gc_ms, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main_nightly`
+    WHERE
+        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
+        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
+        AND normalized_channel = "nightly"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.gc_ms is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
+        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Histogram: payload.processes.content.histograms.gc_mark_ms-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Histogram: payload.processes.content.histograms.gc_mark_ms-query">
+     Histogram: payload.processes.content.histograms.gc_mark_ms
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.gc_mark_ms, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main_nightly`
+    WHERE
+        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
+        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
+        AND normalized_channel = "nightly"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.gc_mark_ms is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
+        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Histogram: payload.processes.content.histograms.gc_mark_rate_2-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Histogram: payload.processes.content.histograms.gc_mark_rate_2-query">
+     Histogram: payload.processes.content.histograms.gc_mark_rate_2
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.gc_mark_rate_2, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main_nightly`
+    WHERE
+        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
+        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
+        AND normalized_channel = "nightly"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.gc_mark_rate_2 is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
+        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Histogram: payload.processes.content.histograms.gc_sweep_ms-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Histogram: payload.processes.content.histograms.gc_sweep_ms-query">
+     Histogram: payload.processes.content.histograms.gc_sweep_ms
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.gc_sweep_ms, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main_nightly`
+    WHERE
+        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
+        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
+        AND normalized_channel = "nightly"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.gc_sweep_ms is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
+        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Histogram: payload.processes.content.histograms.gc_slice_count-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Histogram: payload.processes.content.histograms.gc_slice_count-query">
+     Histogram: payload.processes.content.histograms.gc_slice_count
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.gc_slice_count, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main_nightly`
+    WHERE
+        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
+        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
+        AND normalized_channel = "nightly"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.gc_slice_count is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
+        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Histogram: payload.processes.content.histograms.gc_slice_was_long-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Histogram: payload.processes.content.histograms.gc_slice_was_long-query">
+     Histogram: payload.processes.content.histograms.gc_slice_was_long
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.gc_slice_was_long, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main_nightly`
+    WHERE
+        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
+        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
+        AND normalized_channel = "nightly"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.gc_slice_was_long is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
+        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Histogram: payload.processes.content.histograms.gc_budget_overrun-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Histogram: payload.processes.content.histograms.gc_budget_overrun-query">
+     Histogram: payload.processes.content.histograms.gc_budget_overrun
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.gc_budget_overrun, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main_nightly`
+    WHERE
+        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
+        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
+        AND normalized_channel = "nightly"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.gc_budget_overrun is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
+        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Histogram: payload.processes.content.histograms.gc_budget_was_increased-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Histogram: payload.processes.content.histograms.gc_budget_was_increased-query">
+     Histogram: payload.processes.content.histograms.gc_budget_was_increased
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.gc_budget_was_increased, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main_nightly`
+    WHERE
+        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
+        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
+        AND normalized_channel = "nightly"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.gc_budget_was_increased is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
+        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Histogram: payload.processes.content.histograms.gc_parallel_mark_speedup-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Histogram: payload.processes.content.histograms.gc_parallel_mark_speedup-query">
+     Histogram: payload.processes.content.histograms.gc_parallel_mark_speedup
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.gc_parallel_mark_speedup, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main_nightly`
+    WHERE
+        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
+        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
+        AND normalized_channel = "nightly"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.gc_parallel_mark_speedup is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
+        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Histogram: payload.processes.content.histograms.gc_parallel_mark_utilization-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Histogram: payload.processes.content.histograms.gc_parallel_mark_utilization-query">
+     Histogram: payload.processes.content.histograms.gc_parallel_mark_utilization
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.gc_parallel_mark_utilization, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main_nightly`
+    WHERE
+        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
+        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
+        AND normalized_channel = "nightly"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.gc_parallel_mark_utilization is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
+        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Histogram: payload.processes.content.histograms.gc_parallel_mark_interruptions-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Histogram: payload.processes.content.histograms.gc_parallel_mark_interruptions-query">
+     Histogram: payload.processes.content.histograms.gc_parallel_mark_interruptions
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.gc_parallel_mark_interruptions, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main_nightly`
+    WHERE
+        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
+        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
+        AND normalized_channel = "nightly"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.gc_parallel_mark_interruptions is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
+        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
+  </pre>
+    </code>
+   </div>
+  </section>
+  <section class="accordion">
+   <input id="Histogram: payload.processes.content.histograms.gc_task_start_delay_us-query" name="collapse" type="checkbox"/>
+   <h1 class="handle">
+    <label for="Histogram: payload.processes.content.histograms.gc_task_start_delay_us-query">
+     Histogram: payload.processes.content.histograms.gc_task_start_delay_us
+    </label>
+   </h1>
+   <div class="content">
+    <code>
+     <pre>
+  with json_strings as (
+    SELECT 
+        normalized_os as segment,
+        mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch as branch,
+        JSON_EXTRACT(payload.processes.content.histograms.gc_task_start_delay_us, '$.values') as hist
+    FROM
+        `moz-fx-data-shared-prod.telemetry.main_nightly`
+    WHERE
+        DATE(submission_timestamp) &gt;= DATE('2023-12-23')
+        AND DATE(submission_timestamp) &lt;= DATE('2024-01-08')
+        AND normalized_channel = "nightly"
+        AND normalized_app_name = "Firefox"
+        AND payload.processes.content.histograms.gc_task_start_delay_us is not null
+        AND payload.processes.parent.scalars.browser_engagement_total_uri_count &gt; 0
+        AND mozfun.map.get_key(environment.experiments, "parallel-marking-experiment-2").branch is not null
+),
+keyValuePairs as (
+SELECT
+    segment,
+    branch,
+    SAFE_CAST(key AS float64) as bucket,
+    INT64(PARSE_JSON(hist)[key]) as count
+FROM
+    json_strings,
+    UNNEST(bqutil.fn.json_extract_keys(hist)) as key
+)
+SELECT
+    segment,
+    branch,
+    bucket,
+    SUM(count) as counts
+FROM
+    keyValuePairs
+GROUP BY
+   segment, branch, bucket
+ORDER BY
+   segment, branch, bucket
   </pre>
     </code>
    </div>

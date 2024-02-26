@@ -220,8 +220,10 @@ class TelemetryClient:
   def generatePageloadEventQuery_OS_segments(self, metric):
     t = get_template("events_os_segments.sql")
 
-    metricMin = self.config['pageload_event_metrics'][metric][0]
-    metricMax = self.config['pageload_event_metrics'][metric][1]
+    print(self.config['pageload_event_metrics'][metric])
+
+    metricMin = self.config['pageload_event_metrics'][metric]['min']
+    metricMax = self.config['pageload_event_metrics'][metric]['max']
 
     context = {
         "minVal": metricMin,

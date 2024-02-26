@@ -31,7 +31,7 @@ body {
   background-color: #555;
   color: #fff;
   text-align: center;
-  padding: 10px 0;
+  padding: 10px 10px;
   border-radius: 6px;
 
   /* Position the tooltip text */
@@ -262,6 +262,8 @@ div.chart {
     border-color: black;
     text-align:center;
     padding:($half-spacing-unit * 1.5) 10;
+    padding-bottom: 10;
+    padding-top: 10;
     font-size: 14px;
 }
 .desc-table td {
@@ -278,7 +280,7 @@ div.chart {
 .desc-header {
     background-color: gray;
     width:30%;
-    height:14px;
+    height:12px;
     color: #ffffff;
     text-align:center;
     padding: 5px;
@@ -322,10 +324,6 @@ div.chart {
     border-right-style: hidden;
     border-bottom-style: hidden;
     border-top-style: hidden;
-
-    &:nth-of-type(odd) {
-    	background:#ececec;
-    }
 }
 .summary-table tbody tr.active-row {
     font-weight: bold;
@@ -766,18 +764,13 @@ div.chart {
       </div>
      </th>
      <th>
-      <div class="tooltip">
-       uplift
-       <span class="tooltiptext">
-        Uplift of the mean.
-       </span>
-      </div>
+      uplift
      </th>
      <th>
       <div class="tooltip">
-       effect size (t-test)
+       effect size (mwu)
        <span class="tooltiptext">
-        Effect size calculated by Cohen's d.
+        Effect size calculated by Rank Biserial Correlation.
        </span>
       </div>
      </th>
@@ -785,676 +778,760 @@ div.chart {
    </thead>
    <tbody>
     <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#All-perf_page_load_time_ms-mean">
-       perf_page_load_time_ms
-      </a>
+     <td rowspan="3" style="background:#ececec; border-bottom-style:solid; border-right-style:solid;">
+      <div class="tooltip">
+       <a href="#All-perf_page_load_time_ms-mean">
+        perf_page_load_time_ms
+       </a>
+       <span class="tooltiptext">
+        Time in milliseconds from navigationStart to loadEventStart for the foreground http or https root content document.
+       </span>
+      </div>
      </td>
-     <td>
-      <div style="font-weight: normal">
+     <td style="background:#ececec;">
+      <div style="font-weight: normal;">
        treatment-a
       </div>
      </td>
-     <td>
+     <td style="background:#ececec;">
       <div style="font-weight: normal;">
        -0.6%
       </div>
      </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.51)
+     <td style="background:#ececec;">
+      <div style="font-weight: normal;">
+       Small (r=-0.01)
       </div>
      </td>
     </tr>
     <tr>
-     <td>
-      <div style="font-weight: normal">
+     <td style="background:#ececec;">
+      <div style="font-weight: normal;">
        treatment-b
       </div>
      </td>
-     <td>
+     <td style="background:#ececec;">
       <div style="font-weight: normal;">
-       2.4%
+       +2.4%
       </div>
      </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.00)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
+     <td style="background:#ececec;">
       <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -0.3%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.66)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#All-perf_page_load_time_from_responsestart_ms-mean">
-       perf_page_load_time_from_responsestart_ms
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       0.4%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.75)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       5.3%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=-0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -0.0%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.98)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#All-perf_first_contentful_paint_ms-mean">
-       perf_first_contentful_paint_ms
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -0.1%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.93)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       0.7%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.37)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -0.3%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.79)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#All-perf_first_contentful_paint_from_responsestart_ms-mean">
-       perf_first_contentful_paint_from_responsestart_ms
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       2.6%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.03)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       4.0%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=-0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       0.2%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.73)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#All-perf_largest_contentful_paint_ms-mean">
-       perf_largest_contentful_paint_ms
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -4.0%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -3.1%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
        None (p=0.01)
       </div>
      </td>
     </tr>
     <tr>
-     <td style="border-bottom-style: solid;">
+     <td style="background:#ececec;border-bottom-style:solid;">
       <div style="font-weight: normal;">
        treatment-c
       </div>
      </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -1.6%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.16)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#All-perf_largest_contentful_paint_from_response_start_ms-mean">
-       perf_largest_contentful_paint_from_response_start_ms
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -5.9%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -3.5%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.00)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
+     <td style="background:#ececec;border-bottom-style:solid;">
       <div style="font-weight: normal;">
        -0.3%
       </div>
      </td>
-     <td style="border-bottom-style: solid;">
+     <td style="background:#ececec;border-bottom-style:solid;">
       <div style="font-weight: normal;">
-       None (p=0.80)
+       None (p=0.05)
       </div>
      </td>
     </tr>
     <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#All-js_pageload_execution_ms-mean">
-       js_pageload_execution_ms
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -1.9%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.43)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       10.0%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=-0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       3.5%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.10)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#All-fcp_time-mean">
-       pageload event: fcp_time
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -0.6%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.30)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -2.8%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.04)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -1.7%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       Small (d=0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#All-lcp_time-mean">
-       pageload event: lcp_time
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -0.4%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.71)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -0.6%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.01)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -0.7%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.24)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#All-load_time-mean">
-       pageload event: load_time
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -0.8%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       0.6%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.94)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -0.8%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.60)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#All-response_time-mean">
-       pageload event: response_time
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -1.0%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: bold; color: green">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: bold; color: green;">
-       -3.9%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: bold; color: green">
-       Medium (d=0.06)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -0.2%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.64)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#All-js_exec_time-mean">
-       pageload event: js_exec_time
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -2.6%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.03)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: bold; color: red">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: bold; color: red;">
-       16.4%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: bold; color: red">
-       Medium (d=-0.08)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -1.2%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.01)
-      </div>
-     </td>
+     <tr>
+      <td rowspan="3" style="background:white; border-bottom-style:solid; border-right-style:solid;">
+       <div class="tooltip">
+        <a href="#All-perf_page_load_time_from_responsestart_ms-mean">
+         perf_page_load_time_from_responsestart_ms
+        </a>
+        <span class="tooltiptext">
+         Time in milliseconds from responseStart to loadEventStart for the foreground http or https root content document.
+        </span>
+       </div>
+      </td>
+      <td style="background:white;">
+       <div style="font-weight: normal;">
+        treatment-a
+       </div>
+      </td>
+      <td style="background:white;">
+       <div style="font-weight: normal;">
+        +0.4%
+       </div>
+      </td>
+      <td style="background:white;">
+       <div style="font-weight: normal;">
+        Small (r=-0.01)
+       </div>
+      </td>
+     </tr>
+     <tr>
+      <td style="background:white;">
+       <div style="font-weight: normal;">
+        treatment-b
+       </div>
+      </td>
+      <td style="background:white;">
+       <div style="font-weight: normal;">
+        +5.3%
+       </div>
+      </td>
+      <td style="background:white;">
+       <div style="font-weight: normal;">
+        Small (r=0.03)
+       </div>
+      </td>
+     </tr>
+     <tr>
+      <td style="background:white;border-bottom-style:solid;">
+       <div style="font-weight: normal;">
+        treatment-c
+       </div>
+      </td>
+      <td style="background:white;border-bottom-style:solid;">
+       <div style="font-weight: normal;">
+        -0.0%
+       </div>
+      </td>
+      <td style="background:white;border-bottom-style:solid;">
+       <div style="font-weight: normal;">
+        None (p=0.41)
+       </div>
+      </td>
+     </tr>
+     <tr>
+      <tr>
+       <td rowspan="3" style="background:#ececec; border-bottom-style:solid; border-right-style:solid;">
+        <div class="tooltip">
+         <a href="#All-perf_first_contentful_paint_ms-mean">
+          perf_first_contentful_paint_ms
+         </a>
+         <span class="tooltiptext">
+          The time between navigationStart and the first contentful paint of a foreground http or https root content document, in milliseconds. The contentful paint timestamp is taken during display list building and does not include rasterization or compositing of that paint.
+         </span>
+        </div>
+       </td>
+       <td style="background:#ececec;">
+        <div style="font-weight: normal;">
+         treatment-a
+        </div>
+       </td>
+       <td style="background:#ececec;">
+        <div style="font-weight: normal;">
+         -0.1%
+        </div>
+       </td>
+       <td style="background:#ececec;">
+        <div style="font-weight: normal;">
+         None (p=0.13)
+        </div>
+       </td>
+      </tr>
+      <tr>
+       <td style="background:#ececec;">
+        <div style="font-weight: normal;">
+         treatment-b
+        </div>
+       </td>
+       <td style="background:#ececec;">
+        <div style="font-weight: normal;">
+         +0.7%
+        </div>
+       </td>
+       <td style="background:#ececec;">
+        <div style="font-weight: normal;">
+         None (p=0.15)
+        </div>
+       </td>
+      </tr>
+      <tr>
+       <td style="background:#ececec;border-bottom-style:solid;">
+        <div style="font-weight: normal;">
+         treatment-c
+        </div>
+       </td>
+       <td style="background:#ececec;border-bottom-style:solid;">
+        <div style="font-weight: normal;">
+         -0.3%
+        </div>
+       </td>
+       <td style="background:#ececec;border-bottom-style:solid;">
+        <div style="font-weight: normal;">
+         None (p=0.30)
+        </div>
+       </td>
+      </tr>
+      <tr>
+       <tr>
+        <td rowspan="3" style="background:white; border-bottom-style:solid; border-right-style:solid;">
+         <div class="tooltip">
+          <a href="#All-perf_first_contentful_paint_from_responsestart_ms-mean">
+           perf_first_contentful_paint_from_responsestart_ms
+          </a>
+          <span class="tooltiptext">
+           The time between responseStart and the first contentful paint of a foreground http or https root content document, in milliseconds. The contentful paint timestamp is taken during display list building and does not include rasterization or compositing of that paint.
+          </span>
+         </div>
+        </td>
+        <td style="background:white;">
+         <div style="font-weight: normal;">
+          treatment-a
+         </div>
+        </td>
+        <td style="background:white;">
+         <div style="font-weight: normal;">
+          +2.6%
+         </div>
+        </td>
+        <td style="background:white;">
+         <div style="font-weight: normal;">
+          None (p=0.96)
+         </div>
+        </td>
+       </tr>
+       <tr>
+        <td style="background:white;">
+         <div style="font-weight: normal;">
+          treatment-b
+         </div>
+        </td>
+        <td style="background:white;">
+         <div style="font-weight: normal;">
+          +4.0%
+         </div>
+        </td>
+        <td style="background:white;">
+         <div style="font-weight: normal;">
+          Small (r=0.03)
+         </div>
+        </td>
+       </tr>
+       <tr>
+        <td style="background:white;border-bottom-style:solid;">
+         <div style="font-weight: normal;">
+          treatment-c
+         </div>
+        </td>
+        <td style="background:white;border-bottom-style:solid;">
+         <div style="font-weight: normal;">
+          +0.2%
+         </div>
+        </td>
+        <td style="background:white;border-bottom-style:solid;">
+         <div style="font-weight: normal;">
+          None (p=0.12)
+         </div>
+        </td>
+       </tr>
+       <tr>
+        <tr>
+         <td rowspan="3" style="background:#ececec; border-bottom-style:solid; border-right-style:solid;">
+          <div class="tooltip">
+           <a href="#All-perf_largest_contentful_paint_ms-mean">
+            perf_largest_contentful_paint_ms
+           </a>
+           <span class="tooltiptext">
+            The time between navigationStart and the largest contentful paint of a foreground http or https root content document, in milliseconds. The contentful paint timestamp is taken during display list building and does not include rasterization or compositing of that paint.
+           </span>
+          </div>
+         </td>
+         <td style="background:#ececec;">
+          <div style="font-weight: normal;">
+           treatment-a
+          </div>
+         </td>
+         <td style="background:#ececec;">
+          <div style="font-weight: normal;">
+           -4.0%
+          </div>
+         </td>
+         <td style="background:#ececec;">
+          <div style="font-weight: normal;">
+           None (p=0.07)
+          </div>
+         </td>
+        </tr>
+        <tr>
+         <td style="background:#ececec;">
+          <div style="font-weight: normal;">
+           treatment-b
+          </div>
+         </td>
+         <td style="background:#ececec;">
+          <div style="font-weight: normal;">
+           -3.1%
+          </div>
+         </td>
+         <td style="background:#ececec;">
+          <div style="font-weight: normal;">
+           None (p=0.05)
+          </div>
+         </td>
+        </tr>
+        <tr>
+         <td style="background:#ececec;border-bottom-style:solid;">
+          <div style="font-weight: normal;">
+           treatment-c
+          </div>
+         </td>
+         <td style="background:#ececec;border-bottom-style:solid;">
+          <div style="font-weight: normal;">
+           -1.6%
+          </div>
+         </td>
+         <td style="background:#ececec;border-bottom-style:solid;">
+          <div style="font-weight: normal;">
+           None (p=0.05)
+          </div>
+         </td>
+        </tr>
+        <tr>
+         <tr>
+          <td rowspan="3" style="background:white; border-bottom-style:solid; border-right-style:solid;">
+           <div class="tooltip">
+            <a href="#All-perf_largest_contentful_paint_from_response_start_ms-mean">
+             perf_largest_contentful_paint_from_response_start_ms
+            </a>
+            <span class="tooltiptext">
+             The time between responseStart and the largest contentful paint of a foreground http or https root content document, in milliseconds. The contentful paint timestamp is taken during display list building and does not include rasterization or compositing of that paint.
+            </span>
+           </div>
+          </td>
+          <td style="background:white;">
+           <div style="font-weight: normal;">
+            treatment-a
+           </div>
+          </td>
+          <td style="background:white;">
+           <div style="font-weight: normal;">
+            -5.9%
+           </div>
+          </td>
+          <td style="background:white;">
+           <div style="font-weight: normal;">
+            None (p=0.03)
+           </div>
+          </td>
+         </tr>
+         <tr>
+          <td style="background:white;">
+           <div style="font-weight: normal;">
+            treatment-b
+           </div>
+          </td>
+          <td style="background:white;">
+           <div style="font-weight: normal;">
+            -3.5%
+           </div>
+          </td>
+          <td style="background:white;">
+           <div style="font-weight: normal;">
+            Small (r=0.03)
+           </div>
+          </td>
+         </tr>
+         <tr>
+          <td style="background:white;border-bottom-style:solid;">
+           <div style="font-weight: normal;">
+            treatment-c
+           </div>
+          </td>
+          <td style="background:white;border-bottom-style:solid;">
+           <div style="font-weight: normal;">
+            -0.3%
+           </div>
+          </td>
+          <td style="background:white;border-bottom-style:solid;">
+           <div style="font-weight: normal;">
+            None (p=0.03)
+           </div>
+          </td>
+         </tr>
+         <tr>
+          <tr>
+           <td rowspan="3" style="background:#ececec; border-bottom-style:solid; border-right-style:solid;">
+            <div class="tooltip">
+             <a href="#All-js_pageload_execution_ms-mean">
+              js_pageload_execution_ms
+             </a>
+             <span class="tooltiptext">
+              Time spent during page load executing Javascript in ms.
+             </span>
+            </div>
+           </td>
+           <td style="background:#ececec;">
+            <div style="font-weight: normal;">
+             treatment-a
+            </div>
+           </td>
+           <td style="background:#ececec;">
+            <div style="font-weight: normal;">
+             -1.9%
+            </div>
+           </td>
+           <td style="background:#ececec;">
+            <div style="font-weight: normal;">
+             None (p=0.59)
+            </div>
+           </td>
+          </tr>
+          <tr>
+           <td style="background:#ececec;">
+            <div style="font-weight: normal;">
+             treatment-b
+            </div>
+           </td>
+           <td style="background:#ececec;">
+            <div style="font-weight: normal;">
+             +10.0%
+            </div>
+           </td>
+           <td style="background:#ececec;">
+            <div style="font-weight: normal;">
+             Small (r=0.04)
+            </div>
+           </td>
+          </tr>
+          <tr>
+           <td style="background:#ececec;border-bottom-style:solid;">
+            <div style="font-weight: normal;">
+             treatment-c
+            </div>
+           </td>
+           <td style="background:#ececec;border-bottom-style:solid;">
+            <div style="font-weight: normal;">
+             +3.5%
+            </div>
+           </td>
+           <td style="background:#ececec;border-bottom-style:solid;">
+            <div style="font-weight: normal;">
+             None (p=0.00)
+            </div>
+           </td>
+          </tr>
+          <tr>
+           <tr>
+            <td rowspan="3" style="background:white; border-bottom-style:solid; border-right-style:solid;">
+             <div class="tooltip">
+              <a href="#All-fcp_time-mean">
+               fcp_time
+              </a>
+              <span class="tooltiptext">
+               Time between firstContentfulPaint and navigationStart, in ms.
+              </span>
+             </div>
+            </td>
+            <td style="background:white;">
+             <div style="font-weight: normal;">
+              treatment-a
+             </div>
+            </td>
+            <td style="background:white;">
+             <div style="font-weight: normal;">
+              -0.6%
+             </div>
+            </td>
+            <td style="background:white;">
+             <div style="font-weight: normal;">
+              None (p=0.26)
+             </div>
+            </td>
+           </tr>
+           <tr>
+            <td style="background:white;">
+             <div style="font-weight: normal;">
+              treatment-b
+             </div>
+            </td>
+            <td style="background:white;">
+             <div style="font-weight: normal;">
+              -2.8%
+             </div>
+            </td>
+            <td style="background:white;">
+             <div style="font-weight: normal;">
+              Small (r=-0.03)
+             </div>
+            </td>
+           </tr>
+           <tr>
+            <td style="background:white;border-bottom-style:solid;">
+             <div style="font-weight: normal;">
+              treatment-c
+             </div>
+            </td>
+            <td style="background:white;border-bottom-style:solid;">
+             <div style="font-weight: normal;">
+              -1.7%
+             </div>
+            </td>
+            <td style="background:white;border-bottom-style:solid;">
+             <div style="font-weight: normal;">
+              None (p=0.10)
+             </div>
+            </td>
+           </tr>
+           <tr>
+            <tr>
+             <td rowspan="3" style="background:#ececec; border-bottom-style:solid; border-right-style:solid;">
+              <div class="tooltip">
+               <a href="#All-lcp_time-mean">
+                lcp_time
+               </a>
+               <span class="tooltiptext">
+                Time between largestContentfulPaint and navigationStart, at the point of onLoad firing, in ms. This may differ from the final LCP value as reported through the LCP histogram.
+               </span>
+              </div>
+             </td>
+             <td style="background:#ececec;">
+              <div style="font-weight: normal;">
+               treatment-a
+              </div>
+             </td>
+             <td style="background:#ececec;">
+              <div style="font-weight: normal;">
+               -0.4%
+              </div>
+             </td>
+             <td style="background:#ececec;">
+              <div style="font-weight: normal;">
+               None (p=0.02)
+              </div>
+             </td>
+            </tr>
+            <tr>
+             <td style="background:#ececec;">
+              <div style="font-weight: normal;">
+               treatment-b
+              </div>
+             </td>
+             <td style="background:#ececec;">
+              <div style="font-weight: normal;">
+               -0.6%
+              </div>
+             </td>
+             <td style="background:#ececec;">
+              <div style="font-weight: normal;">
+               Small (r=-0.01)
+              </div>
+             </td>
+            </tr>
+            <tr>
+             <td style="background:#ececec;border-bottom-style:solid;">
+              <div style="font-weight: normal;">
+               treatment-c
+              </div>
+             </td>
+             <td style="background:#ececec;border-bottom-style:solid;">
+              <div style="font-weight: normal;">
+               -0.7%
+              </div>
+             </td>
+             <td style="background:#ececec;border-bottom-style:solid;">
+              <div style="font-weight: normal;">
+               None (p=0.77)
+              </div>
+             </td>
+            </tr>
+            <tr>
+             <tr>
+              <td rowspan="3" style="background:white; border-bottom-style:solid; border-right-style:solid;">
+               <div class="tooltip">
+                <a href="#All-load_time-mean">
+                 load_time
+                </a>
+                <span class="tooltiptext">
+                 Time between loadEventStart and navigationStart, in ms.
+                </span>
+               </div>
+              </td>
+              <td style="background:white;">
+               <div style="font-weight: normal;">
+                treatment-a
+               </div>
+              </td>
+              <td style="background:white;">
+               <div style="font-weight: normal;">
+                -0.8%
+               </div>
+              </td>
+              <td style="background:white;">
+               <div style="font-weight: normal;">
+                Small (r=-0.01)
+               </div>
+              </td>
+             </tr>
+             <tr>
+              <td style="background:white;">
+               <div style="font-weight: normal;">
+                treatment-b
+               </div>
+              </td>
+              <td style="background:white;">
+               <div style="font-weight: normal;">
+                +0.6%
+               </div>
+              </td>
+              <td style="background:white;">
+               <div style="font-weight: normal;">
+                None (p=0.01)
+               </div>
+              </td>
+             </tr>
+             <tr>
+              <td style="background:white;border-bottom-style:solid;">
+               <div style="font-weight: normal;">
+                treatment-c
+               </div>
+              </td>
+              <td style="background:white;border-bottom-style:solid;">
+               <div style="font-weight: normal;">
+                -0.8%
+               </div>
+              </td>
+              <td style="background:white;border-bottom-style:solid;">
+               <div style="font-weight: normal;">
+                None (p=0.18)
+               </div>
+              </td>
+             </tr>
+             <tr>
+              <tr>
+               <td rowspan="3" style="background:#ececec; border-bottom-style:solid; border-right-style:solid;">
+                <div class="tooltip">
+                 <a href="#All-response_time-mean">
+                  response_time
+                 </a>
+                 <span class="tooltiptext">
+                  Time between responseStart and navigationStart, in ms.
+                 </span>
+                </div>
+               </td>
+               <td style="background:#ececec;">
+                <div style="font-weight: normal;">
+                 treatment-a
+                </div>
+               </td>
+               <td style="background:#ececec;">
+                <div style="font-weight: normal;">
+                 -1.0%
+                </div>
+               </td>
+               <td style="background:#ececec;">
+                <div style="font-weight: normal;">
+                 Small (r=-0.01)
+                </div>
+               </td>
+              </tr>
+              <tr>
+               <td style="background:#ececec;">
+                <div style="font-weight: normal;">
+                 treatment-b
+                </div>
+               </td>
+               <td style="background:#ececec;">
+                <div style="font-weight: normal;">
+                 -3.9%
+                </div>
+               </td>
+               <td style="background:#ececec;">
+                <div style="font-weight: normal;">
+                 Small (r=-0.04)
+                </div>
+               </td>
+              </tr>
+              <tr>
+               <td style="background:#ececec;border-bottom-style:solid;">
+                <div style="font-weight: normal;">
+                 treatment-c
+                </div>
+               </td>
+               <td style="background:#ececec;border-bottom-style:solid;">
+                <div style="font-weight: normal;">
+                 -0.2%
+                </div>
+               </td>
+               <td style="background:#ececec;border-bottom-style:solid;">
+                <div style="font-weight: normal;">
+                 Small (r=-0.02)
+                </div>
+               </td>
+              </tr>
+              <tr>
+               <tr>
+                <td rowspan="3" style="background:white; border-bottom-style:solid; border-right-style:solid;">
+                 <div class="tooltip">
+                  <a href="#All-js_exec_time-mean">
+                   js_exec_time
+                  </a>
+                  <span class="tooltiptext">
+                   Time spent executing JS during page load, in ms.
+                  </span>
+                 </div>
+                </td>
+                <td style="background:white;">
+                 <div style="font-weight: normal;">
+                  treatment-a
+                 </div>
+                </td>
+                <td style="background:white;">
+                 <div style="font-weight: normal;">
+                  -2.6%
+                 </div>
+                </td>
+                <td style="background:white;">
+                 <div style="font-weight: normal;">
+                  None (p=0.02)
+                 </div>
+                </td>
+               </tr>
+               <tr>
+                <td style="background:white;">
+                 <div style="font-weight: bold; color: red;">
+                  treatment-b
+                 </div>
+                </td>
+                <td style="background:white;">
+                 <div style="font-weight: bold; color: red;">
+                  +16.4%
+                 </div>
+                </td>
+                <td style="background:white;">
+                 <div style="font-weight: bold; color: red;">
+                  Medium (r=0.05)
+                 </div>
+                </td>
+               </tr>
+               <tr>
+                <td style="background:white;border-bottom-style:solid;">
+                 <div style="font-weight: normal;">
+                  treatment-c
+                 </div>
+                </td>
+                <td style="background:white;border-bottom-style:solid;">
+                 <div style="font-weight: normal;">
+                  -1.2%
+                 </div>
+                </td>
+                <td style="background:white;border-bottom-style:solid;">
+                 <div style="font-weight: normal;">
+                  Small (r=0.02)
+                 </div>
+                </td>
+               </tr>
+               <tr>
+               </tr>
+              </tr>
+             </tr>
+            </tr>
+           </tr>
+          </tr>
+         </tr>
+        </tr>
+       </tr>
+      </tr>
+     </tr>
     </tr>
    </tbody>
   </table>
@@ -1476,18 +1553,13 @@ div.chart {
       </div>
      </th>
      <th>
-      <div class="tooltip">
-       uplift
-       <span class="tooltiptext">
-        Uplift of the mean.
-       </span>
-      </div>
+      uplift
      </th>
      <th>
       <div class="tooltip">
-       effect size (t-test)
+       effect size (mwu)
        <span class="tooltiptext">
-        Effect size calculated by Cohen's d.
+        Effect size calculated by Rank Biserial Correlation.
        </span>
       </div>
      </th>
@@ -1495,676 +1567,760 @@ div.chart {
    </thead>
    <tbody>
     <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Windows-perf_page_load_time_ms-mean">
-       perf_page_load_time_ms
-      </a>
+     <td rowspan="3" style="background:#ececec; border-bottom-style:solid; border-right-style:solid;">
+      <div class="tooltip">
+       <a href="#Windows-perf_page_load_time_ms-mean">
+        perf_page_load_time_ms
+       </a>
+       <span class="tooltiptext">
+        Time in milliseconds from navigationStart to loadEventStart for the foreground http or https root content document.
+       </span>
+      </div>
      </td>
-     <td>
-      <div style="font-weight: normal">
+     <td style="background:#ececec;">
+      <div style="font-weight: normal;">
        treatment-a
       </div>
      </td>
-     <td>
+     <td style="background:#ececec;">
       <div style="font-weight: normal;">
-       0.6%
+       +0.6%
       </div>
      </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.51)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
+     <td style="background:#ececec;">
       <div style="font-weight: normal;">
-       3.0%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=-0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       0.0%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.95)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Windows-perf_page_load_time_from_responsestart_ms-mean">
-       perf_page_load_time_from_responsestart_ms
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       1.9%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.07)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       6.3%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=-0.03)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       0.8%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.44)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Windows-perf_first_contentful_paint_ms-mean">
-       perf_first_contentful_paint_ms
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       0.7%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.35)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       0.1%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.87)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -0.2%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.84)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Windows-perf_first_contentful_paint_from_responsestart_ms-mean">
-       perf_first_contentful_paint_from_responsestart_ms
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       4.5%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=-0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       3.7%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.00)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       1.5%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.14)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Windows-perf_largest_contentful_paint_ms-mean">
-       perf_largest_contentful_paint_ms
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -4.0%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -4.6%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       0.5%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.64)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Windows-perf_largest_contentful_paint_from_response_start_ms-mean">
-       perf_largest_contentful_paint_from_response_start_ms
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -7.0%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.03)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -5.3%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -0.4%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.73)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Windows-js_pageload_execution_ms-mean">
-       js_pageload_execution_ms
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       1.1%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.73)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       11.2%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=-0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       4.6%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.04)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Windows-fcp_time-mean">
-       pageload event: fcp_time
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       0.1%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.18)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: bold; color: green">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: bold; color: green;">
-       -4.1%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: bold; color: green">
-       Medium (d=0.06)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -1.6%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.00)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Windows-lcp_time-mean">
-       pageload event: lcp_time
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       0.4%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.01)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -1.3%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -0.3%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.90)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Windows-load_time-mean">
-       pageload event: load_time
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       0.1%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
        None (p=0.19)
       </div>
      </td>
     </tr>
     <tr>
-     <td>
-      <div style="font-weight: normal">
+     <td style="background:#ececec;">
+      <div style="font-weight: normal;">
        treatment-b
       </div>
      </td>
-     <td>
+     <td style="background:#ececec;">
       <div style="font-weight: normal;">
-       0.9%
+       +3.0%
       </div>
      </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.88)
+     <td style="background:#ececec;">
+      <div style="font-weight: normal;">
+       Small (r=0.01)
       </div>
      </td>
     </tr>
     <tr>
-     <td style="border-bottom-style: solid;">
+     <td style="background:#ececec;border-bottom-style:solid;">
       <div style="font-weight: normal;">
        treatment-c
       </div>
      </td>
-     <td style="border-bottom-style: solid;">
+     <td style="background:#ececec;border-bottom-style:solid;">
       <div style="font-weight: normal;">
-       -0.4%
+       +0.0%
       </div>
      </td>
-     <td style="border-bottom-style: solid;">
+     <td style="background:#ececec;border-bottom-style:solid;">
       <div style="font-weight: normal;">
-       None (p=0.13)
+       None (p=0.61)
       </div>
      </td>
     </tr>
     <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Windows-response_time-mean">
-       pageload event: response_time
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -0.9%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.31)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: bold; color: green">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: bold; color: green;">
-       -5.5%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: bold; color: green">
-       Medium (d=0.08)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -0.9%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.10)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Windows-js_exec_time-mean">
-       pageload event: js_exec_time
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -1.7%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.03)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: bold; color: red">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: bold; color: red;">
-       22.8%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: bold; color: red">
-       Large (d=-0.11)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       0.8%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.74)
-      </div>
-     </td>
+     <tr>
+      <td rowspan="3" style="background:white; border-bottom-style:solid; border-right-style:solid;">
+       <div class="tooltip">
+        <a href="#Windows-perf_page_load_time_from_responsestart_ms-mean">
+         perf_page_load_time_from_responsestart_ms
+        </a>
+        <span class="tooltiptext">
+         Time in milliseconds from responseStart to loadEventStart for the foreground http or https root content document.
+        </span>
+       </div>
+      </td>
+      <td style="background:white;">
+       <div style="font-weight: normal;">
+        treatment-a
+       </div>
+      </td>
+      <td style="background:white;">
+       <div style="font-weight: normal;">
+        +1.9%
+       </div>
+      </td>
+      <td style="background:white;">
+       <div style="font-weight: normal;">
+        None (p=0.00)
+       </div>
+      </td>
+     </tr>
+     <tr>
+      <td style="background:white;">
+       <div style="font-weight: normal;">
+        treatment-b
+       </div>
+      </td>
+      <td style="background:white;">
+       <div style="font-weight: normal;">
+        +6.3%
+       </div>
+      </td>
+      <td style="background:white;">
+       <div style="font-weight: normal;">
+        Small (r=0.04)
+       </div>
+      </td>
+     </tr>
+     <tr>
+      <td style="background:white;border-bottom-style:solid;">
+       <div style="font-weight: normal;">
+        treatment-c
+       </div>
+      </td>
+      <td style="background:white;border-bottom-style:solid;">
+       <div style="font-weight: normal;">
+        +0.8%
+       </div>
+      </td>
+      <td style="background:white;border-bottom-style:solid;">
+       <div style="font-weight: normal;">
+        None (p=0.00)
+       </div>
+      </td>
+     </tr>
+     <tr>
+      <tr>
+       <td rowspan="3" style="background:#ececec; border-bottom-style:solid; border-right-style:solid;">
+        <div class="tooltip">
+         <a href="#Windows-perf_first_contentful_paint_ms-mean">
+          perf_first_contentful_paint_ms
+         </a>
+         <span class="tooltiptext">
+          The time between navigationStart and the first contentful paint of a foreground http or https root content document, in milliseconds. The contentful paint timestamp is taken during display list building and does not include rasterization or compositing of that paint.
+         </span>
+        </div>
+       </td>
+       <td style="background:#ececec;">
+        <div style="font-weight: normal;">
+         treatment-a
+        </div>
+       </td>
+       <td style="background:#ececec;">
+        <div style="font-weight: normal;">
+         +0.7%
+        </div>
+       </td>
+       <td style="background:#ececec;">
+        <div style="font-weight: normal;">
+         Small (r=0.01)
+        </div>
+       </td>
+      </tr>
+      <tr>
+       <td style="background:#ececec;">
+        <div style="font-weight: normal;">
+         treatment-b
+        </div>
+       </td>
+       <td style="background:#ececec;">
+        <div style="font-weight: normal;">
+         +0.1%
+        </div>
+       </td>
+       <td style="background:#ececec;">
+        <div style="font-weight: normal;">
+         None (p=0.07)
+        </div>
+       </td>
+      </tr>
+      <tr>
+       <td style="background:#ececec;border-bottom-style:solid;">
+        <div style="font-weight: normal;">
+         treatment-c
+        </div>
+       </td>
+       <td style="background:#ececec;border-bottom-style:solid;">
+        <div style="font-weight: normal;">
+         -0.2%
+        </div>
+       </td>
+       <td style="background:#ececec;border-bottom-style:solid;">
+        <div style="font-weight: normal;">
+         None (p=0.22)
+        </div>
+       </td>
+      </tr>
+      <tr>
+       <tr>
+        <td rowspan="3" style="background:white; border-bottom-style:solid; border-right-style:solid;">
+         <div class="tooltip">
+          <a href="#Windows-perf_first_contentful_paint_from_responsestart_ms-mean">
+           perf_first_contentful_paint_from_responsestart_ms
+          </a>
+          <span class="tooltiptext">
+           The time between responseStart and the first contentful paint of a foreground http or https root content document, in milliseconds. The contentful paint timestamp is taken during display list building and does not include rasterization or compositing of that paint.
+          </span>
+         </div>
+        </td>
+        <td style="background:white;">
+         <div style="font-weight: normal;">
+          treatment-a
+         </div>
+        </td>
+        <td style="background:white;">
+         <div style="font-weight: normal;">
+          +4.5%
+         </div>
+        </td>
+        <td style="background:white;">
+         <div style="font-weight: normal;">
+          Small (r=0.01)
+         </div>
+        </td>
+       </tr>
+       <tr>
+        <td style="background:white;">
+         <div style="font-weight: normal;">
+          treatment-b
+         </div>
+        </td>
+        <td style="background:white;">
+         <div style="font-weight: normal;">
+          +3.7%
+         </div>
+        </td>
+        <td style="background:white;">
+         <div style="font-weight: normal;">
+          Small (r=0.04)
+         </div>
+        </td>
+       </tr>
+       <tr>
+        <td style="background:white;border-bottom-style:solid;">
+         <div style="font-weight: normal;">
+          treatment-c
+         </div>
+        </td>
+        <td style="background:white;border-bottom-style:solid;">
+         <div style="font-weight: normal;">
+          +1.5%
+         </div>
+        </td>
+        <td style="background:white;border-bottom-style:solid;">
+         <div style="font-weight: normal;">
+          Small (r=0.02)
+         </div>
+        </td>
+       </tr>
+       <tr>
+        <tr>
+         <td rowspan="3" style="background:#ececec; border-bottom-style:solid; border-right-style:solid;">
+          <div class="tooltip">
+           <a href="#Windows-perf_largest_contentful_paint_ms-mean">
+            perf_largest_contentful_paint_ms
+           </a>
+           <span class="tooltiptext">
+            The time between navigationStart and the largest contentful paint of a foreground http or https root content document, in milliseconds. The contentful paint timestamp is taken during display list building and does not include rasterization or compositing of that paint.
+           </span>
+          </div>
+         </td>
+         <td style="background:#ececec;">
+          <div style="font-weight: normal;">
+           treatment-a
+          </div>
+         </td>
+         <td style="background:#ececec;">
+          <div style="font-weight: normal;">
+           -4.0%
+          </div>
+         </td>
+         <td style="background:#ececec;">
+          <div style="font-weight: normal;">
+           None (p=0.90)
+          </div>
+         </td>
+        </tr>
+        <tr>
+         <td style="background:#ececec;">
+          <div style="font-weight: normal;">
+           treatment-b
+          </div>
+         </td>
+         <td style="background:#ececec;">
+          <div style="font-weight: normal;">
+           -4.6%
+          </div>
+         </td>
+         <td style="background:#ececec;">
+          <div style="font-weight: normal;">
+           None (p=0.00)
+          </div>
+         </td>
+        </tr>
+        <tr>
+         <td style="background:#ececec;border-bottom-style:solid;">
+          <div style="font-weight: normal;">
+           treatment-c
+          </div>
+         </td>
+         <td style="background:#ececec;border-bottom-style:solid;">
+          <div style="font-weight: normal;">
+           +0.5%
+          </div>
+         </td>
+         <td style="background:#ececec;border-bottom-style:solid;">
+          <div style="font-weight: normal;">
+           None (p=0.48)
+          </div>
+         </td>
+        </tr>
+        <tr>
+         <tr>
+          <td rowspan="3" style="background:white; border-bottom-style:solid; border-right-style:solid;">
+           <div class="tooltip">
+            <a href="#Windows-perf_largest_contentful_paint_from_response_start_ms-mean">
+             perf_largest_contentful_paint_from_response_start_ms
+            </a>
+            <span class="tooltiptext">
+             The time between responseStart and the largest contentful paint of a foreground http or https root content document, in milliseconds. The contentful paint timestamp is taken during display list building and does not include rasterization or compositing of that paint.
+            </span>
+           </div>
+          </td>
+          <td style="background:white;">
+           <div style="font-weight: normal;">
+            treatment-a
+           </div>
+          </td>
+          <td style="background:white;">
+           <div style="font-weight: normal;">
+            -7.0%
+           </div>
+          </td>
+          <td style="background:white;">
+           <div style="font-weight: normal;">
+            None (p=0.50)
+           </div>
+          </td>
+         </tr>
+         <tr>
+          <td style="background:white;">
+           <div style="font-weight: normal;">
+            treatment-b
+           </div>
+          </td>
+          <td style="background:white;">
+           <div style="font-weight: normal;">
+            -5.3%
+           </div>
+          </td>
+          <td style="background:white;">
+           <div style="font-weight: normal;">
+            Small (r=0.04)
+           </div>
+          </td>
+         </tr>
+         <tr>
+          <td style="background:white;border-bottom-style:solid;">
+           <div style="font-weight: normal;">
+            treatment-c
+           </div>
+          </td>
+          <td style="background:white;border-bottom-style:solid;">
+           <div style="font-weight: normal;">
+            -0.4%
+           </div>
+          </td>
+          <td style="background:white;border-bottom-style:solid;">
+           <div style="font-weight: normal;">
+            Small (r=0.01)
+           </div>
+          </td>
+         </tr>
+         <tr>
+          <tr>
+           <td rowspan="3" style="background:#ececec; border-bottom-style:solid; border-right-style:solid;">
+            <div class="tooltip">
+             <a href="#Windows-js_pageload_execution_ms-mean">
+              js_pageload_execution_ms
+             </a>
+             <span class="tooltiptext">
+              Time spent during page load executing Javascript in ms.
+             </span>
+            </div>
+           </td>
+           <td style="background:#ececec;">
+            <div style="font-weight: normal;">
+             treatment-a
+            </div>
+           </td>
+           <td style="background:#ececec;">
+            <div style="font-weight: normal;">
+             +1.1%
+            </div>
+           </td>
+           <td style="background:#ececec;">
+            <div style="font-weight: normal;">
+             Small (r=0.02)
+            </div>
+           </td>
+          </tr>
+          <tr>
+           <td style="background:#ececec;">
+            <div style="font-weight: bold; color: red;">
+             treatment-b
+            </div>
+           </td>
+           <td style="background:#ececec;">
+            <div style="font-weight: bold; color: red;">
+             +11.2%
+            </div>
+           </td>
+           <td style="background:#ececec;">
+            <div style="font-weight: bold; color: red;">
+             Medium (r=0.05)
+            </div>
+           </td>
+          </tr>
+          <tr>
+           <td style="background:#ececec;border-bottom-style:solid;">
+            <div style="font-weight: normal;">
+             treatment-c
+            </div>
+           </td>
+           <td style="background:#ececec;border-bottom-style:solid;">
+            <div style="font-weight: normal;">
+             +4.6%
+            </div>
+           </td>
+           <td style="background:#ececec;border-bottom-style:solid;">
+            <div style="font-weight: normal;">
+             Small (r=0.02)
+            </div>
+           </td>
+          </tr>
+          <tr>
+           <tr>
+            <td rowspan="3" style="background:white; border-bottom-style:solid; border-right-style:solid;">
+             <div class="tooltip">
+              <a href="#Windows-fcp_time-mean">
+               fcp_time
+              </a>
+              <span class="tooltiptext">
+               Time between firstContentfulPaint and navigationStart, in ms.
+              </span>
+             </div>
+            </td>
+            <td style="background:white;">
+             <div style="font-weight: normal;">
+              treatment-a
+             </div>
+            </td>
+            <td style="background:white;">
+             <div style="font-weight: normal;">
+              +0.1%
+             </div>
+            </td>
+            <td style="background:white;">
+             <div style="font-weight: normal;">
+              Small (r=0.01)
+             </div>
+            </td>
+           </tr>
+           <tr>
+            <td style="background:white;">
+             <div style="font-weight: normal;">
+              treatment-b
+             </div>
+            </td>
+            <td style="background:white;">
+             <div style="font-weight: normal;">
+              -4.1%
+             </div>
+            </td>
+            <td style="background:white;">
+             <div style="font-weight: normal;">
+              Small (r=-0.04)
+             </div>
+            </td>
+           </tr>
+           <tr>
+            <td style="background:white;border-bottom-style:solid;">
+             <div style="font-weight: normal;">
+              treatment-c
+             </div>
+            </td>
+            <td style="background:white;border-bottom-style:solid;">
+             <div style="font-weight: normal;">
+              -1.6%
+             </div>
+            </td>
+            <td style="background:white;border-bottom-style:solid;">
+             <div style="font-weight: normal;">
+              None (p=0.61)
+             </div>
+            </td>
+           </tr>
+           <tr>
+            <tr>
+             <td rowspan="3" style="background:#ececec; border-bottom-style:solid; border-right-style:solid;">
+              <div class="tooltip">
+               <a href="#Windows-lcp_time-mean">
+                lcp_time
+               </a>
+               <span class="tooltiptext">
+                Time between largestContentfulPaint and navigationStart, at the point of onLoad firing, in ms. This may differ from the final LCP value as reported through the LCP histogram.
+               </span>
+              </div>
+             </td>
+             <td style="background:#ececec;">
+              <div style="font-weight: normal;">
+               treatment-a
+              </div>
+             </td>
+             <td style="background:#ececec;">
+              <div style="font-weight: normal;">
+               +0.4%
+              </div>
+             </td>
+             <td style="background:#ececec;">
+              <div style="font-weight: normal;">
+               Small (r=0.02)
+              </div>
+             </td>
+            </tr>
+            <tr>
+             <td style="background:#ececec;">
+              <div style="font-weight: normal;">
+               treatment-b
+              </div>
+             </td>
+             <td style="background:#ececec;">
+              <div style="font-weight: normal;">
+               -1.3%
+              </div>
+             </td>
+             <td style="background:#ececec;">
+              <div style="font-weight: normal;">
+               Small (r=-0.02)
+              </div>
+             </td>
+            </tr>
+            <tr>
+             <td style="background:#ececec;border-bottom-style:solid;">
+              <div style="font-weight: normal;">
+               treatment-c
+              </div>
+             </td>
+             <td style="background:#ececec;border-bottom-style:solid;">
+              <div style="font-weight: normal;">
+               -0.3%
+              </div>
+             </td>
+             <td style="background:#ececec;border-bottom-style:solid;">
+              <div style="font-weight: normal;">
+               None (p=0.01)
+              </div>
+             </td>
+            </tr>
+            <tr>
+             <tr>
+              <td rowspan="3" style="background:white; border-bottom-style:solid; border-right-style:solid;">
+               <div class="tooltip">
+                <a href="#Windows-load_time-mean">
+                 load_time
+                </a>
+                <span class="tooltiptext">
+                 Time between loadEventStart and navigationStart, in ms.
+                </span>
+               </div>
+              </td>
+              <td style="background:white;">
+               <div style="font-weight: normal;">
+                treatment-a
+               </div>
+              </td>
+              <td style="background:white;">
+               <div style="font-weight: normal;">
+                +0.1%
+               </div>
+              </td>
+              <td style="background:white;">
+               <div style="font-weight: normal;">
+                None (p=0.72)
+               </div>
+              </td>
+             </tr>
+             <tr>
+              <td style="background:white;">
+               <div style="font-weight: normal;">
+                treatment-b
+               </div>
+              </td>
+              <td style="background:white;">
+               <div style="font-weight: normal;">
+                +0.9%
+               </div>
+              </td>
+              <td style="background:white;">
+               <div style="font-weight: normal;">
+                Small (r=-0.01)
+               </div>
+              </td>
+             </tr>
+             <tr>
+              <td style="background:white;border-bottom-style:solid;">
+               <div style="font-weight: normal;">
+                treatment-c
+               </div>
+              </td>
+              <td style="background:white;border-bottom-style:solid;">
+               <div style="font-weight: normal;">
+                -0.4%
+               </div>
+              </td>
+              <td style="background:white;border-bottom-style:solid;">
+               <div style="font-weight: normal;">
+                None (p=0.24)
+               </div>
+              </td>
+             </tr>
+             <tr>
+              <tr>
+               <td rowspan="3" style="background:#ececec; border-bottom-style:solid; border-right-style:solid;">
+                <div class="tooltip">
+                 <a href="#Windows-response_time-mean">
+                  response_time
+                 </a>
+                 <span class="tooltiptext">
+                  Time between responseStart and navigationStart, in ms.
+                 </span>
+                </div>
+               </td>
+               <td style="background:#ececec;">
+                <div style="font-weight: normal;">
+                 treatment-a
+                </div>
+               </td>
+               <td style="background:#ececec;">
+                <div style="font-weight: normal;">
+                 -0.9%
+                </div>
+               </td>
+               <td style="background:#ececec;">
+                <div style="font-weight: normal;">
+                 None (p=0.11)
+                </div>
+               </td>
+              </tr>
+              <tr>
+               <td style="background:#ececec;">
+                <div style="font-weight: bold; color: green;">
+                 treatment-b
+                </div>
+               </td>
+               <td style="background:#ececec;">
+                <div style="font-weight: bold; color: green;">
+                 -5.5%
+                </div>
+               </td>
+               <td style="background:#ececec;">
+                <div style="font-weight: bold; color: green;">
+                 Medium (r=-0.06)
+                </div>
+               </td>
+              </tr>
+              <tr>
+               <td style="background:#ececec;border-bottom-style:solid;">
+                <div style="font-weight: normal;">
+                 treatment-c
+                </div>
+               </td>
+               <td style="background:#ececec;border-bottom-style:solid;">
+                <div style="font-weight: normal;">
+                 -0.9%
+                </div>
+               </td>
+               <td style="background:#ececec;border-bottom-style:solid;">
+                <div style="font-weight: normal;">
+                 Small (r=-0.02)
+                </div>
+               </td>
+              </tr>
+              <tr>
+               <tr>
+                <td rowspan="3" style="background:white; border-bottom-style:solid; border-right-style:solid;">
+                 <div class="tooltip">
+                  <a href="#Windows-js_exec_time-mean">
+                   js_exec_time
+                  </a>
+                  <span class="tooltiptext">
+                   Time spent executing JS during page load, in ms.
+                  </span>
+                 </div>
+                </td>
+                <td style="background:white;">
+                 <div style="font-weight: normal;">
+                  treatment-a
+                 </div>
+                </td>
+                <td style="background:white;">
+                 <div style="font-weight: normal;">
+                  -1.7%
+                 </div>
+                </td>
+                <td style="background:white;">
+                 <div style="font-weight: normal;">
+                  None (p=0.10)
+                 </div>
+                </td>
+               </tr>
+               <tr>
+                <td style="background:white;">
+                 <div style="font-weight: bold; color: red;">
+                  treatment-b
+                 </div>
+                </td>
+                <td style="background:white;">
+                 <div style="font-weight: bold; color: red;">
+                  +22.8%
+                 </div>
+                </td>
+                <td style="background:white;">
+                 <div style="font-weight: bold; color: red;">
+                  Medium (r=0.07)
+                 </div>
+                </td>
+               </tr>
+               <tr>
+                <td style="background:white;border-bottom-style:solid;">
+                 <div style="font-weight: normal;">
+                  treatment-c
+                 </div>
+                </td>
+                <td style="background:white;border-bottom-style:solid;">
+                 <div style="font-weight: normal;">
+                  +0.8%
+                 </div>
+                </td>
+                <td style="background:white;border-bottom-style:solid;">
+                 <div style="font-weight: normal;">
+                  Small (r=0.03)
+                 </div>
+                </td>
+               </tr>
+               <tr>
+               </tr>
+              </tr>
+             </tr>
+            </tr>
+           </tr>
+          </tr>
+         </tr>
+        </tr>
+       </tr>
+      </tr>
+     </tr>
     </tr>
    </tbody>
   </table>
@@ -2186,18 +2342,13 @@ div.chart {
       </div>
      </th>
      <th>
-      <div class="tooltip">
-       uplift
-       <span class="tooltiptext">
-        Uplift of the mean.
-       </span>
-      </div>
+      uplift
      </th>
      <th>
       <div class="tooltip">
-       effect size (t-test)
+       effect size (mwu)
        <span class="tooltiptext">
-        Effect size calculated by Cohen's d.
+        Effect size calculated by Rank Biserial Correlation.
        </span>
       </div>
      </th>
@@ -2205,676 +2356,760 @@ div.chart {
    </thead>
    <tbody>
     <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Linux-perf_page_load_time_ms-mean">
-       perf_page_load_time_ms
-      </a>
+     <td rowspan="3" style="background:#ececec; border-bottom-style:solid; border-right-style:solid;">
+      <div class="tooltip">
+       <a href="#Linux-perf_page_load_time_ms-mean">
+        perf_page_load_time_ms
+       </a>
+       <span class="tooltiptext">
+        Time in milliseconds from navigationStart to loadEventStart for the foreground http or https root content document.
+       </span>
+      </div>
      </td>
-     <td>
-      <div style="font-weight: normal">
+     <td style="background:#ececec;">
+      <div style="font-weight: normal;">
        treatment-a
       </div>
      </td>
-     <td>
+     <td style="background:#ececec;">
       <div style="font-weight: normal;">
        -5.4%
       </div>
      </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.03)
+     <td style="background:#ececec;">
+      <div style="font-weight: normal;">
+       Small (r=-0.03)
       </div>
      </td>
     </tr>
     <tr>
-     <td>
-      <div style="font-weight: normal">
+     <td style="background:#ececec;">
+      <div style="font-weight: normal;">
        treatment-b
       </div>
      </td>
-     <td>
+     <td style="background:#ececec;">
       <div style="font-weight: normal;">
        -2.6%
       </div>
      </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.00)
+     <td style="background:#ececec;">
+      <div style="font-weight: normal;">
+       Small (r=-0.01)
       </div>
      </td>
     </tr>
     <tr>
-     <td style="border-bottom-style: solid;">
+     <td style="background:#ececec;border-bottom-style:solid;">
       <div style="font-weight: normal;">
        treatment-c
       </div>
      </td>
-     <td style="border-bottom-style: solid;">
+     <td style="background:#ececec;border-bottom-style:solid;">
       <div style="font-weight: normal;">
        -1.7%
       </div>
      </td>
-     <td style="border-bottom-style: solid;">
+     <td style="background:#ececec;border-bottom-style:solid;">
       <div style="font-weight: normal;">
-       None (p=0.04)
+       Small (r=-0.02)
       </div>
      </td>
     </tr>
     <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Linux-perf_page_load_time_from_responsestart_ms-mean">
-       perf_page_load_time_from_responsestart_ms
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -5.0%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -1.4%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.13)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -1.4%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.14)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Linux-perf_first_contentful_paint_ms-mean">
-       perf_first_contentful_paint_ms
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -3.8%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -0.1%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.91)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -0.9%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.29)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Linux-perf_first_contentful_paint_from_responsestart_ms-mean">
-       perf_first_contentful_paint_from_responsestart_ms
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -5.5%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.03)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -0.9%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.31)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -3.9%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       Small (d=0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Linux-perf_largest_contentful_paint_ms-mean">
-       perf_largest_contentful_paint_ms
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       1.4%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.23)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       1.4%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.22)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -10.3%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       Small (d=0.04)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Linux-perf_largest_contentful_paint_from_response_start_ms-mean">
-       perf_largest_contentful_paint_from_response_start_ms
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       7.2%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=-0.03)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       4.4%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=-0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -5.6%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       Small (d=0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Linux-js_pageload_execution_ms-mean">
-       js_pageload_execution_ms
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -8.3%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -7.1%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -4.0%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.01)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Linux-fcp_time-mean">
-       pageload event: fcp_time
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -3.4%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.04)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       0.5%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=-0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -4.4%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       Small (d=0.04)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Linux-lcp_time-mean">
-       pageload event: lcp_time
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: bold; color: green">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: bold; color: green;">
-       -4.0%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: bold; color: green">
-       Medium (d=0.06)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       1.1%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.05)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -3.7%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       Small (d=0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Linux-load_time-mean">
-       pageload event: load_time
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -4.5%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.03)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -2.5%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.51)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -3.8%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       Small (d=0.04)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Linux-response_time-mean">
-       pageload event: response_time
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -3.5%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.03)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: bold; color: red">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: bold; color: red;">
-       1.7%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: bold; color: red">
-       Medium (d=-0.06)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       0.9%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       Small (d=-0.03)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Linux-js_exec_time-mean">
-       pageload event: js_exec_time
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -7.7%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.04)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: bold; color: green">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: bold; color: green;">
-       -17.0%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: bold; color: green">
-       Large (d=0.11)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: bold; color: green;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: bold; color: green;">
-       -12.8%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: bold; color: green;">
-       Medium (d=0.09)
-      </div>
-     </td>
+     <tr>
+      <td rowspan="3" style="background:white; border-bottom-style:solid; border-right-style:solid;">
+       <div class="tooltip">
+        <a href="#Linux-perf_page_load_time_from_responsestart_ms-mean">
+         perf_page_load_time_from_responsestart_ms
+        </a>
+        <span class="tooltiptext">
+         Time in milliseconds from responseStart to loadEventStart for the foreground http or https root content document.
+        </span>
+       </div>
+      </td>
+      <td style="background:white;">
+       <div style="font-weight: normal;">
+        treatment-a
+       </div>
+      </td>
+      <td style="background:white;">
+       <div style="font-weight: normal;">
+        -5.0%
+       </div>
+      </td>
+      <td style="background:white;">
+       <div style="font-weight: normal;">
+        Small (r=-0.03)
+       </div>
+      </td>
+     </tr>
+     <tr>
+      <td style="background:white;">
+       <div style="font-weight: normal;">
+        treatment-b
+       </div>
+      </td>
+      <td style="background:white;">
+       <div style="font-weight: normal;">
+        -1.4%
+       </div>
+      </td>
+      <td style="background:white;">
+       <div style="font-weight: normal;">
+        Small (r=-0.03)
+       </div>
+      </td>
+     </tr>
+     <tr>
+      <td style="background:white;border-bottom-style:solid;">
+       <div style="font-weight: normal;">
+        treatment-c
+       </div>
+      </td>
+      <td style="background:white;border-bottom-style:solid;">
+       <div style="font-weight: normal;">
+        -1.4%
+       </div>
+      </td>
+      <td style="background:white;border-bottom-style:solid;">
+       <div style="font-weight: normal;">
+        Small (r=-0.03)
+       </div>
+      </td>
+     </tr>
+     <tr>
+      <tr>
+       <td rowspan="3" style="background:#ececec; border-bottom-style:solid; border-right-style:solid;">
+        <div class="tooltip">
+         <a href="#Linux-perf_first_contentful_paint_ms-mean">
+          perf_first_contentful_paint_ms
+         </a>
+         <span class="tooltiptext">
+          The time between navigationStart and the first contentful paint of a foreground http or https root content document, in milliseconds. The contentful paint timestamp is taken during display list building and does not include rasterization or compositing of that paint.
+         </span>
+        </div>
+       </td>
+       <td style="background:#ececec;">
+        <div style="font-weight: normal;">
+         treatment-a
+        </div>
+       </td>
+       <td style="background:#ececec;">
+        <div style="font-weight: normal;">
+         -3.8%
+        </div>
+       </td>
+       <td style="background:#ececec;">
+        <div style="font-weight: normal;">
+         Small (r=-0.03)
+        </div>
+       </td>
+      </tr>
+      <tr>
+       <td style="background:#ececec;">
+        <div style="font-weight: normal;">
+         treatment-b
+        </div>
+       </td>
+       <td style="background:#ececec;">
+        <div style="font-weight: normal;">
+         -0.1%
+        </div>
+       </td>
+       <td style="background:#ececec;">
+        <div style="font-weight: normal;">
+         Small (r=-0.01)
+        </div>
+       </td>
+      </tr>
+      <tr>
+       <td style="background:#ececec;border-bottom-style:solid;">
+        <div style="font-weight: normal;">
+         treatment-c
+        </div>
+       </td>
+       <td style="background:#ececec;border-bottom-style:solid;">
+        <div style="font-weight: normal;">
+         -0.9%
+        </div>
+       </td>
+       <td style="background:#ececec;border-bottom-style:solid;">
+        <div style="font-weight: normal;">
+         Small (r=-0.03)
+        </div>
+       </td>
+      </tr>
+      <tr>
+       <tr>
+        <td rowspan="3" style="background:white; border-bottom-style:solid; border-right-style:solid;">
+         <div class="tooltip">
+          <a href="#Linux-perf_first_contentful_paint_from_responsestart_ms-mean">
+           perf_first_contentful_paint_from_responsestart_ms
+          </a>
+          <span class="tooltiptext">
+           The time between responseStart and the first contentful paint of a foreground http or https root content document, in milliseconds. The contentful paint timestamp is taken during display list building and does not include rasterization or compositing of that paint.
+          </span>
+         </div>
+        </td>
+        <td style="background:white;">
+         <div style="font-weight: normal;">
+          treatment-a
+         </div>
+        </td>
+        <td style="background:white;">
+         <div style="font-weight: normal;">
+          -5.5%
+         </div>
+        </td>
+        <td style="background:white;">
+         <div style="font-weight: normal;">
+          Small (r=-0.04)
+         </div>
+        </td>
+       </tr>
+       <tr>
+        <td style="background:white;">
+         <div style="font-weight: normal;">
+          treatment-b
+         </div>
+        </td>
+        <td style="background:white;">
+         <div style="font-weight: normal;">
+          -0.9%
+         </div>
+        </td>
+        <td style="background:white;">
+         <div style="font-weight: normal;">
+          Small (r=-0.04)
+         </div>
+        </td>
+       </tr>
+       <tr>
+        <td style="background:white;border-bottom-style:solid;">
+         <div style="font-weight: bold; color: green;">
+          treatment-c
+         </div>
+        </td>
+        <td style="background:white;border-bottom-style:solid;">
+         <div style="font-weight: bold; color: green;">
+          -3.9%
+         </div>
+        </td>
+        <td style="background:white;border-bottom-style:solid;">
+         <div style="font-weight: bold; color: green;">
+          Medium (r=-0.06)
+         </div>
+        </td>
+       </tr>
+       <tr>
+        <tr>
+         <td rowspan="3" style="background:#ececec; border-bottom-style:solid; border-right-style:solid;">
+          <div class="tooltip">
+           <a href="#Linux-perf_largest_contentful_paint_ms-mean">
+            perf_largest_contentful_paint_ms
+           </a>
+           <span class="tooltiptext">
+            The time between navigationStart and the largest contentful paint of a foreground http or https root content document, in milliseconds. The contentful paint timestamp is taken during display list building and does not include rasterization or compositing of that paint.
+           </span>
+          </div>
+         </td>
+         <td style="background:#ececec;">
+          <div style="font-weight: normal;">
+           treatment-a
+          </div>
+         </td>
+         <td style="background:#ececec;">
+          <div style="font-weight: normal;">
+           +1.4%
+          </div>
+         </td>
+         <td style="background:#ececec;">
+          <div style="font-weight: normal;">
+           Small (r=-0.01)
+          </div>
+         </td>
+        </tr>
+        <tr>
+         <td style="background:#ececec;">
+          <div style="font-weight: normal;">
+           treatment-b
+          </div>
+         </td>
+         <td style="background:#ececec;">
+          <div style="font-weight: normal;">
+           +1.4%
+          </div>
+         </td>
+         <td style="background:#ececec;">
+          <div style="font-weight: normal;">
+           None (p=0.84)
+          </div>
+         </td>
+        </tr>
+        <tr>
+         <td style="background:#ececec;border-bottom-style:solid;">
+          <div style="font-weight: normal;">
+           treatment-c
+          </div>
+         </td>
+         <td style="background:#ececec;border-bottom-style:solid;">
+          <div style="font-weight: normal;">
+           -10.3%
+          </div>
+         </td>
+         <td style="background:#ececec;border-bottom-style:solid;">
+          <div style="font-weight: normal;">
+           Small (r=-0.02)
+          </div>
+         </td>
+        </tr>
+        <tr>
+         <tr>
+          <td rowspan="3" style="background:white; border-bottom-style:solid; border-right-style:solid;">
+           <div class="tooltip">
+            <a href="#Linux-perf_largest_contentful_paint_from_response_start_ms-mean">
+             perf_largest_contentful_paint_from_response_start_ms
+            </a>
+            <span class="tooltiptext">
+             The time between responseStart and the largest contentful paint of a foreground http or https root content document, in milliseconds. The contentful paint timestamp is taken during display list building and does not include rasterization or compositing of that paint.
+            </span>
+           </div>
+          </td>
+          <td style="background:white;">
+           <div style="font-weight: normal;">
+            treatment-a
+           </div>
+          </td>
+          <td style="background:white;">
+           <div style="font-weight: normal;">
+            +7.2%
+           </div>
+          </td>
+          <td style="background:white;">
+           <div style="font-weight: normal;">
+            None (p=0.17)
+           </div>
+          </td>
+         </tr>
+         <tr>
+          <td style="background:white;">
+           <div style="font-weight: normal;">
+            treatment-b
+           </div>
+          </td>
+          <td style="background:white;">
+           <div style="font-weight: normal;">
+            +4.4%
+           </div>
+          </td>
+          <td style="background:white;">
+           <div style="font-weight: normal;">
+            None (p=0.04)
+           </div>
+          </td>
+         </tr>
+         <tr>
+          <td style="background:white;border-bottom-style:solid;">
+           <div style="font-weight: normal;">
+            treatment-c
+           </div>
+          </td>
+          <td style="background:white;border-bottom-style:solid;">
+           <div style="font-weight: normal;">
+            -5.6%
+           </div>
+          </td>
+          <td style="background:white;border-bottom-style:solid;">
+           <div style="font-weight: normal;">
+            Small (r=-0.02)
+           </div>
+          </td>
+         </tr>
+         <tr>
+          <tr>
+           <td rowspan="3" style="background:#ececec; border-bottom-style:solid; border-right-style:solid;">
+            <div class="tooltip">
+             <a href="#Linux-js_pageload_execution_ms-mean">
+              js_pageload_execution_ms
+             </a>
+             <span class="tooltiptext">
+              Time spent during page load executing Javascript in ms.
+             </span>
+            </div>
+           </td>
+           <td style="background:#ececec;">
+            <div style="font-weight: bold; color: green;">
+             treatment-a
+            </div>
+           </td>
+           <td style="background:#ececec;">
+            <div style="font-weight: bold; color: green;">
+             -8.3%
+            </div>
+           </td>
+           <td style="background:#ececec;">
+            <div style="font-weight: bold; color: green;">
+             Large (r=-0.12)
+            </div>
+           </td>
+          </tr>
+          <tr>
+           <td style="background:#ececec;">
+            <div style="font-weight: normal;">
+             treatment-b
+            </div>
+           </td>
+           <td style="background:#ececec;">
+            <div style="font-weight: normal;">
+             -7.1%
+            </div>
+           </td>
+           <td style="background:#ececec;">
+            <div style="font-weight: normal;">
+             Small (r=-0.05)
+            </div>
+           </td>
+          </tr>
+          <tr>
+           <td style="background:#ececec;border-bottom-style:solid;">
+            <div style="font-weight: normal;">
+             treatment-c
+            </div>
+           </td>
+           <td style="background:#ececec;border-bottom-style:solid;">
+            <div style="font-weight: normal;">
+             -4.0%
+            </div>
+           </td>
+           <td style="background:#ececec;border-bottom-style:solid;">
+            <div style="font-weight: normal;">
+             Small (r=-0.03)
+            </div>
+           </td>
+          </tr>
+          <tr>
+           <tr>
+            <td rowspan="3" style="background:white; border-bottom-style:solid; border-right-style:solid;">
+             <div class="tooltip">
+              <a href="#Linux-fcp_time-mean">
+               fcp_time
+              </a>
+              <span class="tooltiptext">
+               Time between firstContentfulPaint and navigationStart, in ms.
+              </span>
+             </div>
+            </td>
+            <td style="background:white;">
+             <div style="font-weight: normal;">
+              treatment-a
+             </div>
+            </td>
+            <td style="background:white;">
+             <div style="font-weight: normal;">
+              -3.4%
+             </div>
+            </td>
+            <td style="background:white;">
+             <div style="font-weight: normal;">
+              Small (r=-0.03)
+             </div>
+            </td>
+           </tr>
+           <tr>
+            <td style="background:white;">
+             <div style="font-weight: normal;">
+              treatment-b
+             </div>
+            </td>
+            <td style="background:white;">
+             <div style="font-weight: normal;">
+              +0.5%
+             </div>
+            </td>
+            <td style="background:white;">
+             <div style="font-weight: normal;">
+              None (p=0.03)
+             </div>
+            </td>
+           </tr>
+           <tr>
+            <td style="background:white;border-bottom-style:solid;">
+             <div style="font-weight: normal;">
+              treatment-c
+             </div>
+            </td>
+            <td style="background:white;border-bottom-style:solid;">
+             <div style="font-weight: normal;">
+              -4.4%
+             </div>
+            </td>
+            <td style="background:white;border-bottom-style:solid;">
+             <div style="font-weight: normal;">
+              Small (r=-0.04)
+             </div>
+            </td>
+           </tr>
+           <tr>
+            <tr>
+             <td rowspan="3" style="background:#ececec; border-bottom-style:solid; border-right-style:solid;">
+              <div class="tooltip">
+               <a href="#Linux-lcp_time-mean">
+                lcp_time
+               </a>
+               <span class="tooltiptext">
+                Time between largestContentfulPaint and navigationStart, at the point of onLoad firing, in ms. This may differ from the final LCP value as reported through the LCP histogram.
+               </span>
+              </div>
+             </td>
+             <td style="background:#ececec;">
+              <div style="font-weight: normal;">
+               treatment-a
+              </div>
+             </td>
+             <td style="background:#ececec;">
+              <div style="font-weight: normal;">
+               -4.0%
+              </div>
+             </td>
+             <td style="background:#ececec;">
+              <div style="font-weight: normal;">
+               Small (r=-0.04)
+              </div>
+             </td>
+            </tr>
+            <tr>
+             <td style="background:#ececec;">
+              <div style="font-weight: normal;">
+               treatment-b
+              </div>
+             </td>
+             <td style="background:#ececec;">
+              <div style="font-weight: normal;">
+               +1.1%
+              </div>
+             </td>
+             <td style="background:#ececec;">
+              <div style="font-weight: normal;">
+               None (p=0.92)
+              </div>
+             </td>
+            </tr>
+            <tr>
+             <td style="background:#ececec;border-bottom-style:solid;">
+              <div style="font-weight: normal;">
+               treatment-c
+              </div>
+             </td>
+             <td style="background:#ececec;border-bottom-style:solid;">
+              <div style="font-weight: normal;">
+               -3.7%
+              </div>
+             </td>
+             <td style="background:#ececec;border-bottom-style:solid;">
+              <div style="font-weight: normal;">
+               Small (r=-0.02)
+              </div>
+             </td>
+            </tr>
+            <tr>
+             <tr>
+              <td rowspan="3" style="background:white; border-bottom-style:solid; border-right-style:solid;">
+               <div class="tooltip">
+                <a href="#Linux-load_time-mean">
+                 load_time
+                </a>
+                <span class="tooltiptext">
+                 Time between loadEventStart and navigationStart, in ms.
+                </span>
+               </div>
+              </td>
+              <td style="background:white;">
+               <div style="font-weight: normal;">
+                treatment-a
+               </div>
+              </td>
+              <td style="background:white;">
+               <div style="font-weight: normal;">
+                -4.5%
+               </div>
+              </td>
+              <td style="background:white;">
+               <div style="font-weight: normal;">
+                Small (r=-0.03)
+               </div>
+              </td>
+             </tr>
+             <tr>
+              <td style="background:white;">
+               <div style="font-weight: normal;">
+                treatment-b
+               </div>
+              </td>
+              <td style="background:white;">
+               <div style="font-weight: normal;">
+                -2.5%
+               </div>
+              </td>
+              <td style="background:white;">
+               <div style="font-weight: normal;">
+                None (p=0.60)
+               </div>
+              </td>
+             </tr>
+             <tr>
+              <td style="background:white;border-bottom-style:solid;">
+               <div style="font-weight: normal;">
+                treatment-c
+               </div>
+              </td>
+              <td style="background:white;border-bottom-style:solid;">
+               <div style="font-weight: normal;">
+                -3.8%
+               </div>
+              </td>
+              <td style="background:white;border-bottom-style:solid;">
+               <div style="font-weight: normal;">
+                Small (r=-0.02)
+               </div>
+              </td>
+             </tr>
+             <tr>
+              <tr>
+               <td rowspan="3" style="background:#ececec; border-bottom-style:solid; border-right-style:solid;">
+                <div class="tooltip">
+                 <a href="#Linux-response_time-mean">
+                  response_time
+                 </a>
+                 <span class="tooltiptext">
+                  Time between responseStart and navigationStart, in ms.
+                 </span>
+                </div>
+               </td>
+               <td style="background:#ececec;">
+                <div style="font-weight: normal;">
+                 treatment-a
+                </div>
+               </td>
+               <td style="background:#ececec;">
+                <div style="font-weight: normal;">
+                 -3.5%
+                </div>
+               </td>
+               <td style="background:#ececec;">
+                <div style="font-weight: normal;">
+                 Small (r=-0.02)
+                </div>
+               </td>
+              </tr>
+              <tr>
+               <td style="background:#ececec;">
+                <div style="font-weight: normal;">
+                 treatment-b
+                </div>
+               </td>
+               <td style="background:#ececec;">
+                <div style="font-weight: normal;">
+                 +1.7%
+                </div>
+               </td>
+               <td style="background:#ececec;">
+                <div style="font-weight: normal;">
+                 Small (r=0.03)
+                </div>
+               </td>
+              </tr>
+              <tr>
+               <td style="background:#ececec;border-bottom-style:solid;">
+                <div style="font-weight: normal;">
+                 treatment-c
+                </div>
+               </td>
+               <td style="background:#ececec;border-bottom-style:solid;">
+                <div style="font-weight: normal;">
+                 +0.9%
+                </div>
+               </td>
+               <td style="background:#ececec;border-bottom-style:solid;">
+                <div style="font-weight: normal;">
+                 None (p=0.00)
+                </div>
+               </td>
+              </tr>
+              <tr>
+               <tr>
+                <td rowspan="3" style="background:white; border-bottom-style:solid; border-right-style:solid;">
+                 <div class="tooltip">
+                  <a href="#Linux-js_exec_time-mean">
+                   js_exec_time
+                  </a>
+                  <span class="tooltiptext">
+                   Time spent executing JS during page load, in ms.
+                  </span>
+                 </div>
+                </td>
+                <td style="background:white;">
+                 <div style="font-weight: normal;">
+                  treatment-a
+                 </div>
+                </td>
+                <td style="background:white;">
+                 <div style="font-weight: normal;">
+                  -7.7%
+                 </div>
+                </td>
+                <td style="background:white;">
+                 <div style="font-weight: normal;">
+                  Small (r=-0.03)
+                 </div>
+                </td>
+               </tr>
+               <tr>
+                <td style="background:white;">
+                 <div style="font-weight: normal;">
+                  treatment-b
+                 </div>
+                </td>
+                <td style="background:white;">
+                 <div style="font-weight: normal;">
+                  -17.0%
+                 </div>
+                </td>
+                <td style="background:white;">
+                 <div style="font-weight: normal;">
+                  Small (r=-0.04)
+                 </div>
+                </td>
+               </tr>
+               <tr>
+                <td style="background:white;border-bottom-style:solid;">
+                 <div style="font-weight: normal;">
+                  treatment-c
+                 </div>
+                </td>
+                <td style="background:white;border-bottom-style:solid;">
+                 <div style="font-weight: normal;">
+                  -12.8%
+                 </div>
+                </td>
+                <td style="background:white;border-bottom-style:solid;">
+                 <div style="font-weight: normal;">
+                  Small (r=-0.04)
+                 </div>
+                </td>
+               </tr>
+               <tr>
+               </tr>
+              </tr>
+             </tr>
+            </tr>
+           </tr>
+          </tr>
+         </tr>
+        </tr>
+       </tr>
+      </tr>
+     </tr>
     </tr>
    </tbody>
   </table>
@@ -2896,18 +3131,13 @@ div.chart {
       </div>
      </th>
      <th>
-      <div class="tooltip">
-       uplift
-       <span class="tooltiptext">
-        Uplift of the mean.
-       </span>
-      </div>
+      uplift
      </th>
      <th>
       <div class="tooltip">
-       effect size (t-test)
+       effect size (mwu)
        <span class="tooltiptext">
-        Effect size calculated by Cohen's d.
+        Effect size calculated by Rank Biserial Correlation.
        </span>
       </div>
      </th>
@@ -2915,676 +3145,760 @@ div.chart {
    </thead>
    <tbody>
     <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Mac-perf_page_load_time_ms-mean">
-       perf_page_load_time_ms
-      </a>
+     <td rowspan="3" style="background:#ececec; border-bottom-style:solid; border-right-style:solid;">
+      <div class="tooltip">
+       <a href="#Mac-perf_page_load_time_ms-mean">
+        perf_page_load_time_ms
+       </a>
+       <span class="tooltiptext">
+        Time in milliseconds from navigationStart to loadEventStart for the foreground http or https root content document.
+       </span>
+      </div>
      </td>
-     <td>
-      <div style="font-weight: normal">
+     <td style="background:#ececec;">
+      <div style="font-weight: normal;">
        treatment-a
       </div>
      </td>
-     <td>
+     <td style="background:#ececec;">
       <div style="font-weight: normal;">
        -3.5%
       </div>
      </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.02)
+     <td style="background:#ececec;">
+      <div style="font-weight: normal;">
+       Small (r=-0.05)
       </div>
      </td>
     </tr>
     <tr>
-     <td>
-      <div style="font-weight: normal">
+     <td style="background:#ececec;">
+      <div style="font-weight: normal;">
        treatment-b
       </div>
      </td>
-     <td>
+     <td style="background:#ececec;">
       <div style="font-weight: normal;">
-       3.7%
+       +3.7%
       </div>
      </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=-0.02)
+     <td style="background:#ececec;">
+      <div style="font-weight: normal;">
+       None (p=0.34)
       </div>
      </td>
     </tr>
     <tr>
-     <td style="border-bottom-style: solid;">
+     <td style="background:#ececec;border-bottom-style:solid;">
       <div style="font-weight: normal;">
        treatment-c
       </div>
      </td>
-     <td style="border-bottom-style: solid;">
+     <td style="background:#ececec;border-bottom-style:solid;">
       <div style="font-weight: normal;">
        -0.1%
       </div>
      </td>
-     <td style="border-bottom-style: solid;">
+     <td style="background:#ececec;border-bottom-style:solid;">
       <div style="font-weight: normal;">
-       None (p=0.94)
+       Small (r=-0.03)
       </div>
      </td>
     </tr>
     <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Mac-perf_page_load_time_from_responsestart_ms-mean">
-       perf_page_load_time_from_responsestart_ms
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -4.7%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       6.0%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=-0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -2.6%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.01)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Mac-perf_first_contentful_paint_ms-mean">
-       perf_first_contentful_paint_ms
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -1.6%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.04)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       6.6%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=-0.03)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       0.2%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.76)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Mac-perf_first_contentful_paint_from_responsestart_ms-mean">
-       perf_first_contentful_paint_from_responsestart_ms
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -2.4%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       13.9%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=-0.04)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -2.9%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.01)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Mac-perf_largest_contentful_paint_ms-mean">
-       perf_largest_contentful_paint_ms
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -8.2%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.03)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       7.9%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=-0.03)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -8.3%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       Small (d=0.03)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Mac-perf_largest_contentful_paint_from_response_start_ms-mean">
-       perf_largest_contentful_paint_from_response_start_ms
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -10.4%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.04)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       10.9%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=-0.04)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: bold; color: red;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: bold; color: red;">
-       18.0%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: bold; color: red;">
-       Medium (d=-0.06)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Mac-js_pageload_execution_ms-mean">
-       js_pageload_execution_ms
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -18.2%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.04)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       16.0%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=-0.03)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       0.7%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.68)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Mac-fcp_time-mean">
-       pageload event: fcp_time
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -1.4%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Medium (d=0.06)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       2.7%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=-0.04)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       1.1%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       Small (d=0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Mac-lcp_time-mean">
-       pageload event: lcp_time
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -1.5%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.04)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       2.4%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=-0.03)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -0.2%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       Small (d=0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Mac-load_time-mean">
-       pageload event: load_time
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: bold; color: green">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: bold; color: green;">
-       -2.6%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: bold; color: green">
-       Medium (d=0.07)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       2.0%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=-0.03)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       0.1%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       Small (d=0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Mac-response_time-mean">
-       pageload event: response_time
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       0.4%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       1.3%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=-0.02)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       4.0%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.01)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td rowspan="3" style="border-bottom-style: solid; border-right-style: solid;">
-      <a href="#Mac-js_exec_time-mean">
-       pageload event: js_exec_time
-      </a>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       treatment-a
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       -2.0%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       None (p=0.19)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      <div style="font-weight: normal">
-       treatment-b
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal;">
-       8.2%
-      </div>
-     </td>
-     <td>
-      <div style="font-weight: normal">
-       Small (d=-0.04)
-      </div>
-     </td>
-    </tr>
-    <tr>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       treatment-c
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       -0.3%
-      </div>
-     </td>
-     <td style="border-bottom-style: solid;">
-      <div style="font-weight: normal;">
-       None (p=0.00)
-      </div>
-     </td>
+     <tr>
+      <td rowspan="3" style="background:white; border-bottom-style:solid; border-right-style:solid;">
+       <div class="tooltip">
+        <a href="#Mac-perf_page_load_time_from_responsestart_ms-mean">
+         perf_page_load_time_from_responsestart_ms
+        </a>
+        <span class="tooltiptext">
+         Time in milliseconds from responseStart to loadEventStart for the foreground http or https root content document.
+        </span>
+       </div>
+      </td>
+      <td style="background:white;">
+       <div style="font-weight: normal;">
+        treatment-a
+       </div>
+      </td>
+      <td style="background:white;">
+       <div style="font-weight: normal;">
+        -4.7%
+       </div>
+      </td>
+      <td style="background:white;">
+       <div style="font-weight: normal;">
+        Small (r=-0.05)
+       </div>
+      </td>
+     </tr>
+     <tr>
+      <td style="background:white;">
+       <div style="font-weight: normal;">
+        treatment-b
+       </div>
+      </td>
+      <td style="background:white;">
+       <div style="font-weight: normal;">
+        +6.0%
+       </div>
+      </td>
+      <td style="background:white;">
+       <div style="font-weight: normal;">
+        None (p=0.03)
+       </div>
+      </td>
+     </tr>
+     <tr>
+      <td style="background:white;border-bottom-style:solid;">
+       <div style="font-weight: normal;">
+        treatment-c
+       </div>
+      </td>
+      <td style="background:white;border-bottom-style:solid;">
+       <div style="font-weight: normal;">
+        -2.6%
+       </div>
+      </td>
+      <td style="background:white;border-bottom-style:solid;">
+       <div style="font-weight: normal;">
+        Small (r=-0.04)
+       </div>
+      </td>
+     </tr>
+     <tr>
+      <tr>
+       <td rowspan="3" style="background:#ececec; border-bottom-style:solid; border-right-style:solid;">
+        <div class="tooltip">
+         <a href="#Mac-perf_first_contentful_paint_ms-mean">
+          perf_first_contentful_paint_ms
+         </a>
+         <span class="tooltiptext">
+          The time between navigationStart and the first contentful paint of a foreground http or https root content document, in milliseconds. The contentful paint timestamp is taken during display list building and does not include rasterization or compositing of that paint.
+         </span>
+        </div>
+       </td>
+       <td style="background:#ececec;">
+        <div style="font-weight: normal;">
+         treatment-a
+        </div>
+       </td>
+       <td style="background:#ececec;">
+        <div style="font-weight: normal;">
+         -1.6%
+        </div>
+       </td>
+       <td style="background:#ececec;">
+        <div style="font-weight: normal;">
+         Small (r=-0.03)
+        </div>
+       </td>
+      </tr>
+      <tr>
+       <td style="background:#ececec;">
+        <div style="font-weight: normal;">
+         treatment-b
+        </div>
+       </td>
+       <td style="background:#ececec;">
+        <div style="font-weight: normal;">
+         +6.6%
+        </div>
+       </td>
+       <td style="background:#ececec;">
+        <div style="font-weight: normal;">
+         Small (r=0.01)
+        </div>
+       </td>
+      </tr>
+      <tr>
+       <td style="background:#ececec;border-bottom-style:solid;">
+        <div style="font-weight: normal;">
+         treatment-c
+        </div>
+       </td>
+       <td style="background:#ececec;border-bottom-style:solid;">
+        <div style="font-weight: normal;">
+         +0.2%
+        </div>
+       </td>
+       <td style="background:#ececec;border-bottom-style:solid;">
+        <div style="font-weight: normal;">
+         Small (r=-0.02)
+        </div>
+       </td>
+      </tr>
+      <tr>
+       <tr>
+        <td rowspan="3" style="background:white; border-bottom-style:solid; border-right-style:solid;">
+         <div class="tooltip">
+          <a href="#Mac-perf_first_contentful_paint_from_responsestart_ms-mean">
+           perf_first_contentful_paint_from_responsestart_ms
+          </a>
+          <span class="tooltiptext">
+           The time between responseStart and the first contentful paint of a foreground http or https root content document, in milliseconds. The contentful paint timestamp is taken during display list building and does not include rasterization or compositing of that paint.
+          </span>
+         </div>
+        </td>
+        <td style="background:white;">
+         <div style="font-weight: normal;">
+          treatment-a
+         </div>
+        </td>
+        <td style="background:white;">
+         <div style="font-weight: normal;">
+          -2.4%
+         </div>
+        </td>
+        <td style="background:white;">
+         <div style="font-weight: normal;">
+          Small (r=-0.03)
+         </div>
+        </td>
+       </tr>
+       <tr>
+        <td style="background:white;">
+         <div style="font-weight: normal;">
+          treatment-b
+         </div>
+        </td>
+        <td style="background:white;">
+         <div style="font-weight: normal;">
+          +13.9%
+         </div>
+        </td>
+        <td style="background:white;">
+         <div style="font-weight: normal;">
+          Small (r=0.01)
+         </div>
+        </td>
+       </tr>
+       <tr>
+        <td style="background:white;border-bottom-style:solid;">
+         <div style="font-weight: normal;">
+          treatment-c
+         </div>
+        </td>
+        <td style="background:white;border-bottom-style:solid;">
+         <div style="font-weight: normal;">
+          -2.9%
+         </div>
+        </td>
+        <td style="background:white;border-bottom-style:solid;">
+         <div style="font-weight: normal;">
+          Small (r=-0.03)
+         </div>
+        </td>
+       </tr>
+       <tr>
+        <tr>
+         <td rowspan="3" style="background:#ececec; border-bottom-style:solid; border-right-style:solid;">
+          <div class="tooltip">
+           <a href="#Mac-perf_largest_contentful_paint_ms-mean">
+            perf_largest_contentful_paint_ms
+           </a>
+           <span class="tooltiptext">
+            The time between navigationStart and the largest contentful paint of a foreground http or https root content document, in milliseconds. The contentful paint timestamp is taken during display list building and does not include rasterization or compositing of that paint.
+           </span>
+          </div>
+         </td>
+         <td style="background:#ececec;">
+          <div style="font-weight: normal;">
+           treatment-a
+          </div>
+         </td>
+         <td style="background:#ececec;">
+          <div style="font-weight: normal;">
+           -8.2%
+          </div>
+         </td>
+         <td style="background:#ececec;">
+          <div style="font-weight: normal;">
+           Small (r=-0.03)
+          </div>
+         </td>
+        </tr>
+        <tr>
+         <td style="background:#ececec;">
+          <div style="font-weight: normal;">
+           treatment-b
+          </div>
+         </td>
+         <td style="background:#ececec;">
+          <div style="font-weight: normal;">
+           +7.9%
+          </div>
+         </td>
+         <td style="background:#ececec;">
+          <div style="font-weight: normal;">
+           None (p=0.18)
+          </div>
+         </td>
+        </tr>
+        <tr>
+         <td style="background:#ececec;border-bottom-style:solid;">
+          <div style="font-weight: normal;">
+           treatment-c
+          </div>
+         </td>
+         <td style="background:#ececec;border-bottom-style:solid;">
+          <div style="font-weight: normal;">
+           -8.3%
+          </div>
+         </td>
+         <td style="background:#ececec;border-bottom-style:solid;">
+          <div style="font-weight: normal;">
+           Small (r=-0.04)
+          </div>
+         </td>
+        </tr>
+        <tr>
+         <tr>
+          <td rowspan="3" style="background:white; border-bottom-style:solid; border-right-style:solid;">
+           <div class="tooltip">
+            <a href="#Mac-perf_largest_contentful_paint_from_response_start_ms-mean">
+             perf_largest_contentful_paint_from_response_start_ms
+            </a>
+            <span class="tooltiptext">
+             The time between responseStart and the largest contentful paint of a foreground http or https root content document, in milliseconds. The contentful paint timestamp is taken during display list building and does not include rasterization or compositing of that paint.
+            </span>
+           </div>
+          </td>
+          <td style="background:white;">
+           <div style="font-weight: normal;">
+            treatment-a
+           </div>
+          </td>
+          <td style="background:white;">
+           <div style="font-weight: normal;">
+            -10.4%
+           </div>
+          </td>
+          <td style="background:white;">
+           <div style="font-weight: normal;">
+            Small (r=-0.03)
+           </div>
+          </td>
+         </tr>
+         <tr>
+          <td style="background:white;">
+           <div style="font-weight: normal;">
+            treatment-b
+           </div>
+          </td>
+          <td style="background:white;">
+           <div style="font-weight: normal;">
+            +10.9%
+           </div>
+          </td>
+          <td style="background:white;">
+           <div style="font-weight: normal;">
+            Small (r=0.01)
+           </div>
+          </td>
+         </tr>
+         <tr>
+          <td style="background:white;border-bottom-style:solid;">
+           <div style="font-weight: normal;">
+            treatment-c
+           </div>
+          </td>
+          <td style="background:white;border-bottom-style:solid;">
+           <div style="font-weight: normal;">
+            +18.0%
+           </div>
+          </td>
+          <td style="background:white;border-bottom-style:solid;">
+           <div style="font-weight: normal;">
+            Small (r=-0.01)
+           </div>
+          </td>
+         </tr>
+         <tr>
+          <tr>
+           <td rowspan="3" style="background:#ececec; border-bottom-style:solid; border-right-style:solid;">
+            <div class="tooltip">
+             <a href="#Mac-js_pageload_execution_ms-mean">
+              js_pageload_execution_ms
+             </a>
+             <span class="tooltiptext">
+              Time spent during page load executing Javascript in ms.
+             </span>
+            </div>
+           </td>
+           <td style="background:#ececec;">
+            <div style="font-weight: bold; color: green;">
+             treatment-a
+            </div>
+           </td>
+           <td style="background:#ececec;">
+            <div style="font-weight: bold; color: green;">
+             -18.2%
+            </div>
+           </td>
+           <td style="background:#ececec;">
+            <div style="font-weight: bold; color: green;">
+             Medium (r=-0.05)
+            </div>
+           </td>
+          </tr>
+          <tr>
+           <td style="background:#ececec;">
+            <div style="font-weight: normal;">
+             treatment-b
+            </div>
+           </td>
+           <td style="background:#ececec;">
+            <div style="font-weight: normal;">
+             +16.0%
+            </div>
+           </td>
+           <td style="background:#ececec;">
+            <div style="font-weight: normal;">
+             Small (r=0.01)
+            </div>
+           </td>
+          </tr>
+          <tr>
+           <td style="background:#ececec;border-bottom-style:solid;">
+            <div style="font-weight: normal;">
+             treatment-c
+            </div>
+           </td>
+           <td style="background:#ececec;border-bottom-style:solid;">
+            <div style="font-weight: normal;">
+             +0.7%
+            </div>
+           </td>
+           <td style="background:#ececec;border-bottom-style:solid;">
+            <div style="font-weight: normal;">
+             Small (r=-0.02)
+            </div>
+           </td>
+          </tr>
+          <tr>
+           <tr>
+            <td rowspan="3" style="background:white; border-bottom-style:solid; border-right-style:solid;">
+             <div class="tooltip">
+              <a href="#Mac-fcp_time-mean">
+               fcp_time
+              </a>
+              <span class="tooltiptext">
+               Time between firstContentfulPaint and navigationStart, in ms.
+              </span>
+             </div>
+            </td>
+            <td style="background:white;">
+             <div style="font-weight: normal;">
+              treatment-a
+             </div>
+            </td>
+            <td style="background:white;">
+             <div style="font-weight: normal;">
+              -1.4%
+             </div>
+            </td>
+            <td style="background:white;">
+             <div style="font-weight: normal;">
+              Small (r=-0.04)
+             </div>
+            </td>
+           </tr>
+           <tr>
+            <td style="background:white;">
+             <div style="font-weight: normal;">
+              treatment-b
+             </div>
+            </td>
+            <td style="background:white;">
+             <div style="font-weight: normal;">
+              +2.7%
+             </div>
+            </td>
+            <td style="background:white;">
+             <div style="font-weight: normal;">
+              Small (r=0.02)
+             </div>
+            </td>
+           </tr>
+           <tr>
+            <td style="background:white;border-bottom-style:solid;">
+             <div style="font-weight: normal;">
+              treatment-c
+             </div>
+            </td>
+            <td style="background:white;border-bottom-style:solid;">
+             <div style="font-weight: normal;">
+              +1.1%
+             </div>
+            </td>
+            <td style="background:white;border-bottom-style:solid;">
+             <div style="font-weight: normal;">
+              Small (r=-0.01)
+             </div>
+            </td>
+           </tr>
+           <tr>
+            <tr>
+             <td rowspan="3" style="background:#ececec; border-bottom-style:solid; border-right-style:solid;">
+              <div class="tooltip">
+               <a href="#Mac-lcp_time-mean">
+                lcp_time
+               </a>
+               <span class="tooltiptext">
+                Time between largestContentfulPaint and navigationStart, at the point of onLoad firing, in ms. This may differ from the final LCP value as reported through the LCP histogram.
+               </span>
+              </div>
+             </td>
+             <td style="background:#ececec;">
+              <div style="font-weight: normal;">
+               treatment-a
+              </div>
+             </td>
+             <td style="background:#ececec;">
+              <div style="font-weight: normal;">
+               -1.5%
+              </div>
+             </td>
+             <td style="background:#ececec;">
+              <div style="font-weight: normal;">
+               Small (r=-0.04)
+              </div>
+             </td>
+            </tr>
+            <tr>
+             <td style="background:#ececec;">
+              <div style="font-weight: normal;">
+               treatment-b
+              </div>
+             </td>
+             <td style="background:#ececec;">
+              <div style="font-weight: normal;">
+               +2.4%
+              </div>
+             </td>
+             <td style="background:#ececec;">
+              <div style="font-weight: normal;">
+               Small (r=0.01)
+              </div>
+             </td>
+            </tr>
+            <tr>
+             <td style="background:#ececec;border-bottom-style:solid;">
+              <div style="font-weight: normal;">
+               treatment-c
+              </div>
+             </td>
+             <td style="background:#ececec;border-bottom-style:solid;">
+              <div style="font-weight: normal;">
+               -0.2%
+              </div>
+             </td>
+             <td style="background:#ececec;border-bottom-style:solid;">
+              <div style="font-weight: normal;">
+               Small (r=-0.02)
+              </div>
+             </td>
+            </tr>
+            <tr>
+             <tr>
+              <td rowspan="3" style="background:white; border-bottom-style:solid; border-right-style:solid;">
+               <div class="tooltip">
+                <a href="#Mac-load_time-mean">
+                 load_time
+                </a>
+                <span class="tooltiptext">
+                 Time between loadEventStart and navigationStart, in ms.
+                </span>
+               </div>
+              </td>
+              <td style="background:white;">
+               <div style="font-weight: bold; color: green;">
+                treatment-a
+               </div>
+              </td>
+              <td style="background:white;">
+               <div style="font-weight: bold; color: green;">
+                -2.6%
+               </div>
+              </td>
+              <td style="background:white;">
+               <div style="font-weight: bold; color: green;">
+                Medium (r=-0.05)
+               </div>
+              </td>
+             </tr>
+             <tr>
+              <td style="background:white;">
+               <div style="font-weight: normal;">
+                treatment-b
+               </div>
+              </td>
+              <td style="background:white;">
+               <div style="font-weight: normal;">
+                +2.0%
+               </div>
+              </td>
+              <td style="background:white;">
+               <div style="font-weight: normal;">
+                Small (r=0.01)
+               </div>
+              </td>
+             </tr>
+             <tr>
+              <td style="background:white;border-bottom-style:solid;">
+               <div style="font-weight: normal;">
+                treatment-c
+               </div>
+              </td>
+              <td style="background:white;border-bottom-style:solid;">
+               <div style="font-weight: normal;">
+                +0.1%
+               </div>
+              </td>
+              <td style="background:white;border-bottom-style:solid;">
+               <div style="font-weight: normal;">
+                Small (r=-0.03)
+               </div>
+              </td>
+             </tr>
+             <tr>
+              <tr>
+               <td rowspan="3" style="background:#ececec; border-bottom-style:solid; border-right-style:solid;">
+                <div class="tooltip">
+                 <a href="#Mac-response_time-mean">
+                  response_time
+                 </a>
+                 <span class="tooltiptext">
+                  Time between responseStart and navigationStart, in ms.
+                 </span>
+                </div>
+               </td>
+               <td style="background:#ececec;">
+                <div style="font-weight: normal;">
+                 treatment-a
+                </div>
+               </td>
+               <td style="background:#ececec;">
+                <div style="font-weight: normal;">
+                 +0.4%
+                </div>
+               </td>
+               <td style="background:#ececec;">
+                <div style="font-weight: normal;">
+                 Small (r=-0.03)
+                </div>
+               </td>
+              </tr>
+              <tr>
+               <td style="background:#ececec;">
+                <div style="font-weight: normal;">
+                 treatment-b
+                </div>
+               </td>
+               <td style="background:#ececec;">
+                <div style="font-weight: normal;">
+                 +1.3%
+                </div>
+               </td>
+               <td style="background:#ececec;">
+                <div style="font-weight: normal;">
+                 Small (r=0.01)
+                </div>
+               </td>
+              </tr>
+              <tr>
+               <td style="background:#ececec;border-bottom-style:solid;">
+                <div style="font-weight: normal;">
+                 treatment-c
+                </div>
+               </td>
+               <td style="background:#ececec;border-bottom-style:solid;">
+                <div style="font-weight: normal;">
+                 +4.0%
+                </div>
+               </td>
+               <td style="background:#ececec;border-bottom-style:solid;">
+                <div style="font-weight: normal;">
+                 Small (r=-0.02)
+                </div>
+               </td>
+              </tr>
+              <tr>
+               <tr>
+                <td rowspan="3" style="background:white; border-bottom-style:solid; border-right-style:solid;">
+                 <div class="tooltip">
+                  <a href="#Mac-js_exec_time-mean">
+                   js_exec_time
+                  </a>
+                  <span class="tooltiptext">
+                   Time spent executing JS during page load, in ms.
+                  </span>
+                 </div>
+                </td>
+                <td style="background:white;">
+                 <div style="font-weight: normal;">
+                  treatment-a
+                 </div>
+                </td>
+                <td style="background:white;">
+                 <div style="font-weight: normal;">
+                  -2.0%
+                 </div>
+                </td>
+                <td style="background:white;">
+                 <div style="font-weight: normal;">
+                  None (p=0.92)
+                 </div>
+                </td>
+               </tr>
+               <tr>
+                <td style="background:white;">
+                 <div style="font-weight: normal;">
+                  treatment-b
+                 </div>
+                </td>
+                <td style="background:white;">
+                 <div style="font-weight: normal;">
+                  +8.2%
+                 </div>
+                </td>
+                <td style="background:white;">
+                 <div style="font-weight: normal;">
+                  Small (r=0.02)
+                 </div>
+                </td>
+               </tr>
+               <tr>
+                <td style="background:white;border-bottom-style:solid;">
+                 <div style="font-weight: normal;">
+                  treatment-c
+                 </div>
+                </td>
+                <td style="background:white;border-bottom-style:solid;">
+                 <div style="font-weight: normal;">
+                  -0.3%
+                 </div>
+                </td>
+                <td style="background:white;border-bottom-style:solid;">
+                 <div style="font-weight: normal;">
+                  None (p=0.02)
+                 </div>
+                </td>
+               </tr>
+               <tr>
+               </tr>
+              </tr>
+             </tr>
+            </tr>
+           </tr>
+          </tr>
+         </tr>
+        </tr>
+       </tr>
+      </tr>
+     </tr>
     </tr>
    </tbody>
   </table>
@@ -41525,36 +41839,62 @@ div.chart {
      <pre>
   {
     "slug": "performance-metric-calibration-with-lcp",
-    "histograms": [
-        "payload.processes.content.histograms.perf_page_load_time_ms",
-        "payload.processes.content.histograms.perf_page_load_time_from_responsestart_ms",
-        "payload.processes.content.histograms.perf_first_contentful_paint_ms",
-        "payload.processes.content.histograms.perf_first_contentful_paint_from_responsestart_ms",
-        "payload.processes.content.histograms.perf_largest_contentful_paint_ms",
-        "payload.processes.content.histograms.perf_largest_contentful_paint_from_response_start_ms",
-        "payload.processes.content.histograms.js_pageload_execution_ms"
-    ],
+    "histograms": {
+        "payload.processes.content.histograms.perf_page_load_time_ms": {
+            "desc": "Time in milliseconds from navigationStart to loadEventStart for the foreground http or https root content document.",
+            "kind": "numerical"
+        },
+        "payload.processes.content.histograms.perf_page_load_time_from_responsestart_ms": {
+            "desc": "Time in milliseconds from responseStart to loadEventStart for the foreground http or https root content document.",
+            "kind": "numerical"
+        },
+        "payload.processes.content.histograms.perf_first_contentful_paint_ms": {
+            "desc": "The time between navigationStart and the first contentful paint of a foreground http or https root content document, in milliseconds. The contentful paint timestamp is taken during display list building and does not include rasterization or compositing of that paint.",
+            "kind": "numerical"
+        },
+        "payload.processes.content.histograms.perf_first_contentful_paint_from_responsestart_ms": {
+            "desc": "The time between responseStart and the first contentful paint of a foreground http or https root content document, in milliseconds. The contentful paint timestamp is taken during display list building and does not include rasterization or compositing of that paint.",
+            "kind": "numerical"
+        },
+        "payload.processes.content.histograms.perf_largest_contentful_paint_ms": {
+            "desc": "The time between navigationStart and the largest contentful paint of a foreground http or https root content document, in milliseconds. The contentful paint timestamp is taken during display list building and does not include rasterization or compositing of that paint.",
+            "kind": "numerical"
+        },
+        "payload.processes.content.histograms.perf_largest_contentful_paint_from_response_start_ms": {
+            "desc": "The time between responseStart and the largest contentful paint of a foreground http or https root content document, in milliseconds. The contentful paint timestamp is taken during display list building and does not include rasterization or compositing of that paint.",
+            "kind": "numerical"
+        },
+        "payload.processes.content.histograms.js_pageload_execution_ms": {
+            "desc": "Time spent during page load executing Javascript in ms.",
+            "kind": "numerical"
+        }
+    },
     "pageload_event_metrics": {
-        "fcp_time": [
-            0,
-            10000
-        ],
-        "lcp_time": [
-            0,
-            10000
-        ],
-        "load_time": [
-            0,
-            30000
-        ],
-        "response_time": [
-            0,
-            10000
-        ],
-        "js_exec_time": [
-            0,
-            10000
-        ]
+        "fcp_time": {
+            "desc": "Time between firstContentfulPaint and navigationStart, in ms.",
+            "min": 0,
+            "max": 10000
+        },
+        "lcp_time": {
+            "desc": "Time between largestContentfulPaint and navigationStart, at the point of onLoad firing, in ms. This may differ from the final LCP value as reported through the LCP histogram.",
+            "min": 0,
+            "max": 10000
+        },
+        "load_time": {
+            "desc": "Time between loadEventStart and navigationStart, in ms.",
+            "min": 0,
+            "max": 30000
+        },
+        "response_time": {
+            "desc": "Time between responseStart and navigationStart, in ms.",
+            "min": 0,
+            "max": 10000
+        },
+        "js_exec_time": {
+            "desc": "Time spent executing JS during page load, in ms.",
+            "min": 0,
+            "max": 10000
+        }
     },
     "segments": [
         "All",
