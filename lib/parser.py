@@ -114,7 +114,7 @@ def retrieveNimbusAPI(dataDir, slug, skipCache):
     print(f"Using local config found in {filename}")
     return values
 
-  url=f'https://experimenter.services.mozilla.com/api/v6/experiments/{slug}'
+  url=f'https://experimenter.services.mozilla.com/api/v6/experiments/{slug}/'
   print(f"Loading nimbus API from {url}")
   response = requests.get(url)
   if response.ok:
