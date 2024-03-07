@@ -2,9 +2,10 @@ import requests
 import json
 import yaml
 import sys
+import os
 import datetime
 
-def checkForLocalFile(dataDir, filename):
+def checkForLocalFile(filename):
   try:
     with open(filename, 'r') as f:
       data = json.load(f)
@@ -12,12 +13,18 @@ def checkForLocalFile(dataDir, filename):
   except:
     return None
 
-def annotateMetrics(dataDir, config, skipCache):
-  annotateHistograms(dataDir, config, skipCache)
-  annotatePageloadEventMetrics(dataDir, config, skipCache)
+def loadProbeIndex():
+  filename=os.path.join(os.path.dirname(__file__), "probe-index.json")
+  data = checkForLocalFile(filename)
+  return data
 
-def annotatePageloadEventMetrics(dataDir, config, skipCache):
-  event_schema = retrievePageloadEventSchema(dataDir, skipCache)
+def annotateMetrics(config):
+  probeIndex = loadProbeIndex()
+  annotateHistograms(config, probeIndex)
+  annotatePageloadEventMetrics(config, probeIndex)
+
+def annotatePageloadEventMetrics(config, probeIndex):
+  event_schema = probeIndex["glean"]["perf_page_load"]["extra_keys"]
 
   event_metrics = config['pageload_event_metrics'].copy()
   config['pageload_event_metrics'] = {}
@@ -32,84 +39,60 @@ def annotatePageloadEventMetrics(dataDir, config, skipCache):
       print(f"ERROR: {metric} not found in pageload event schema.") 
       sys.exit(1)
 
-def annotateHistograms(dataDir, config, skipCache):
-  histogram_schema = retrieveHistogramsSchema(dataDir, skipCache)
-
+def annotateHistograms(config, probeIndex):
   histograms = config['histograms'].copy()
   config['histograms'] = {}
   for i,hist in enumerate(histograms):
     config['histograms'][hist] = {}
-    hist_name = hist.split('.')[-1].upper()
-    if hist_name in histogram_schema:
-      config['histograms'][hist]["desc"] = histogram_schema[hist_name]["description"]
-      kind = histogram_schema[hist_name]["kind"]
+    hist_name = hist.split('.')[-1]
+
+    # Annotate legacy probe.
+    if hist_name.upper() in probeIndex["legacy"]:
+      schema = probeIndex["legacy"][hist_name.upper()]
+      config['histograms'][hist]["glean"] = False
+      config['histograms'][hist]["desc"] = schema["description"]
+      kind = schema["details"]["kind"]
       if kind=="categorical" or kind=="boolean":
         config['histograms'][hist]["kind"] = "categorical"
-        if "labels" in histogram_schema[hist_name]:
-          config['histograms'][hist]["labels"] = histogram_schema[hist_name]["labels"]
+        if "labels" in schema["details"]:
+          config['histograms'][hist]["labels"] = schema["details"]["labels"]
         else:
           config['histograms'][hist]["labels"] = []
           config['histograms'][hist]["labels"].append("no")
           config['histograms'][hist]["labels"].append("yes")
       else:
         config['histograms'][hist]["kind"] = "numerical"
+
+    # Annotate glean probe.
+    elif hist_name in probeIndex["glean"]:
+      schema = probeIndex["glean"][hist_name]
+      config['histograms'][hist]["glean"] = True
+      config['histograms'][hist]["desc"] = schema["description"]
+
+      # Only support timing distribution types for now.
+      if schema["type"] == "timing_distribution":
+        config['histograms'][hist]["kind"] = "numerical"
+      else:
+        type=schema["type"]
+        print(f"ERROR: Type {type} for {hist_name} not currently supported.") 
+        sys.exit(1)
+
+      # Use the high and low values from the legacy mirror as bounds.
+      if "telemetry_mirror" in probeIndex["glean"][hist_name]:
+        legacy_mirror = probeIndex["glean"][hist_name]["telemetry_mirror"]
+        high = probeIndex["legacy"][legacy_mirror]["details"]["high"]
+        config['histograms'][hist]['max'] = high
+
     else:
       print(f"ERROR: {hist_name} not found in histograms schema.") 
       sys.exit(1)
-
-def retrieveHistogramsSchema(dataDir, skipCache):
-  filename=f"{dataDir}/histograms-schema.json"
-  if skipCache:
-    values = None
-  else:
-    values = checkForLocalFile(dataDir, filename)
-
-  if values is not None:
-    print(f"Using local histograms schema in {filename}")
-    return values
-
-  url=f'https://hg.mozilla.org/mozilla-central/raw-file/tip/toolkit/components/telemetry/Histograms.json'
-  print(f"Loading Histograms schema from {url}")
-  response = requests.get(url)
-  if response.ok:
-    values = response.json()
-    with open(filename, 'w') as f:
-      json.dump(values, f, indent=2)
-    return values
-  else:
-    print(f"Failed to retrieve {url}: {response.status_code}")
-    sys.exit(1)
-
-def retrievePageloadEventSchema(dataDir, skipCache):
-  filename=f"{dataDir}/pageload-event-schema.json"
-  if skipCache:
-    values = None
-  else:
-    values = checkForLocalFile(dataDir, filename)
-
-  if values is not None:
-    print(f"Using local pageload event schema in {filename}")
-    return values
-
-  url=f'https://hg.mozilla.org/mozilla-central/raw-file/tip/dom/metrics.yaml'
-  print(f"Loading pageload event schema from {url}")
-  response = requests.get(url)
-  if response.ok:
-    data = yaml.safe_load(response.text)
-    values = data['perf']['page_load']['extra_keys']
-    with open(filename, 'w') as f:
-      json.dump(values, f, indent=2)
-    return values
-  else:
-    print(f"Failed to retrieve {url}: {response.status_code}")
-    sys.exit(1)
 
 def retrieveNimbusAPI(dataDir, slug, skipCache):
   filename = f"{dataDir}/{slug}-nimbus-API.json"
   if skipCache:
     values = None
   else:
-    values = checkForLocalFile(dataDir, filename)
+    values = checkForLocalFile(filename)
   if values is not None:
     print(f"Using local config found in {filename}")
     return values
@@ -140,7 +123,7 @@ def extractValuesFromAPI(api):
 
   values["branches"] = []
   for branch in api["branches"]:
-    values["branches"].append(branch["slug"])
+    values["branches"].append({'name': branch["slug"]})
   return values
 
 def parseNimbusAPI(dataDir, slug, skipCache):

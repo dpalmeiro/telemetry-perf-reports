@@ -57,7 +57,8 @@ def getIconForSegment(segment):
       "All": "fa-solid fa-globe",
       "Windows": "fa-brands fa-windows",
       "Linux": "fa-brands fa-linux",
-      "Mac": "fa-brands fa-apple"
+      "Mac": "fa-brands fa-apple",
+      "Android": "fa-brands fa-android"
   }
   if segment in iconMap:
     return iconMap[segment]

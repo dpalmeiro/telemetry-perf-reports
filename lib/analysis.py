@@ -4,7 +4,7 @@ import json
 import sys
 
 # Expand the histogram into an array of values
-def expand_histogram(bins, counts):
+def flatten_histogram(bins, counts):
   array = []
   for i in range(len(bins)):
     for j in range(1, int(counts[i]/2.0)):
@@ -33,6 +33,9 @@ def calc_t_test(x1, x2, s1, s2, n1, n2):
 
 def create_subsample(bins, counts, sample_size=100000):
   total_counts = sum(counts)
+  if total_counts <= sample_size:
+    return flatten_histogram(bins, counts)
+
   ratio = total_counts/sample_size
   subsample = []
   for i in range(len(bins)):
@@ -230,8 +233,8 @@ def createResultsTemplate(config):
         else:
           template[branch][segment]["histograms"][hist_name] = createNumericalTemplate()
 
-        for metric in config["pageload_event_metrics"]:
-          template[branch][segment]["pageload_event_metrics"][metric] = createNumericalTemplate()
+      for metric in config["pageload_event_metrics"]:
+        template[branch][segment]["pageload_event_metrics"][metric] = createNumericalTemplate()
 
   return template
 
@@ -323,7 +326,6 @@ class DataAnalyzer:
         bins = data[branch][segment]["pageload_event_metrics"][metric]["bins"]
         counts = data[branch][segment]["pageload_event_metrics"][metric]["counts"]
         desc = self.config["pageload_event_metrics"][metric]["desc"]
-
         self.results[branch][segment]["pageload_event_metrics"][metric]["desc"] = desc
         calculate_histogram_stats(bins, counts, self.results[branch][segment]["pageload_event_metrics"][metric])
 

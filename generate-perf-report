@@ -57,13 +57,11 @@ def getResultsForExperiment(dataDir, config, skipCache):
   sqlClient = TelemetryClient(dataDir, config, skipCache)
   telemetryData = sqlClient.getResults()
 
-  # If this is not an experiment, adjust the branches
-  # list to pretend that it is.
-  if config['is_experiment'] == False:
-    branch_names = []
-    for i in range(len(config['branches'])):
-      branch_names.append(config['branches'][i]['name'])
-    config['branches'] = branch_names
+  # Change the branches to a list for easier use during analysis.
+  branch_names = []
+  for i in range(len(config['branches'])):
+    branch_names.append(config['branches'][i]['name'])
+  config['branches'] = branch_names
 
   analyzer = DataAnalyzer(config)
   results = analyzer.processTelemetryData(telemetryData)
@@ -115,7 +113,7 @@ if __name__ == "__main__":
   # If results not found, generate them.
   if results is None:
     # Annotate metrics
-    parser.annotateMetrics(dataDir, config, skipCache)
+    parser.annotateMetrics(config)
 
     if config["is_experiment"] == True:
       # Parse Nimbus API.

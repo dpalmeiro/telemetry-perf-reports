@@ -8,25 +8,29 @@ from django.template.loader import get_template
 
 # Remove any histograms that have empty datasets in
 # either a branch, or branch segment.
-def invalidDataSet(df, branches, segments):
+def invalidDataSet(df, histogram, branches, segments):
   if df.empty:
+    print(f"Empty dataset found, removing: {histogram}.")
     return True
 
   for branch in branches:
-    branch_df = df[df["branch"]==branch]
+    branch_name = branch['name']
+    branch_df = df[df["branch"]==branch_name]
     if branch_df.empty:
+      print(f"Empty dataset found for branch={branch_name}, removing: {histogram}.")
       return True
     for segment in segments:
       if segment=="All":
         continue
       branch_segment_df = branch_df[branch_df["segment"]==segment]
       if branch_segment_df.empty:
+        print(f"Empty dataset found for segment={segment}, removing: {histogram}.")
         return True
 
   return False
 
 def segments_are_all_OS(segments):
-  os_segments = set(["Windows", "All", "Linux", "Mac"])
+  os_segments = set(["Windows", "All", "Linux", "Mac", "Android"])
   for segment in segments:
     if segment not in os_segments:
       return False
@@ -75,6 +79,21 @@ class TelemetryClient:
         for i in range(min(len(labels),len(buckets))):
           buckets[i] = labels[i]
 
+      # If there is a max, then overflow larger buckets into the max.
+      if 'max' in self.config['histograms'][histogram]:
+        maxBucket = self.config['histograms'][histogram]['max']
+        remove=[]
+        maxBucketCount=0
+        for i,x in enumerate(buckets):
+          if x >= maxBucket:
+            remove.append(i)
+            maxBucketCount = maxBucketCount + counts[i]
+        for i in sorted(remove, reverse=True):
+          del buckets[i]
+          del counts[i]
+        buckets.append(maxBucket)
+        counts.append(maxBucketCount)
+
       assert len(buckets) == len(counts)
       results[branch][segment]['histograms'][histogram] = {}
       results[branch][segment]['histograms'][histogram]['bins'] = buckets
@@ -119,14 +138,13 @@ class TelemetryClient:
       print(df)
 
       # Remove histograms that are empty.
-      if invalidDataSet(df, self.config['branches'], self.config['segments']):
+      if invalidDataSet(df, histogram, self.config['branches'], self.config['segments']):
         remove.append(histogram)
         continue
       histograms[histogram] = df
 
     for hist in remove:
       if hist in self.config['histograms']:
-        print(f"Empty dataset found, removing: {histogram}.")
         del self.config['histograms'][hist]
 
     # Combine histogram and pageload event results.
@@ -158,7 +176,7 @@ class TelemetryClient:
       df = self.getHistogramData(self.config, histogram)
 
       # Remove invalid histogram data.
-      if invalidDataSet(df, self.config['branches'], self.config['segments']):
+      if invalidDataSet(df, histogram, self.config['branches'], self.config['segments']):
         remove.append(histogram)
         continue
       histograms[histogram] = df
@@ -171,13 +189,14 @@ class TelemetryClient:
     # Combine histogram and pageload event results.
     results = {}
     for branch in self.config['branches']:
-      results[branch] = {}
+      branch_name = branch['name']
+      results[branch_name] = {}
       for segment in self.config['segments']:
-        print (f"Aggregating results for segment={segment} and branch={branch}")
-        results[branch][segment] = {"histograms": {}, "pageload_event_metrics": {}}
+        print (f"Aggregating results for segment={segment} and branch={branch_name}")
+        results[branch_name][segment] = {"histograms": {}, "pageload_event_metrics": {}}
 
         # Special case when segments is OS only.
-        self.collectResultsFromQuery_OS_segments(results, branch, segment, event_metrics, histograms)
+        self.collectResultsFromQuery_OS_segments(results, branch_name, segment, event_metrics, histograms)
 
     results['queries'] = self.queries
     return results
@@ -304,8 +323,8 @@ class TelemetryClient:
     })
     return query
 
-  def generateHistogramQuery_OS_segments_non_experiment(self, histogram):
-    t = get_template("histogram_os_segments_non_experiment.sql")
+  def generateHistogramQuery_OS_segments_non_experiment_legacy(self, histogram):
+    t = get_template("histogram_os_segments_non_experiment_legacy.sql")
 
     branches = self.config["branches"]
     for i in range(len(branches)):
@@ -323,6 +342,35 @@ class TelemetryClient:
         "histogram": histogram,
         "branches": branches
     }
+    query = t.render(context)
+    # Remove empty lines before returning
+    query = "".join([s for s in query.strip().splitlines(True) if s.strip()])
+    self.queries.append({
+      "name": f"Histogram: {histogram}",
+      "query": query
+    })
+    return query
+
+  def generateHistogramQuery_OS_segments_non_experiment_glean(self, histogram):
+    t = get_template("histogram_os_segments_non_experiment_glean.sql")
+
+    branches = self.config["branches"]
+    for i in range(len(branches)):
+      branches[i]["last"] = False
+      if "version" in self.config["branches"][i]:
+        version = self.config["branches"][i]["version"]
+        branches[i]["ver_condition"] = f"AND SPLIT(client_info.app_display_version, '.')[offset(0)] = \"{version}\""
+      if "architecture" in self.config["branches"][i]:
+        arch = self.config["branches"][i]["architecture"]
+        branches[i]["arch_condition"] = f"AND client_info.architecture = \"{arch}\""
+
+    branches[-1]["last"] = True
+
+    context = {
+        "histogram": histogram,
+        "branches": branches
+    }
+
     query = t.render(context)
     # Remove empty lines before returning
     query = "".join([s for s in query.strip().splitlines(True) if s.strip()])
@@ -381,7 +429,10 @@ class TelemetryClient:
       return df
 
     if segments_are_all_OS(self.config['segments']):
-      query = self.generateHistogramQuery_OS_segments_non_experiment(histogram)
+      if config["histograms"][histogram]["glean"]:
+        query = self.generateHistogramQuery_OS_segments_non_experiment_glean(histogram)
+      else:
+        query = self.generateHistogramQuery_OS_segments_non_experiment_legacy(histogram)
     else:
       print("No current support for generic non-experiment queries.")
       sys.exit(1)
