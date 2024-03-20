@@ -1,5 +1,5 @@
 {
-  "slug": "performance-metric-calibration-with-lcp-beta",
+  "slug": "speculative-connect-sockets-with-lcp-beta",
 
   "histograms": [
       "payload.processes.content.histograms.perf_page_load_time_ms",
@@ -10,11 +10,7 @@
       "payload.processes.content.histograms.perf_largest_contentful_paint_ms",
       "payload.processes.content.histograms.perf_largest_contentful_paint_from_response_start_ms",
       "payload.processes.content.histograms.time_to_response_start_ms",
-      "payload.processes.content.histograms.http_page_open_to_first_received",
-      "payload.processes.content.histograms.http_sub_dns_lookup_time",
-      "payload.processes.content.histograms.http_sub_open_to_first_sent",
-      "payload.processes.content.histograms.http_sub_open_to_first_received",
-      "payload.processes.content.histograms.http_subitem_first_byte_latency_time"
+      "payload.processes.content.histograms.http_page_open_to_first_received"
   ],
 
   "pageload_event_metrics": {
