@@ -113,7 +113,7 @@ def retrieveNimbusAPI(dataDir, slug, skipCache):
 # Specifically, the branch slugs, channel and start/end dates.
 def extractValuesFromAPI(api):
   values = {}
-  values["startDate"] = api["enrollmentEndDate"]
+  values["startDate"] = api["startDate"]
   values["endDate"] = api["endDate"]
   values["channel"] = api["channel"]
 

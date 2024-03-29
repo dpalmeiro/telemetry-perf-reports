@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 import numpy as np
 from scipy import interpolate
 from django.template import Template, Context
@@ -268,7 +269,7 @@ class ReportGenerator:
     for i in range(len(self.data['input']['branches'])):
       if is_experiment:
         branchInfo = {
-            "name": self.data['input']['branches'][i]
+            "name": self.data['input']['branches'][i]['name']
         }
       else:
         branchInfo = {
