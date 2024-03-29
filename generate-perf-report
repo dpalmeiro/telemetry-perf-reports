@@ -123,12 +123,15 @@ if __name__ == "__main__":
       # Make control the first element if not already.
       if "control" in config:
         control = config["control"]
-        if config["branches"][0] != control:
-          i = config["branches"].index(control)
-          tmp = config["branches"][0]
-          config["branches"][0] = control
-          config["branches"][i] = tmp
-        
+        del config["control"]
+        if config["branches"][0]["name"] != control:
+          for i,b in enumerate(config["branches"]):
+            if b["name"] == control:
+              tmpFirst   = config["branches"][0]
+              tmpControl = config["branches"][i]
+              config["branches"][i] = tmpFirst
+              config["branches"][0] = tmpControl
+              break
 
     print("Using Config:")
     configStr = json.dumps(config, indent=2)
