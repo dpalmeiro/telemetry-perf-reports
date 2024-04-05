@@ -141,10 +141,15 @@ class ReportGenerator:
             for branch in self.data["branches"]:
               if "uplift" in self.data[branch][segment][metric_type][metric]:
                 rows = []
-                for i in range(len(self.data[branch][segment][metric_type][metric]["labels"])):
+                n_labels = len(self.data[branch][segment][metric_type][metric]["labels"])
+                for i in range(n_labels):
                   label = self.data[branch][segment][metric_type][metric]["labels"][i]
-                  #uplift = "{0:.2f}".format(self.data[branch][segment][metric_type][metric]["uplift"][i])
                   uplift = self.data[branch][segment][metric_type][metric]["uplift"][i]
+
+                  # Enumerated histograms have a lot of labels, so try and limit the ones
+                  # we show.
+                  if n_labels > 5 and abs(uplift)<0.05:
+                    continue
 
                   weight="font-weight:normal;"
                   if abs(uplift) >= 10:
@@ -164,6 +169,7 @@ class ReportGenerator:
                     uplift = "{0:.2f}".format(self.data[branch][segment][metric_type][metric]["uplift"][i])
 
                   uplift_desc=f"{label:<15}: {uplift}%"
+
                   rows.append({
                     "uplift": uplift_desc,
                     "effect": effect,
@@ -180,11 +186,15 @@ class ReportGenerator:
                 })
                 branches[-1]["style"] = branches[-1]["style"] + "border-bottom-style: solid;"
 
+            total_rowspan = 0
+            for i in range(len(branches)):
+              total_rowspan = total_rowspan + branches[i]["branch_rowspan"]
+
             categorical_metrics.append({
               "name": metric_name,
               "desc": self.data[branch][segment][metric_type][metric]["desc"],
               "style": f"background:{row_background}; border-bottom-style: solid; border-right-style: solid;",
-              "name_rowspan": len(branches)*branches[0]["branch_rowspan"],
+              "name_rowspan": total_rowspan,
               "branches": branches
             })
             continue
@@ -458,21 +468,40 @@ class ReportGenerator:
   def createCategoricalComparison(self, segment, metric, metric_type):
     t = get_template("categorical.html")
 
+    # If the histogram has too many buckets, then only display a 
+    # set of interesting comparisons instead of all of them.
+    indices = set()
+
     control = self.data["branches"][0]
+    n_elem = len(self.data[control][segment][metric_type][metric]["ratios"])
+    if n_elem <= 10:
+      indices = set(range(0, n_elem-1))
+
+    for branch in self.data["branches"]:
+      if branch == control:
+        continue
+      uplift = self.data[branch][segment][metric_type][metric]["uplift"]
+      ratios = self.data[branch][segment][metric_type][metric]["ratios"]
+      ratios_control = self.data[control][segment][metric_type][metric]["ratios"]
+
+      for i in range(len(uplift)):
+        if abs(uplift[i]) > 0.01 and (ratios[i] >= 0.05 or ratios_control[i] >= 0.1):
+          indices.add(i)
+
     datasets=[]
     for branch in self.data["branches"]:
-      ratios_branch = self.data[branch][segment][metric_type][metric]["ratios"]
+      ratios_branch = [self.data[branch][segment][metric_type][metric]["ratios"][i] for i in indices]
       datasets.append({
         "branch": branch,
         "ratios": ratios_branch,
       })
 
       if branch != control:
-        ratios_control = self.data[control][segment][metric_type][metric]["ratios"]
-        uplift = self.data[branch][segment][metric_type][metric]["uplift"]
+        ratios_control = [self.data[control][segment][metric_type][metric]["ratios"][i] for i in indices]
+        uplift = [self.data[branch][segment][metric_type][metric]["uplift"][i] for i in indices]
         datasets[-1]["uplift"] = uplift
 
-    labels=self.data[control][segment][metric_type][metric]["labels"]
+    labels=[self.data[control][segment][metric_type][metric]["labels"][i] for i in indices]
     context = {
       "labels": labels,
       "datasets": datasets,

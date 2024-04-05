@@ -25,23 +25,7 @@
       maintainAspectRatio: false,
       responsive: true,
       plugins: {
-          datalabels: {
-            anchor: 'end',
-            align: 'top',
-            formatter: (val, context) => {
-                i = context.dataIndex;
-                if (context.dataset.hasOwnProperty('uplift')) {
-                  uplift = context.dataset.uplift[i];
-                  return val.toFixed(2) + "  (" + (uplift > 0 ? "+" : "") + uplift.toFixed(1) + ")%";
-                } else {
-                  return val.toFixed(2);
-                }
-            },
-            font: {
-              weight: 'bold',
-                size: 14
-            }
-          },
+          datalabels: { display: false },
           legend: {
               display: true,
               position: 'top',
