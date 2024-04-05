@@ -22,11 +22,7 @@
       "payload.processes.content.histograms.gc_slice_count",
       "payload.processes.content.histograms.gc_slice_was_long",
       "payload.processes.content.histograms.gc_budget_overrun",
-      "payload.processes.content.histograms.gc_budget_was_increased",
-      "payload.processes.content.histograms.gc_parallel_mark_speedup",
-      "payload.processes.content.histograms.gc_parallel_mark_utilization",
-      "payload.processes.content.histograms.gc_parallel_mark_interruptions",
-      "payload.processes.content.histograms.gc_task_start_delay_us"
+      "payload.processes.content.histograms.gc_budget_was_increased"
   ],
 
   "pageload_event_metrics": {

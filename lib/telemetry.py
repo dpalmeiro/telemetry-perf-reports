@@ -72,12 +72,27 @@ class TelemetryClient:
       # Add labels to the buckets for categorical histograms.
       if self.config['histograms'][histogram]['kind'] == 'categorical':
         labels = self.config['histograms'][histogram]['labels']
+
         # Remove overflow bucket if it exists
         if len(labels)==(len(buckets)-1) and counts[-1]==0:
           del buckets[-1]
           del counts[-1]
-        for i in range(min(len(labels),len(buckets))):
-          buckets[i] = labels[i]
+
+        # Add missing buckets so they line up in each branch.
+        if len(labels) > len(buckets):
+          for i in range(len(buckets)):
+            print(buckets[i], counts[i])
+          new_counts = []
+          for i,b in enumerate(labels):
+            j = buckets.index(b) if b in buckets else None
+            if j:
+              new_counts.append(counts[j])
+            else:
+              new_counts.append(0)
+          counts  = new_counts
+         
+        # Remap bucket values to the appropriate label names.
+        buckets = labels
 
       # If there is a max, then overflow larger buckets into the max.
       if 'max' in self.config['histograms'][histogram]:

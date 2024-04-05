@@ -52,16 +52,19 @@ def annotateHistograms(config, probeIndex):
       config['histograms'][hist]["glean"] = False
       config['histograms'][hist]["desc"] = schema["description"]
       kind = schema["details"]["kind"]
-      if kind=="categorical" or kind=="boolean":
+      print(hist, kind)
+      if kind=="categorical" or kind=="boolean" or kind=="enumerated":
         config['histograms'][hist]["kind"] = "categorical"
         if "labels" in schema["details"]:
           config['histograms'][hist]["labels"] = schema["details"]["labels"]
-        else:
-          config['histograms'][hist]["labels"] = []
-          config['histograms'][hist]["labels"].append("no")
-          config['histograms'][hist]["labels"].append("yes")
+        elif kind=="boolean":
+          config['histograms'][hist]["labels"] = ["no", "yes"]
+        elif "n_buckets" in schema["details"]:
+          n_buckets = schema["details"]["n_buckets"]
+          config['histograms'][hist]["labels"] = list(range(0, n_buckets))
       else:
         config['histograms'][hist]["kind"] = "numerical"
+
 
     # Annotate glean probe.
     elif hist_name in probeIndex["glean"]:
@@ -117,7 +120,7 @@ def extractValuesFromAPI(api):
   values["endDate"] = api["endDate"]
   values["channel"] = api["channel"]
 
-  if values["endDate"] == None:
+  if values["endDate"] is None:
     now = datetime.datetime.now();
     values["endDate"] = now.strftime('%Y-%m-%d')
 
