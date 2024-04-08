@@ -16,7 +16,7 @@ eventdata_{{branch.name}}_desktop as (
         AND normalized_app_name = "Firefox"
         {{branch.ver_condition}}
         {{branch.arch_condition}}
-{% for condition in branch.event_conditions %}
+{% for condition in branch.glean_conditions %}
         {{condition}}
 {% endfor %}
 ),
@@ -49,7 +49,7 @@ eventdata_{{branch.name}}_android as (
         AND normalized_channel = "{{branch.channel}}"
         {{branch.ver_condition}}
         {{branch.arch_condition}}
-{% for condition in branch.event_conditions %}
+{% for condition in branch.glean_conditions %}
         {{condition}}
 {% endfor %}
 ),

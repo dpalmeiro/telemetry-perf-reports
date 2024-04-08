@@ -17,6 +17,9 @@ with
         AND {{histogram}} is not null
         {{branch.ver_condition}}
         {{branch.arch_condition}}
+{% for condition in branch.glean_conditions %}
+        {{condition}}
+{% endfor %}
 ),
 {{branch.name}}_android as (
     SELECT
@@ -33,6 +36,9 @@ with
         AND {{histogram}} is not null
         {{branch.ver_condition}}
         {{branch.arch_condition}}
+{% for condition in branch.glean_conditions %}
+        {{condition}}
+{% endfor %}
 )
 {% if branch.last == False %}
 ,

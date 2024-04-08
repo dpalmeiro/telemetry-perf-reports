@@ -231,6 +231,8 @@ class TelemetryClient:
       if "architecture" in self.config["branches"][i]:
         arch = self.config["branches"][i]["architecture"]
         branches[i]["arch_condition"] = f"AND client_info.architecture = \"{arch}\""
+      if "glean_conditions" in self.config["branches"][i]:
+        branches[i]["glean_conditions"] = self.config["branches"][i]["glean_conditions"]
     branches[-1]["last"] = True
 
     print(branches)
@@ -350,12 +352,15 @@ class TelemetryClient:
       if "architecture" in self.config["branches"][i]:
         arch = self.config["branches"][i]["architecture"]
         branches[i]["arch_condition"] = f"AND application.architecture = \"{arch}\""
+      if "legacy_conditions" in self.config["branches"][i]:
+        branches[i]["legacy_conditions"] = self.config["branches"][i]["legacy_conditions"]
 
     branches[-1]["last"] = True
 
     context = {
         "histogram": histogram,
-        "branches": branches
+        "branches": branches,
+        "channel": self.config["branches"][0]["channel"],
     }
     query = t.render(context)
     # Remove empty lines before returning
@@ -378,6 +383,8 @@ class TelemetryClient:
       if "architecture" in self.config["branches"][i]:
         arch = self.config["branches"][i]["architecture"]
         branches[i]["arch_condition"] = f"AND client_info.architecture = \"{arch}\""
+      if "glean_conditions" in self.config["branches"][i]:
+        branches[i]["glean_conditions"] = self.config["branches"][i]["glean_conditions"]
 
     branches[-1]["last"] = True
 
