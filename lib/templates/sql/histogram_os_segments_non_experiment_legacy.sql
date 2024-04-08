@@ -20,7 +20,7 @@ with
         AND {{histogram}} is not null
         {{branch.ver_condition}}
         {{branch.arch_condition}}
-{% for condition in branch.histogram_conditions %}
+{% for condition in branch.legacy_conditions %}
         {{condition}}
 {% endfor %}
 ),
