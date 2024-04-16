@@ -377,7 +377,7 @@ class ReportGenerator:
     t = get_template("uplift.html")
 
     control = self.data["branches"][0]
-    quantiles = list(np.around(np.linspace(0.1, 0.90, 89), 2))
+    quantiles = list(np.around(np.linspace(0.1, 0.99, 99), 2))
 
     datasets = []
     for branch in self.data["branches"]:
