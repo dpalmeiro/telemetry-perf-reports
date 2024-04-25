@@ -262,6 +262,7 @@ class TelemetryClient:
     metricMax = self.config['pageload_event_metrics'][metric]['max']
 
     context = {
+        "include_null_branch": self.config['include_null_branch'],
         "minVal": metricMin,
         "maxVal": metricMax,
         "slug": self.config['slug'],
@@ -325,6 +326,7 @@ class TelemetryClient:
 
     context = {
         "is_experiment": self.config['is_experiment'],
+        "include_null_branch": self.config['include_null_branch'],
         "slug": self.config['slug'],
         "channel": self.config['channel'],
         "startDate": self.config['startDate'],

@@ -120,6 +120,15 @@ if __name__ == "__main__":
       api = parser.parseNimbusAPI(dataDir, slug, skipCache)
       config = config | api
 
+      # If null branch was included, add an extra branch.
+      if 'include_null_branch' in config:
+        include_null_branch = config['include_null_branch']
+        if include_null_branch == True or include_null_branch.lower() == "true":
+          config['include_null_branch'] = True
+          config["branches"].append({'name': 'null'})
+      else:
+        config['include_null_branch'] = False
+
       # Make control the first element if not already.
       if "control" in config:
         control = config["control"]

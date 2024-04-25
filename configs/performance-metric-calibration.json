@@ -1,5 +1,6 @@
 {
   "slug": "performance-metric-calibration",
+  "include_null_branch": "true",
 
   "histograms": [
       "payload.processes.content.histograms.perf_page_load_time_ms",
