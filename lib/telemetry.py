@@ -217,7 +217,7 @@ class TelemetryClient:
     return results
 
   def generatePageloadEventQuery_OS_segments_non_experiment(self, metric):
-    t = get_template("events_os_segments_non_experiment.sql")
+    t = get_template("other/glean/pageload_events_os_segments.sql")
 
     minVal = self.config['pageload_event_metrics'][metric]['min']
     maxVal = self.config['pageload_event_metrics'][metric]['max']
@@ -254,7 +254,7 @@ class TelemetryClient:
     return query
 
   def generatePageloadEventQuery_OS_segments(self, metric):
-    t = get_template("events_os_segments.sql")
+    t = get_template("experiment/glean/pageload_events_os_segments.sql")
 
     print(self.config['pageload_event_metrics'][metric])
 
@@ -280,8 +280,9 @@ class TelemetryClient:
     })
     return query
 
+  # Not currently used, and not well supported.
   def generatePageloadEventQuery_Generic(self):
-    t = get_template("events_generic.sql")
+    t = get_template("archived/events_generic.sql")
 
     segmentInfo = []
     for segment in self.config['segments']:
@@ -321,11 +322,30 @@ class TelemetryClient:
     return query
 
   # Use *_os_segments queries if the segments is OS only which is much faster than generic query.
-  def generateHistogramQuery_OS_segments(self, histogram):
-    t = get_template("histogram_os_segments.sql")
+  def generateHistogramQuery_OS_segments_legacy(self, histogram):
+    t = get_template("experiment/legacy/histogram_os_segments.sql")
 
     context = {
-        "is_experiment": self.config['is_experiment'],
+        "include_null_branch": self.config['include_null_branch'],
+        "slug": self.config['slug'],
+        "channel": self.config['channel'],
+        "startDate": self.config['startDate'],
+        "endDate": self.config['endDate'],
+        "histogram": histogram,
+    }
+    query = t.render(context)
+    # Remove empty lines before returning
+    query = "".join([s for s in query.strip().splitlines(True) if s.strip()])
+    self.queries.append({
+      "name": f"Histogram: {histogram}",
+      "query": query
+    })
+    return query
+
+  def generateHistogramQuery_OS_segments_glean(self, histogram):
+    t = get_template("experiment/glean/histogram_os_segments.sql")
+
+    context = {
         "include_null_branch": self.config['include_null_branch'],
         "slug": self.config['slug'],
         "channel": self.config['channel'],
@@ -343,7 +363,7 @@ class TelemetryClient:
     return query
 
   def generateHistogramQuery_OS_segments_non_experiment_legacy(self, histogram):
-    t = get_template("histogram_os_segments_non_experiment_legacy.sql")
+    t = get_template("other/legacy/histogram_os_segments.sql")
 
     branches = self.config["branches"]
     for i in range(len(branches)):
@@ -374,7 +394,7 @@ class TelemetryClient:
     return query
 
   def generateHistogramQuery_OS_segments_non_experiment_glean(self, histogram):
-    t = get_template("histogram_os_segments_non_experiment_glean.sql")
+    t = get_template("other/glean/histogram_os_segments.sql")
 
     branches = self.config["branches"]
     for i in range(len(branches)):
@@ -404,8 +424,9 @@ class TelemetryClient:
     })
     return query
 
+  # Not currently used, and not well supported.
   def generateHistogramQuery_Generic(self, histogram):
-    t = get_template("histogram_generic.sql")
+    t = get_template("archived/histogram_generic.sql")
 
     segmentInfo = []
     for segment in self.config['segments']:
@@ -478,9 +499,14 @@ class TelemetryClient:
       return df
 
     if segments_are_all_OS(self.config['segments']):
-      query = self.generateHistogramQuery_OS_segments(histogram)
+      if config["histograms"][histogram]["glean"]:
+        query = self.generateHistogramQuery_OS_segments_glean(histogram)
+      else:
+        query = self.generateHistogramQuery_OS_segments_legacy(histogram)
     else:
-      query = self.generateHistogramQuery_Generic(histogram)
+      # Generic segments are not well supported right now.
+      print("No current support for generic non-experiment queries.")
+      sys.exit(1)
 
     print("Running query:\n" + query)
     job = self.client.query(query)
@@ -521,7 +547,9 @@ class TelemetryClient:
     if segments_are_all_OS(self.config['segments']):
       query = self.generatePageloadEventQuery_OS_segments(metric)
     else:
-      query = self.generatePageloadEventQuery_Generic()
+      #query = self.generatePageloadEventQuery_Generic()
+      print("No current support for generic pageload event queries.")
+      sys.exit(1)
 
     print("Running query:\n" + query)
     job = self.client.query(query)
