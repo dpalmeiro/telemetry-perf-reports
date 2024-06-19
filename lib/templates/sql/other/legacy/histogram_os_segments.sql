@@ -7,11 +7,7 @@ with
         "{{branch.name}}" as branch,
         JSON_EXTRACT({{histogram}}, '$.values') as hist
     FROM
-    {% if channel == "nightly" %}
-        `moz-fx-data-shared-prod.telemetry.main_nightly`
-    {% else %}
         `moz-fx-data-shared-prod.telemetry.main`
-    {% endif %}
     WHERE
         DATE(submission_timestamp) >= DATE('{{branch.startDate}}')
         AND DATE(submission_timestamp) <= DATE('{{branch.endDate}}')    
