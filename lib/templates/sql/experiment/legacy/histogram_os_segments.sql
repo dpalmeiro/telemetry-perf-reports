@@ -5,11 +5,7 @@ with json_strings as (
         mozfun.map.get_key(environment.experiments, "{{slug}}").branch as branch,
         JSON_EXTRACT({{histogram}}, '$.values') as hist
     FROM
-    {% if channel == "nightly" %}
-        `moz-fx-data-shared-prod.telemetry.main_nightly`
-    {% else %}
-        `moz-fx-data-shared-prod.telemetry.main`
-    {% endif %}
+      `moz-fx-data-shared-prod.telemetry.main`
     WHERE
         DATE(submission_timestamp) >= DATE('{{startDate}}')
         AND DATE(submission_timestamp) <= DATE('{{endDate}}')
@@ -38,11 +34,7 @@ json_strings_null as (
         "null" as branch,
         JSON_EXTRACT({{histogram}}, '$.values') as hist
     FROM
-    {% if channel == "nightly" %}
-        `moz-fx-data-shared-prod.telemetry.main_nightly`
-    {% else %}
-        `moz-fx-data-shared-prod.telemetry.main`
-    {% endif %}
+      `moz-fx-data-shared-prod.telemetry.main`
     WHERE
         DATE(submission_timestamp) >= DATE('{{startDate}}')
         AND DATE(submission_timestamp) <= DATE('{{endDate}}')
