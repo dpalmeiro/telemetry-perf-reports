@@ -3,9 +3,20 @@ import os
 import json
 import glob
 import django
+import sys
 from django.conf import settings
 from django.template.loader import get_template
 from bs4 import BeautifulSoup as bs
+
+# Take the directory as the first argument
+if len(sys.argv) < 2:
+    print("Usage: ./update-index <directory>")
+    sys.exit(1)
+
+REPORT_DIR = sys.argv[1]  # Use the directory provided as the first argumen
+if not os.path.isdir(REPORT_DIR):
+    print(f"The directory '{REPORT_DIR}' does not exist.")
+    sys.exit(1)
 
 def setupDjango():
   TEMPLATES = [
@@ -24,8 +35,8 @@ if __name__ == "__main__":
 
 experiment_reports = []
 other_reports = []
-for filename in glob.glob("reports/*.html"):
-  if filename == "reports/index.html":
+for filename in glob.glob(f"{REPORT_DIR}/*.html"):
+  if os.path.basename(filename) == "index.html":
     continue
 
   print("Reading " + filename)
@@ -61,5 +72,5 @@ context = {
 html = t.render(context)
 soup = bs(html, 'html.parser')
 
-with open("reports/index.html", "w") as f:
+with open(f"{REPORT_DIR}/index.html", "w") as f:
   f.write(soup.prettify())
