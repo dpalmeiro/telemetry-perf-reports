@@ -261,6 +261,11 @@ class TelemetryClient:
     metricMin = self.config['pageload_event_metrics'][metric]['min']
     metricMax = self.config['pageload_event_metrics'][metric]['max']
 
+    isp_blacklist = []
+    if 'isp_blacklist' in self.config:
+      with open(self.config['isp_blacklist'], 'r') as file:
+        isp_blacklist = [line.strip() for line in file]
+
     context = {
         "include_null_branch": self.config['include_null_branch'],
         "minVal": metricMin,
@@ -269,7 +274,8 @@ class TelemetryClient:
         "channel": self.config['channel'],
         "startDate": self.config['startDate'],
         "endDate": self.config['endDate'],
-        "metric": metric
+        "metric": metric,
+        "blacklist": isp_blacklist
     }
     query = t.render(context)
     # Remove empty lines before returning
@@ -325,6 +331,11 @@ class TelemetryClient:
   def generateHistogramQuery_OS_segments_legacy(self, histogram):
     t = get_template("experiment/legacy/histogram_os_segments.sql")
 
+    isp_blacklist = []
+    if 'isp_blacklist' in self.config:
+      with open(self.config['isp_blacklist'], 'r') as file:
+        isp_blacklist = [line.strip() for line in file]
+
     context = {
         "include_null_branch": self.config['include_null_branch'],
         "slug": self.config['slug'],
@@ -332,6 +343,7 @@ class TelemetryClient:
         "startDate": self.config['startDate'],
         "endDate": self.config['endDate'],
         "histogram": histogram,
+        "blacklist": isp_blacklist
     }
     query = t.render(context)
     # Remove empty lines before returning

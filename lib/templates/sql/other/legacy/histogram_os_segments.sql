@@ -19,6 +19,9 @@ with
 {% for condition in branch.legacy_conditions %}
         {{condition}}
 {% endfor %}
+        {% for isp in blacklist %}
+        AND metadata.isp.name != "{{isp}}"
+        {% endfor %}
 ),
 bucketCounts_{{branch.name}} as (
 SELECT
