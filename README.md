@@ -16,7 +16,8 @@ Ensure you have the following Python libraries installed:
 - [db-dtypes]: `pip install db-dtypes`
 - [BeautifulSoup]: `pip install bs4`
 
-Ensure that the Google Cloud, `gcloud` cli is installed and that you are authenticated with a project defined (e.g. `gcloud config set project mozdata`)
+Ensure that the Google Cloud, `gcloud` cli is installed (see [docs](https://cloud.google.com/sdk/docs/install)) and that you are authenticated with a project defined (e.g. `gcloud config set project mozdata`)
+
 
 ## Usage
 
