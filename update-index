@@ -7,6 +7,7 @@ import sys
 from django.conf import settings
 from django.template.loader import get_template
 from bs4 import BeautifulSoup as bs
+from datetime import datetime
 
 # Take the directory as the first argument
 if len(sys.argv) < 2:
@@ -59,8 +60,13 @@ for filename in glob.glob(f"{REPORT_DIR}/*.html"):
       else:
         config["style"] = "background:white"
 
+      # Use the end date of the last branch for non-experiments.
+      config["endDate"] = config["branches"][-1]["endDate"]
+
       other_reports.append(config)
 
+experiment_reports.sort(key=lambda report: datetime.strptime(report['endDate'], '%Y-%m-%d'), reverse=True)
+other_reports.sort(key=lambda report: datetime.strptime(report['endDate'], '%Y-%m-%d'), reverse=True)
 
 context = {
     "title": "Telemetry Performance Report Index",
