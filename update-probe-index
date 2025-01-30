@@ -33,6 +33,7 @@ if __name__ == "__main__":
     metric_name = metric.split("/")[1]
     metric_info = legacy_metrics[metric]["history"][channel][-1]
     probe_index["legacy"][metric_name] = metric_info
+    probe_index["legacy"][metric_name]["repos"] = "legacy"
 
   # Collect all glean probes
   glean_repositories_url = "https://probeinfo.telemetry.mozilla.org/glean/repositories"
@@ -42,7 +43,11 @@ if __name__ == "__main__":
     metrics = get_url(f"https://probeinfo.telemetry.mozilla.org/glean/{name}/metrics")
     for metric in metrics:
       metric_sql_name = metric.replace(".", "_")
-      probe_index["glean"][metric_sql_name] = metrics[metric]["history"][-1]
+      if metric_sql_name not in probe_index["glean"]:
+        probe_index["glean"][metric_sql_name] = metrics[metric]["history"][-1]
+        probe_index["glean"][metric_sql_name]["repos"] = []
+
+      probe_index["glean"][metric_sql_name]["repos"].append(name)
 
       if "telemetry_mirror" in metrics[metric]["history"][-1]:
         mirror = metrics[metric]["history"][-1]["telemetry_mirror"]
@@ -53,4 +58,3 @@ if __name__ == "__main__":
   with open(probeIndexFile, 'w') as f:
     json.dump(probe_index, f, indent=2)
 
-       

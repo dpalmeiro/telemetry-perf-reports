@@ -51,6 +51,8 @@ def annotateHistograms(config, probeIndex):
       schema = probeIndex["legacy"][hist_name.upper()]
       config['histograms'][hist]["glean"] = False
       config['histograms'][hist]["desc"] = schema["description"]
+      config['histograms'][hist]["available_on_desktop"] = True
+      config['histograms'][hist]["available_on_android"] = False
       kind = schema["details"]["kind"]
       print(hist, kind)
       if kind=="categorical" or kind=="boolean" or kind=="enumerated":
@@ -71,6 +73,18 @@ def annotateHistograms(config, probeIndex):
       schema = probeIndex["glean"][hist_name]
       config['histograms'][hist]["glean"] = True
       config['histograms'][hist]["desc"] = schema["description"]
+  
+      # Mark if the probe is available on desktop or mobile.
+      config['histograms'][hist]["available_on_desktop"] = False
+      config['histograms'][hist]["available_on_android"] = False
+
+      if "gecko" in schema["repos"]:
+        config['histograms'][hist]["available_on_desktop"] = True
+        config['histograms'][hist]["available_on_android"] = True
+      elif "fenix" in schema["repos"]:
+        config['histograms'][hist]["available_on_android"] = True
+      elif "desktop" in schema["repos"]:
+        config['histograms'][hist]["available_on_desktop"] = True
 
       # Only support timing distribution types for now.
       if schema["type"] == "timing_distribution":
@@ -119,6 +133,7 @@ def extractValuesFromAPI(api):
   values["startDate"] = api["startDate"]
   values["endDate"] = api["endDate"]
   values["channel"] = api["channel"]
+  values["isRollout"] = api["isRollout"]
 
   if values["endDate"] is None:
     now = datetime.datetime.now();

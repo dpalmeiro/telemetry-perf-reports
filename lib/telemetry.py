@@ -267,7 +267,7 @@ class TelemetryClient:
         isp_blacklist = [line.strip() for line in file]
 
     context = {
-        "include_null_branch": self.config['include_null_branch'],
+        "include_non_enrolled_branch": self.config['include_non_enrolled_branch'],
         "minVal": metricMin,
         "maxVal": metricMax,
         "slug": self.config['slug'],
@@ -337,12 +337,14 @@ class TelemetryClient:
         isp_blacklist = [line.strip() for line in file]
 
     context = {
-        "include_null_branch": self.config['include_null_branch'],
+        "include_non_enrolled_branch": self.config['include_non_enrolled_branch'],
         "slug": self.config['slug'],
         "channel": self.config['channel'],
         "startDate": self.config['startDate'],
         "endDate": self.config['endDate'],
         "histogram": histogram,
+        "available_on_desktop": self.config['histograms'][histogram]['available_on_desktop'],
+        "available_on_android": self.config['histograms'][histogram]['available_on_android'],
         "blacklist": isp_blacklist
     }
     query = t.render(context)
@@ -358,12 +360,14 @@ class TelemetryClient:
     t = get_template("experiment/glean/histogram_os_segments.sql")
 
     context = {
-        "include_null_branch": self.config['include_null_branch'],
+        "include_non_enrolled_branch": self.config['include_non_enrolled_branch'],
         "slug": self.config['slug'],
         "channel": self.config['channel'],
         "startDate": self.config['startDate'],
         "endDate": self.config['endDate'],
         "histogram": histogram,
+        "available_on_desktop": self.config['histograms'][histogram]['available_on_desktop'],
+        "available_on_android": self.config['histograms'][histogram]['available_on_android'],
     }
     query = t.render(context)
     # Remove empty lines before returning
@@ -393,6 +397,8 @@ class TelemetryClient:
 
     context = {
         "histogram": histogram,
+        "available_on_desktop": self.config['histograms'][histogram]['available_on_desktop'],
+        "available_on_android": self.config['histograms'][histogram]['available_on_android'],
         "branches": branches,
         "channel": self.config["branches"][0]["channel"],
     }
@@ -424,6 +430,8 @@ class TelemetryClient:
 
     context = {
         "histogram": histogram,
+        "available_on_desktop": self.config['histograms'][histogram]['available_on_desktop'],
+        "available_on_android": self.config['histograms'][histogram]['available_on_android'],
         "branches": branches
     }
 
@@ -454,6 +462,8 @@ class TelemetryClient:
         "startDate": self.config['startDate'],
         "endDate": self.config['endDate'],
         "histogram": histogram,
+        "available_available_on_desktop": self.config['histograms'][histogram]['available_on_desktop'],
+        "available_on_android": self.config['histograms'][histogram]['available_on_android'],
         "segments": segmentInfo
     }
     query = t.render(context)

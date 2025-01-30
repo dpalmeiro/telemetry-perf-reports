@@ -1,5 +1,6 @@
 {% autoescape off %}
 with 
+{% if available_on_desktop == True %}
 desktop_data as (
     SELECT 
         normalized_os as segment,
@@ -20,6 +21,18 @@ desktop_data as (
       AND metadata.isp.name != "{{isp}}"
       {% endfor %}
 ),
+{% else %}
+desktop_data as (
+  SELECT
+    "" as segment,
+    "" as branch,
+    0 as bucket,
+    0 as count
+  FROM `mozdata.firefox_desktop.metrics` as d
+  WHERE FALSE
+),
+{% endif %}
+{% if available_on_android == True %}
 android_data as (
     SELECT 
         normalized_os as segment,
@@ -39,11 +52,23 @@ android_data as (
       AND metadata.isp.name != "{{isp}}"
       {% endfor %}
 )
-{% if include_null_branch == True %}
-,desktop_data_null as (
+{% else %}
+android_data as (
+  SELECT
+    "" as segment,
+    "" as branch,
+    0 as bucket,
+    0 as count
+  FROM `mozdata.fenix.metrics` as f
+  WHERE FALSE
+)
+{% endif %}
+{% if include_non_enrolled_branch == True %}
+{% if available_on_desktop == True %}
+,desktop_data_non_enrolled as (
     SELECT 
         normalized_os as segment,
-        "null" as branch,
+        "non-enrolled" as branch,
         CAST(key as INT64)/1000000 AS bucket,
         value as count
     FROM `mozdata.firefox_desktop.metrics` as d
@@ -56,10 +81,22 @@ android_data as (
       AND {{histogram}} is not null
       AND ARRAY_LENGTH(ping_info.experiments) = 0
 ),
-android_data_null as (
+{% else %}
+,desktop_data_non_enrolled as (
+  SELECT 
+    "" as segment,
+    "" as branch,
+    0 as bucket,
+    0 as count
+  FROM `mozdata.firefox_desktop.metrics` as d
+  WHERE FALSE
+),
+{% endif %}
+{% if available_on_android == True %}
+android_data_non_enrolled as (
     SELECT 
         normalized_os as segment,
-        "null" as branch,
+        "non-enrolled" as branch,
         CAST(key as INT64)/1000000 AS bucket,
         value as count
     FROM `mozdata.fenix.metrics` as f
@@ -71,6 +108,17 @@ android_data_null as (
       AND {{histogram}} is not null
       AND ARRAY_LENGTH(ping_info.experiments) = 0
 )
+{% else %}
+android_data_non_enrolled as (
+  SELECT
+    "" as segment,
+    "" as branch,
+    0 as bucket,
+    0 as count
+  FROM `mozdata.fenix.metrics` as f
+  WHERE FALSE
+)
+{% endif %}
 {% endif %}
 
 SELECT
@@ -83,11 +131,11 @@ FROM
         SELECT * FROM desktop_data
         UNION ALL
         SELECT * FROM android_data
-{% if include_null_branch == True %}
+{% if include_non_enrolled_branch == True %}
         UNION ALL
-        SELECT * FROM desktop_data_null
+        SELECT * FROM desktop_data_non_enrolled
         UNION ALL
-        SELECT * FROM android_data_null
+        SELECT * FROM android_data_non_enrolled
 {% endif %}
     ) s
 GROUP BY

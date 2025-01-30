@@ -17,12 +17,12 @@ WHERE
   AND metadata.isp.name != "{{isp}}"
   {% endfor %}
 )
-{% if include_null_branch == True %}
+{% if include_non_enrolled_branch == True %}
 ,
-desktop_eventdata_null as (
+desktop_eventdata_non_enrolled as (
 SELECT
   normalized_os as segment,
-  "null" as branch,
+  "non-enrolled" as branch,
   SAFE_CAST((SELECT value FROM UNNEST(event.extra) WHERE key = '{{metric}}') AS int) AS {{metric}},
 FROM
   `moz-fx-data-shared-prod.firefox_desktop.pageload`
@@ -53,12 +53,12 @@ WHERE
   AND metadata.isp.name != "{{isp}}"
   {% endfor %}
 )
-{% if include_null_branch == True %}
+{% if include_non_enrolled_branch == True %}
 ,
-android_eventdata_null as (
+android_eventdata_non_enrolled as (
 SELECT
   normalized_os as segment,
-  "null" as branch,
+  "non-enrolled" as branch,
   SAFE_CAST((SELECT value FROM UNNEST(event.extra) WHERE key = '{{metric}}') AS int) AS {{metric}},
 FROM
   `moz-fx-data-shared-prod.fenix.pageload`
@@ -78,15 +78,15 @@ SELECT
   {{metric}} as bucket,
   COUNT(*) as counts
 FROM
-{% if include_null_branch == True %}
+{% if include_non_enrolled_branch == True %}
   (
     SELECT * from desktop_eventdata
     UNION ALL
-    SELECT * from desktop_eventdata_null
+    SELECT * from desktop_eventdata_non_enrolled
     UNION ALL
     SELECT * from android_eventdata
     UNION ALL
-    SELECT * from android_eventdata_null
+    SELECT * from android_eventdata_non_enrolled
   )
 {% else %}
   (
