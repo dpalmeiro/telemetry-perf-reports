@@ -27,7 +27,7 @@ default_histograms = [
 
   "metrics.timing_distribution.performance_interaction_tab_switch_composite",
   "metrics.timing_distribution.recent_synced_tabs_recent_synced_tab_time_to_load",
-  "metrics.timing_distribution.perf_awesomebar_search_engine_suggestions" 
+  "metrics.timing_distribution.perf_awesomebar_search_engine_suggestions",
   "metrics.timing_distribution.metrics_search_page_load_time",
 ]
 
@@ -70,8 +70,8 @@ def is_supported_experiment(exp):
 
   return True
 
-# Check if the experiment finished in the last 3 days.
-def is_recent_experiment(date_string, days=10):
+# Check if the experiment finished recently.
+def is_recent_experiment(date_string, days=3):
     given_date = datetime.strptime(date_string, "%Y-%m-%d")
     now = datetime.now()
     

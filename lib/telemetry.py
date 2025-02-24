@@ -53,7 +53,6 @@ class TelemetryClient:
         counts = list(subset['counts'])
       else:
         subset = df[(df["segment"] == segment) & (df["branch"] == branch)]
-        print(subset)
         buckets = list(subset['bucket'])
         counts = list(subset['counts'])
 
@@ -190,12 +189,13 @@ class TelemetryClient:
     for histogram in self.config['histograms']:
       df = self.getHistogramData(self.config, histogram)
 
-      # Remove invalid histogram data.
+      # Mark histograms that have invalid data sets.
       if invalidDataSet(df, histogram, self.config['branches'], self.config['segments']):
         remove.append(histogram)
         continue
       histograms[histogram] = df
 
+    # Remove invalid histogram data.
     for hist in remove:
       if hist in self.config['histograms']:
         print(f"Empty dataset found, removing: {histogram}.")
