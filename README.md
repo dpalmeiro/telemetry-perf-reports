@@ -1,3 +1,6 @@
+> ⚠️ **This repository has moved.**  Please see the new location: [mozilla/catalyst](https://github.com/mozilla/catalyst)
+
+
 # Telemetry Perf Reports
 
 ## Overview
